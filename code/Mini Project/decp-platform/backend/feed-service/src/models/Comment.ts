@@ -50,7 +50,13 @@ Comment.init(
   {
     sequelize,
     tableName: 'comments',
-    timestamps: true
+    timestamps: true,
+    indexes: [
+      // Fetch comments by post, newest first
+      { fields: ['postId', 'createdAt'] },
+      // Threaded replies
+      { fields: ['parentId'] }
+    ]
   }
 );
 

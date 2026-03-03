@@ -1,21 +1,122 @@
 import React, { useState } from 'react';
-import { Box, Paper, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Box,
+  Paper,
+  Typography,
+  useMediaQuery,
+  useTheme,
+  TextField,
+  InputAdornment,
+  Avatar,
+  List,
+  ListItemButton,
+  Badge,
+  Divider,
+  IconButton,
+  Tooltip,
+  Button,
+} from '@mui/material';
+import { Search, Edit, GroupAdd } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
 import { useGetChatsQuery } from '@services/chatApi';
-import { ChatList } from '@components/messaging/ChatList';
 import { ChatRoom } from '@components/messaging/ChatRoom';
-import { EmptyState } from '@components/common';
 import { Chat } from '@types';
+import { formatRelativeTime } from '@utils';
+
+const ChatListItem: React.FC<{
+  chat: Chat;
+  isSelected: boolean;
+  currentUserId: string;
+  onSelect: (chat: Chat) => void;
+}> = ({ chat, isSelected, currentUserId, onSelect }) => {
+  const otherParticipant = chat.isGroup
+    ? null
+    : chat.participants?.find((p) => (p._id || p.id) !== currentUserId) || chat.participants?.[0];
+
+  const displayName = chat.isGroup
+    ? chat.groupName || chat.title || 'Group Chat'
+    : `${otherParticipant?.firstName || 'User'} ${otherParticipant?.lastName || ''}`.trim();
+
+  const lastMsg = (chat.lastMessage as any);
+  const lastMsgText = lastMsg?.content || lastMsg?.text || 'Start a conversation';
+  const lastMsgTime = lastMsg?.createdAt;
+
+  return (
+    <ListItemButton
+      onClick={() => onSelect(chat)}
+      selected={isSelected}
+      sx={{
+        py: 1.5,
+        px: 2,
+        gap: 1.5,
+        borderRadius: 0,
+        '&.Mui-selected': {
+          bgcolor: 'rgba(16,185,129,0.1)',
+          borderLeft: '3px solid',
+          borderColor: 'primary.main',
+          '&:hover': { bgcolor: 'rgba(16,185,129,0.12)' },
+        },
+        '&:hover': { bgcolor: 'rgba(0,0,0,0.03)' },
+      }}
+    >
+      <Badge
+        badgeContent={chat.unreadCount || 0}
+        color="primary"
+        max={9}
+        sx={{ '& .MuiBadge-badge': { fontSize: '0.6rem', minWidth: 16, height: 16 } }}
+      >
+        <Avatar
+          src={chat.isGroup ? chat.groupAvatar : otherParticipant?.avatar}
+          sx={{ width: 44, height: 44, background: 'linear-gradient(135deg, #6366f1, #818cf8)', fontSize: '1rem', fontWeight: 700 }}
+        >
+          {displayName[0]?.toUpperCase()}
+        </Avatar>
+      </Badge>
+      <Box sx={{ flex: 1, minWidth: 0 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.25 }}>
+          <Typography variant="body2" fontWeight={700} noWrap sx={{ flex: 1, mr: 1 }}>
+            {displayName}
+          </Typography>
+          {lastMsgTime && (
+            <Typography variant="caption" color="text.disabled" sx={{ fontSize: '0.65rem', flexShrink: 0 }}>
+              {formatRelativeTime(lastMsgTime)}
+            </Typography>
+          )}
+        </Box>
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          noWrap
+          sx={{ display: 'block', fontWeight: (chat.unreadCount || 0) > 0 ? 600 : 400 }}
+        >
+          {lastMsgText}
+        </Typography>
+      </Box>
+    </ListItemButton>
+  );
+};
 
 export const MessagesPage: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
-  const { onlineUsers } = useSelector((state: RootState) => state.socket);
-  const { data: chatsData, isLoading } = useGetChatsQuery();
+  const [searchTerm, setSearchTerm] = useState('');
+  const { user } = useSelector((state: RootState) => state.auth);
+  const { data: chatsData, isLoading } = useGetChatsQuery(undefined, {
+    pollingInterval: 10000, // refresh every 10 s for new conversations
+  });
 
-  const chats = chatsData?.data || [];
+  const currentUserId = user?._id || user?.id || '';
+  const chats = (chatsData?.data || []).filter((c: Chat) => {
+    if (!searchTerm.trim()) return true;
+    const term = searchTerm.toLowerCase();
+    const otherP = c.participants?.find((p) => (p._id || p.id) !== currentUserId);
+    const name = c.isGroup
+      ? (c.groupName || c.title || '').toLowerCase()
+      : `${otherP?.firstName || ''} ${otherP?.lastName || ''}`.toLowerCase();
+    return name.includes(term);
+  });
 
   const handleSelectChat = (chat: Chat) => {
     setSelectedChat(chat);
@@ -25,44 +126,95 @@ export const MessagesPage: React.FC = () => {
     setSelectedChat(null);
   };
 
-  if (isLoading) {
-    return (
-      <Box className="h-[calc(100vh-140px)] flex items-center justify-center">
-        <Typography>Loading...</Typography>
+  const sidebarContent = (
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      {/* Sidebar Header */}
+      <Box sx={{ px: 2, pt: 2, pb: 1.5, borderBottom: '1px solid', borderColor: 'divider', flexShrink: 0 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
+          <Typography variant="h6" fontWeight={800}>Messages</Typography>
+          <Box sx={{ display: 'flex', gap: 0.5 }}>
+            <Tooltip title="New group">
+              <IconButton size="small"><GroupAdd fontSize="small" /></IconButton>
+            </Tooltip>
+            <Tooltip title="New message">
+              <IconButton size="small"><Edit fontSize="small" /></IconButton>
+            </Tooltip>
+          </Box>
+        </Box>
+        <TextField
+          size="small"
+          fullWidth
+          placeholder="Search conversations…"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search sx={{ fontSize: 18, color: 'text.disabled' }} />
+              </InputAdornment>
+            ),
+          }}
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              borderRadius: '20px',
+              bgcolor: (t) => t.palette.mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)',
+              '& fieldset': { borderColor: 'transparent' },
+              '&.Mui-focused fieldset': { borderColor: 'primary.main' },
+            },
+          }}
+        />
       </Box>
-    );
-  }
+
+      {/* Chat List */}
+      <Box sx={{ flex: 1, overflowY: 'auto' }}>
+        {isLoading ? (
+          <Box sx={{ p: 3, textAlign: 'center' }}>
+            <Typography color="text.disabled" variant="body2">Loading…</Typography>
+          </Box>
+        ) : chats.length === 0 ? (
+          <Box sx={{ p: 3, textAlign: 'center' }}>
+            <Typography color="text.disabled" variant="body2" gutterBottom>
+              {searchTerm ? 'No conversations found' : 'No messages yet'}
+            </Typography>
+            {!searchTerm && (
+              <Button variant="outlined" size="small" sx={{ mt: 1, borderRadius: '20px' }}>
+                Start a conversation
+              </Button>
+            )}
+          </Box>
+        ) : (
+          <List disablePadding>
+            {chats.map((chat: Chat, i: number) => (
+              <React.Fragment key={chat._id || chat.id || i}>
+                <ChatListItem
+                  chat={chat}
+                  isSelected={(selectedChat?._id || selectedChat?.id) === (chat._id || chat.id)}
+                  currentUserId={currentUserId}
+                  onSelect={handleSelectChat}
+                />
+                {i < chats.length - 1 && <Divider sx={{ mx: 2 }} />}
+              </React.Fragment>
+            ))}
+          </List>
+        )}
+      </Box>
+    </Box>
+  );
+
+  const selectedChatId = selectedChat?._id || selectedChat?.id || '';
 
   // Mobile view
   if (isMobile) {
     return (
-      <Box className="h-[calc(100vh-140px)]">
+      <Box sx={{ height: 'calc(100vh - 120px)' }}>
         {selectedChat ? (
-          <ChatRoom
-            chat={selectedChat}
-            onBack={handleBack}
-            isMobile
-          />
+          <Paper sx={{ height: '100%', overflow: 'hidden', borderRadius: '16px' }}>
+            {/* Key by chatId to fully reset ChatRoom state on chat switch */}
+            <ChatRoom key={selectedChatId} chat={selectedChat} onBack={handleBack} isMobile />
+          </Paper>
         ) : (
-          <Paper className="h-full overflow-hidden">
-            <Box className="p-4 border-b border-gray-200 dark:border-gray-800">
-              <Typography variant="h6" className="font-bold">
-                Messages
-              </Typography>
-            </Box>
-            {chats.length === 0 ? (
-              <EmptyState
-                icon="empty"
-                title="No messages"
-                description="Start a conversation with your connections!"
-              />
-            ) : (
-              <ChatList
-                chats={chats}
-                onSelectChat={handleSelectChat}
-                onlineUsers={onlineUsers}
-              />
-            )}
+          <Paper sx={{ height: '100%', overflow: 'hidden', borderRadius: '16px' }}>
+            {sidebarContent}
           </Paper>
         )}
       </Box>
@@ -71,42 +223,68 @@ export const MessagesPage: React.FC = () => {
 
   // Desktop view
   return (
-    <Box className="h-[calc(100vh-140px)]">
-      <Paper className="h-full overflow-hidden flex">
-        {/* Chat List */}
-        <Box className="w-80 border-r border-gray-200 dark:border-gray-800">
-          <Box className="p-4 border-b border-gray-200 dark:border-gray-800">
-            <Typography variant="h6" className="font-bold">
-              Messages
-            </Typography>
-          </Box>
-          {chats.length === 0 ? (
-            <EmptyState
-              icon="empty"
-              title="No messages"
-              description="Start a conversation with your connections!"
-            />
-          ) : (
-            <ChatList
-              chats={chats}
-              selectedChatId={selectedChat?._id || selectedChat?.id}
-              onSelectChat={handleSelectChat}
-              onlineUsers={onlineUsers}
-            />
-          )}
+    <Box sx={{ height: 'calc(100vh - 120px)' }}>
+      <Paper
+        sx={{
+          height: '100%',
+          overflow: 'hidden',
+          display: 'flex',
+          borderRadius: '16px',
+          border: '1px solid',
+          borderColor: 'divider',
+        }}
+      >
+        {/* Sidebar */}
+        <Box
+          sx={{
+            width: 320,
+            flexShrink: 0,
+            borderRight: '1px solid',
+            borderColor: 'divider',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          {sidebarContent}
         </Box>
 
-        {/* Chat Room */}
-        <Box className="flex-1">
+        {/* Chat Area */}
+        <Box sx={{ flex: 1, overflow: 'hidden' }}>
           {selectedChat ? (
-            <ChatRoom chat={selectedChat} />
+            /* Key by chatId so ChatRoom fully remounts on chat switch — clears localMessages */
+            <ChatRoom key={selectedChatId} chat={selectedChat} />
           ) : (
-            <Box className="h-full flex items-center justify-center">
-              <EmptyState
-                icon="empty"
-                title="Select a conversation"
-                description="Choose a chat from the list to start messaging"
-              />
+            <Box
+              sx={{
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 2,
+                color: 'text.disabled',
+              }}
+            >
+              <Box
+                sx={{
+                  width: 80,
+                  height: 80,
+                  borderRadius: '24px',
+                  background: 'rgba(99,102,241,0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Edit sx={{ fontSize: 36, color: '#6366f1' }} />
+              </Box>
+              <Typography variant="h6" fontWeight={700} color="text.secondary">
+                Your Messages
+              </Typography>
+              <Typography variant="body2" color="text.disabled" textAlign="center" maxWidth={260}>
+                Select a conversation from the list or start a new one
+              </Typography>
             </Box>
           )}
         </Box>

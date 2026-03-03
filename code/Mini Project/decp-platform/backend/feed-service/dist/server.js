@@ -9,6 +9,7 @@ const helmet_1 = __importDefault(require("helmet"));
 const config_1 = require("./config");
 const logger_1 = require("./utils/logger");
 const errorHandler_1 = require("./middleware/errorHandler");
+const internalAuth_1 = require("./middleware/internalAuth");
 const postRoutes_1 = __importDefault(require("./routes/postRoutes"));
 const database_1 = __importDefault(require("./config/database"));
 const app = (0, express_1.default)();
@@ -21,6 +22,35 @@ app.use(express_1.default.json({ limit: '10mb' }));
 app.use(express_1.default.urlencoded({ extended: true, limit: '10mb' }));
 // Static files for uploads
 app.use('/uploads', express_1.default.static(process.env.UPLOAD_DIR || 'uploads'));
+// OBS-002: Prometheus-compatible /metrics endpoint (no external dependency)
+app.get('/metrics', (_req, res) => {
+    const m = process.memoryUsage();
+    const lines = [
+        '# HELP process_uptime_seconds Process uptime in seconds',
+        '# TYPE process_uptime_seconds gauge',
+        `process_uptime_seconds ${process.uptime().toFixed(3)}`,
+        '',
+        '# HELP process_memory_heap_used_bytes Heap memory in use',
+        '# TYPE process_memory_heap_used_bytes gauge',
+        `process_memory_heap_used_bytes ${m.heapUsed}`,
+        '',
+        '# HELP process_memory_heap_total_bytes Heap memory allocated',
+        '# TYPE process_memory_heap_total_bytes gauge',
+        `process_memory_heap_total_bytes ${m.heapTotal}`,
+        '',
+        '# HELP process_memory_rss_bytes Resident set size',
+        '# TYPE process_memory_rss_bytes gauge',
+        `process_memory_rss_bytes ${m.rss}`,
+        '',
+        '# HELP nodejs_version_info Node.js version info',
+        '# TYPE nodejs_version_info gauge',
+        `nodejs_version_info{version="${process.version}"} 1`,
+    ];
+    res.set('Content-Type', 'text/plain; version=0.0.4; charset=utf-8');
+    res.send(lines.join('\n') + '\n');
+});
+// SEC-002: Internal service token validation
+app.use(internalAuth_1.internalAuthMiddleware);
 // Health check
 app.get('/health', (req, res) => {
     res.json({
@@ -43,7 +73,7 @@ const startServer = async () => {
     try {
         await database_1.default.authenticate();
         logger_1.logger.info('✅ Database connection established successfully.');
-        await database_1.default.sync({ alter: true });
+        await database_1.default.sync({ force: false }); // MIGRATE-001: create-if-not-exists only — safe for production
         logger_1.logger.info('✅ Database synchronized.');
         app.listen(PORT, () => {
             logger_1.logger.info(`📰 Feed Service running on port ${PORT}`);

@@ -9,3 +9,4 @@ export { ResearchPage } from './ResearchPage';
 export { MessagesPage } from './MessagesPage';
 export { NotificationsPage } from './NotificationsPage';
 export { AnalyticsPage } from './AnalyticsPage';
+export { SearchPage } from "./SearchPage";

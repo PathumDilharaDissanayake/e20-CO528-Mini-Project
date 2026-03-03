@@ -56,7 +56,11 @@ RefreshToken.init(
   {
     sequelize,
     tableName: 'refresh_tokens',
-    timestamps: true
+    timestamps: true,
+    indexes: [
+      { fields: ['userId', 'isRevoked'] }, // revoke all tokens for a user
+      { fields: ['expiresAt'] }            // cleanup expired tokens job
+    ]
   }
 );
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import {
   Box,
   Typography,
@@ -7,6 +7,8 @@ import {
   TextField,
   Paper,
   Fab,
+  Tooltip,
+  CircularProgress,
 } from '@mui/material';
 import {
   Send,
@@ -15,6 +17,7 @@ import {
   ArrowBack,
   Phone,
   VideoCall,
+  DoneAll,
 } from '@mui/icons-material';
 import { Chat, Message } from '@types';
 import { useSelector } from 'react-redux';
@@ -33,71 +36,110 @@ export const ChatRoom: React.FC<ChatRoomProps> = ({ chat, onBack, isMobile }) =>
   const { user } = useSelector((state: RootState) => state.auth);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [messageText, setMessageText] = useState('');
+  // localMessages: optimistic temp messages not yet confirmed by server
   const [localMessages, setLocalMessages] = useState<Message[]>([]);
+  const [isSending, setIsSending] = useState(false);
 
   const chatId = chat._id || chat.id || '';
-  const { data: messagesData } = useGetMessagesQuery({ chatId, page: 1, limit: 50 });
+  const currentUserId = user?._id || user?.id || '';
+
+  const { data: messagesData, isLoading: isLoadingMessages } = useGetMessagesQuery(
+    { chatId, page: 1, limit: 50 },
+    { skip: !chatId, pollingInterval: 5000 } // Poll every 5s as fallback for socket events
+  );
   const [sendMessage] = useSendMessageMutation();
   const { joinChat, leaveChat, onNewMessage } = useSocket();
 
-  const messages = messagesData?.data || [];
-  const allMessages = useMemo(() => [...messages, ...localMessages], [messages, localMessages]);
+  const serverMessages = messagesData?.data || [];
 
-  const currentUserId = user?._id || user?.id;
-  const otherParticipant = chat.isGroup
-    ? null
-    : chat.participants?.find((p) => (p._id || p.id) !== currentUserId) || chat.participants?.[0];
-  const chatName = chat.isGroup
-    ? chat.groupName || chat.title || 'Group Chat'
-    : `${otherParticipant?.firstName || 'User'} ${otherParticipant?.lastName || ''}`.trim();
+  // IDs already returned by the server
+  const serverMessageIds = useMemo(
+    () => new Set(serverMessages.map((m) => m._id || m.id)),
+    [serverMessages]
+  );
 
+  // Show server messages + only the temp messages not yet in server data
+  const allMessages = useMemo(() => {
+    const pendingLocals = localMessages.filter((lm) => {
+      const id = lm._id || lm.id || '';
+      return !serverMessageIds.has(id);
+    });
+    return [...serverMessages, ...pendingLocals];
+  }, [serverMessages, localMessages, serverMessageIds]);
+
+  // Reset local state when chat changes
   useEffect(() => {
-    if (!chatId) {
-      return;
-    }
+    setLocalMessages([]);
+    setMessageText('');
+  }, [chatId]);
+
+  // Socket: join room and handle incoming messages from others
+  useEffect(() => {
+    if (!chatId) return;
 
     joinChat(chatId);
+
     const unsubscribe = onNewMessage((message: Message) => {
-      const messageChatId = message.chat || message.conversationId;
-      if (messageChatId === chatId) {
-        setLocalMessages((prev) => [...prev, message]);
-      }
+      const msgChatId = message.chat || message.conversationId;
+      if (msgChatId !== chatId) return;
+
+      const senderId = message.sender?._id || message.sender?.id || message.senderId;
+      // Ignore own messages — they're added optimistically then confirmed via refetch
+      if (senderId === currentUserId) return;
+
+      setLocalMessages((prev) => {
+        const id = message._id || message.id || '';
+        if (prev.some((m) => (m._id || m.id) === id)) return prev;
+        return [...prev, message];
+      });
     });
 
     return () => {
       leaveChat(chatId);
       unsubscribe();
     };
-  }, [chatId, joinChat, leaveChat, onNewMessage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chatId]);
 
+  // Auto-scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [allMessages]);
+  }, [allMessages.length]);
 
-  const handleSend = async () => {
-    if (!messageText.trim() || !chatId) return;
+  const handleSend = useCallback(async () => {
+    const text = messageText.trim();
+    if (!text || !chatId || isSending) return;
 
-    const userId = user?._id || user?.id || 'me';
+    const tempId = `temp-${Date.now()}`;
     const tempMessage: Message = {
-      _id: Date.now().toString(),
+      _id: tempId,
+      id: tempId,
       chat: chatId,
-      sender: user || { _id: userId, firstName: 'You', role: 'student' },
-      content: messageText,
-      readBy: [userId],
+      conversationId: chatId,
+      sender: user || { _id: currentUserId, firstName: 'You', role: 'student' },
+      senderId: currentUserId,
+      content: text,
+      readBy: [currentUserId],
       createdAt: new Date().toISOString(),
     };
 
     setLocalMessages((prev) => [...prev, tempMessage]);
     setMessageText('');
+    setIsSending(true);
 
     try {
-      await sendMessage({ chatId, content: messageText }).unwrap();
+      await sendMessage({ chatId, content: text }).unwrap();
+      // Remove temp — the invalidated query refetch will include the real message
+      setLocalMessages((prev) => prev.filter((m) => (m._id || m.id) !== tempId));
     } catch (error) {
       console.error('Failed to send message:', error);
+      // Keep temp message to indicate it was attempted
+    } finally {
+      setIsSending(false);
     }
-  };
+  }, [messageText, chatId, isSending, user, currentUserId, sendMessage]);
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -106,84 +148,166 @@ export const ChatRoom: React.FC<ChatRoomProps> = ({ chat, onBack, isMobile }) =>
 
   const isMyMessage = (message: Message) => {
     const senderId = message.sender?._id || message.sender?.id || message.senderId;
-    const userId = user?._id || user?.id;
-    return senderId === userId;
+    return senderId === currentUserId;
   };
 
+  const otherParticipant = chat.isGroup
+    ? null
+    : chat.participants?.find((p) => (p._id || p.id) !== currentUserId) || chat.participants?.[0];
+
+  const chatName = chat.isGroup
+    ? chat.groupName || chat.title || 'Group Chat'
+    : `${otherParticipant?.firstName || 'User'} ${otherParticipant?.lastName || ''}`.trim();
+
   return (
-    <Box className="h-full flex flex-col bg-gray-50 dark:bg-gray-900">
-      <Paper elevation={1} className="p-3 flex items-center gap-3 rounded-none">
+    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      {/* Header */}
+      <Paper
+        elevation={0}
+        sx={{
+          px: 2,
+          py: 1.5,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 1.5,
+          borderRadius: 0,
+          borderBottom: '1px solid',
+          borderColor: 'divider',
+          flexShrink: 0,
+        }}
+      >
         {isMobile && (
-          <IconButton onClick={onBack}>
+          <IconButton onClick={onBack} size="small">
             <ArrowBack />
           </IconButton>
         )}
         <Avatar
           src={chat.isGroup ? chat.groupAvatar : otherParticipant?.avatar}
-          className="bg-gradient-to-br from-blue-500 to-purple-600"
+          sx={{ width: 40, height: 40, background: 'linear-gradient(135deg, #6366f1, #818cf8)' }}
         >
-          {chatName[0]}
+          {chatName[0]?.toUpperCase()}
         </Avatar>
-        <Box className="flex-1">
-          <Typography variant="subtitle1" className="font-semibold">
+        <Box sx={{ flex: 1, minWidth: 0 }}>
+          <Typography variant="subtitle2" fontWeight={700} noWrap>
             {chatName}
           </Typography>
-          <Typography variant="caption" className="text-gray-500">
-            {chat.isGroup ? `${chat.participants?.length || 0} participants` : 'Online'}
+          <Typography variant="caption" color="text.secondary">
+            {chat.isGroup ? `${chat.participants?.length || 0} members` : 'Active'}
           </Typography>
         </Box>
-        <IconButton>
-          <Phone />
-        </IconButton>
-        <IconButton>
-          <VideoCall />
-        </IconButton>
-        <IconButton>
-          <MoreVert />
-        </IconButton>
+        <Tooltip title="Voice call">
+          <IconButton size="small"><Phone fontSize="small" /></IconButton>
+        </Tooltip>
+        <Tooltip title="Video call">
+          <IconButton size="small"><VideoCall fontSize="small" /></IconButton>
+        </Tooltip>
+        <Tooltip title="More options">
+          <IconButton size="small"><MoreVert fontSize="small" /></IconButton>
+        </Tooltip>
       </Paper>
 
-      <Box className="flex-1 overflow-y-auto p-4 space-y-4">
+      {/* Messages */}
+      <Box
+        sx={{
+          flex: 1,
+          overflowY: 'auto',
+          px: 2,
+          py: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 0.5,
+          bgcolor: (t) => t.palette.mode === 'dark' ? 'rgba(255,255,255,0.01)' : 'rgba(0,0,0,0.015)',
+        }}
+      >
+        {isLoadingMessages && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
+            <CircularProgress size={28} color="primary" />
+          </Box>
+        )}
+
+        {!isLoadingMessages && allMessages.length === 0 && (
+          <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+            <Typography color="text.disabled" variant="body2">No messages yet</Typography>
+            <Typography color="text.disabled" variant="caption">Say hello to {chatName}!</Typography>
+          </Box>
+        )}
+
         {allMessages.map((message) => {
           const isMine = isMyMessage(message);
-          const sender = message.sender || {
-            firstName: 'User',
-            lastName: '',
-            role: 'student' as const,
-          };
+          const isTemp = (message._id || message.id || '').startsWith('temp-');
+          const sender = (message.sender || { firstName: 'User', lastName: '', role: 'student' }) as any;
 
           return (
-            <Box key={message._id || message.id} className={`flex ${isMine ? 'justify-end' : 'justify-start'}`}>
-              <Box className={`flex gap-2 max-w-[70%] ${isMine ? 'flex-row-reverse' : ''}`}>
+            <Box
+              key={message._id || message.id}
+              sx={{ display: 'flex', justifyContent: isMine ? 'flex-end' : 'flex-start', mb: 0.5 }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: 1,
+                  maxWidth: '72%',
+                  flexDirection: isMine ? 'row-reverse' : 'row',
+                  alignItems: 'flex-end',
+                }}
+              >
                 {!isMine && (
                   <Avatar
                     src={sender.avatar || sender.profilePicture}
-                    className="w-8 h-8 mt-1 bg-gradient-to-br from-blue-500 to-purple-600"
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      mb: 0.25,
+                      background: 'linear-gradient(135deg, #6366f1, #818cf8)',
+                      fontSize: '0.72rem',
+                      flexShrink: 0,
+                    }}
                   >
                     {(sender.firstName || 'U')[0]}
                   </Avatar>
                 )}
-                <Box
-                  className={`
-                    px-4 py-2 rounded-2xl
-                    ${isMine
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
-                      : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100'
-                    }
-                  `}
-                >
+                <Box>
                   {chat.isGroup && !isMine && (
-                    <Typography variant="caption" className="opacity-70 block mb-1">
-                      {sender.firstName || 'User'}
+                    <Typography variant="caption" sx={{ ml: 1, color: 'primary.main', fontWeight: 600, fontSize: '0.7rem' }}>
+                      {sender.firstName}
                     </Typography>
                   )}
-                  <Typography variant="body2">{message.content || ''}</Typography>
-                  <Typography
-                    variant="caption"
-                    className={`opacity-70 block mt-1 text-right ${isMine ? 'text-white' : 'text-gray-500'}`}
+                  <Box
+                    sx={{
+                      px: 2,
+                      py: 1,
+                      borderRadius: isMine ? '18px 4px 18px 18px' : '4px 18px 18px 18px',
+                      background: isMine
+                        ? 'linear-gradient(135deg, #6366f1, #818cf8)'
+                        : (t: any) => t.palette.mode === 'dark' ? '#1e293b' : '#ffffff',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                      opacity: isTemp ? 0.75 : 1,
+                      transition: 'opacity 0.3s',
+                    }}
                   >
-                    {formatRelativeTime(message.createdAt || new Date().toISOString())}
-                  </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: isMine ? 'white' : 'text.primary',
+                        lineHeight: 1.5,
+                        wordBreak: 'break-word',
+                        whiteSpace: 'pre-wrap',
+                      }}
+                    >
+                      {message.content}
+                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 0.5, mt: 0.25 }}>
+                      <Typography
+                        variant="caption"
+                        sx={{ color: isMine ? 'rgba(255,255,255,0.65)' : 'text.disabled', fontSize: '0.62rem' }}
+                      >
+                        {formatRelativeTime(message.createdAt || new Date().toISOString())}
+                      </Typography>
+                      {isMine && !isTemp && (
+                        <DoneAll sx={{ fontSize: 12, color: 'rgba(255,255,255,0.65)' }} />
+                      )}
+                    </Box>
+                  </Box>
                 </Box>
               </Box>
             </Box>
@@ -192,34 +316,61 @@ export const ChatRoom: React.FC<ChatRoomProps> = ({ chat, onBack, isMobile }) =>
         <div ref={messagesEndRef} />
       </Box>
 
-      <Paper elevation={1} className="p-3 rounded-none">
-        <Box className="flex items-center gap-2">
-          <IconButton>
-            <AttachFile />
-          </IconButton>
+      {/* Input */}
+      <Paper
+        elevation={0}
+        sx={{
+          px: 2,
+          py: 1.5,
+          borderTop: '1px solid',
+          borderColor: 'divider',
+          borderRadius: 0,
+          flexShrink: 0,
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: 1 }}>
+          <Tooltip title="Attach file">
+            <IconButton size="small" sx={{ color: 'text.secondary', mb: 0.5 }}>
+              <AttachFile fontSize="small" />
+            </IconButton>
+          </Tooltip>
           <TextField
             fullWidth
             multiline
             maxRows={4}
-            placeholder="Type a message..."
+            placeholder="Type a message…"
             value={messageText}
             onChange={(e) => setMessageText(e.target.value)}
-            onKeyPress={handleKeyPress}
-            className="bg-gray-100 dark:bg-gray-800 rounded-full"
-            InputProps={{
-              className: 'rounded-full px-4',
+            onKeyDown={handleKeyDown}
+            size="small"
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '20px',
+                bgcolor: (t) => t.palette.mode === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)',
+                '& fieldset': { borderColor: 'transparent' },
+                '&:hover fieldset': { borderColor: 'primary.light' },
+                '&.Mui-focused fieldset': { borderColor: 'primary.main' },
+              },
             }}
           />
           <Fab
             size="small"
-            color="primary"
+            disabled={!messageText.trim() || isSending}
             onClick={handleSend}
-            disabled={!messageText.trim()}
-            className="bg-gradient-to-r from-blue-500 to-purple-600"
+            sx={{
+              flexShrink: 0,
+              mb: 0.5,
+              background: 'linear-gradient(135deg, #6366f1, #818cf8)',
+              boxShadow: '0 4px 12px rgba(99,102,241,0.35)',
+              '&:disabled': { opacity: 0.4, background: 'rgba(99,102,241,0.3)', boxShadow: 'none' },
+            }}
           >
-            <Send fontSize="small" />
+            <Send fontSize="small" sx={{ color: 'white' }} />
           </Fab>
         </Box>
+        <Typography variant="caption" color="text.disabled" sx={{ ml: 1, fontSize: '0.65rem' }}>
+          Press Enter to send · Shift+Enter for new line
+        </Typography>
       </Paper>
     </Box>
   );

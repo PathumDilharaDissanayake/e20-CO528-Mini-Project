@@ -359,3 +359,9 @@ SequelizeConnectionError: database "decp_events" does not exist
 2026-03-03 08:08:32 [EVENTS-SERVICE] [info]: ✅ Database connected.
 2026-03-03 08:08:32 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
 2026-03-03 08:08:32 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-03 22:13:03 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-03 22:13:03 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 22:13:03 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-03 22:46:49 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-03 22:46:49 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 22:46:49 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005

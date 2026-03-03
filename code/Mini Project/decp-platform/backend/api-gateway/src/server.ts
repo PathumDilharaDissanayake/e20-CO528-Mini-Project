@@ -6,8 +6,10 @@ import morgan from 'morgan';
 import { config } from './config';
 import { logger } from './utils/logger';
 import { rateLimiter } from './middleware/rateLimiter';
+import { correlationIdMiddleware } from './middleware/correlationId';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 import healthRoutes from './routes/healthRoutes';
+import docsRoutes from './routes/docsRoutes';
 import proxyRoutes from './routes/proxyRoutes';
 
 const app: Application = express();
@@ -43,8 +45,14 @@ app.use(morgan('combined', {
 // Rate limiting
 app.use(rateLimiter);
 
+// OBS-001: Correlation ID — must run before all routes
+app.use(correlationIdMiddleware);
+
 // Health check (before proxy routes)
 app.use('/', healthRoutes);
+
+// API Docs (Swagger UI + OpenAPI spec)
+app.use('/', docsRoutes);
 
 // Proxy routes to microservices
 app.use('/', proxyRoutes);

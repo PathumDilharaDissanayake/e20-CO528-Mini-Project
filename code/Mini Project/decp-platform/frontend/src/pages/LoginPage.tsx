@@ -149,10 +149,10 @@ export const LoginPage: React.FC = () => {
               color: 'white',
               '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.2)' },
               '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
-              '&.Mui-focused fieldset': { borderColor: '#10b981' },
+              '&.Mui-focused fieldset': { borderColor: '#166534' },
             },
             '& .MuiInputLabel-root': { color: 'gray' },
-            '& .MuiInputLabel-root.Mui-focused': { color: '#10b981' },
+            '& .MuiInputLabel-root.Mui-focused': { color: '#166534' },
             '& .MuiFormHelperText-root': { color: '#f87171' },
           }}
         />
@@ -191,10 +191,10 @@ export const LoginPage: React.FC = () => {
               color: 'white',
               '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.2)' },
               '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
-              '&.Mui-focused fieldset': { borderColor: '#10b981' },
+              '&.Mui-focused fieldset': { borderColor: '#166534' },
             },
             '& .MuiInputLabel-root': { color: 'gray' },
-            '& .MuiInputLabel-root.Mui-focused': { color: '#10b981' },
+            '& .MuiInputLabel-root.Mui-focused': { color: '#166534' },
             '& .MuiFormHelperText-root': { color: '#f87171' },
           }}
         />
@@ -217,10 +217,10 @@ export const LoginPage: React.FC = () => {
           sx={{
             textTransform: 'none',
             fontSize: '1rem',
-            background: 'linear-gradient(135deg, #059669 0%, #10b981 100%)',
+            background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
             boxShadow: '0 4px 15px rgba(16, 185, 129, 0.4)',
             '&:hover': {
-              background: 'linear-gradient(135deg, #047857 0%, #059669 100%)',
+              background: 'linear-gradient(135deg, #14532d 0%, #15803d 100%)',
               boxShadow: '0 6px 20px rgba(16, 185, 129, 0.5)',
             },
           }}

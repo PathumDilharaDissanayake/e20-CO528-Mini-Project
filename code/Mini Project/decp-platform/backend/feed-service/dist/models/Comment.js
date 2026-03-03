@@ -32,7 +32,13 @@ Comment.init({
 }, {
     sequelize: database_1.default,
     tableName: 'comments',
-    timestamps: true
+    timestamps: true,
+    indexes: [
+        // Fetch comments by post, newest first
+        { fields: ['postId', 'createdAt'] },
+        // Threaded replies
+        { fields: ['parentId'] }
+    ]
 });
 exports.default = Comment;
 //# sourceMappingURL=Comment.js.map

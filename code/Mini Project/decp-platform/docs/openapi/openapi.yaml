@@ -1,0 +1,2306 @@
+openapi: 3.0.3
+info:
+  title: DECP Platform API
+  description: |
+    **Department Engagement & Career Platform** — REST API documentation.
+
+    ## Authentication
+    All protected endpoints require a Bearer JWT token in the `Authorization` header:
+    ```
+    Authorization: Bearer <accessToken>
+    ```
+
+    Access tokens expire after **15 minutes**. Use the `/auth/refresh` endpoint to obtain a new pair.
+
+    ## Response Format
+    All responses follow the canonical envelope:
+    ```json
+    {
+      "success": true,
+      "message": "Human-readable description",
+      "data": {},
+      "meta": { "page": 1, "limit": 10, "total": 50 }
+    }
+    ```
+
+    ## Base URL
+    - Development: `http://localhost:3000/api/v1`
+    - Production: `https://api.decp.edu/api/v1`
+  version: 1.0.0
+  contact:
+    name: DECP Platform Team
+    email: admin@decp.edu
+  license:
+    name: MIT
+
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Local development (via API Gateway)
+  - url: https://api.decp.edu/api/v1
+    description: Production
+
+tags:
+  - name: Authentication
+    description: User registration, login, and token management
+  - name: Users
+    description: User profiles and connections
+  - name: Feed
+    description: Posts, likes, comments, and shares
+  - name: Jobs
+    description: Job listings and applications
+  - name: Events
+    description: University events and RSVPs
+  - name: Research
+    description: Research projects and collaboration
+  - name: Messaging
+    description: Conversations and messages
+  - name: Notifications
+    description: User notifications
+  - name: Analytics
+    description: Platform usage analytics
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Reusable Components
+# ─────────────────────────────────────────────────────────────────────────────
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    # ── Error ─────────────────────────────────────────────────────────────────
+    Error:
+      type: object
+      required: [success, message]
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: "Resource not found"
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+
+    # ── Pagination Meta ───────────────────────────────────────────────────────
+    PaginationMeta:
+      type: object
+      properties:
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 10
+        total:
+          type: integer
+          example: 150
+        totalPages:
+          type: integer
+          example: 15
+        hasNext:
+          type: boolean
+        hasPrev:
+          type: boolean
+        nextCursor:
+          type: string
+          nullable: true
+          description: ISO timestamp for cursor-based pagination
+
+    # ── User ──────────────────────────────────────────────────────────────────
+    UserPublic:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        lastName:
+          type: string
+        role:
+          type: string
+          enum: [student, faculty, alumni, admin]
+        profilePicture:
+          type: string
+          nullable: true
+
+    UserPrivate:
+      allOf:
+        - $ref: '#/components/schemas/UserPublic'
+        - type: object
+          properties:
+            isEmailVerified:
+              type: boolean
+            lastLogin:
+              type: string
+              format: date-time
+              nullable: true
+
+    # ── Tokens ────────────────────────────────────────────────────────────────
+    Tokens:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        expiresIn:
+          type: string
+          example: "15m"
+
+    # ── Post ──────────────────────────────────────────────────────────────────
+    Post:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        content:
+          type: string
+          maxLength: 5000
+        type:
+          type: string
+          enum: [text, image, video, document]
+        mediaUrls:
+          type: array
+          items:
+            type: string
+        likes:
+          type: integer
+        comments:
+          type: integer
+        shares:
+          type: integer
+        isPublic:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    # ── Comment ───────────────────────────────────────────────────────────────
+    Comment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        postId:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        content:
+          type: string
+        parentId:
+          type: string
+          format: uuid
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+
+    # ── Job ───────────────────────────────────────────────────────────────────
+    Job:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        company:
+          type: string
+        location:
+          type: string
+        type:
+          type: string
+          enum: [full-time, part-time, contract, internship]
+        description:
+          type: string
+        requirements:
+          type: array
+          items:
+            type: string
+        isActive:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+
+    # ── Event ─────────────────────────────────────────────────────────────────
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          enum: [webinar, workshop, networking, career_fair, seminar, other]
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        location:
+          type: string
+        isVirtual:
+          type: boolean
+
+    # ── Notification ──────────────────────────────────────────────────────────
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        message:
+          type: string
+        read:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Paths
+# ─────────────────────────────────────────────────────────────────────────────
+
+paths:
+
+  # ── Auth ────────────────────────────────────────────────────────────────────
+
+  /auth/register:
+    post:
+      tags: [Authentication]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password, firstName, lastName, role]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  minLength: 8
+                  example: "SecurePass123!"
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                role:
+                  type: string
+                  enum: [student, faculty, alumni, admin]
+                department:
+                  type: string
+                graduationYear:
+                  type: integer
+      responses:
+        '201':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        $ref: '#/components/schemas/UserPrivate'
+                      accessToken:
+                        type: string
+                      refreshToken:
+                        type: string
+                      expiresIn:
+                        type: string
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Email already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/login:
+    post:
+      tags: [Authentication]
+      summary: Login with email and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        $ref: '#/components/schemas/UserPrivate'
+                      accessToken:
+                        type: string
+                      refreshToken:
+                        type: string
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/refresh:
+    post:
+      tags: [Authentication]
+      summary: Refresh access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        '200':
+          description: Tokens refreshed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Tokens'
+        '401':
+          description: Invalid or expired refresh token
+
+  /auth/logout:
+    post:
+      tags: [Authentication]
+      summary: Logout (revoke refresh token)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        '200':
+          description: Logged out successfully
+
+  /auth/me:
+    get:
+      tags: [Authentication]
+      summary: Get current authenticated user
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Current user data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        $ref: '#/components/schemas/UserPrivate'
+        '401':
+          description: Not authenticated
+
+  /auth/forgot-password:
+    post:
+      tags: [Authentication]
+      summary: Request password reset email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        '200':
+          description: Reset email sent (always 200 to prevent user enumeration)
+
+  /auth/reset-password:
+    post:
+      tags: [Authentication]
+      summary: Reset password with token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token, password]
+              properties:
+                token:
+                  type: string
+                password:
+                  type: string
+                  minLength: 8
+      responses:
+        '200':
+          description: Password reset successfully
+        '400':
+          description: Invalid or expired token
+
+  # ── Feed ────────────────────────────────────────────────────────────────────
+
+  /posts:
+    get:
+      tags: [Feed]
+      summary: Get public feed (paginated)
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+            maximum: 50
+        - name: cursor
+          in: query
+          description: ISO timestamp for cursor-based pagination
+          schema:
+            type: string
+        - name: userId
+          in: query
+          description: Filter posts by author
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Feed retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Post'
+                  meta:
+                    $ref: '#/components/schemas/PaginationMeta'
+    post:
+      tags: [Feed]
+      summary: Create a new post
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [content]
+              properties:
+                content:
+                  type: string
+                  maxLength: 5000
+                type:
+                  type: string
+                  enum: [text, image, video, document]
+                isPublic:
+                  type: boolean
+                  default: true
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '201':
+          description: Post created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      post:
+                        $ref: '#/components/schemas/Post'
+        '401':
+          description: Not authenticated
+
+  /posts/{postId}:
+    get:
+      tags: [Feed]
+      summary: Get a post by ID
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Post retrieved
+        '404':
+          description: Post not found
+    put:
+      tags: [Feed]
+      summary: Update a post (owner only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                isPublic:
+                  type: boolean
+      responses:
+        '200':
+          description: Post updated
+        '403':
+          description: Not authorized
+        '404':
+          description: Post not found
+    delete:
+      tags: [Feed]
+      summary: Delete a post (owner or admin)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Post deleted
+        '403':
+          description: Not authorized
+
+  /posts/{postId}/like:
+    post:
+      tags: [Feed]
+      summary: Toggle like on a post (idempotent)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Like toggled
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      liked:
+                        type: boolean
+                      likesCount:
+                        type: integer
+
+  /posts/{postId}/comments:
+    get:
+      tags: [Feed]
+      summary: Get comments for a post
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Comments retrieved
+    post:
+      tags: [Feed]
+      summary: Add a comment to a post
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [content]
+              properties:
+                content:
+                  type: string
+                  maxLength: 2000
+                parentId:
+                  type: string
+                  format: uuid
+                  description: Parent comment ID for threaded replies
+      responses:
+        '201':
+          description: Comment added
+
+  /posts/{postId}/share:
+    post:
+      tags: [Feed]
+      summary: Share a post (idempotent per user)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Post shared
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      shared:
+                        type: boolean
+                      sharesCount:
+                        type: integer
+
+  # ── Jobs ────────────────────────────────────────────────────────────────────
+
+  /jobs:
+    get:
+      tags: [Jobs]
+      summary: List job postings
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [full-time, part-time, contract, internship]
+      responses:
+        '200':
+          description: Jobs list retrieved
+    post:
+      tags: [Jobs]
+      summary: Create a job posting
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title, company, location, type, description]
+              properties:
+                title:
+                  type: string
+                company:
+                  type: string
+                location:
+                  type: string
+                type:
+                  type: string
+                  enum: [full-time, part-time, contract, internship]
+                description:
+                  type: string
+                requirements:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '201':
+          description: Job created
+
+  /jobs/{jobId}/apply:
+    post:
+      tags: [Jobs]
+      summary: Apply for a job
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                coverLetter:
+                  type: string
+                resume:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Application submitted
+        '409':
+          description: Already applied
+
+  # ── Notifications ────────────────────────────────────────────────────────────
+
+  /notifications:
+    get:
+      tags: [Notifications]
+      summary: Get user notifications
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Notifications retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Notification'
+                  meta:
+                    $ref: '#/components/schemas/PaginationMeta'
+
+  /notifications/read-all:
+    put:
+      tags: [Notifications]
+      summary: Mark all notifications as read
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: All notifications marked as read
+
+  /notifications/{notificationId}/read:
+    put:
+      tags: [Notifications]
+      summary: Mark a notification as read
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: notificationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Notification marked as read
+        '404':
+          description: Notification not found (or belongs to another user)
+
+  /notifications:
+    post:
+      tags: [Notifications]
+      summary: Create a notification for a user
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userId, type, title, body]
+              properties:
+                userId:
+                  type: string
+                  format: uuid
+                type:
+                  type: string
+                  enum: [mention, like, comment, connection, job, event, research, system]
+                title:
+                  type: string
+                body:
+                  type: string
+                link:
+                  type: string
+      responses:
+        '201':
+          description: Notification created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      notification:
+                        $ref: '#/components/schemas/Notification'
+
+  /notifications/push/subscribe:
+    post:
+      tags: [Notifications]
+      summary: Subscribe to web push notifications
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [endpoint, keys]
+              properties:
+                endpoint:
+                  type: string
+                  format: uri
+                keys:
+                  type: object
+                  properties:
+                    p256dh:
+                      type: string
+                    auth:
+                      type: string
+      responses:
+        '200':
+          description: Push subscription saved
+
+  /notifications/push/unsubscribe:
+    post:
+      tags: [Notifications]
+      summary: Remove push subscription
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [endpoint]
+              properties:
+                endpoint:
+                  type: string
+                  format: uri
+      responses:
+        '200':
+          description: Push subscription removed
+
+  # ── Users ────────────────────────────────────────────────────────────────────
+
+  /users:
+    get:
+      tags: [Users]
+      summary: List all users
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+        - name: role
+          in: query
+          schema:
+            type: string
+            enum: [student, faculty, alumni, admin]
+        - name: department
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User list retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserPublic'
+                  meta:
+                    $ref: '#/components/schemas/PaginationMeta'
+        '401':
+          description: Not authenticated
+
+  /users/me:
+    get:
+      tags: [Users]
+      summary: Get current user's profile
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Profile retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    description: Profile record (auto-synced from JWT claims)
+        '401':
+          description: Not authenticated
+    put:
+      tags: [Users]
+      summary: Update current user's profile
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bio:
+                  type: string
+                  maxLength: 1000
+                department:
+                  type: string
+                graduationYear:
+                  type: integer
+                skills:
+                  type: array
+                  items:
+                    type: string
+                website:
+                  type: string
+                  format: uri
+                phone:
+                  type: string
+                socialLinks:
+                  type: object
+                  properties:
+                    linkedin:
+                      type: string
+                    github:
+                      type: string
+                    twitter:
+                      type: string
+      responses:
+        '200':
+          description: Profile updated
+        '401':
+          description: Not authenticated
+
+  /users/search:
+    get:
+      tags: [Users]
+      summary: Search users by name, email, or department
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 2
+          description: Search query (name, email, department)
+        - name: role
+          in: query
+          schema:
+            type: string
+            enum: [student, faculty, alumni, admin]
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+      responses:
+        '200':
+          description: Matching users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserPublic'
+
+  /users/{userId}:
+    get:
+      tags: [Users]
+      summary: Get a user's public profile
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: User profile retrieved
+        '404':
+          description: User not found
+    delete:
+      tags: [Users]
+      summary: Delete a user profile (admin or self)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Profile deleted
+        '403':
+          description: Cannot delete another user's profile
+
+  # ── Jobs (extended) ──────────────────────────────────────────────────────────
+
+  /jobs/{jobId}:
+    get:
+      tags: [Jobs]
+      summary: Get a job posting by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Job details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      job:
+                        $ref: '#/components/schemas/Job'
+        '404':
+          description: Job not found
+    put:
+      tags: [Jobs]
+      summary: Update a job posting (owner only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                company:
+                  type: string
+                description:
+                  type: string
+                isActive:
+                  type: boolean
+      responses:
+        '200':
+          description: Job updated
+        '403':
+          description: Not the job poster
+        '404':
+          description: Job not found
+    delete:
+      tags: [Jobs]
+      summary: Delete a job posting (owner only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Job deleted
+        '403':
+          description: Not the job poster
+
+  /jobs/applications:
+    get:
+      tags: [Jobs]
+      summary: Get current user's job applications
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, reviewed, shortlisted, rejected, accepted]
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Applications list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        jobId:
+                          type: string
+                          format: uuid
+                        status:
+                          type: string
+                          enum: [pending, reviewed, shortlisted, rejected, accepted]
+                        coverLetter:
+                          type: string
+                        appliedAt:
+                          type: string
+                          format: date-time
+
+  /jobs/applications/{applicationId}/status:
+    put:
+      tags: [Jobs]
+      summary: Update application status (job poster only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status:
+                  type: string
+                  enum: [pending, reviewed, shortlisted, rejected, accepted]
+      responses:
+        '200':
+          description: Application status updated
+        '403':
+          description: Only the job poster can update application status
+        '404':
+          description: Application not found
+
+  # ── Events ───────────────────────────────────────────────────────────────────
+
+  /events:
+    get:
+      tags: [Events]
+      summary: List events
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+            maximum: 50
+        - name: eventType
+          in: query
+          schema:
+            type: string
+            enum: [webinar, workshop, networking, career_fair, seminar, other]
+        - name: upcoming
+          in: query
+          schema:
+            type: boolean
+          description: Filter to future events only
+      responses:
+        '200':
+          description: Events list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Event'
+                  meta:
+                    $ref: '#/components/schemas/PaginationMeta'
+    post:
+      tags: [Events]
+      summary: Create a new event
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title, eventType, startDate, endDate]
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                eventType:
+                  type: string
+                  enum: [webinar, workshop, networking, career_fair, seminar, other]
+                startDate:
+                  type: string
+                  format: date-time
+                endDate:
+                  type: string
+                  format: date-time
+                location:
+                  type: string
+                isVirtual:
+                  type: boolean
+                  default: false
+                meetingUrl:
+                  type: string
+                  format: uri
+                capacity:
+                  type: integer
+                  minimum: 1
+                tags:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '201':
+          description: Event created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      event:
+                        $ref: '#/components/schemas/Event'
+        '401':
+          description: Not authenticated
+
+  /events/my-rsvps:
+    get:
+      tags: [Events]
+      summary: Get current user's RSVPs
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: User's RSVP list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        eventId:
+                          type: string
+                          format: uuid
+                        status:
+                          type: string
+                          enum: [going, maybe, not_going]
+                        event:
+                          $ref: '#/components/schemas/Event'
+
+  /events/{eventId}:
+    get:
+      tags: [Events]
+      summary: Get event details
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Event details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      event:
+                        $ref: '#/components/schemas/Event'
+        '404':
+          description: Event not found
+    put:
+      tags: [Events]
+      summary: Update an event (organiser only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '200':
+          description: Event updated
+        '403':
+          description: Not the event organiser
+        '404':
+          description: Event not found
+    delete:
+      tags: [Events]
+      summary: Delete an event (organiser or admin)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Event deleted
+        '403':
+          description: Not authorised
+
+  /events/{eventId}/rsvp:
+    post:
+      tags: [Events]
+      summary: RSVP to an event (upsert — idempotent)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status:
+                  type: string
+                  enum: [going, maybe, not_going]
+      responses:
+        '200':
+          description: RSVP updated (existing record)
+        '201':
+          description: RSVP created
+        '400':
+          description: Event is at capacity
+        '404':
+          description: Event not found
+
+  # ── Research ─────────────────────────────────────────────────────────────────
+
+  /research:
+    get:
+      tags: [Research]
+      summary: List research projects
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            maximum: 50
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [active, completed, paused, recruiting]
+        - name: tags
+          in: query
+          schema:
+            type: string
+          description: Comma-separated tags to filter by
+      responses:
+        '200':
+          description: Research projects list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      description: ResearchProject
+                  meta:
+                    $ref: '#/components/schemas/PaginationMeta'
+    post:
+      tags: [Research]
+      summary: Create a research project
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title, abstract]
+              properties:
+                title:
+                  type: string
+                abstract:
+                  type: string
+                status:
+                  type: string
+                  enum: [active, completed, paused, recruiting]
+                  default: active
+                tags:
+                  type: array
+                  items:
+                    type: string
+                collaborators:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+      responses:
+        '201':
+          description: Research project created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      project:
+                        type: object
+
+  /research/{projectId}:
+    get:
+      tags: [Research]
+      summary: Get a research project by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Project details
+        '404':
+          description: Project not found
+    put:
+      tags: [Research]
+      summary: Update a research project (lead researcher only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                abstract:
+                  type: string
+                status:
+                  type: string
+                  enum: [active, completed, paused, recruiting]
+      responses:
+        '200':
+          description: Project updated
+        '403':
+          description: Not the lead researcher
+        '404':
+          description: Project not found
+    delete:
+      tags: [Research]
+      summary: Delete a research project (lead researcher only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Project deleted
+        '403':
+          description: Not the lead researcher
+
+  /research/{projectId}/collaborate:
+    post:
+      tags: [Research]
+      summary: Join a research project as collaborator
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Joined as collaborator (duplicate join is idempotent via Set dedup)
+        '404':
+          description: Project not found
+    delete:
+      tags: [Research]
+      summary: Leave a research project
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Left the project
+        '400':
+          description: Lead researcher cannot leave the project
+        '404':
+          description: Project not found
+
+  /research/{projectId}/documents:
+    post:
+      tags: [Research]
+      summary: Upload a document to a research project
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [document]
+              properties:
+                document:
+                  type: string
+                  format: binary
+                  description: PDF, DOCX, or image (magic-byte validated, max 50 MB)
+                title:
+                  type: string
+      responses:
+        '201':
+          description: Document uploaded
+        '400':
+          description: Unsupported file type or size exceeded
+        '403':
+          description: Not the lead researcher or a collaborator
+
+  /research/{projectId}/documents/{documentId}:
+    delete:
+      tags: [Research]
+      summary: Remove a document from a research project
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: documentId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Document removed
+        '403':
+          description: Not authorised
+        '404':
+          description: Document not found
+
+  # ── Messaging ────────────────────────────────────────────────────────────────
+
+  /messaging:
+    get:
+      tags: [Messaging]
+      summary: Get current user's conversations
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Conversations list (ordered by last message time)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        type:
+                          type: string
+                          enum: [direct, group]
+                        name:
+                          type: string
+                          nullable: true
+                        participants:
+                          type: array
+                          items:
+                            type: string
+                            format: uuid
+                        lastMessage:
+                          type: string
+                          nullable: true
+                        updatedAt:
+                          type: string
+                          format: date-time
+    post:
+      tags: [Messaging]
+      summary: Create a conversation
+      description: |
+        For `direct` type between two users, returns the existing conversation if one already exists
+        (idempotent — safe to call multiple times).
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [type, participants]
+              properties:
+                type:
+                  type: string
+                  enum: [direct, group]
+                participants:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  description: User IDs to include (creator is added automatically)
+                name:
+                  type: string
+                  description: Required for group conversations
+      responses:
+        '201':
+          description: Conversation created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      conversation:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                          type:
+                            type: string
+                          participants:
+                            type: array
+                            items:
+                              type: string
+
+  /messaging/{conversationId}:
+    get:
+      tags: [Messaging]
+      summary: Get conversation details (participants only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: conversationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Conversation details
+        '403':
+          description: Not a participant in this conversation
+        '404':
+          description: Conversation not found
+
+  /messaging/{conversationId}/messages:
+    get:
+      tags: [Messaging]
+      summary: Get messages in a conversation (participants only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: conversationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: Messages list (newest first)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        conversationId:
+                          type: string
+                          format: uuid
+                        senderId:
+                          type: string
+                          format: uuid
+                        content:
+                          type: string
+                        createdAt:
+                          type: string
+                          format: date-time
+        '403':
+          description: Not a participant
+    post:
+      tags: [Messaging]
+      summary: Send a message (participants only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: conversationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [content]
+              properties:
+                content:
+                  type: string
+                  maxLength: 10000
+      responses:
+        '201':
+          description: Message sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                          content:
+                            type: string
+                          senderId:
+                            type: string
+                            format: uuid
+        '403':
+          description: Not a participant
+
+  # ── Analytics ─────────────────────────────────────────────────────────────────
+
+  /analytics/track:
+    post:
+      tags: [Analytics]
+      summary: Track a user activity event
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action, entityType, entityId]
+              properties:
+                action:
+                  type: string
+                  enum: [view, like, comment, share, apply, rsvp, connect, search]
+                entityType:
+                  type: string
+                  enum: [post, job, event, research, user, profile]
+                entityId:
+                  type: string
+                  format: uuid
+                metadata:
+                  type: object
+                  additionalProperties: true
+                  description: Optional extra context (e.g. source, referrer)
+      responses:
+        '201':
+          description: Activity tracked
+        '401':
+          description: Not authenticated
+
+  /analytics/dashboard:
+    get:
+      tags: [Analytics]
+      summary: Get platform dashboard metrics
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date
+          description: ISO date (inclusive lower bound)
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date
+          description: ISO date (inclusive upper bound)
+      responses:
+        '200':
+          description: Dashboard metrics (4 parallel aggregations)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      totalActivities:
+                        type: integer
+                      uniqueUsers:
+                        type: integer
+                      activitiesByType:
+                        type: object
+                        additionalProperties:
+                          type: integer
+                        description: Map of action → count
+                      activitiesByDay:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                              format: date
+                            count:
+                              type: integer
+
+  /analytics/users/{userId}/activity:
+    get:
+      tags: [Analytics]
+      summary: Get activity history for a specific user
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            maximum: 100
+      responses:
+        '200':
+          description: User activity history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      activities:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            action:
+                              type: string
+                            entityType:
+                              type: string
+                            entityId:
+                              type: string
+                            createdAt:
+                              type: string
+                              format: date-time
+                      total:
+                        type: integer
+
+  /analytics/popular:
+    get:
+      tags: [Analytics]
+      summary: Get most-interacted-with content
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: entityType
+          in: query
+          schema:
+            type: string
+            enum: [post, job, event, research, user, profile]
+          description: Filter by content type
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Popular content list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        entityId:
+                          type: string
+                          format: uuid
+                        entityType:
+                          type: string
+                        count:
+                          type: integer

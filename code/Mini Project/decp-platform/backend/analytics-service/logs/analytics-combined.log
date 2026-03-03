@@ -181,3 +181,12 @@ SequelizeConnectionError: database "decp_analytics" does not exist
 2026-03-03 07:40:15 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
 2026-03-03 07:40:15 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
 2026-03-03 07:40:15 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-03 08:08:35 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-03 08:08:35 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 08:08:35 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-03 22:13:07 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-03 22:13:07 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 22:13:07 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-03 22:46:53 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-03 22:46:53 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 22:46:53 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009

@@ -23,12 +23,12 @@ const themeSlice = createSlice({
     toggleTheme: (state) => {
       state.mode = state.mode === 'light' ? 'dark' : 'light';
       localStorage.setItem('theme', state.mode);
-      document.documentElement.classList.toggle('dark', state.mode === 'dark');
+      // DOM manipulation is handled by AppWithTheme's useLayoutEffect — not here
     },
     setTheme: (state, action: PayloadAction<ThemeMode>) => {
       state.mode = action.payload;
       localStorage.setItem('theme', state.mode);
-      document.documentElement.classList.toggle('dark', state.mode === 'dark');
+      // DOM manipulation is handled by AppWithTheme's useLayoutEffect — not here
     },
   },
 });

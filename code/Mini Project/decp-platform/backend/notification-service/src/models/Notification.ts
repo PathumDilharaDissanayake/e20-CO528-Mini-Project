@@ -38,6 +38,14 @@ Notification.init({
   data: { type: DataTypes.JSONB, defaultValue: {} },
   isRead: { type: DataTypes.BOOLEAN, defaultValue: false },
   readAt: { type: DataTypes.DATE, allowNull: true }
-}, { sequelize, tableName: 'notifications', timestamps: true });
+}, {
+  sequelize,
+  tableName: 'notifications',
+  timestamps: true,
+  indexes: [
+    { fields: ['userId', 'isRead'] },    // badge count query — critical for performance
+    { fields: ['userId', 'createdAt'] }  // paginate notifications per user
+  ]
+});
 
 export default Notification;

@@ -11,8 +11,10 @@ const morgan_1 = __importDefault(require("morgan"));
 const config_1 = require("./config");
 const logger_1 = require("./utils/logger");
 const rateLimiter_1 = require("./middleware/rateLimiter");
+const correlationId_1 = require("./middleware/correlationId");
 const errorHandler_1 = require("./middleware/errorHandler");
 const healthRoutes_1 = __importDefault(require("./routes/healthRoutes"));
+const docsRoutes_1 = __importDefault(require("./routes/docsRoutes"));
 const proxyRoutes_1 = __importDefault(require("./routes/proxyRoutes"));
 const app = (0, express_1.default)();
 // Security middleware
@@ -40,8 +42,12 @@ app.use((0, morgan_1.default)('combined', {
 }));
 // Rate limiting
 app.use(rateLimiter_1.rateLimiter);
+// OBS-001: Correlation ID — must run before all routes
+app.use(correlationId_1.correlationIdMiddleware);
 // Health check (before proxy routes)
 app.use('/', healthRoutes_1.default);
+// API Docs (Swagger UI + OpenAPI spec)
+app.use('/', docsRoutes_1.default);
 // Proxy routes to microservices
 app.use('/', proxyRoutes_1.default);
 // Error handling

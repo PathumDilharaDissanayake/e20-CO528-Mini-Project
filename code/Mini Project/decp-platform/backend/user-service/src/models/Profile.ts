@@ -162,7 +162,14 @@ Profile.init(
   {
     sequelize,
     tableName: 'profiles',
-    timestamps: true
+    timestamps: true,
+    indexes: [
+      { fields: ['userId'] },               // already unique but makes intent explicit
+      { fields: ['role'] },                 // role-based filter in searchUsers
+      { fields: ['firstName', 'lastName'] }, // name-based sorting/search
+      { fields: ['skills'], using: 'gin' }, // GIN index for @> (contains) skill filter
+      { fields: ['createdAt'] }             // list ordering
+    ]
   }
 );
 

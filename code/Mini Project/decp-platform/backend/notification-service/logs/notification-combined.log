@@ -208,3 +208,9 @@ SequelizeConnectionError: database "decp_notifications" does not exist
 2026-03-03 08:08:35 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
 2026-03-03 08:08:35 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
 2026-03-03 08:08:35 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-03 22:13:06 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-03 22:13:06 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 22:13:06 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-03 22:46:52 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-03 22:46:52 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 22:46:52 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008

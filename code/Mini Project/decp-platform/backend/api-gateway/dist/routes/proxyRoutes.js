@@ -41,6 +41,7 @@ const http = __importStar(require("http"));
 const https = __importStar(require("https"));
 const config_1 = require("../config");
 const auth_1 = require("../middleware/auth");
+const rateLimiter_1 = require("../middleware/rateLimiter");
 const logger_1 = require("../utils/logger");
 const axios_1 = __importDefault(require("axios"));
 const router = (0, express_1.Router)();
@@ -99,6 +100,14 @@ const createProxyHandler = (targetService, servicePrefix) => {
             if (user.lastName)
                 headers['x-user-lastname'] = String(user.lastName);
         }
+        // SEC-002: Internal service token — proves request originated from the trusted gateway
+        const internalToken = process.env.INTERNAL_SERVICE_TOKEN;
+        if (internalToken)
+            headers['x-internal-token'] = internalToken;
+        // OBS-001: Propagate correlation ID for end-to-end request tracing
+        const correlationId = req.headers['x-correlation-id'];
+        if (correlationId)
+            headers['x-correlation-id'] = correlationId;
         const contentType = req.headers['content-type'] || '';
         // ---- Multipart: stream the raw body through (files) ----
         if (contentType.includes('multipart/form-data')) {
@@ -117,7 +126,7 @@ const createProxyHandler = (targetService, servicePrefix) => {
                     headers: {
                         ...req.headers,
                         host: targetUrlObj.host,
-                        ...headers,
+                        ...headers, // includes x-user-id, x-internal-token, x-correlation-id
                     },
                 }, (proxyRes) => {
                     let body = '';
@@ -176,15 +185,16 @@ const createProxyHandler = (targetService, servicePrefix) => {
 // AUTH SERVICE (port 3001)
 // Gateway strips /api/v1/auth → service receives /login, /register, etc.
 // ============================================================
-router.post('/api/v1/auth/register', createProxyHandler(config_1.config.services.auth));
-router.post('/api/v1/auth/login', createProxyHandler(config_1.config.services.auth));
+// SEC-006: Sensitive auth endpoints get a tighter rate limit (5 req per 15 min per IP)
+router.post('/api/v1/auth/register', rateLimiter_1.strictRateLimiter, createProxyHandler(config_1.config.services.auth));
+router.post('/api/v1/auth/login', rateLimiter_1.strictRateLimiter, createProxyHandler(config_1.config.services.auth));
 router.post('/api/v1/auth/refresh', createProxyHandler(config_1.config.services.auth));
 router.post('/api/v1/auth/logout', createProxyHandler(config_1.config.services.auth));
 router.get('/api/v1/auth/me', auth_1.authMiddleware, createProxyHandler(config_1.config.services.auth));
 router.get('/api/v1/auth/health', createProxyHandler(config_1.config.services.auth));
 router.post('/api/v1/auth/verify-email', createProxyHandler(config_1.config.services.auth));
-router.post('/api/v1/auth/forgot-password', createProxyHandler(config_1.config.services.auth));
-router.post('/api/v1/auth/reset-password', createProxyHandler(config_1.config.services.auth));
+router.post('/api/v1/auth/forgot-password', rateLimiter_1.strictRateLimiter, createProxyHandler(config_1.config.services.auth));
+router.post('/api/v1/auth/reset-password', rateLimiter_1.strictRateLimiter, createProxyHandler(config_1.config.services.auth));
 // ============================================================
 // USER SERVICE (port 3002)
 // Gateway strips /api/v1 then /users → service receives /me, /:userId, /connections/...
