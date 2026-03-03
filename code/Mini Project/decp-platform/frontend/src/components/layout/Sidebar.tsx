@@ -12,6 +12,7 @@ import {
   Chip,
   Divider,
   Badge,
+  Toolbar,
 } from '@mui/material';
 import {
   Home,
@@ -47,7 +48,7 @@ const secondaryNavItems = [
 const getRoleColor = (role?: string) => {
   switch (role) {
     case 'admin': return { bg: 'linear-gradient(135deg,#ef4444,#dc2626)', label: 'Admin' };
-    case 'faculty': return { bg: 'linear-gradient(135deg,#10b981,#059669)', label: 'Faculty' };
+    case 'faculty': return { bg: 'linear-gradient(135deg,#166534,#15803d)', label: 'Faculty' };
     case 'alumni': return { bg: 'linear-gradient(135deg,#f59e0b,#d97706)', label: 'Alumni' };
     default: return { bg: 'linear-gradient(135deg,#6366f1,#4f46e5)', label: 'Student' };
   }
@@ -72,11 +73,14 @@ export const Sidebar: React.FC = () => {
 
   const drawerContent = (
     <Box className="h-full flex flex-col overflow-hidden">
+      {/* Spacer so content clears the fixed AppBar (64 px) */}
+      <Toolbar sx={{ minHeight: '64px !important', flexShrink: 0, p: '0 !important' }} />
+
       {/* User Profile Card */}
       <Box
         className="relative overflow-hidden flex-shrink-0"
         sx={{
-          background: 'linear-gradient(135deg, #059669 0%, #10b981 50%, #14b8a6 100%)',
+          background: 'linear-gradient(135deg, #15803d 0%, #166534 50%, #14b8a6 100%)',
           p: 2.5,
         }}
       >
@@ -153,7 +157,7 @@ export const Sidebar: React.FC = () => {
                     transition: 'all 0.2s ease',
                     ...(active
                       ? {
-                          background: 'linear-gradient(135deg, #059669 0%, #10b981 100%)',
+                          background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
                           boxShadow: '0 4px 12px rgba(16,185,129,0.35)',
                           '& .MuiListItemIcon-root': { color: '#fff' },
                           '& .MuiListItemText-primary': { color: '#fff', fontWeight: 700 },
@@ -162,7 +166,7 @@ export const Sidebar: React.FC = () => {
                           '&:hover': {
                             background: (theme) =>
                               theme.palette.mode === 'dark'
-                                ? 'rgba(16,185,129,0.12)'
+                                ? 'rgba(22,101,52,0.12)'
                                 : 'rgba(16,185,129,0.08)',
                           },
                         }),
@@ -213,7 +217,7 @@ export const Sidebar: React.FC = () => {
                     transition: 'all 0.2s ease',
                     ...(active
                       ? {
-                          background: 'linear-gradient(135deg, #059669 0%, #10b981 100%)',
+                          background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
                           boxShadow: '0 4px 12px rgba(16,185,129,0.35)',
                           '& .MuiListItemIcon-root': { color: '#fff' },
                           '& .MuiListItemText-primary': { color: '#fff', fontWeight: 700 },
@@ -222,7 +226,7 @@ export const Sidebar: React.FC = () => {
                           '&:hover': {
                             background: (theme) =>
                               theme.palette.mode === 'dark'
-                                ? 'rgba(16,185,129,0.12)'
+                                ? 'rgba(22,101,52,0.12)'
                                 : 'rgba(16,185,129,0.08)',
                           },
                         }),

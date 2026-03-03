@@ -3,6 +3,7 @@ import * as http from 'http';
 import * as https from 'https';
 import { config } from '../config';
 import { authMiddleware, optionalAuthMiddleware } from '../middleware/auth';
+import { strictRateLimiter } from '../middleware/rateLimiter';
 import { logger } from '../utils/logger';
 import axios from 'axios';
 
@@ -66,6 +67,14 @@ const createProxyHandler = (targetService: string, servicePrefix?: string) => {
       if (user.lastName) headers['x-user-lastname'] = String(user.lastName);
     }
 
+    // SEC-002: Internal service token — proves request originated from the trusted gateway
+    const internalToken = process.env.INTERNAL_SERVICE_TOKEN;
+    if (internalToken) headers['x-internal-token'] = internalToken;
+
+    // OBS-001: Propagate correlation ID for end-to-end request tracing
+    const correlationId = req.headers['x-correlation-id'] as string | undefined;
+    if (correlationId) headers['x-correlation-id'] = correlationId;
+
     const contentType = req.headers['content-type'] || '';
 
     // ---- Multipart: stream the raw body through (files) ----
@@ -87,7 +96,7 @@ const createProxyHandler = (targetService: string, servicePrefix?: string) => {
             headers: {
               ...req.headers,
               host: targetUrlObj.host,
-              ...headers,
+              ...headers, // includes x-user-id, x-internal-token, x-correlation-id
             },
           },
           (proxyRes) => {
@@ -150,15 +159,16 @@ const createProxyHandler = (targetService: string, servicePrefix?: string) => {
 // AUTH SERVICE (port 3001)
 // Gateway strips /api/v1/auth → service receives /login, /register, etc.
 // ============================================================
-router.post('/api/v1/auth/register', createProxyHandler(config.services.auth));
-router.post('/api/v1/auth/login', createProxyHandler(config.services.auth));
+// SEC-006: Sensitive auth endpoints get a tighter rate limit (5 req per 15 min per IP)
+router.post('/api/v1/auth/register', strictRateLimiter, createProxyHandler(config.services.auth));
+router.post('/api/v1/auth/login', strictRateLimiter, createProxyHandler(config.services.auth));
 router.post('/api/v1/auth/refresh', createProxyHandler(config.services.auth));
 router.post('/api/v1/auth/logout', createProxyHandler(config.services.auth));
 router.get('/api/v1/auth/me', authMiddleware, createProxyHandler(config.services.auth));
 router.get('/api/v1/auth/health', createProxyHandler(config.services.auth));
 router.post('/api/v1/auth/verify-email', createProxyHandler(config.services.auth));
-router.post('/api/v1/auth/forgot-password', createProxyHandler(config.services.auth));
-router.post('/api/v1/auth/reset-password', createProxyHandler(config.services.auth));
+router.post('/api/v1/auth/forgot-password', strictRateLimiter, createProxyHandler(config.services.auth));
+router.post('/api/v1/auth/reset-password', strictRateLimiter, createProxyHandler(config.services.auth));
 
 // ============================================================
 // USER SERVICE (port 3002)

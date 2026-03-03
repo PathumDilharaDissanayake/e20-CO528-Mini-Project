@@ -133,6 +133,14 @@ User.init(
     sequelize,
     tableName: 'users',
     timestamps: true,
+    indexes: [
+      { fields: ['email'] },                       // login lookup (covered by unique but explicit)
+      { fields: ['emailVerificationToken'] },       // verify-email lookup
+      { fields: ['passwordResetToken'] },           // reset-password lookup
+      { fields: ['googleId'] },                     // OAuth login lookup
+      { fields: ['role', 'isActive'] },             // role-based admin queries
+      { fields: ['isActive', 'createdAt'] }         // list active users, paginated
+    ],
     hooks: {
       beforeCreate: async (user) => {
         if (user.password) {

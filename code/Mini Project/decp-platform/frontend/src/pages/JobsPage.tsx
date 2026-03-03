@@ -52,7 +52,7 @@ const HeroBanner: React.FC<{ jobCount: number; canPost: boolean; onPost: () => v
     />
     {/* Gradient orbs */}
     <Box className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10"
-      sx={{ background: 'radial-gradient(circle, #10b981 0%, transparent 70%)', transform: 'translate(30%, -30%)' }} />
+      sx={{ background: 'radial-gradient(circle, #166534 0%, transparent 70%)', transform: 'translate(30%, -30%)' }} />
     <Box className="absolute bottom-0 left-1/3 w-40 h-40 rounded-full opacity-10"
       sx={{ background: 'radial-gradient(circle, #6366f1 0%, transparent 70%)', transform: 'translateY(40%)' }} />
 
@@ -60,8 +60,8 @@ const HeroBanner: React.FC<{ jobCount: number; canPost: boolean; onPost: () => v
       <Box className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <Box>
           <Box className="flex items-center gap-2 mb-2">
-            <Box sx={{ width: 40, height: 40, borderRadius: '12px', background: 'rgba(16,185,129,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Work sx={{ color: '#10b981', fontSize: 22 }} />
+            <Box sx={{ width: 40, height: 40, borderRadius: '12px', background: 'rgba(22,101,52,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Work sx={{ color: '#166534', fontSize: 22 }} />
             </Box>
             <Typography variant="h5" sx={{ fontWeight: 800, color: '#fff' }}>
               Jobs & Internships
@@ -75,7 +75,7 @@ const HeroBanner: React.FC<{ jobCount: number; canPost: boolean; onPost: () => v
               icon={<BusinessCenter sx={{ fontSize: '14px !important' }} />}
               label={`${jobCount} Open Positions`}
               size="small"
-              sx={{ background: 'rgba(16,185,129,0.2)', color: '#34d399', borderColor: 'rgba(16,185,129,0.3)', fontWeight: 600 }}
+              sx={{ background: 'rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.92)', borderColor: 'rgba(255,255,255,0.3)', fontWeight: 600 }}
               variant="outlined"
             />
             <Chip
@@ -100,7 +100,7 @@ const HeroBanner: React.FC<{ jobCount: number; canPost: boolean; onPost: () => v
             startIcon={<Add />}
             onClick={onPost}
             sx={{
-              background: 'linear-gradient(135deg, #059669, #10b981)',
+              background: 'linear-gradient(135deg, #15803d, #166534)',
               borderRadius: '12px',
               px: 3,
               py: 1.5,
@@ -235,7 +235,7 @@ export const JobsPage: React.FC = () => {
         <form onSubmit={handleCreateJob}>
           <DialogTitle sx={{ pb: 1, fontWeight: 700 }}>
             <Box className="flex items-center gap-2">
-              <Box sx={{ width: 36, height: 36, borderRadius: '10px', background: 'linear-gradient(135deg,#059669,#10b981)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Box sx={{ width: 36, height: 36, borderRadius: '10px', background: 'linear-gradient(135deg,#15803d,#166534)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Work sx={{ color: '#fff', fontSize: 18 }} />
               </Box>
               Post a New Job

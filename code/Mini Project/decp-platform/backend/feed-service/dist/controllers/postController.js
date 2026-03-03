@@ -1,12 +1,55 @@
 "use strict";
+/**
+ * Post Controller — HTTP layer only. All business logic delegated to postService.
+ * Max responsibility: parse request → call service → format response.
+ *
+ * Agent: A-06 (Backend Implementation Agent)
+ * Refactored: 2026-03-03 — Extracted service layer, fixed FLAW-003/004/011/012
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sharePost = exports.deleteComment = exports.getComments = exports.addComment = exports.unlikePost = exports.likePost = exports.deletePost = exports.updatePost = exports.getPost = exports.createPost = exports.getFeed = void 0;
-const models_1 = require("../models");
-const logger_1 = require("../utils/logger");
+exports.sharePost = exports.deleteComment = exports.addComment = exports.getComments = exports.unlikePost = exports.likePost = exports.deletePost = exports.updatePost = exports.createPost = exports.getPost = exports.getFeed = void 0;
 const joi_1 = __importDefault(require("joi"));
+const postService = __importStar(require("../services/postService"));
+const logger_1 = require("../utils/logger");
+// ─────────────────────────────────────────────────────────────────────────────
+// Validation schemas
+// ─────────────────────────────────────────────────────────────────────────────
 const createPostSchema = joi_1.default.object({
     content: joi_1.default.string().min(1).max(5000).required(),
     type: joi_1.default.string().valid('text', 'image', 'video', 'document').default('text'),
@@ -16,42 +59,67 @@ const createCommentSchema = joi_1.default.object({
     content: joi_1.default.string().min(1).max(2000).required(),
     parentId: joi_1.default.string().uuid().optional()
 });
+// ─────────────────────────────────────────────────────────────────────────────
+// Helper: uniform error response
+// ─────────────────────────────────────────────────────────────────────────────
+const handleError = (res, err, context) => {
+    const error = err;
+    const status = error.statusCode || 500;
+    if (status >= 500)
+        logger_1.logger.error(`[${context}] ${error.message}`, { stack: error.stack });
+    res.status(status).json({
+        success: false,
+        message: error.message || 'Internal server error'
+    });
+};
+// ─────────────────────────────────────────────────────────────────────────────
+// Feed
+// ─────────────────────────────────────────────────────────────────────────────
 const getFeed = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
-        const offset = (page - 1) * limit;
+        const cursor = req.query.cursor;
         const userId = req.query.userId;
-        const where = { isPublic: true };
-        if (userId)
-            where.userId = userId;
-        const { count, rows: posts } = await models_1.Post.findAndCountAll({
-            where,
-            order: [['createdAt', 'DESC']],
-            limit,
-            offset
-        });
+        const result = await postService.getFeed({ page, limit, cursor, userId });
         res.json({
             success: true,
             message: 'Feed retrieved successfully',
-            data: posts,
+            data: result.posts,
             meta: {
-                page,
-                limit,
-                total: count,
-                totalPages: Math.ceil(count / limit)
+                page: result.page,
+                limit: result.limit,
+                total: result.total,
+                totalPages: result.totalPages,
+                hasNext: result.hasNext,
+                hasPrev: result.hasPrev,
+                nextCursor: result.nextCursor
             }
         });
     }
-    catch (error) {
-        logger_1.logger.error('Get feed error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Internal server error'
-        });
+    catch (err) {
+        handleError(res, err, 'getFeed');
     }
 };
 exports.getFeed = getFeed;
+const getPost = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        const post = await postService.getPostById(postId);
+        if (!post) {
+            res.status(404).json({ success: false, message: 'Post not found' });
+            return;
+        }
+        res.json({ success: true, message: 'Post retrieved successfully', data: { post } });
+    }
+    catch (err) {
+        handleError(res, err, 'getPost');
+    }
+};
+exports.getPost = getPost;
+// ─────────────────────────────────────────────────────────────────────────────
+// Mutations
+// ─────────────────────────────────────────────────────────────────────────────
 const createPost = async (req, res) => {
     try {
         const userId = req.headers['x-user-id'];
@@ -64,87 +132,29 @@ const createPost = async (req, res) => {
             res.status(400).json({
                 success: false,
                 message: 'Validation error',
-                error: error.details[0].message
+                errors: [{ field: error.details[0].path.join('.'), message: error.details[0].message }]
             });
             return;
         }
         const mediaUrls = req.files?.map(f => `/uploads/${f.filename}`) || [];
-        const post = await models_1.Post.create({
-            userId,
-            content: value.content,
-            type: mediaUrls.length > 0 ? (value.type || 'image') : 'text',
-            mediaUrls,
-            isPublic: value.isPublic
-        });
-        res.status(201).json({
-            success: true,
-            message: 'Post created successfully',
-            data: { post }
-        });
+        const post = await postService.createPost({ userId, ...value, mediaUrls });
+        res.status(201).json({ success: true, message: 'Post created successfully', data: { post } });
     }
-    catch (error) {
-        logger_1.logger.error('Create post error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Internal server error'
-        });
+    catch (err) {
+        handleError(res, err, 'createPost');
     }
 };
 exports.createPost = createPost;
-const getPost = async (req, res) => {
-    try {
-        const { postId } = req.params;
-        const post = await models_1.Post.findByPk(postId, {
-            include: [
-                { model: models_1.Comment, as: 'postComments' }
-            ]
-        });
-        if (!post) {
-            res.status(404).json({ success: false, message: 'Post not found' });
-            return;
-        }
-        res.json({
-            success: true,
-            message: 'Post retrieved successfully',
-            data: { post }
-        });
-    }
-    catch (error) {
-        logger_1.logger.error('Get post error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Internal server error'
-        });
-    }
-};
-exports.getPost = getPost;
 const updatePost = async (req, res) => {
     try {
         const userId = req.headers['x-user-id'];
         const { postId } = req.params;
-        const post = await models_1.Post.findByPk(postId);
-        if (!post) {
-            res.status(404).json({ success: false, message: 'Post not found' });
-            return;
-        }
-        if (post.userId !== userId) {
-            res.status(403).json({ success: false, message: 'Not authorized' });
-            return;
-        }
         const { content, isPublic } = req.body;
-        await post.update({ content, isPublic });
-        res.json({
-            success: true,
-            message: 'Post updated successfully',
-            data: { post }
-        });
+        const post = await postService.updatePost(postId, userId, { content, isPublic });
+        res.json({ success: true, message: 'Post updated successfully', data: { post } });
     }
-    catch (error) {
-        logger_1.logger.error('Update post error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Internal server error'
-        });
+    catch (err) {
+        handleError(res, err, 'updatePost');
     }
 };
 exports.updatePost = updatePost;
@@ -153,87 +163,56 @@ const deletePost = async (req, res) => {
         const userId = req.headers['x-user-id'];
         const userRole = req.headers['x-user-role'];
         const { postId } = req.params;
-        const post = await models_1.Post.findByPk(postId);
-        if (!post) {
-            res.status(404).json({ success: false, message: 'Post not found' });
-            return;
-        }
-        if (post.userId !== userId && userRole !== 'admin') {
-            res.status(403).json({ success: false, message: 'Not authorized' });
-            return;
-        }
-        await post.destroy();
-        res.json({
-            success: true,
-            message: 'Post deleted successfully'
-        });
+        await postService.deletePost(postId, userId, userRole);
+        res.status(204).send();
     }
-    catch (error) {
-        logger_1.logger.error('Delete post error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Internal server error'
-        });
+    catch (err) {
+        handleError(res, err, 'deletePost');
     }
 };
 exports.deletePost = deletePost;
+// ─────────────────────────────────────────────────────────────────────────────
+// Likes
+// ─────────────────────────────────────────────────────────────────────────────
 const likePost = async (req, res) => {
     try {
         const userId = req.headers['x-user-id'];
         const { postId } = req.params;
-        const post = await models_1.Post.findByPk(postId);
-        if (!post) {
-            res.status(404).json({ success: false, message: 'Post not found' });
-            return;
-        }
-        const [like, created] = await models_1.Like.findOrCreate({
-            where: { postId, userId }
+        const result = await postService.toggleLike(postId, userId);
+        res.json({
+            success: true,
+            message: result.liked ? 'Post liked' : 'Post unliked',
+            data: result
         });
-        if (!created) {
-            await like.destroy();
-            await post.decrement('likes');
-            res.json({ success: true, message: 'Post unliked', data: { liked: false } });
-            return;
-        }
-        await post.increment('likes');
-        res.json({ success: true, message: 'Post liked', data: { liked: true } });
     }
-    catch (error) {
-        logger_1.logger.error('Like post error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Internal server error'
-        });
+    catch (err) {
+        handleError(res, err, 'likePost');
     }
 };
 exports.likePost = likePost;
-const unlikePost = async (req, res) => {
+// Kept for backward-compatibility — delegates to the same toggle
+exports.unlikePost = exports.likePost;
+// ─────────────────────────────────────────────────────────────────────────────
+// Comments
+// ─────────────────────────────────────────────────────────────────────────────
+const getComments = async (req, res) => {
     try {
-        const userId = req.headers['x-user-id'];
         const { postId } = req.params;
-        const post = await models_1.Post.findByPk(postId);
-        if (!post) {
-            res.status(404).json({ success: false, message: 'Post not found' });
-            return;
-        }
-        const like = await models_1.Like.findOne({ where: { postId, userId } });
-        if (!like) {
-            res.status(200).json({ success: true, message: 'Post already unliked', data: { liked: false } });
-            return;
-        }
-        await like.destroy();
-        await post.decrement('likes');
-        res.json({ success: true, message: 'Post unliked', data: { liked: false } });
-    }
-    catch (error) {
-        logger_1.logger.error('Unlike post error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Internal server error'
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 20;
+        const { comments, total } = await postService.getComments(postId, page, limit);
+        res.json({
+            success: true,
+            message: 'Comments retrieved successfully',
+            data: comments,
+            meta: { page, limit, total, totalPages: Math.ceil(total / limit) }
         });
     }
+    catch (err) {
+        handleError(res, err, 'getComments');
+    }
 };
-exports.unlikePost = unlikePost;
+exports.getComments = getComments;
 const addComment = async (req, res) => {
     try {
         const userId = req.headers['x-user-id'];
@@ -243,126 +222,43 @@ const addComment = async (req, res) => {
             res.status(400).json({
                 success: false,
                 message: 'Validation error',
-                error: error.details[0].message
+                errors: [{ field: error.details[0].path.join('.'), message: error.details[0].message }]
             });
             return;
         }
-        const post = await models_1.Post.findByPk(postId);
-        if (!post) {
-            res.status(404).json({ success: false, message: 'Post not found' });
-            return;
-        }
-        const comment = await models_1.Comment.create({
-            postId,
-            userId,
-            content: value.content,
-            parentId: value.parentId
-        });
-        await post.increment('comments');
-        res.status(201).json({
-            success: true,
-            message: 'Comment added successfully',
-            data: { comment }
-        });
+        const comment = await postService.addComment({ userId, postId, ...value });
+        res.status(201).json({ success: true, message: 'Comment added successfully', data: { comment } });
     }
-    catch (error) {
-        logger_1.logger.error('Add comment error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Internal server error'
-        });
+    catch (err) {
+        handleError(res, err, 'addComment');
     }
 };
 exports.addComment = addComment;
-const getComments = async (req, res) => {
-    try {
-        const { postId } = req.params;
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
-        const offset = (page - 1) * limit;
-        const { count, rows: comments } = await models_1.Comment.findAndCountAll({
-            where: { postId },
-            order: [['createdAt', 'DESC']],
-            limit,
-            offset
-        });
-        res.json({
-            success: true,
-            message: 'Comments retrieved successfully',
-            data: comments,
-            meta: {
-                page,
-                limit,
-                total: count,
-                totalPages: Math.ceil(count / limit)
-            }
-        });
-    }
-    catch (error) {
-        logger_1.logger.error('Get comments error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Internal server error'
-        });
-    }
-};
-exports.getComments = getComments;
 const deleteComment = async (req, res) => {
     try {
         const userId = req.headers['x-user-id'];
         const userRole = req.headers['x-user-role'];
         const { postId, commentId } = req.params;
-        const post = await models_1.Post.findByPk(postId);
-        if (!post) {
-            res.status(404).json({ success: false, message: 'Post not found' });
-            return;
-        }
-        const comment = await models_1.Comment.findOne({ where: { id: commentId, postId } });
-        if (!comment) {
-            res.status(404).json({ success: false, message: 'Comment not found' });
-            return;
-        }
-        if (comment.userId !== userId && post.userId !== userId && userRole !== 'admin') {
-            res.status(403).json({ success: false, message: 'Not authorized' });
-            return;
-        }
-        await comment.destroy();
-        await post.decrement('comments');
-        res.json({
-            success: true,
-            message: 'Comment deleted successfully'
-        });
+        await postService.deleteComment(postId, commentId, userId, userRole);
+        res.status(204).send();
     }
-    catch (error) {
-        logger_1.logger.error('Delete comment error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Internal server error'
-        });
+    catch (err) {
+        handleError(res, err, 'deleteComment');
     }
 };
 exports.deleteComment = deleteComment;
+// ─────────────────────────────────────────────────────────────────────────────
+// Shares
+// ─────────────────────────────────────────────────────────────────────────────
 const sharePost = async (req, res) => {
     try {
+        const userId = req.headers['x-user-id'];
         const { postId } = req.params;
-        const post = await models_1.Post.findByPk(postId);
-        if (!post) {
-            res.status(404).json({ success: false, message: 'Post not found' });
-            return;
-        }
-        await post.increment('shares');
-        res.json({
-            success: true,
-            message: 'Post shared successfully',
-            data: { shares: post.shares + 1 }
-        });
+        const result = await postService.toggleShare(postId, userId);
+        res.json({ success: true, message: 'Post shared successfully', data: result });
     }
-    catch (error) {
-        logger_1.logger.error('Share post error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Internal server error'
-        });
+    catch (err) {
+        handleError(res, err, 'sharePost');
     }
 };
 exports.sharePost = sharePost;

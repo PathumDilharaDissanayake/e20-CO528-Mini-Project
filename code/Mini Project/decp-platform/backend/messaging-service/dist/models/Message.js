@@ -15,5 +15,13 @@ Message.init({
     type: { type: sequelize_1.DataTypes.ENUM('text', 'image', 'file'), defaultValue: 'text' },
     attachmentUrl: { type: sequelize_1.DataTypes.STRING(500), allowNull: true },
     isDeleted: { type: sequelize_1.DataTypes.BOOLEAN, defaultValue: false }
-}, { sequelize: database_1.default, tableName: 'messages', timestamps: true });
+}, {
+    sequelize: database_1.default,
+    tableName: 'messages',
+    timestamps: true,
+    indexes: [
+        { fields: ['conversationId', 'createdAt'] }, // paginate messages per conversation
+        { fields: ['senderId'] } // sender history lookup
+    ]
+});
 exports.default = Message;

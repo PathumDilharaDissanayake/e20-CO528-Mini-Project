@@ -1,8 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getMe = exports.resetPassword = exports.forgotPassword = exports.verifyEmail = exports.logout = exports.refreshToken = exports.login = exports.register = void 0;
 const uuid_1 = require("uuid");
 const sequelize_1 = require("sequelize");
+const database_1 = __importDefault(require("../config/database"));
 const models_1 = require("../models");
 const jwt_1 = require("../utils/jwt");
 const email_1 = require("../utils/email");
@@ -31,45 +35,52 @@ const register = async (req, res) => {
         }
         // Generate verification token
         const verificationToken = (0, uuid_1.v4)();
-        // Create user
-        const userData = {
-            email,
-            password,
-            firstName,
-            lastName,
-            role,
-            isEmailVerified: false,
-            emailVerificationToken: verificationToken
-        };
-        // Add optional fields if provided
-        if (department)
-            userData.department = department;
-        if (graduationYear)
-            userData.graduationYear = graduationYear;
-        const user = await models_1.User.create(userData);
-        // Send verification email
+        // Wrap user creation + refresh token in a transaction (FLAW-012 fix)
+        const t = await database_1.default.transaction();
+        let user;
+        let tokens;
+        try {
+            const userData = {
+                email,
+                password,
+                firstName,
+                lastName,
+                role,
+                isEmailVerified: false,
+                emailVerificationToken: verificationToken
+            };
+            if (department)
+                userData.department = department;
+            if (graduationYear)
+                userData.graduationYear = graduationYear;
+            user = await models_1.User.create(userData, { transaction: t });
+            tokens = (0, jwt_1.generateTokens)({
+                userId: user.id,
+                email: user.email,
+                role: user.role,
+                firstName: user.firstName,
+                lastName: user.lastName
+            });
+            const refreshTokenExpiry = new Date();
+            refreshTokenExpiry.setDate(refreshTokenExpiry.getDate() + 7);
+            await models_1.RefreshToken.create({
+                token: tokens.refreshToken,
+                userId: user.id,
+                expiresAt: refreshTokenExpiry
+            }, { transaction: t });
+            await t.commit();
+        }
+        catch (txError) {
+            await t.rollback();
+            throw txError;
+        }
+        // Send verification email outside transaction (non-critical path)
         try {
             await (0, email_1.sendVerificationEmail)(email, verificationToken);
         }
         catch (emailError) {
             logger_1.logger.error('Failed to send verification email:', emailError);
         }
-        // Generate tokens
-        const tokens = (0, jwt_1.generateTokens)({
-            userId: user.id,
-            email: user.email,
-            role: user.role,
-            firstName: user.firstName,
-            lastName: user.lastName
-        });
-        // Save refresh token
-        const refreshTokenExpiry = new Date();
-        refreshTokenExpiry.setDate(refreshTokenExpiry.getDate() + 7);
-        await models_1.RefreshToken.create({
-            token: tokens.refreshToken,
-            userId: user.id,
-            expiresAt: refreshTokenExpiry
-        });
         logger_1.logger.info(`User registered: ${email}`);
         res.status(201).json({
             success: true,
@@ -126,25 +137,33 @@ const login = async (req, res) => {
             });
             return;
         }
-        // Update last login
-        user.lastLogin = new Date();
-        await user.save();
-        // Generate tokens
-        const tokens = (0, jwt_1.generateTokens)({
-            userId: user.id,
-            email: user.email,
-            role: user.role,
-            firstName: user.firstName,
-            lastName: user.lastName
-        });
-        // Save refresh token
-        const refreshTokenExpiry = new Date();
-        refreshTokenExpiry.setDate(refreshTokenExpiry.getDate() + 7);
-        await models_1.RefreshToken.create({
-            token: tokens.refreshToken,
-            userId: user.id,
-            expiresAt: refreshTokenExpiry
-        });
+        // Generate tokens + save refresh token atomically (FLAW-012 fix)
+        const loginTx = await database_1.default.transaction();
+        let loginTokens;
+        try {
+            user.lastLogin = new Date();
+            await user.save({ transaction: loginTx });
+            loginTokens = (0, jwt_1.generateTokens)({
+                userId: user.id,
+                email: user.email,
+                role: user.role,
+                firstName: user.firstName,
+                lastName: user.lastName
+            });
+            const refreshTokenExpiry = new Date();
+            refreshTokenExpiry.setDate(refreshTokenExpiry.getDate() + 7);
+            await models_1.RefreshToken.create({
+                token: loginTokens.refreshToken,
+                userId: user.id,
+                expiresAt: refreshTokenExpiry
+            }, { transaction: loginTx });
+            await loginTx.commit();
+        }
+        catch (txError) {
+            await loginTx.rollback();
+            throw txError;
+        }
+        const tokens = loginTokens;
         logger_1.logger.info(`User logged in: ${email}`);
         res.json({
             success: true,
@@ -213,11 +232,21 @@ const refreshToken = async (req, res) => {
         }
         // Revoke old token
         await storedToken.update({ isRevoked: true });
-        // Generate new tokens
+        // Fetch user to ensure firstName/lastName are always included in new tokens (FLAW-005 fix)
+        const user = await models_1.User.findByPk(payload.userId, {
+            attributes: ['id', 'email', 'role', 'firstName', 'lastName', 'isActive']
+        });
+        if (!user || !user.isActive) {
+            res.status(401).json({ success: false, message: 'User account is inactive' });
+            return;
+        }
+        // Generate new tokens with complete payload
         const tokens = (0, jwt_1.generateTokens)({
-            userId: payload.userId,
-            email: payload.email,
-            role: payload.role
+            userId: user.id,
+            email: user.email,
+            role: user.role,
+            firstName: user.firstName,
+            lastName: user.lastName
         });
         // Save new refresh token
         const refreshTokenExpiry = new Date();

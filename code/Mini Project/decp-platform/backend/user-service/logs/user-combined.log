@@ -401,3 +401,9 @@ SequelizeConnectionError: database "decp_users" does not exist
 2026-03-03 08:08:29 [USER-SERVICE] [info]: ✅ Database connection established successfully.
 2026-03-03 08:08:29 [USER-SERVICE] [info]: ✅ Database synchronized.
 2026-03-03 08:08:29 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-03 22:13:00 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-03 22:13:00 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 22:13:00 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-03 22:46:46 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-03 22:46:46 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 22:46:46 [USER-SERVICE] [info]: 👤 User Service running on port 3002

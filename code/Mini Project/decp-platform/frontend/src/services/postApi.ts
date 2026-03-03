@@ -62,7 +62,13 @@ export const postApi = apiSlice.injectEndpoints({
     getPosts: builder.query<PaginatedResponse<Post>, { page?: number; limit?: number }>({
       query: ({ page = 1, limit = 10 }) => `/posts/feed?page=${page}&limit=${limit}`,
       transformResponse: (response: any) => toPaginatedPosts(response),
-      providesTags: ['Post'],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.data.map(({ _id, id }) => ({ type: 'Post' as const, id: _id || id })),
+              { type: 'Post', id: 'LIST' },
+            ]
+          : [{ type: 'Post', id: 'LIST' }],
     }),
     getPostById: builder.query<ApiResponse<Post>, string>({
       query: (id) => `/posts/${id}`,
@@ -78,6 +84,14 @@ export const postApi = apiSlice.injectEndpoints({
       transformResponse: (response: any) => toPaginatedPosts(response),
       providesTags: ['Post'],
     }),
+    getPostComments: builder.query<ApiResponse<any[]>, string>({
+      query: (postId) => `/posts/${postId}/comments`,
+      transformResponse: (response: any) => ({
+        ...response,
+        data: Array.isArray(response?.data) ? response.data : [],
+      }),
+      providesTags: (result, error, id) => [{ type: 'Post', id: `comments-${id}` }],
+    }),
     createPost: builder.mutation<ApiResponse<Post>, FormData>({
       query: (data) => ({
         url: '/posts',
@@ -88,7 +102,7 @@ export const postApi = apiSlice.injectEndpoints({
         ...response,
         data: normalizePost(response?.data?.post || response?.data),
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: [{ type: 'Post', id: 'LIST' }],
     }),
     updatePost: builder.mutation<ApiResponse<Post>, { id: string; data: Partial<CreatePostData> }>({
       query: ({ id, data }) => ({
@@ -100,29 +114,58 @@ export const postApi = apiSlice.injectEndpoints({
         ...response,
         data: normalizePost(response?.data?.post || response?.data),
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: 'Post', id }],
+      invalidatesTags: (result, error, { id }) => [{ type: 'Post', id }, { type: 'Post', id: 'LIST' }],
     }),
     deletePost: builder.mutation<ApiResponse<void>, string>({
       query: (id) => ({
         url: `/posts/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: (result, error, id) => [{ type: 'Post', id }, { type: 'Post', id: 'LIST' }],
     }),
     likePost: builder.mutation<ApiResponse<Post>, string>({
       query: (id) => ({
         url: `/posts/${id}/like`,
         method: 'POST',
       }),
-      transformResponse: (response: any) => response,
-      invalidatesTags: (result, error, id) => [{ type: 'Post', id }],
+      // Optimistic update so like is instant
+      async onQueryStarted(id, { dispatch, queryFulfilled, getState }) {
+        const patches: any[] = [];
+        // Patch all paginated getPosts queries
+        const state = getState() as any;
+        const entries = state.api?.queries || {};
+        Object.keys(entries).forEach((key) => {
+          if (key.startsWith('getPosts(')) {
+            const patch = dispatch(
+              postApi.util.updateQueryData('getPosts', JSON.parse(key.slice(9, -1)), (draft) => {
+                const post = draft.data.find((p) => (p._id || p.id) === id);
+                if (post) {
+                  if (Array.isArray(post.likes)) {
+                    // toggle-like logic handled by server, just increment count
+                    (post.likes as any[]).push('optimistic');
+                  } else {
+                    post.likes = Number(post.likes || 0) + 1;
+                  }
+                }
+              })
+            );
+            patches.push(patch);
+          }
+        });
+        try {
+          await queryFulfilled;
+        } catch {
+          patches.forEach((p) => p.undo());
+        }
+      },
+      invalidatesTags: (result, error, id) => [{ type: 'Post', id }, { type: 'Post', id: 'LIST' }],
     }),
     unlikePost: builder.mutation<ApiResponse<Post>, string>({
       query: (id) => ({
         url: `/posts/${id}/like`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, id) => [{ type: 'Post', id }],
+      invalidatesTags: (result, error, id) => [{ type: 'Post', id }, { type: 'Post', id: 'LIST' }],
     }),
     addComment: builder.mutation<ApiResponse<Post>, { postId: string; content: string }>({
       query: ({ postId, content }) => ({
@@ -130,21 +173,29 @@ export const postApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: { content },
       }),
-      invalidatesTags: (result, error, { postId }) => [{ type: 'Post', id: postId }, 'Post'],
+      invalidatesTags: (result, error, { postId }) => [
+        { type: 'Post', id: postId },
+        { type: 'Post', id: `comments-${postId}` },
+        { type: 'Post', id: 'LIST' },
+      ],
     }),
     deleteComment: builder.mutation<ApiResponse<Post>, { postId: string; commentId: string }>({
       query: ({ postId, commentId }) => ({
         url: `/posts/${postId}/comments/${commentId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, { postId }) => [{ type: 'Post', id: postId }, 'Post'],
+      invalidatesTags: (result, error, { postId }) => [
+        { type: 'Post', id: postId },
+        { type: 'Post', id: `comments-${postId}` },
+        { type: 'Post', id: 'LIST' },
+      ],
     }),
     sharePost: builder.mutation<ApiResponse<Post>, string>({
       query: (id) => ({
         url: `/posts/${id}/share`,
         method: 'POST',
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: [{ type: 'Post', id: 'LIST' }],
     }),
   }),
 });
@@ -153,6 +204,7 @@ export const {
   useGetPostsQuery,
   useGetPostByIdQuery,
   useGetUserPostsQuery,
+  useGetPostCommentsQuery,
   useCreatePostMutation,
   useUpdatePostMutation,
   useDeletePostMutation,

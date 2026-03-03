@@ -13,6 +13,11 @@ import {
   TextField,
   Collapse,
   Divider,
+  Skeleton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from '@mui/material';
 import {
   Favorite,
@@ -23,7 +28,9 @@ import {
   Edit,
   Delete,
   Send,
-  EmojiEmotions,
+  BookmarkBorder,
+  Bookmark,
+  Close,
 } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
@@ -32,171 +39,300 @@ import {
   useDeletePostMutation,
   useAddCommentMutation,
   useSharePostMutation,
+  useGetPostCommentsQuery,
+  useUpdatePostMutation,
 } from '@services/postApi';
 import { Post } from '@types';
 import { formatRelativeTime } from '@utils';
 import { ImageModal } from '@components/common';
+import { useNavigate } from 'react-router-dom';
 
 interface PostCardProps {
   post: Post;
+  onPostUpdated?: () => void;
 }
 
-export const PostCard: React.FC<PostCardProps> = ({ post }) => {
+export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
   const { user } = useSelector((state: RootState) => state.auth);
+  const navigate = useNavigate();
   const [likePost] = useLikePostMutation();
   const [deletePost] = useDeletePostMutation();
   const [addComment] = useAddCommentMutation();
   const [sharePost] = useSharePostMutation();
+  const [updatePost] = useUpdatePostMutation();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showComments, setShowComments] = useState(false);
   const [commentText, setCommentText] = useState('');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isSaved, setIsSaved] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [editContent, setEditContent] = useState(post.content || '');
+  const [editSubmitting, setEditSubmitting] = useState(false);
+
+  // Optimistic like state — cleared after server confirms so fresh data renders
+  const [isLikedOpt, setIsLikedOpt] = useState<boolean | null>(null);
+  const [likesOpt, setLikesOpt] = useState<number | null>(null);
 
   const postId = post._id || post.id || '';
   const currentUserId = user?._id || user?.id || '';
 
-  const author = post.author || {
+  // Fetch comments from server when section is expanded
+  const { data: commentsData, isLoading: isLoadingComments } = useGetPostCommentsQuery(postId, {
+    skip: !showComments || !postId,
+  });
+
+  const author: any = post.author || {
     _id: post.userId || 'unknown',
     id: post.userId || 'unknown',
     firstName: 'Community',
     lastName: 'Member',
-    role: 'student' as const,
+    role: 'student',
   };
 
-  const likesCount = Array.isArray(post.likes) ? post.likes.length : Number(post.likes || 0);
-  const commentsCount = Array.isArray(post.comments) ? post.comments.length : Number(post.comments || 0);
-  const comments = Array.isArray(post.comments) ? post.comments : [];
-  const isLiked = Array.isArray(post.likes) ? post.likes.includes(currentUserId) : false;
+  const serverLikesCount = Array.isArray(post.likes)
+    ? post.likes.length
+    : Number(post.likes || 0);
+  const likesCount = likesOpt !== null ? likesOpt : serverLikesCount;
+
+  const serverIsLiked = Array.isArray(post.likes)
+    ? post.likes.includes(currentUserId)
+    : false;
+  const isLiked = isLikedOpt !== null ? isLikedOpt : serverIsLiked;
+
+  const commentsArr: any[] = commentsData?.data || [];
+  const commentsCount =
+    commentsData?.data != null
+      ? commentsData.data.length
+      : Array.isArray(post.comments)
+      ? post.comments.length
+      : Number(post.comments || 0);
+
   const isOwner = (author._id || author.id || post.userId) === currentUserId;
 
-  const mediaItems = Array.isArray(post.media)
+  const mediaItems: any[] = Array.isArray(post.media)
     ? post.media
-    : Array.isArray(post.mediaUrls)
-      ? post.mediaUrls.map((url) => ({
+    : Array.isArray((post as any).mediaUrls)
+    ? (post as any).mediaUrls.map((url: string) => ({
         url,
-        type: /\.(mp4|webm|ogg)$/i.test(url) ? ('video' as const) : ('image' as const),
+        type: /\.(mp4|webm|ogg)$/i.test(url) ? 'video' : 'image',
       }))
-      : [];
+    : [];
 
   const handleLike = async () => {
+    const wasLiked = isLiked;
+    const prevCount = likesCount;
+    setIsLikedOpt(!wasLiked);
+    setLikesOpt(wasLiked ? prevCount - 1 : prevCount + 1);
     try {
       await likePost(postId).unwrap();
-    } catch (error) {
-      console.error('Failed to like post:', error);
+      // After server confirms, clear optimistic state — the refreshed post data takes over
+      setIsLikedOpt(null);
+      setLikesOpt(null);
+    } catch {
+      setIsLikedOpt(wasLiked);
+      setLikesOpt(prevCount);
     }
   };
 
   const handleDelete = async () => {
+    setAnchorEl(null);
     try {
       await deletePost(postId).unwrap();
-    } catch (error) {
-      console.error('Failed to delete post:', error);
+      onPostUpdated?.();
+    } catch (e) {
+      console.error(e);
     }
-    setAnchorEl(null);
+  };
+
+  const handleEditSave = async () => {
+    if (!editContent.trim() || editSubmitting) return;
+    setEditSubmitting(true);
+    try {
+      await updatePost({ id: postId, data: { content: editContent } }).unwrap();
+      setEditOpen(false);
+      onPostUpdated?.();
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setEditSubmitting(false);
+    }
   };
 
   const handleComment = async () => {
-    if (!commentText.trim()) return;
+    if (!commentText.trim() || submitting) return;
+    setSubmitting(true);
     try {
       await addComment({ postId, content: commentText }).unwrap();
       setCommentText('');
-    } catch (error) {
-      console.error('Failed to add comment:', error);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setSubmitting(false);
     }
   };
 
   const handleShare = async () => {
     try {
       await sharePost(postId).unwrap();
-    } catch (error) {
-      console.error('Failed to share post:', error);
+    } catch (e) {
+      console.error(e);
     }
   };
 
-  // Get role badge color - Green theme
-  const getRoleBadgeColor = (role?: string) => {
-    switch (role) {
-      case 'alumni': return 'bg-gradient-to-r from-amber-500 to-orange-500';
-      case 'faculty': return 'bg-gradient-to-r from-green-500 to-emerald-500';
-      case 'student': return 'bg-gradient-to-r from-teal-500 to-cyan-500';
-      default: return 'bg-gradient-to-r from-gray-500 to-slate-500';
-    }
+  const getBadge = (role?: string) => {
+    if (role === 'alumni') return { bgcolor: '#f59e0b', color: 'white' };
+    if (role === 'faculty') return { bgcolor: '#166534', color: 'white' };
+    if (role === 'admin') return { bgcolor: '#ef4444', color: 'white' };
+    return { bgcolor: '#6366f1', color: 'white' };
   };
+  const bs = getBadge(author.role);
+
+  const authorId = author._id || author.id || post.userId || '';
 
   return (
     <>
-      <Card className="mb-4 shadow-card hover:shadow-card-hover transition-all duration-300 rounded-2xl overflow-hidden">
-        {/* Gradient Border Accent - Green Theme */}
-        <Box className="h-1 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500" />
+      <Card
+        sx={{
+          mb: 2,
+          borderRadius: '16px',
+          overflow: 'hidden',
+          border: '1px solid',
+          borderColor: 'divider',
+          transition: 'box-shadow 0.2s ease',
+          '&:hover': { boxShadow: '0 4px 20px rgba(22,101,52,0.1)' },
+        }}
+      >
+        <Box sx={{ height: 3, background: 'linear-gradient(90deg,#15803d,#166534,#14b8a6)' }} />
 
-        <CardContent className="pt-4">
-          <Box className="flex justify-between items-start mb-3">
-            <Box className="flex gap-3">
-              <Box className="relative">
+        <CardContent sx={{ pt: 2, pb: 1 }}>
+          {/* Author row */}
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1.5 }}>
+            <Box sx={{ display: 'flex', gap: 1.5, flex: 1, minWidth: 0 }}>
+              <Box sx={{ position: 'relative', flexShrink: 0 }}>
                 <Avatar
                   src={author.avatar || author.profilePicture}
-                  className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600"
+                  onClick={() => authorId && navigate(`/users/${authorId}`)}
+                  sx={{
+                    width: 44,
+                    height: 44,
+                    background: 'linear-gradient(135deg,#15803d,#166534)',
+                    fontWeight: 700,
+                    cursor: authorId ? 'pointer' : 'default',
+                  }}
                 >
                   {(author.firstName || 'C')[0]}
                 </Avatar>
-                {/* Online indicator */}
-                <Box className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full" />
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: -1,
+                    right: -1,
+                    width: 12,
+                    height: 12,
+                    borderRadius: '50%',
+                    bgcolor: '#22c55e',
+                    border: '2px solid white',
+                  }}
+                />
               </Box>
-              <Box>
-                <Box className="flex items-center gap-2">
-                  <Typography variant="subtitle1" className="font-semibold">
+              <Box sx={{ flex: 1, minWidth: 0 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
+                  <Typography
+                    variant="subtitle2"
+                    fontWeight={700}
+                    sx={{ lineHeight: 1.2, cursor: authorId ? 'pointer' : 'default' }}
+                    onClick={() => authorId && navigate(`/users/${authorId}`)}
+                  >
                     {author.firstName || 'Community'} {author.lastName || 'Member'}
                   </Typography>
-                  <Box className={`px-2 py-0.5 rounded-full text-[10px] text-white font-medium ${getRoleBadgeColor(author.role)}`}>
+                  <Box sx={{ px: 1, py: 0.15, borderRadius: '20px', fontSize: '0.62rem', fontWeight: 700, ...bs }}>
                     {author.role || 'student'}
                   </Box>
                 </Box>
-                <Typography variant="caption" className="text-gray-500">
-                  {author.department || 'Department'} • {formatRelativeTime(post.createdAt || new Date().toISOString())}
+                <Typography variant="caption" color="text.secondary">
+                  {author.department ? `${author.department} · ` : ''}
+                  {formatRelativeTime(post.createdAt || new Date().toISOString())}
                 </Typography>
               </Box>
             </Box>
-            {isOwner && (
-              <>
-                <IconButton size="small" onClick={(e) => setAnchorEl(e.currentTarget)} className="hover:bg-gray-100">
-                  <MoreVert />
+            <Box sx={{ display: 'flex', gap: 0.5, flexShrink: 0 }}>
+              <IconButton size="small" onClick={() => setIsSaved(!isSaved)}>
+                {isSaved ? (
+                  <Bookmark fontSize="small" sx={{ color: 'primary.main' }} />
+                ) : (
+                  <BookmarkBorder fontSize="small" />
+                )}
+              </IconButton>
+              {isOwner && (
+                <IconButton size="small" onClick={(e) => setAnchorEl(e.currentTarget)}>
+                  <MoreVert fontSize="small" />
                 </IconButton>
-                <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)} className="rounded-xl">
-                  <MenuItem className="hover:bg-green-50">
-                    <Edit fontSize="small" className="mr-2 text-green-600" /> Edit
-                  </MenuItem>
-                  <MenuItem onClick={handleDelete} className="text-red-600 hover:bg-red-50">
-                    <Delete fontSize="small" className="mr-2" /> Delete
-                  </MenuItem>
-                </Menu>
-              </>
-            )}
+              )}
+            </Box>
           </Box>
 
-          <Typography variant="body1" className="whitespace-pre-wrap mb-3 text-gray-700 dark:text-gray-300">
+          {/* Post content */}
+          <Typography
+            variant="body2"
+            sx={{ whiteSpace: 'pre-wrap', lineHeight: 1.7, mb: mediaItems.length > 0 ? 1.5 : 0 }}
+          >
             {post.content || ''}
           </Typography>
 
+          {/* Media */}
           {mediaItems.length > 0 && (
-            <Box className="mt-3 grid gap-2 grid-cols-1 sm:grid-cols-2">
-              {mediaItems.map((media, index) => (
+            <Box
+              sx={{
+                mt: 1.5,
+                display: 'grid',
+                gap: 1,
+                gridTemplateColumns: mediaItems.length === 1 ? '1fr' : '1fr 1fr',
+                borderRadius: '12px',
+                overflow: 'hidden',
+              }}
+            >
+              {mediaItems.slice(0, 4).map((media: any, index: number) => (
                 <Box
                   key={index}
-                  className="relative rounded-xl overflow-hidden cursor-pointer group"
-                  onClick={() => setSelectedImage(media.url)}
+                  sx={{ position: 'relative', cursor: 'pointer', overflow: 'hidden' }}
+                  onClick={() => media.type === 'image' && setSelectedImage(media.url)}
                 >
                   {media.type === 'image' ? (
                     <img
                       src={media.url}
                       alt="Post media"
-                      className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                      style={{
+                        width: '100%',
+                        height: mediaItems.length === 1 ? 320 : 200,
+                        objectFit: 'cover',
+                        display: 'block',
+                      }}
                     />
                   ) : (
-                    <video src={media.url} controls className="w-full h-64 object-cover" />
+                    <video
+                      src={media.url}
+                      controls
+                      style={{ width: '100%', height: 280, objectFit: 'cover', display: 'block' }}
+                    />
                   )}
-                  {/* Overlay on hover */}
-                  <Box className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                  {index === 3 && mediaItems.length > 4 && (
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        inset: 0,
+                        bgcolor: 'rgba(0,0,0,0.55)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <Typography variant="h5" fontWeight={700} color="white">
+                        +{mediaItems.length - 4}
+                      </Typography>
+                    </Box>
+                  )}
                 </Box>
               ))}
             </Box>
@@ -205,92 +341,267 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
 
         <Divider />
 
-        <CardActions className="px-4 py-1 bg-gray-50/50 dark:bg-gray-800/50">
+        {/* Action bar */}
+        <CardActions
+          sx={{
+            px: 2,
+            py: 0.75,
+            bgcolor: (t) =>
+              t.palette.mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.015)',
+          }}
+        >
           <Button
             size="small"
-            startIcon={isLiked ? <Favorite className="text-red-500" /> : <FavoriteBorder />}
+            startIcon={isLiked ? <Favorite sx={{ color: '#ef4444' }} /> : <FavoriteBorder />}
             onClick={handleLike}
-            className={`${isLiked ? 'text-red-500' : 'text-gray-600'} hover:bg-red-50 rounded-lg transition-colors`}
+            sx={{
+              color: isLiked ? '#ef4444' : 'text.secondary',
+              fontWeight: 600,
+              borderRadius: '8px',
+              px: 1.5,
+              '&:hover': { bgcolor: 'rgba(239,68,68,0.08)', color: '#ef4444' },
+              transition: 'all 0.15s',
+            }}
           >
-            {likesCount}
+            {likesCount > 0 ? likesCount : 'Like'}
           </Button>
-          <Button size="small" startIcon={<Comment className="text-gray-500" />} onClick={() => setShowComments(!showComments)} className="text-gray-600 hover:bg-green-50 rounded-lg transition-colors">
-            {commentsCount}
+          <Button
+            size="small"
+            startIcon={<Comment fontSize="small" />}
+            onClick={() => setShowComments(!showComments)}
+            sx={{
+              color: showComments ? 'primary.main' : 'text.secondary',
+              fontWeight: 600,
+              borderRadius: '8px',
+              px: 1.5,
+              '&:hover': { bgcolor: 'rgba(16,185,129,0.08)', color: 'primary.main' },
+            }}
+          >
+            {commentsCount > 0 ? commentsCount : 'Comment'}
           </Button>
-          <Button size="small" startIcon={<Share className="text-gray-500" />} onClick={handleShare} className="text-gray-600 hover:bg-teal-50 rounded-lg transition-colors">
-            {post.shares || 0}
+          <Button
+            size="small"
+            startIcon={<Share fontSize="small" />}
+            onClick={handleShare}
+            sx={{
+              color: 'text.secondary',
+              fontWeight: 600,
+              borderRadius: '8px',
+              px: 1.5,
+              '&:hover': { bgcolor: 'rgba(99,102,241,0.08)', color: '#6366f1' },
+            }}
+          >
+            {post.shares ? post.shares : 'Share'}
           </Button>
-
-          <Box className="flex-1" />
-          <IconButton size="small" className="text-yellow-500 hover:bg-yellow-50">
-            <EmojiEmotions fontSize="small" />
-          </IconButton>
         </CardActions>
 
+        {/* Comments section */}
         <Collapse in={showComments}>
-          <CardContent className="pt-0 bg-gray-50/30 dark:bg-gray-800/30">
-            <Divider className="mb-3" />
+          <Box sx={{ px: 2, pb: 2 }}>
+            <Divider sx={{ mb: 2 }} />
 
-            <Box className="flex gap-2 mb-4">
+            {/* Comment input */}
+            <Box sx={{ display: 'flex', gap: 1.5, mb: 2, alignItems: 'flex-end' }}>
               <Avatar
                 src={user?.avatar || user?.profilePicture}
-                className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-600"
+                sx={{
+                  width: 34,
+                  height: 34,
+                  background: 'linear-gradient(135deg,#15803d,#166534)',
+                  fontSize: '0.8rem',
+                  fontWeight: 700,
+                  flexShrink: 0,
+                }}
               >
                 {(user?.firstName || 'U')[0]}
               </Avatar>
-              <Box className="flex-1 flex gap-2">
+              <Box sx={{ flex: 1, display: 'flex', gap: 1, alignItems: 'flex-end' }}>
                 <TextField
                   fullWidth
                   size="small"
-                  placeholder="Write a comment..."
+                  multiline
+                  maxRows={3}
+                  placeholder="Write a comment…"
                   value={commentText}
                   onChange={(e) => setCommentText(e.target.value)}
-                  className="bg-white dark:bg-gray-800 rounded-full"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleComment();
+                    }
+                  }}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: '20px',
+                      '& fieldset': { borderColor: 'transparent' },
+                      '&.Mui-focused fieldset': { borderColor: 'primary.main' },
+                      bgcolor: (t) =>
+                        t.palette.mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)',
+                    },
+                  }}
                 />
                 <IconButton
+                  size="small"
                   onClick={handleComment}
-                  disabled={!commentText.trim()}
-                  className="text-green-600 hover:bg-green-50 disabled:text-gray-400"
+                  disabled={!commentText.trim() || submitting}
+                  sx={{
+                    bgcolor: 'primary.main',
+                    color: 'white',
+                    width: 34,
+                    height: 34,
+                    flexShrink: 0,
+                    '&:hover': { bgcolor: 'primary.dark' },
+                    '&:disabled': { bgcolor: 'action.disabledBackground' },
+                  }}
                 >
-                  <Send />
+                  <Send fontSize="small" />
                 </IconButton>
               </Box>
             </Box>
 
-            <Box className="space-y-3">
-              {comments.map((comment) => {
-                const commentAuthor = comment.author || {
-                  firstName: 'Member',
-                  lastName: '',
-                  role: 'student' as const,
-                };
-
-                return (
-                  <Box key={comment._id || comment.id} className="flex gap-2 animate-fade-in">
-                    <Avatar
-                      src={commentAuthor.avatar || commentAuthor.profilePicture}
-                      className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-600"
-                    >
-                      {(commentAuthor.firstName || 'M')[0]}
-                    </Avatar>
-                    <Box className="flex-1 bg-white dark:bg-gray-800 rounded-2xl px-4 py-2 shadow-sm">
-                      <Box className="flex items-center gap-2 mb-1">
-                        <Typography variant="subtitle2" className="font-semibold">
-                          {commentAuthor.firstName || 'Member'} {commentAuthor.lastName || ''}
-                        </Typography>
-                        <Typography variant="caption" className="text-gray-400 text-xs">
-                          {formatRelativeTime(comment.createdAt || new Date().toISOString())}
+            {/* Comments list */}
+            {isLoadingComments ? (
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+                {[1, 2].map((i) => (
+                  <Box key={i} sx={{ display: 'flex', gap: 1.5 }}>
+                    <Skeleton variant="circular" width={34} height={34} />
+                    <Skeleton variant="rounded" height={56} sx={{ flex: 1, borderRadius: '16px' }} />
+                  </Box>
+                ))}
+              </Box>
+            ) : commentsArr.length === 0 ? (
+              <Typography
+                variant="caption"
+                color="text.disabled"
+                sx={{ display: 'block', textAlign: 'center', py: 1 }}
+              >
+                No comments yet — be the first!
+              </Typography>
+            ) : (
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+                {commentsArr.map((comment: any) => {
+                  const ca = comment.author || { firstName: 'Member', lastName: '' };
+                  return (
+                    <Box key={comment._id || comment.id} sx={{ display: 'flex', gap: 1.5 }}>
+                      <Avatar
+                        src={ca.avatar}
+                        sx={{
+                          width: 34,
+                          height: 34,
+                          background: 'linear-gradient(135deg,#15803d,#166534)',
+                          fontSize: '0.8rem',
+                          fontWeight: 700,
+                          flexShrink: 0,
+                          mt: 0.25,
+                        }}
+                      >
+                        {(ca.firstName || 'M')[0]}
+                      </Avatar>
+                      <Box
+                        sx={{
+                          flex: 1,
+                          bgcolor: (t) => t.palette.mode === 'dark' ? '#1e293b' : '#f8fafc',
+                          borderRadius: '4px 16px 16px 16px',
+                          px: 2,
+                          py: 1.25,
+                          boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+                        }}
+                      >
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+                          <Typography variant="caption" fontWeight={700}>
+                            {ca.firstName} {ca.lastName}
+                          </Typography>
+                          <Typography
+                            variant="caption"
+                            color="text.disabled"
+                            sx={{ fontSize: '0.62rem' }}
+                          >
+                            {formatRelativeTime(comment.createdAt || new Date().toISOString())}
+                          </Typography>
+                        </Box>
+                        <Typography
+                          variant="body2"
+                          sx={{ lineHeight: 1.5, whiteSpace: 'pre-wrap' }}
+                        >
+                          {comment.content || ''}
                         </Typography>
                       </Box>
-                      <Typography variant="body2" className="text-gray-700 dark:text-gray-300">{comment.content || ''}</Typography>
                     </Box>
-                  </Box>
-                );
-              })}
-            </Box>
-          </CardContent>
+                  );
+                })}
+              </Box>
+            )}
+          </Box>
         </Collapse>
+
+        {/* Owner actions menu */}
+        {isOwner && (
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+            PaperProps={{ sx: { borderRadius: '12px', minWidth: 160 } }}
+          >
+            <MenuItem
+              onClick={() => {
+                setAnchorEl(null);
+                setEditContent(post.content || '');
+                setEditOpen(true);
+              }}
+              sx={{ gap: 1.5, '&:hover': { bgcolor: 'rgba(16,185,129,0.08)' } }}
+            >
+              <Edit fontSize="small" sx={{ color: 'primary.main' }} />
+              <Typography variant="body2" fontWeight={500}>Edit Post</Typography>
+            </MenuItem>
+            <Divider />
+            <MenuItem
+              onClick={handleDelete}
+              sx={{ gap: 1.5, '&:hover': { bgcolor: 'rgba(239,68,68,0.08)' } }}
+            >
+              <Delete fontSize="small" sx={{ color: 'error.main' }} />
+              <Typography variant="body2" fontWeight={500} color="error">Delete Post</Typography>
+            </MenuItem>
+          </Menu>
+        )}
       </Card>
+
+      {/* Edit Post Dialog */}
+      <Dialog open={editOpen} onClose={() => setEditOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
+          <Typography variant="h6" fontWeight={700}>Edit Post</Typography>
+          <IconButton size="small" onClick={() => setEditOpen(false)}>
+            <Close fontSize="small" />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          <TextField
+            fullWidth
+            multiline
+            rows={5}
+            value={editContent}
+            onChange={(e) => setEditContent(e.target.value)}
+            placeholder="What's on your mind?"
+            sx={{ mt: 1 }}
+          />
+          <Typography
+            variant="caption"
+            color={editContent.length > 5000 ? 'error' : 'text.disabled'}
+            sx={{ display: 'block', textAlign: 'right', mt: 0.5 }}
+          >
+            {editContent.length}/5000
+          </Typography>
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 2 }}>
+          <Button onClick={() => setEditOpen(false)} disabled={editSubmitting}>Cancel</Button>
+          <Button
+            variant="contained"
+            onClick={handleEditSave}
+            disabled={!editContent.trim() || editSubmitting || editContent.length > 5000}
+          >
+            {editSubmitting ? 'Saving…' : 'Save'}
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       <ImageModal open={!!selectedImage} imageUrl={selectedImage} onClose={() => setSelectedImage(null)} />
     </>

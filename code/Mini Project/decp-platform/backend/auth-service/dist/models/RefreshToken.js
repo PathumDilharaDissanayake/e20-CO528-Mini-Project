@@ -38,7 +38,11 @@ RefreshToken.init({
 }, {
     sequelize: database_1.default,
     tableName: 'refresh_tokens',
-    timestamps: true
+    timestamps: true,
+    indexes: [
+        { fields: ['userId', 'isRevoked'] }, // revoke all tokens for a user
+        { fields: ['expiresAt'] } // cleanup expired tokens job
+    ]
 });
 exports.default = RefreshToken;
 //# sourceMappingURL=RefreshToken.js.map

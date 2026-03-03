@@ -52,7 +52,7 @@ const HeroBanner: React.FC<{ eventCount: number; canCreate: boolean; onCreate: (
   >
     <Box className="absolute inset-0 opacity-15" sx={{ backgroundImage: `radial-gradient(circle at 18px 18px, rgba(255,255,255,0.4) 1.5px, transparent 0)`, backgroundSize: '30px 30px' }} />
     <Box className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10" sx={{ background: 'radial-gradient(circle, #818cf8 0%, transparent 70%)', transform: 'translate(30%, -30%)' }} />
-    <Box className="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-10" sx={{ background: 'radial-gradient(circle, #10b981 0%, transparent 70%)', transform: 'translate(-30%, 40%)' }} />
+    <Box className="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-10" sx={{ background: 'radial-gradient(circle, #166534 0%, transparent 70%)', transform: 'translate(-30%, 40%)' }} />
 
     <Box className="relative p-6 sm:p-8">
       <Box className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -74,7 +74,7 @@ const HeroBanner: React.FC<{ eventCount: number; canCreate: boolean; onCreate: (
             <Chip icon={<Videocam sx={{ fontSize: '14px !important' }} />} label="Online & In-Person" size="small"
               sx={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.8)', borderColor: 'rgba(255,255,255,0.2)', fontWeight: 600 }} variant="outlined" />
             <Chip icon={<Groups sx={{ fontSize: '14px !important' }} />} label="Open to All" size="small"
-              sx={{ background: 'rgba(16,185,129,0.2)', color: '#34d399', borderColor: 'rgba(16,185,129,0.3)', fontWeight: 600 }} variant="outlined" />
+              sx={{ background: 'rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.92)', borderColor: 'rgba(255,255,255,0.3)', fontWeight: 600 }} variant="outlined" />
           </Box>
         </Box>
         {canCreate && (

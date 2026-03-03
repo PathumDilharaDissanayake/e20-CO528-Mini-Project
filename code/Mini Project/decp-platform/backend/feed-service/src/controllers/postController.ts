@@ -1,7 +1,19 @@
+/**
+ * Post Controller — HTTP layer only. All business logic delegated to postService.
+ * Max responsibility: parse request → call service → format response.
+ *
+ * Agent: A-06 (Backend Implementation Agent)
+ * Refactored: 2026-03-03 — Extracted service layer, fixed FLAW-003/004/011/012
+ */
+
 import { Request, Response } from 'express';
-import { Post, Like, Comment } from '../models';
-import { logger } from '../utils/logger';
 import Joi from 'joi';
+import * as postService from '../services/postService';
+import { logger } from '../utils/logger';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Validation schemas
+// ─────────────────────────────────────────────────────────────────────────────
 
 const createPostSchema = Joi.object({
   content: Joi.string().min(1).max(5000).required(),
@@ -14,42 +26,69 @@ const createCommentSchema = Joi.object({
   parentId: Joi.string().uuid().optional()
 });
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Helper: uniform error response
+// ─────────────────────────────────────────────────────────────────────────────
+
+const handleError = (res: Response, err: unknown, context: string): void => {
+  const error = err as Error & { statusCode?: number };
+  const status = error.statusCode || 500;
+  if (status >= 500) logger.error(`[${context}] ${error.message}`, { stack: error.stack });
+  res.status(status).json({
+    success: false,
+    message: error.message || 'Internal server error'
+  });
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Feed
+// ─────────────────────────────────────────────────────────────────────────────
+
 export const getFeed = async (req: Request, res: Response): Promise<void> => {
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
-    const offset = (page - 1) * limit;
+    const cursor = req.query.cursor as string | undefined;
     const userId = req.query.userId as string | undefined;
 
-    const where: any = { isPublic: true };
-    if (userId) where.userId = userId;
-
-    const { count, rows: posts } = await Post.findAndCountAll({
-      where,
-      order: [['createdAt', 'DESC']],
-      limit,
-      offset
-    });
+    const result = await postService.getFeed({ page, limit, cursor, userId });
 
     res.json({
       success: true,
       message: 'Feed retrieved successfully',
-      data: posts,
+      data: result.posts,
       meta: {
-        page,
-        limit,
-        total: count,
-        totalPages: Math.ceil(count / limit)
+        page: result.page,
+        limit: result.limit,
+        total: result.total,
+        totalPages: result.totalPages,
+        hasNext: result.hasNext,
+        hasPrev: result.hasPrev,
+        nextCursor: result.nextCursor
       }
     });
-  } catch (error) {
-    logger.error('Get feed error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal server error'
-    });
+  } catch (err) {
+    handleError(res, err, 'getFeed');
   }
 };
+
+export const getPost = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { postId } = req.params;
+    const post = await postService.getPostById(postId);
+    if (!post) {
+      res.status(404).json({ success: false, message: 'Post not found' });
+      return;
+    }
+    res.json({ success: true, message: 'Post retrieved successfully', data: { post } });
+  } catch (err) {
+    handleError(res, err, 'getPost');
+  }
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Mutations
+// ─────────────────────────────────────────────────────────────────────────────
 
 export const createPost = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -64,61 +103,17 @@ export const createPost = async (req: Request, res: Response): Promise<void> => 
       res.status(400).json({
         success: false,
         message: 'Validation error',
-        error: error.details[0].message
+        errors: [{ field: error.details[0].path.join('.'), message: error.details[0].message }]
       });
       return;
     }
 
     const mediaUrls = (req.files as Express.Multer.File[])?.map(f => `/uploads/${f.filename}`) || [];
+    const post = await postService.createPost({ userId, ...value, mediaUrls });
 
-    const post = await Post.create({
-      userId,
-      content: value.content,
-      type: mediaUrls.length > 0 ? (value.type || 'image') : 'text',
-      mediaUrls,
-      isPublic: value.isPublic
-    });
-
-    res.status(201).json({
-      success: true,
-      message: 'Post created successfully',
-      data: { post }
-    });
-  } catch (error) {
-    logger.error('Create post error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal server error'
-    });
-  }
-};
-
-export const getPost = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { postId } = req.params;
-
-    const post = await Post.findByPk(postId, {
-      include: [
-        { model: Comment, as: 'postComments' }
-      ]
-    });
-
-    if (!post) {
-      res.status(404).json({ success: false, message: 'Post not found' });
-      return;
-    }
-
-    res.json({
-      success: true,
-      message: 'Post retrieved successfully',
-      data: { post }
-    });
-  } catch (error) {
-    logger.error('Get post error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal server error'
-    });
+    res.status(201).json({ success: true, message: 'Post created successfully', data: { post } });
+  } catch (err) {
+    handleError(res, err, 'createPost');
   }
 };
 
@@ -126,32 +121,12 @@ export const updatePost = async (req: Request, res: Response): Promise<void> => 
   try {
     const userId = req.headers['x-user-id'] as string;
     const { postId } = req.params;
-
-    const post = await Post.findByPk(postId);
-    if (!post) {
-      res.status(404).json({ success: false, message: 'Post not found' });
-      return;
-    }
-
-    if (post.userId !== userId) {
-      res.status(403).json({ success: false, message: 'Not authorized' });
-      return;
-    }
-
     const { content, isPublic } = req.body;
-    await post.update({ content, isPublic });
 
-    res.json({
-      success: true,
-      message: 'Post updated successfully',
-      data: { post }
-    });
-  } catch (error) {
-    logger.error('Update post error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal server error'
-    });
+    const post = await postService.updatePost(postId, userId, { content, isPublic });
+    res.json({ success: true, message: 'Post updated successfully', data: { post } });
+  } catch (err) {
+    handleError(res, err, 'updatePost');
   }
 };
 
@@ -161,92 +136,53 @@ export const deletePost = async (req: Request, res: Response): Promise<void> => 
     const userRole = req.headers['x-user-role'] as string;
     const { postId } = req.params;
 
-    const post = await Post.findByPk(postId);
-    if (!post) {
-      res.status(404).json({ success: false, message: 'Post not found' });
-      return;
-    }
-
-    if (post.userId !== userId && userRole !== 'admin') {
-      res.status(403).json({ success: false, message: 'Not authorized' });
-      return;
-    }
-
-    await post.destroy();
-
-    res.json({
-      success: true,
-      message: 'Post deleted successfully'
-    });
-  } catch (error) {
-    logger.error('Delete post error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal server error'
-    });
+    await postService.deletePost(postId, userId, userRole);
+    res.status(204).send();
+  } catch (err) {
+    handleError(res, err, 'deletePost');
   }
 };
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Likes
+// ─────────────────────────────────────────────────────────────────────────────
 
 export const likePost = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = req.headers['x-user-id'] as string;
     const { postId } = req.params;
-
-    const post = await Post.findByPk(postId);
-    if (!post) {
-      res.status(404).json({ success: false, message: 'Post not found' });
-      return;
-    }
-
-    const [like, created] = await Like.findOrCreate({
-      where: { postId, userId }
+    const result = await postService.toggleLike(postId, userId);
+    res.json({
+      success: true,
+      message: result.liked ? 'Post liked' : 'Post unliked',
+      data: result
     });
-
-    if (!created) {
-      await like.destroy();
-      await post.decrement('likes');
-      res.json({ success: true, message: 'Post unliked', data: { liked: false } });
-      return;
-    }
-
-    await post.increment('likes');
-    res.json({ success: true, message: 'Post liked', data: { liked: true } });
-  } catch (error) {
-    logger.error('Like post error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal server error'
-    });
+  } catch (err) {
+    handleError(res, err, 'likePost');
   }
 };
 
-export const unlikePost = async (req: Request, res: Response): Promise<void> => {
+// Kept for backward-compatibility — delegates to the same toggle
+export const unlikePost = likePost;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Comments
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const getComments = async (req: Request, res: Response): Promise<void> => {
   try {
-    const userId = req.headers['x-user-id'] as string;
     const { postId } = req.params;
-
-    const post = await Post.findByPk(postId);
-    if (!post) {
-      res.status(404).json({ success: false, message: 'Post not found' });
-      return;
-    }
-
-    const like = await Like.findOne({ where: { postId, userId } });
-    if (!like) {
-      res.status(200).json({ success: true, message: 'Post already unliked', data: { liked: false } });
-      return;
-    }
-
-    await like.destroy();
-    await post.decrement('likes');
-
-    res.json({ success: true, message: 'Post unliked', data: { liked: false } });
-  } catch (error) {
-    logger.error('Unlike post error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal server error'
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 20;
+    const { comments, total } = await postService.getComments(postId, page, limit);
+    res.json({
+      success: true,
+      message: 'Comments retrieved successfully',
+      data: comments,
+      meta: { page, limit, total, totalPages: Math.ceil(total / limit) }
     });
+  } catch (err) {
+    handleError(res, err, 'getComments');
   }
 };
 
@@ -260,71 +196,15 @@ export const addComment = async (req: Request, res: Response): Promise<void> => 
       res.status(400).json({
         success: false,
         message: 'Validation error',
-        error: error.details[0].message
+        errors: [{ field: error.details[0].path.join('.'), message: error.details[0].message }]
       });
       return;
     }
 
-    const post = await Post.findByPk(postId);
-    if (!post) {
-      res.status(404).json({ success: false, message: 'Post not found' });
-      return;
-    }
-
-    const comment = await Comment.create({
-      postId,
-      userId,
-      content: value.content,
-      parentId: value.parentId
-    });
-
-    await post.increment('comments');
-
-    res.status(201).json({
-      success: true,
-      message: 'Comment added successfully',
-      data: { comment }
-    });
-  } catch (error) {
-    logger.error('Add comment error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal server error'
-    });
-  }
-};
-
-export const getComments = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { postId } = req.params;
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 10;
-    const offset = (page - 1) * limit;
-
-    const { count, rows: comments } = await Comment.findAndCountAll({
-      where: { postId },
-      order: [['createdAt', 'DESC']],
-      limit,
-      offset
-    });
-
-    res.json({
-      success: true,
-      message: 'Comments retrieved successfully',
-      data: comments,
-      meta: {
-        page,
-        limit,
-        total: count,
-        totalPages: Math.ceil(count / limit)
-      }
-    });
-  } catch (error) {
-    logger.error('Get comments error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal server error'
-    });
+    const comment = await postService.addComment({ userId, postId, ...value });
+    res.status(201).json({ success: true, message: 'Comment added successfully', data: { comment } });
+  } catch (err) {
+    handleError(res, err, 'addComment');
   }
 };
 
@@ -334,61 +214,24 @@ export const deleteComment = async (req: Request, res: Response): Promise<void> 
     const userRole = req.headers['x-user-role'] as string;
     const { postId, commentId } = req.params;
 
-    const post = await Post.findByPk(postId);
-    if (!post) {
-      res.status(404).json({ success: false, message: 'Post not found' });
-      return;
-    }
-
-    const comment = await Comment.findOne({ where: { id: commentId, postId } });
-    if (!comment) {
-      res.status(404).json({ success: false, message: 'Comment not found' });
-      return;
-    }
-
-    if (comment.userId !== userId && post.userId !== userId && userRole !== 'admin') {
-      res.status(403).json({ success: false, message: 'Not authorized' });
-      return;
-    }
-
-    await comment.destroy();
-    await post.decrement('comments');
-
-    res.json({
-      success: true,
-      message: 'Comment deleted successfully'
-    });
-  } catch (error) {
-    logger.error('Delete comment error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal server error'
-    });
+    await postService.deleteComment(postId, commentId, userId, userRole);
+    res.status(204).send();
+  } catch (err) {
+    handleError(res, err, 'deleteComment');
   }
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Shares
+// ─────────────────────────────────────────────────────────────────────────────
+
 export const sharePost = async (req: Request, res: Response): Promise<void> => {
   try {
+    const userId = req.headers['x-user-id'] as string;
     const { postId } = req.params;
-
-    const post = await Post.findByPk(postId);
-    if (!post) {
-      res.status(404).json({ success: false, message: 'Post not found' });
-      return;
-    }
-
-    await post.increment('shares');
-
-    res.json({
-      success: true,
-      message: 'Post shared successfully',
-      data: { shares: post.shares + 1 }
-    });
-  } catch (error) {
-    logger.error('Share post error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal server error'
-    });
+    const result = await postService.toggleShare(postId, userId);
+    res.json({ success: true, message: 'Post shared successfully', data: result });
+  } catch (err) {
+    handleError(res, err, 'sharePost');
   }
 };

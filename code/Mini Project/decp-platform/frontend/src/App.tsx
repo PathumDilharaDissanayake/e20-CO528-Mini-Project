@@ -19,16 +19,17 @@ import {
   MessagesPage,
   NotificationsPage,
   AnalyticsPage,
+  SearchPage,
 } from '@pages';
 
 // Loading Component
 const PageLoader: React.FC = () => (
-  <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+  <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-slate-800">
     <div className="relative">
-      <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200 dark:border-blue-900"></div>
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-600 absolute top-0 left-0"></div>
+      <div className="animate-spin rounded-full h-16 w-16 border-4 border-green-200 dark:border-green-900"></div>
+      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-600 absolute top-0 left-0"></div>
     </div>
-    <p className="mt-4 text-gray-600 dark:text-gray-400 font-medium animate-pulse">Loading...</p>
+    <p className="mt-4 text-gray-600 dark:text-gray-400 font-medium animate-pulse">Loading DECP…</p>
   </div>
 );
 
@@ -123,7 +124,7 @@ const App: React.FC = () => {
           <Route path="/notifications" element={<NotificationsPage />} />
           
           {/* Search */}
-          <Route path="/search" element={<FeedPage />} />
+          <Route path="/search" element={<SearchPage />} />
         </Route>
 
         {/* Admin Routes */}

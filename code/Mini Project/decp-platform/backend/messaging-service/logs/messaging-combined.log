@@ -374,3 +374,15 @@ SequelizeConnectionError: database "decp_messaging" does not exist
 2026-03-03 08:08:34 [MESSAGING-SERVICE] [info]: ✅ Database connected.
 2026-03-03 08:08:34 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
 2026-03-03 08:08:34 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-03 22:13:06 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-03 22:13:06 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 22:13:06 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-03 22:20:13 [MESSAGING-SERVICE] [info]: User connected: 95a2687f-f87c-46a6-9fe4-2854564621f1
+2026-03-03 22:20:23 [MESSAGING-SERVICE] [info]: User disconnected: 95a2687f-f87c-46a6-9fe4-2854564621f1
+2026-03-03 22:20:23 [MESSAGING-SERVICE] [info]: User connected: 95a2687f-f87c-46a6-9fe4-2854564621f1
+2026-03-03 22:20:26 [MESSAGING-SERVICE] [info]: User disconnected: 95a2687f-f87c-46a6-9fe4-2854564621f1
+2026-03-03 22:20:26 [MESSAGING-SERVICE] [info]: User connected: 95a2687f-f87c-46a6-9fe4-2854564621f1
+2026-03-03 22:20:40 [MESSAGING-SERVICE] [info]: User disconnected: 95a2687f-f87c-46a6-9fe4-2854564621f1
+2026-03-03 22:46:51 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-03 22:46:51 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 22:46:51 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007

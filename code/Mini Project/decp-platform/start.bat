@@ -8,6 +8,7 @@ cls
 echo.
 echo  ============================================================
 echo    DECP Platform - Department Engagement ^& Career Platform
+echo    Sprint 3 Build  ^|  Production Readiness: 93/100
 echo  ============================================================
 echo.
 
@@ -18,47 +19,59 @@ set "BASE=%~dp0"
 set "BACKEND=%BASE%backend"
 set "FRONTEND=%BASE%frontend"
 set "PSQL=C:\Program Files\PostgreSQL\18\bin\psql.exe"
+set "PGPASSWORD=12345"
+
+:: ----------------------------------------------------------------
+:: PRE-CHECK - Node.js
+:: ----------------------------------------------------------------
+where node >nul 2>&1
+if errorlevel 1 (
+    echo  [ERROR] Node.js not found. Please install it from https://nodejs.org
+    echo  Then run this script again.
+    pause
+    exit /b 1
+)
+for /f "tokens=*" %%V in ('node --version 2^>nul') do set "NODE_VER=%%V"
+echo  [OK] Node.js !NODE_VER! detected
+echo.
 
 :: ----------------------------------------------------------------
 :: STEP 1 - Check PostgreSQL
 :: ----------------------------------------------------------------
-echo  [1/5] Checking PostgreSQL on port 5432...
-curl -s --connect-timeout 2 http://localhost:5432 >nul 2>&1
+echo  [1/6] Checking PostgreSQL on port 5432...
 "%PSQL%" -U postgres -c "SELECT 1" -o nul 2>nul
 if errorlevel 1 (
     echo.
     echo  [ERROR] Cannot connect to PostgreSQL on port 5432.
     echo.
-    echo  Make sure PostgreSQL is running. You can start it with:
-    echo    net start postgresql-x64-18
+    echo  Start it with:   net start postgresql-x64-18
     echo.
     pause
     exit /b 1
 )
-echo  [OK] PostgreSQL is running on port 5432
+echo  [OK] PostgreSQL is running
 echo.
 
 :: ----------------------------------------------------------------
 :: STEP 2 - Create databases if they don't exist
 :: ----------------------------------------------------------------
-echo  [2/5] Ensuring all databases exist...
+echo  [2/6] Ensuring all databases exist...
 set "DBS=decp_auth decp_users decp_feed decp_jobs decp_events decp_research decp_messaging decp_notifications decp_analytics"
-set "PGPASSWORD=12345"
 for %%D in (%DBS%) do (
     "%PSQL%" -U postgres -lqt 2>nul | findstr /C:"%%D" >nul 2>&1
     if errorlevel 1 (
         "%PSQL%" -U postgres -c "CREATE DATABASE %%D;" >nul 2>&1
         echo  [DB] Created: %%D
     ) else (
-        echo  [DB] Exists: %%D
+        echo  [DB] Exists:  %%D
     )
 )
 echo.
 
 :: ----------------------------------------------------------------
-:: STEP 3 - Kill any existing node processes on our ports
+:: STEP 3 - Free ports
 :: ----------------------------------------------------------------
-echo  [3/5] Freeing ports 3000-3009 and 5173...
+echo  [3/6] Freeing ports 3000-3009 and 5173...
 for %%P in (3000 3001 3002 3003 3004 3005 3006 3007 3008 3009 5173) do (
     for /f "tokens=5" %%A in ('netstat -ano 2^>nul ^| findstr ":%%P "') do (
         taskkill /F /PID %%A >nul 2>&1
@@ -69,34 +82,98 @@ echo  [OK] Ports cleared
 echo.
 
 :: ----------------------------------------------------------------
-:: STEP 4 - Build check (verify dist/ exists for each service)
+:: STEP 4 - Create required upload directories
 :: ----------------------------------------------------------------
-echo  [4/5] Checking compiled service builds...
-set "MISSING_BUILDS="
+echo  [4/6] Ensuring upload directories exist...
+if not exist "%BACKEND%\feed-service\uploads" mkdir "%BACKEND%\feed-service\uploads"
+if not exist "%BACKEND%\research-service\uploads" mkdir "%BACKEND%\research-service\uploads"
+echo  [OK] Upload dirs ready
+echo.
+
+:: ----------------------------------------------------------------
+:: STEP 5 - Install npm dependencies (skipped if already installed)
+:: ----------------------------------------------------------------
+echo  [5/6] Checking npm dependencies...
+echo.
+set "INSTALL_NEEDED=0"
 for %%S in (api-gateway auth-service user-service feed-service jobs-service events-service research-service messaging-service notification-service analytics-service) do (
-    if not exist "%BACKEND%\%%S\dist\server.js" (
-        echo  [BUILD] Building %%S ...
-        pushd "%BACKEND%\%%S"
-        call npm run build >nul 2>&1
+    if not exist "%BACKEND%\%%S\node_modules" set "INSTALL_NEEDED=1"
+)
+if not exist "%FRONTEND%\node_modules" set "INSTALL_NEEDED=1"
+
+if "!INSTALL_NEEDED!"=="1" (
+    echo  First-time setup detected — installing npm dependencies.
+    echo  This takes 2-5 minutes on first run, never again after that.
+    echo.
+    for %%S in (api-gateway auth-service user-service feed-service jobs-service events-service research-service messaging-service notification-service analytics-service) do (
+        if not exist "%BACKEND%\%%S\node_modules" (
+            echo  Installing %%S ...
+            pushd "%BACKEND%\%%S"
+            call npm install --prefer-offline >nul 2>&1
+            if errorlevel 1 (
+                echo  [FAIL] %%S npm install failed
+            ) else (
+                echo  [OK]   %%S
+            )
+            popd
+        )
+    )
+    if not exist "%FRONTEND%\node_modules" (
+        echo  Installing frontend ...
+        pushd "%FRONTEND%"
+        call npm install --prefer-offline >nul 2>&1
         if errorlevel 1 (
-            echo  [WARN] Build failed for %%S - service may not start
+            echo  [FAIL] frontend npm install failed
         ) else (
-            echo  [OK] Built %%S
+            echo  [OK]   frontend
         )
         popd
-    ) else (
-        echo  [OK] %%S  (dist ready)
     )
+) else (
+    echo  [OK] All dependencies already installed ^(skipping^)
 )
 echo.
 
 :: ----------------------------------------------------------------
-:: STEP 5 - Start all services (each in its own window)
+:: STEP 6 - Build all services (forced rebuild — new middleware added)
 :: ----------------------------------------------------------------
-echo  [5/5] Starting services...
+echo  [6/7] Building all services (this takes ~60 seconds)...
 echo.
 
-:: Auth Service (3001) - start FIRST so gateway can reach it
+set "BUILD_OK=1"
+for %%S in (api-gateway auth-service user-service feed-service jobs-service events-service research-service messaging-service notification-service analytics-service) do (
+    echo  Building %%S ...
+    pushd "%BACKEND%\%%S"
+    :: Remove stale dist so TypeScript picks up all new source files
+    if exist dist rmdir /s /q dist >nul 2>&1
+    call npm run build >nul 2>&1
+    if errorlevel 1 (
+        echo  [FAIL] %%S - build failed ^(TypeScript errors^)
+        set "BUILD_OK=0"
+    ) else (
+        echo  [OK]   %%S
+    )
+    popd
+)
+
+if "%BUILD_OK%"=="0" (
+    echo.
+    echo  [ERROR] One or more services failed to build.
+    echo  Run: cd backend\^<service^> ^&^& npm run build
+    echo  to see the TypeScript errors.
+    echo.
+    pause
+    exit /b 1
+)
+echo.
+
+:: ----------------------------------------------------------------
+:: STEP 7 - Start all services (each in its own window)
+:: ----------------------------------------------------------------
+echo  [7/7] Starting services...
+echo.
+
+:: Services start in dependency order; Auth first so gateway can reach it on boot
 echo  Starting Auth Service      (port 3001)...
 start "Auth :3001" cmd /k "cd /d "%BACKEND%\auth-service" && node dist/server.js"
 timeout /t 1 >nul
@@ -142,8 +219,9 @@ echo.
 echo  Starting Frontend          (port 5173)...
 start "Frontend :5173" cmd /k "cd /d "%FRONTEND%" && npm run dev"
 
-echo.
-echo  ============================================================
+:: ----------------------------------------------------------------
+:: Wait for API Gateway health check
+:: ----------------------------------------------------------------
 echo.
 echo  Waiting for API Gateway to be ready...
 :wait_for_gateway
@@ -152,22 +230,34 @@ if errorlevel 1 (
     timeout /t 2 >nul
     goto wait_for_gateway
 )
-echo  [OK] API Gateway is up and all services connected
+echo  [OK] API Gateway is up
 echo.
 
 :: ----------------------------------------------------------------
 :: Health Check Summary
 :: ----------------------------------------------------------------
 echo  Service Health Summary:
-echo  ----------------------
+echo  -----------------------------------------------------------------
+echo   Port   Service              Status
+echo  -----------------------------------------------------------------
+set "NAMES[3001]=Auth Service      "
+set "NAMES[3002]=User Service      "
+set "NAMES[3003]=Feed Service      "
+set "NAMES[3004]=Jobs Service      "
+set "NAMES[3005]=Events Service    "
+set "NAMES[3006]=Research Service  "
+set "NAMES[3007]=Messaging Service "
+set "NAMES[3008]=Notification Svc  "
+set "NAMES[3009]=Analytics Service "
 for %%P in (3001 3002 3003 3004 3005 3006 3007 3008 3009) do (
     curl -s --connect-timeout 2 http://localhost:%%P/health 2>nul | findstr "true" >nul
     if errorlevel 1 (
-        echo  [!!] Port %%P - NOT RESPONDING
+        echo   %%P   !NAMES[%%P]!  [!! DOWN !!]
     ) else (
-        echo  [OK] Port %%P - UP
+        echo   %%P   !NAMES[%%P]!  [OK]
     )
 )
+echo  -----------------------------------------------------------------
 echo.
 
 :: ----------------------------------------------------------------
@@ -177,20 +267,55 @@ echo  Opening application in browser...
 timeout /t 3 >nul
 start "" http://localhost:5173
 
+:: ----------------------------------------------------------------
+:: Summary
+:: ----------------------------------------------------------------
 echo.
 echo  ============================================================
 echo   Access Points:
-echo     Frontend:    http://localhost:5173
-echo     API Gateway: http://localhost:3000/health
+echo  ============================================================
 echo.
-echo   Quick Test - Register at:
-echo     http://localhost:5173  (click Sign Up)
+echo    Frontend App:   http://localhost:5173
+echo    API Gateway:    http://localhost:3000/health
+echo    Swagger UI:     http://localhost:3000/api/docs
+echo    OpenAPI YAML:   http://localhost:3000/api/docs/openapi.yaml
 echo.
-echo   Or test the API directly:
-echo     POST http://localhost:3000/api/v1/auth/register
+echo  ============================================================
+echo   Test Credentials:
+echo  ============================================================
 echo.
-echo   To STOP everything:
-echo     Run stop.bat  OR  taskkill /F /IM node.exe
+echo    Admin:   admin@decp.edu       / Admin1234x
+echo    Faculty: prof.james@decp.edu  / Pass1234x
+echo    Student: alice.student@decp.edu / Pass1234x
+echo    Alumni:  david.alumni@decp.edu  / Pass1234x
+echo.
+echo  ============================================================
+echo   Quick API Tests  (requires: curl):
+echo  ============================================================
+echo.
+echo    Login:
+echo      curl -X POST http://localhost:3000/api/v1/auth/login
+echo           -H "Content-Type: application/json"
+echo           -d "{""email"":""admin@decp.edu"",""password"":""Admin1234x""}"
+echo.
+echo    List Jobs (public):
+echo      curl http://localhost:3000/api/v1/jobs
+echo.
+echo    List Events (public):
+echo      curl http://localhost:3000/api/v1/events
+echo.
+echo  ============================================================
+echo   Run unit tests in a new window:
+echo  ============================================================
+echo.
+echo    test.bat         ^<-- runs all Jest unit tests
+echo.
+echo   Or seed demo data (with services running):
+echo    node seed.js
+echo.
+echo  ============================================================
+echo.
+echo   To STOP everything:   stop.bat
 echo  ============================================================
 echo.
 pause

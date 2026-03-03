@@ -74,7 +74,15 @@ Post.init(
   {
     sequelize,
     tableName: 'posts',
-    timestamps: true
+    timestamps: true,
+    indexes: [
+      // High-frequency feed query: public posts ordered by date
+      { fields: ['isPublic', 'createdAt'] },
+      // User profile posts
+      { fields: ['userId', 'createdAt'] },
+      // Cursor-based pagination support
+      { fields: ['createdAt', 'id'] }
+    ]
   }
 );
 
