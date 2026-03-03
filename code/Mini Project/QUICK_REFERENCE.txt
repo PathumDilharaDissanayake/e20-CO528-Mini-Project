@@ -1,0 +1,136 @@
+═══════════════════════════════════════════════════════════════════════════════
+                    DECP PLATFORM - QUICK REFERENCE
+═══════════════════════════════════════════════════════════════════════════════
+
+🚀 TO RUN THE PROJECT:
+   Double-click: RUN_PORT_5433.bat
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🗄️  DATABASE (PostgreSQL in Docker)
+   ├─ Container: decp-postgres
+   ├─ Port: 5433 (NOT 5432!)
+   ├─ Password: 12345
+   ├─ Host: localhost
+   └─ 9 Databases: decp_auth, decp_users, decp_feed, decp_jobs, 
+                    decp_events, decp_research, decp_messaging,
+                    decp_notifications, decp_analytics
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔧 BACKEND SERVICES (10 Microservices)
+
+   Service          Port    Database
+   ──────────────────────────────────────
+   API Gateway      3000    N/A
+   Auth Service     3001    decp_auth
+   User Service     3002    decp_users
+   Feed Service     3003    decp_feed
+   Jobs Service     3004    decp_jobs
+   Events Service   3005    decp_events
+   Research Service 3006    decp_research
+   Messaging        3007    decp_messaging
+   Notifications    3008    decp_notifications
+   Analytics        3009    decp_analytics
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🌐 ACCESS URLs
+
+   Web App:        http://localhost:5173
+   API Gateway:    http://localhost:3000
+   PostgreSQL:     localhost:5433 (postgres/12345)
+   Redis:          localhost:6379
+   RabbitMQ UI:    http://localhost:15672 (admin/admin)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🐳 DOCKER COMMANDS
+
+   # Start infrastructure
+   docker start decp-postgres decp-redis decp-rabbitmq
+
+   # Check databases
+   docker exec decp-postgres psql -U postgres -c "\l"
+
+   # Test connection
+   docker exec decp-postgres psql postgresql://postgres:12345@localhost:5432/decp_jobs -c "SELECT 1;"
+
+   # View logs
+   docker logs decp-postgres
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🛠️ TROUBLESHOOTING
+
+   Problem: Password authentication failed
+   Solution: Check if using port 5433, not 5432
+
+   Problem: Database does not exist
+   Solution: Recreate databases:
+             docker exec decp-postgres psql -U postgres -c "CREATE DATABASE decp_XXX;"
+
+   Problem: ts-node-dev caching old code
+   Solution: Clear cache - delete %TEMP%\ts-node* folders
+
+   Problem: Port already in use
+   Solution: taskkill /F /IM node.exe
+
+   Problem: Windows PostgreSQL conflict
+   Solution: Docker PostgreSQL runs on 5433 (different from Windows 5432)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📁 KEY FILES
+
+   PROJECT_CONTEXT_MASTER.md    Full documentation
+   RUN_PORT_5433.bat            Main startup script
+   QUICK_REFERENCE.txt          This file
+   
+   Backend:  decp-platform/backend/
+   Frontend: decp-platform/frontend/
+   Mobile:   decp-platform/mobile/
+   Docs:     decp-platform/docs/
+   Diagrams: decp-platform/diagrams/
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ TESTING CHECKLIST
+
+   [ ] Run RUN_PORT_5433.bat
+   [ ] Wait for all services to start
+   [ ] Browser opens at localhost:5173
+   [ ] Register a new user
+   [ ] Login
+   [ ] Create a post
+   [ ] Browse jobs
+   [ ] Check events
+
+═══════════════════════════════════════════════════════════════════════════════
+
+⚡ EMERGENCY RESET
+
+   If everything breaks:
+   
+   1. Stop everything:
+      taskkill /F /IM node.exe
+      docker stop decp-postgres decp-redis decp-rabbitmq
+   
+   2. Clear cache:
+      rmdir /s /q %TEMP%\ts-node*
+   
+   3. Restart:
+      RUN_PORT_5433.bat
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📞 CONTEXT FILE LOCATION
+
+   Full documentation: PROJECT_CONTEXT_MASTER.md
+   (Contains all details, architecture, troubleshooting, etc.)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Last Updated: March 1, 2026
+Status: ✅ WORKING
+═══════════════════════════════════════════════════════════════════════════════

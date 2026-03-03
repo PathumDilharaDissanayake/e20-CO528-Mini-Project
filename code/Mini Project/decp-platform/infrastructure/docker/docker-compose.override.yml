@@ -1,0 +1,192 @@
+# DECP Platform - Docker Compose Override (Local Development)
+# This file extends docker-compose.dev.yml with local-specific settings
+# Usage: docker-compose -f docker-compose.dev.yml -f docker-compose.override.yml up
+
+version: '3.8'
+
+services:
+  # Override API Gateway for local development
+  api-gateway:
+    ports:
+      - "3000:3000"
+    environment:
+      - DEBUG=true
+      - LOG_LEVEL=debug
+    volumes:
+      - ../../services/api-gateway:/app
+      - /app/node_modules
+      - /app/dist
+    # Override command to enable hot reload
+    command: npm run start:debug
+
+  # Override Auth Service
+  auth-service:
+    ports:
+      - "3001:3001"
+    environment:
+      - DEBUG=true
+      - LOG_LEVEL=debug
+    volumes:
+      - ../../services/auth-service:/app
+      - /app/node_modules
+      - /app/dist
+    command: npm run start:debug
+
+  # Override User Service
+  user-service:
+    ports:
+      - "3002:3002"
+    environment:
+      - DEBUG=true
+      - LOG_LEVEL=debug
+    volumes:
+      - ../../services/user-service:/app
+      - /app/node_modules
+      - /app/dist
+    command: npm run start:debug
+
+  # Override Product Service
+  product-service:
+    ports:
+      - "3003:3003"
+    environment:
+      - DEBUG=true
+      - LOG_LEVEL=debug
+    volumes:
+      - ../../services/product-service:/app
+      - /app/node_modules
+      - /app/dist
+    command: npm run start:debug
+
+  # Override Order Service
+  order-service:
+    ports:
+      - "3004:3004"
+    environment:
+      - DEBUG=true
+      - LOG_LEVEL=debug
+    volumes:
+      - ../../services/order-service:/app
+      - /app/node_modules
+      - /app/dist
+    command: npm run start:debug
+
+  # Override Payment Service
+  payment-service:
+    ports:
+      - "3005:3005"
+    environment:
+      - DEBUG=true
+      - LOG_LEVEL=debug
+      - STRIPE_SECRET_KEY=sk_test_xxx
+      - STRIPE_WEBHOOK_SECRET=whsec_test_xxx
+    volumes:
+      - ../../services/payment-service:/app
+      - /app/node_modules
+      - /app/dist
+    command: npm run start:debug
+
+  # Override Notification Service
+  notification-service:
+    ports:
+      - "3006:3006"
+    environment:
+      - DEBUG=true
+      - LOG_LEVEL=debug
+    volumes:
+      - ../../services/notification-service:/app
+      - /app/node_modules
+      - /app/dist
+    command: npm run start:debug
+
+  # Override Frontend for development
+  frontend:
+    ports:
+      - "3007:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
+      - NEXT_TELEMETRY_DISABLED=1
+    volumes:
+      - ../../frontend:/app
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev
+
+  # Override PostgreSQL for local development
+  postgres:
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: decp_admin
+      POSTGRES_PASSWORD: dev_password
+      POSTGRES_DB: decp_platform
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+      - ./backups:/backups
+
+  # Override Redis for local development
+  redis:
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --save 60 1
+
+  # Override RabbitMQ for local development
+  rabbitmq:
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      - "15692:15692"
+    environment:
+      RABBITMQ_DEFAULT_USER: decp_admin
+      RABBITMQ_DEFAULT_PASS: dev_password
+
+  # Add Jaeger for distributed tracing (local only)
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: decp-jaeger-local
+    ports:
+      - "16686:16686"
+      - "14268:14268"
+      - "14250:14250"
+      - "9411:9411"
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    networks:
+      - decp-network-dev
+
+  # Add MinIO for local S3-compatible storage
+  minio:
+    image: minio/minio:latest
+    container_name: decp-minio-local
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - decp-network-dev
+
+  # Create MinIO bucket on startup
+  minio-create-bucket:
+    image: minio/mc:latest
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      sleep 10;
+      /usr/bin/mc config host add minio http://minio:9000 minioadmin minioadmin;
+      /usr/bin/mc mb minio/decp-uploads || true;
+      /usr/bin/mc policy set public minio/decp-uploads;
+      exit 0;
+      "
+    networks:
+      - decp-network-dev
+
+volumes:
+  minio_data:

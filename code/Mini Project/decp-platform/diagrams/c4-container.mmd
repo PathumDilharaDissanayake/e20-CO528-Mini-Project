@@ -1,0 +1,142 @@
+%% DECP Platform - C4 Model Level 2: Container Diagram
+%% Shows the high-level technology choices, containers (apps, databases, etc.)
+
+flowchart TB
+    subgraph Users["👥 Users"]
+        Student["Student"]
+        Alumni["Alumni"]
+        Admin["Administrator"]
+        Faculty["Faculty"]
+    end
+
+    subgraph DECPSystem["🎓 DECP Platform - System Boundary"]
+        subgraph WebLayer["Web Layer"]
+            WebApp["🌐 Single Page Application<br/><br/>[Container: React.js]<br/><br/>Provides platform functionality<br/>via web browser"]
+            AdminDashboard["⚙️ Admin Dashboard<br/><br/>[Container: React.js]<br/><br/>Administrative interface<br/>for platform management"]
+        end
+
+        subgraph MobileLayer["Mobile Layer"]
+            MobileApp["📱 Mobile Application<br/><br/>[Container: React Native]<br/><br/>Provides platform functionality<br/>on iOS and Android"]
+        end
+
+        subgraph APILayer["API Layer"]
+            APIGateway["🌐 API Gateway<br/><br/>[Container: Kong / AWS API Gateway]<br/><br/>Routes requests, handles auth,<br/>rate limiting, and load balancing"]
+            WebSocketServer["⚡ WebSocket Server<br/><br/>[Container: Node.js/Socket.io]<br/><br/>Handles real-time messaging<br/>and notifications"]
+        end
+
+        subgraph Microservices["Microservices Layer"]
+            UserService["👤 User Service<br/><br/>[Container: Node.js/Express]<br/><br/>Manages users, profiles,<br/>authentication"]
+            FeedService["📰 Feed Service<br/><br/>[Container: Node.js/Express]<br/><br/>Manages posts, feed,<br/>social interactions"]
+            JobService["💼 Job Service<br/><br/>[Container: Node.js/Express]<br/><br/>Manages job postings<br/>and applications"]
+            EventService["📅 Event Service<br/><br/>[Container: Node.js/Express]<br/><br/>Manages events and RSVP"]
+            ResearchService["🔬 Research Service<br/><br/>[Container: Node.js/Express]<br/><br/>Manages research projects<br/>and collaboration"]
+            MessageService["💬 Message Service<br/><br/>[Container: Node.js/Express]<br/><br/>Manages direct messages<br/>and group chats"]
+            NotificationService["🔔 Notification Service<br/><br/>[Container: Node.js/Express]<br/><br/>Manages email, push,<br/>and in-app notifications"]
+            AnalyticsService["📊 Analytics Service<br/><br/>[Container: Python/FastAPI]<br/><br/>Processes metrics and<br/>generates reports"]
+            MediaService["🖼️ Media Service<br/><br/>[Container: Node.js/Express]<br/><br/>Handles file uploads<br/>and media processing"]
+            SearchService["🔍 Search Service<br/><br/>[Container: Node.js/Express]<br/><br/>Full-text search across<br/>all content"]
+        end
+
+        subgraph MessageQueue["Message Queue Layer"]
+            MessageBroker["📨 Message Broker<br/><br/>[Container: RabbitMQ]<br/><br/>Handles async communication<br/>between services"]
+        end
+
+        subgraph DataLayer["Data Layer"]
+            UserDB[("🗄️ User Database<br/><br/>[Container: PostgreSQL]<br/><br/>Stores user profiles,<br/>authentication data")]
+            FeedDB[("🗄️ Feed Database<br/><br/>[Container: MongoDB]<br/><br/>Stores posts, comments,<br/>social graph")]
+            JobDB[("🗄️ Job Database<br/><br/>[Container: PostgreSQL]<br/><br/>Stores job postings,<br/>applications")]
+            EventDB[("🗄️ Event Database<br/><br/>[Container: PostgreSQL]<br/><br/>Stores events, RSVPs,<br/>attendees")]
+            ResearchDB[("🗄️ Research Database<br/><br/>[Container: MongoDB]<br/><br/>Stores research projects,<br/>documents")]
+            MessageDB[("🗄️ Message Database<br/><br/>[Container: MongoDB]<br/><br/>Stores chat messages,<br/>conversations")]
+            Cache[("⚡ Cache Store<br/><br/>[Container: Redis]<br/><br/>Session storage,<br/>frequently accessed data")]
+            SearchIndex[("📇 Search Index<br/><br/>[Container: Elasticsearch]<br/><br/>Full-text search index")]
+        end
+
+        subgraph StorageLayer["Storage Layer"]
+            ObjectStorage["📦 Object Storage<br/><br/>[Container: AWS S3]<br/><br/>Stores images, videos,<br/>documents"]
+            CDN["🌐 CDN<br/><br/>[Container: CloudFront]<br/><br/>Delivers static content<br/>and media"]
+        end
+    end
+
+    subgraph ExternalSystems["🔗 External Systems"]
+        EmailProvider["Email Provider<br/>(SendGrid/AWS SES)"]
+        PushProvider["Push Provider<br/>(Firebase)"]
+        OAuthProvider["OAuth Provider<br/>(Google/LinkedIn)"]
+    end
+
+    %% User Connections
+    Student -->|"Uses<br/>[HTTPS]"| WebApp
+    Student -->|"Uses<br/>[HTTPS]"| MobileApp
+    Alumni -->|"Uses<br/>[HTTPS]"| WebApp
+    Alumni -->|"Uses<br/>[HTTPS]"| MobileApp
+    Admin -->|"Uses<br/>[HTTPS]"| AdminDashboard
+    Faculty -->|"Uses<br/>[HTTPS]"| WebApp
+
+    %% Client to API Gateway
+    WebApp -->|"Makes API calls<br/>[JSON/HTTPS]"| APIGateway
+    MobileApp -->|"Makes API calls<br/>[JSON/HTTPS]"| APIGateway
+    AdminDashboard -->|"Makes API calls<br/>[JSON/HTTPS]"| APIGateway
+
+    %% WebSocket for real-time
+    MobileApp -->|"Connects for real-time<br/>[WebSocket]"| WebSocketServer
+    WebApp -->|"Connects for real-time<br/>[WebSocket]"| WebSocketServer
+
+    %% API Gateway to Services
+    APIGateway -->|"Routes to<br/>[JSON/HTTP]"| UserService
+    APIGateway -->|"Routes to<br/>[JSON/HTTP]"| FeedService
+    APIGateway -->|"Routes to<br/>[JSON/HTTP]"| JobService
+    APIGateway -->|"Routes to<br/>[JSON/HTTP]"| EventService
+    APIGateway -->|"Routes to<br/>[JSON/HTTP]"| ResearchService
+    APIGateway -->|"Routes to<br/>[JSON/HTTP]"| MessageService
+    APIGateway -->|"Routes to<br/>[JSON/HTTP]"| NotificationService
+    APIGateway -->|"Routes to<br/>[JSON/HTTP]"| AnalyticsService
+    APIGateway -->|"Routes to<br/>[JSON/HTTP]"| MediaService
+    APIGateway -->|"Routes to<br/>[JSON/HTTP]"| SearchService
+
+    %% Service to Database
+    UserService -->|"Reads/Writes<br/>[SQL]"| UserDB
+    UserService -->|"Caches<br/>[Redis Protocol]"| Cache
+    FeedService -->|"Reads/Writes<br/>[BSON]"| FeedDB
+    FeedService -->|"Caches<br/>[Redis Protocol]"| Cache
+    JobService -->|"Reads/Writes<br/>[SQL]"| JobDB
+    JobService -->|"Caches<br/>[Redis Protocol]"| Cache
+    EventService -->|"Reads/Writes<br/>[SQL]"| EventDB
+    ResearchService -->|"Reads/Writes<br/>[BSON]"| ResearchDB
+    MessageService -->|"Reads/Writes<br/>[BSON]"| MessageDB
+    MessageService -->|"Caches<br/>[Redis Protocol]"| Cache
+    MessageService -->|"Publishes events<br/>[WebSocket]"| WebSocketServer
+    SearchService -->|"Indexes/Queries<br/>[REST]"| SearchIndex
+    MediaService -->|"Stores/Retrieves<br/>[AWS SDK]"| ObjectStorage
+    AnalyticsService -->|"Queries<br/>[SQL/BSON]"| UserDB
+    AnalyticsService -->|"Queries<br/>[BSON]"| FeedDB
+
+    %% Service to Message Queue
+    UserService -.->|"Publishes events<br/>[AMQP]"| MessageBroker
+    FeedService -.->|"Publishes events<br/>[AMQP]"| MessageBroker
+    JobService -.->|"Publishes events<br/>[AMQP]"| MessageBroker
+    EventService -.->|"Publishes events<br/>[AMQP]"| MessageBroker
+    MessageBroker -.->|"Consumes events<br/>[AMQP]"| NotificationService
+    MessageBroker -.->|"Consumes events<br/>[AMQP]"| AnalyticsService
+
+    %% External connections
+    NotificationService -->|"Sends emails<br/>[SMTP/HTTPS]"| EmailProvider
+    NotificationService -->|"Sends push<br/>[FCM API]"| PushProvider
+    UserService -->|"Authenticates<br/>[OAuth 2.0]"| OAuthProvider
+    CDN -->|"Fetches from<br/>[HTTPS]"| ObjectStorage
+
+    %% Styling - C4 Standard
+    classDef person fill:#08427b,stroke:#052e56,color:#fff,stroke-width:2px
+    classDef container fill:#438dd5,stroke:#2e629c,color:#fff,stroke-width:2px
+    classDef db fill:#438dd5,stroke:#2e629c,color:#fff,stroke-width:2px
+    classDef external fill:#999999,stroke:#6b6b6b,color:#fff,stroke-width:2px
+    classDef boundary fill:#ffffff,stroke:#cccccc,stroke-dasharray:5 5,stroke-width:2px
+
+    class Student,Alumni,Admin,Faculty person
+    class WebApp,MobileApp,AdminDashboard,APIGateway,WebSocketServer,UserService,FeedService,JobService,EventService,ResearchService,MessageService,NotificationService,AnalyticsService,MediaService,SearchService,MessageBroker container
+    class UserDB,FeedDB,JobDB,EventDB,ResearchDB,MessageDB,Cache,SearchIndex,ObjectStorage,CDN db
+    class EmailProvider,PushProvider,OAuthProvider external
+    class DECPSystem,WebLayer,MobileLayer,APILayer,Microservices,MessageQueue,DataLayer,StorageLayer boundary
+
+    %% Title
+    Title["🎓 DECP Platform - C4 Model: Container Diagram (Level 2)"]
+    style Title fill:#1168bd,stroke:#0b4884,color:#fff,stroke-width:3px

@@ -1,0 +1,65 @@
+# DECP Platform - Mobile App Build Dockerfile
+# Used for building React Native / Flutter mobile applications
+
+FROM node:20-alpine AS builder
+
+# Install required dependencies
+RUN apk add --no-cache \
+    git \
+    python3 \
+    make \
+    g++ \
+    openjdk17-jdk \
+    android-tools \
+    bash
+
+# Set up Android SDK
+ENV ANDROID_HOME=/usr/local/android-sdk
+ENV ANDROID_SDK_ROOT=$ANDROID_HOME
+ENV PATH=${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools
+
+# Create android sdk directory
+RUN mkdir -p ${ANDROID_HOME}/cmdline-tools && \
+    wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O /tmp/cmdline-tools.zip && \
+    unzip -q /tmp/cmdline-tools.zip -d ${ANDROID_HOME}/cmdline-tools && \
+    mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_HOME}/cmdline-tools/latest && \
+    rm /tmp/cmdline-tools.zip
+
+# Accept licenses and install SDK components
+RUN yes | sdkmanager --licenses && \
+    sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci && npm cache clean --force
+
+# Copy source code
+COPY . .
+
+# Build Android APK
+RUN cd android && ./gradlew assembleRelease
+
+# ===================
+# Production stage - Extract APK
+# ===================
+FROM alpine:latest AS production
+
+RUN apk add --no-cache ca-certificates
+
+WORKDIR /output
+
+# Copy built APK from builder
+COPY --from=builder /app/android/app/build/outputs/apk/release/*.apk ./
+
+# Create output script
+RUN echo "#!/bin/sh" > /extract.sh && \
+    echo "cp /output/*.apk /artifacts/" >> /extract.sh && \
+    chmod +x /extract.sh
+
+VOLUME ["/artifacts"]
+
+CMD ["/extract.sh"]

@@ -1,0 +1,61 @@
+%% DECP Platform - C4 Model Level 1: System Context Diagram
+%% Shows the system as a box in the centre, surrounded by its users and other systems
+
+flowchart TB
+    subgraph EnterpriseBoundary["University Enterprise Boundary"]
+        %% Users/Persons
+        Student["👨‍🎓 Student<br/><br/>A current student of the department<br/>wants to connect with peers,<br/>find jobs, and collaborate on research"]
+        
+        Alumni["👨‍💼 Alumni<br/><br/>A graduate of the department<br/>wants to mentor students,<br/>post jobs, and network"]
+        
+        Admin["👨‍💻 Administrator<br/><br/>Department staff member<br/>manages platform content,<br/>users, and events"]
+        
+        Faculty["👨‍🏫 Faculty Member<br/><br/>Professor or researcher<br/>creates research projects<br/>and mentors students"]
+
+        %% The System
+        DECPSystem["🎓 DECP Platform<br/><br/>Department Engagement & Career Platform<br/>[Software System]<br/><br/>Allows students and alumni to connect,<br/>share posts, apply for jobs,<br/>collaborate on research,<br/>and participate in events"]
+
+        %% External Systems
+        subgraph ExternalSystems["External Systems"]
+            EmailSystem["📧 Email System<br/><br/>[External System]<br/><br/>SendGrid / AWS SES<br/>Sends email notifications"]
+            
+            PushSystem["📱 Push Notification System<br/><br/>[External System]<br/><br/>Firebase Cloud Messaging<br/>Sends mobile push notifications"]
+            
+            CloudStorage["☁️ Cloud Storage<br/><br/>[External System]<br/><br/>AWS S3 / Google Cloud Storage<br/>Stores media files and documents"]
+            
+            LinkedInAPI["🔗 LinkedIn API<br/><br/>[External System]<br/><br/>Professional networking<br/>integration for job postings"]
+            
+            CalendarSystem["📅 Calendar System<br/><br/>[External System]<br/><br/>Google Calendar / Outlook<br/>Event synchronization"]
+        end
+    end
+
+    %% Relationships
+    Student -->|"Views feed, posts updates,<br/>applies for jobs, messages peers"| DECPSystem
+    Alumni -->|"Posts jobs, mentors students,<br/>shares experiences, networks"| DECPSystem
+    Admin -->|"Manages users, moderates content,<br/>creates announcements"| DECPSystem
+    Faculty -->|"Creates research projects,<br/>collaborates, shares resources"| DECPSystem
+
+    DECPSystem -->|"Sends email notifications<br/>to users"| EmailSystem
+    DECPSystem -->|"Sends push notifications<br/>to mobile devices"| PushSystem
+    DECPSystem -->|"Stores and retrieves<br/>media files"| CloudStorage
+    DECPSystem -->|"Syncs job postings and<br/>professional profiles"| LinkedInAPI
+    DECPSystem -->|"Synchronizes events with<br/>external calendars"| CalendarSystem
+
+    %% Styling - C4 Standard
+    classDef person fill:#08427b,stroke:#052e56,color:#fff,stroke-width:2px
+    classDef system fill:#1168bd,stroke:#0b4884,color:#fff,stroke-width:2px
+    classDef external fill:#999999,stroke:#6b6b6b,color:#fff,stroke-width:2px
+    classDef boundary fill:#ffffff,stroke:#cccccc,stroke-dasharray:5 5,stroke-width:2px
+
+    class Student,Alumni,Admin,Faculty person
+    class DECPSystem system
+    class EmailSystem,PushSystem,CloudStorage,LinkedInAPI,CalendarSystem external
+    class EnterpriseBoundary boundary
+
+    %% Title
+    Title["🎓 DECP Platform - C4 Model: System Context Diagram (Level 1)"]
+    style Title fill:#1168bd,stroke:#0b4884,color:#fff,stroke-width:3px
+
+    %% Description
+    Description["Shows the DECP Platform as a system with its users and external dependencies"]
+    style Description fill:#f5f5f5,stroke:#cccccc,color:#333

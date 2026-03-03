@@ -1,0 +1,155 @@
+%% DECP Platform - Service-Oriented Architecture (SOA) Diagram
+%% Shows all 10 microservices, API Gateway, service interactions, and message flow
+
+flowchart TB
+    subgraph Clients["🖥️ Client Applications"]
+        WebApp["Web Application<br/>(React/Vue)"]
+        MobileApp["Mobile App<br/>(React Native/Flutter)"]
+        ThirdParty["Third-party Clients"]
+    end
+
+    subgraph APILayer["🌐 API Layer"]
+        APIGateway["API Gateway<br/>(Kong/AWS API Gateway)"]
+        LoadBalancer["Load Balancer<br/>(Nginx/HAProxy)"]
+        CDN["CDN<br/>(CloudFront)"]
+    end
+
+    subgraph Microservices["🔧 Microservices Architecture"]
+        direction TB
+        
+        subgraph CoreServices["Core Services"]
+            UserService["👤 User Service<br/>Port: 8001<br/>User Management, Auth"]
+            FeedService["📰 Feed Service<br/>Port: 8002<br/>Posts, Media, Feed"]
+            JobService["💼 Job Service<br/>Port: 8003<br/>Jobs, Internships"]
+            EventService["📅 Event Service<br/>Port: 8004<br/>Events, RSVP"]
+        end
+        
+        subgraph CollaborationServices["Collaboration Services"]
+            ResearchService["🔬 Research Service<br/>Port: 8005<br/>Projects, Documents"]
+            MessageService["💬 Message Service<br/>Port: 8006<br/>Chat, Notifications"]
+        end
+        
+        subgraph SupportServices["Support Services"]
+            NotificationService["🔔 Notification Service<br/>Port: 8007<br/>Email, Push"]
+            AnalyticsService["📊 Analytics Service<br/>Port: 8008<br/>Metrics, Reports"]
+            MediaService["🖼️ Media Service<br/>Port: 8009<br/>File Upload, Storage"]
+            SearchService["🔍 Search Service<br/>Port: 8010<br/>Full-text Search"]
+        end
+    end
+
+    subgraph MessageQueue["📨 Message Queue<br/>(RabbitMQ/AWS SQS)"]
+        Q1["user.events"]
+        Q2["feed.events"]
+        Q3["job.events"]
+        Q4["notification.events"]
+        Q5["analytics.events"]
+    end
+
+    subgraph DataLayer["💾 Data Layer"]
+        subgraph Databases["Databases"]
+            UserDB[("User DB<br/>PostgreSQL")]
+            FeedDB[("Feed DB<br/>MongoDB")]
+            JobDB[("Job DB<br/>PostgreSQL")]
+            EventDB[("Event DB<br/>PostgreSQL")]
+            ResearchDB[("Research DB<br/>MongoDB")]
+            MessageDB[("Message DB<br/>MongoDB")]
+            Cache[("Cache<br/>Redis")]
+            SearchIndex[("Search Index<br/>Elasticsearch")]
+        end
+        
+        subgraph Storage["Storage"]
+            S3["Object Storage<br/>AWS S3"]
+            CDNStorage["CDN Storage<br/>CloudFront"]
+        end
+    end
+
+    subgraph ExternalServices["🔗 External Services"]
+        EmailService["Email Service<br/>(SendGrid/AWS SES)"]
+        PushService["Push Service<br/>(Firebase)"]
+        SMSService["SMS Service<br/>(Twilio)"]
+        OAuth["OAuth Providers<br/>(Google, LinkedIn)"]
+    end
+
+    %% Client Connections
+    WebApp -->|"HTTPS/REST"| CDN
+    MobileApp -->|"HTTPS/REST"| CDN
+    ThirdParty -->|"API Keys"| APIGateway
+    CDN --> LoadBalancer
+    LoadBalancer --> APIGateway
+
+    %% API Gateway to Services
+    APIGateway -->|"/api/v1/users/*"| UserService
+    APIGateway -->|"/api/v1/feed/*"| FeedService
+    APIGateway -->|"/api/v1/jobs/*"| JobService
+    APIGateway -->|"/api/v1/events/*"| EventService
+    APIGateway -->|"/api/v1/research/*"| ResearchService
+    APIGateway -->|"/api/v1/messages/*"| MessageService
+    APIGateway -->|"/api/v1/notifications/*"| NotificationService
+    APIGateway -->|"/api/v1/analytics/*"| AnalyticsService
+    APIGateway -->|"/api/v1/media/*"| MediaService
+    APIGateway -->|"/api/v1/search/*"| SearchService
+
+    %% Service to Database Connections
+    UserService --> UserDB
+    UserService --> Cache
+    FeedService --> FeedDB
+    FeedService --> Cache
+    JobService --> JobDB
+    JobService --> Cache
+    EventService --> EventDB
+    ResearchService --> ResearchDB
+    MessageService --> MessageDB
+    MessageService --> Cache
+    SearchService --> SearchIndex
+    MediaService --> S3
+
+    %% Inter-service Communication (Async via Message Queue)
+    UserService -.->|"Publish"| Q1
+    FeedService -.->|"Publish"| Q2
+    JobService -.->|"Publish"| Q3
+    NotificationService -.->|"Consume"| Q1
+    NotificationService -.->|"Consume"| Q2
+    NotificationService -.->|"Consume"| Q3
+    NotificationService -.->|"Consume"| Q4
+    AnalyticsService -.->|"Consume"| Q5
+
+    %% Notification Service to External
+    NotificationService --> EmailService
+    NotificationService --> PushService
+    NotificationService --> SMSService
+    UserService --> OAuth
+
+    %% Styling
+    classDef client fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef api fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef core fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef collab fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef support fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef queue fill:#fff8e1,stroke:#f9a825,stroke-width:2px
+    classDef db fill:#e0f2f1,stroke:#00695c,stroke-width:2px
+    classDef storage fill:#efebe9,stroke:#4e342e,stroke-width:2px
+    classDef external fill:#f5f5f5,stroke:#616161,stroke-width:2px
+
+    class WebApp,MobileApp,ThirdParty client
+    class APIGateway,LoadBalancer,CDN api
+    class UserService,FeedService,JobService,EventService core
+    class ResearchService,MessageService collab
+    class NotificationService,AnalyticsService,MediaService,SearchService support
+    class Q1,Q2,Q3,Q4,Q5 queue
+    class UserDB,FeedDB,JobDB,EventDB,ResearchDB,MessageDB,Cache,SearchIndex db
+    class S3,CDNStorage storage
+    class EmailService,PushService,SMSService,OAuth external
+
+    %% Title
+    Title["🔧 DECP Platform - Service-Oriented Architecture (SOA)"]
+    style Title fill:#1976d2,stroke:#0d47a1,color:#fff,stroke-width:3px
+
+    %% Legend
+    subgraph Legend["Legend"]
+        direction LR
+        L1["Core Services"]:::core
+        L2["Collaboration"]:::collab
+        L3["Support"]:::support
+        L4[("Database")]:::db
+        L5["External"]:::external
+    end

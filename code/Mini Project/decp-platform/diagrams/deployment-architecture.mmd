@@ -1,0 +1,172 @@
+%% DECP Platform - Deployment Architecture
+%% Shows AWS Cloud infrastructure, Kubernetes cluster, and all components
+
+flowchart TB
+    subgraph Users["👥 Users"]
+        EndUsers["End Users<br/>Students, Alumni, Admin"]
+    end
+
+    subgraph CloudFront["🌐 AWS CloudFront<br/>[CDN]"]
+        CDNEdge["Edge Locations<br/>Global Content Delivery"]
+        WAF["AWS WAF<br/>Web Application Firewall"]
+    end
+
+    subgraph AWSCloud["☁️ AWS Cloud"]
+        subgraph VPC["VPC: decp-vpc<br/>10.0.0.0/16"]
+            
+            subgraph PublicSubnet["Public Subnets<br/>10.0.1.0/24, 10.0.2.0/24<br/>AZ-a, AZ-b"]
+                IGW["🌐 Internet Gateway"]
+                NATGW["NAT Gateway"]
+                ALB["Application Load Balancer<br/>[AWS ALB]"]
+                Bastion["Bastion Host<br/>[Jump Server]"]
+            end
+
+            subgraph PrivateSubnetApp["Private Subnets - App Tier<br/>10.0.10.0/24, 10.0.11.0/24<br/>AZ-a, AZ-b"]
+                subgraph EKSCluster["🚀 Amazon EKS Cluster<br/>Kubernetes v1.28"]
+                    subgraph NodeGroup1["Node Group: General<br/>t3.medium instances"]
+                        Pod1["User Service Pod"]
+                        Pod2["Feed Service Pod"]
+                        Pod3["Job Service Pod"]
+                        Pod4["Event Service Pod"]
+                    end
+                    
+                    subgraph NodeGroup2["Node Group: Compute<br/>t3.large instances"]
+                        Pod5["Research Service Pod"]
+                        Pod6["Message Service Pod"]
+                        Pod7["Search Service Pod"]
+                    end
+                    
+                    subgraph NodeGroup3["Node Group: Background<br/>t3.medium instances"]
+                        Pod8["Notification Service Pod"]
+                        Pod9["Analytics Service Pod"]
+                        Pod10["Media Service Pod"]
+                    end
+
+                    subgraph IngressController["Ingress Controller<br/>(NGINX Ingress)"]
+                        Ingress["Ingress Resource<br/>Route rules"]
+                    end
+                end
+            end
+
+            subgraph PrivateSubnetData["Private Subnets - Data Tier<br/>10.0.20.0/24, 10.0.21.0/24<br/>AZ-a, AZ-b"]
+                subgraph RDSCluster["🗄️ Amazon RDS<br/>PostgreSQL"]
+                    RDSPrimary["Primary Instance<br/>Multi-AZ"]
+                    RDSReplica["Read Replica"]
+                end
+
+                subgraph DocumentDB["📄 Amazon DocumentDB<br/>MongoDB Compatible"]
+                    DocPrimary["Primary Node"]
+                    DocReplica["Replica Node"]
+                end
+
+                subgraph ElastiCache["⚡ Amazon ElastiCache<br/>Redis Cluster"]
+                    RedisPrimary["Primary Shard"]
+                    RedisReplica["Replica Shard"]
+                end
+
+                subgraph OpenSearch["🔍 Amazon OpenSearch<br/>Elasticsearch"]
+                    SearchMaster["Master Node"]
+                    SearchData1["Data Node 1"]
+                    SearchData2["Data Node 2"]
+                end
+
+                subgraph MQ["📨 Amazon MQ<br/>RabbitMQ"]
+                    MQPrimary["Primary Broker"]
+                    MQReplica["Standby Broker"]
+                end
+            end
+        end
+
+        subgraph S3Storage["🪣 Amazon S3"]
+            S3Media["Media Bucket<br/>decp-media-{env}"]
+            S3Logs["Logs Bucket<br/>decp-logs-{env}"]
+            S3Backup["Backup Bucket<br/>decp-backups-{env}"]
+        end
+
+        subgraph AWSServices["🔧 AWS Managed Services"]
+            Cognito["Amazon Cognito<br/>User Authentication"]
+            SES["Amazon SES<br/>Email Service"]
+            SNS["Amazon SNS<br/>Push Notifications"]
+            CloudWatch["Amazon CloudWatch<br/>Monitoring & Logging"]
+            XRay["AWS X-Ray<br/>Distributed Tracing"]
+        end
+    end
+
+    %% Connection Flow
+    EndUsers -->|"HTTPS"| CDNEdge
+    CDNEdge --> WAF
+    WAF -->|"Route 53 DNS"| IGW
+    IGW --> ALB
+    ALB -->|"Forward"| Ingress
+    Ingress -->|"Route"| Pod1
+    Ingress -->|"Route"| Pod2
+    Ingress -->|"Route"| Pod3
+    Ingress -->|"Route"| Pod4
+    Ingress -->|"Route"| Pod5
+    Ingress -->|"Route"| Pod6
+    Ingress -->|"Route"| Pod7
+    Ingress -->|"Route"| Pod8
+    Ingress -->|"Route"| Pod9
+    Ingress -->|"Route"| Pod10
+
+    %% Pod to Database Connections
+    Pod1 -->|"PostgreSQL<br/>port 5432"| RDSPrimary
+    Pod3 -->|"PostgreSQL<br/>port 5432"| RDSPrimary
+    Pod4 -->|"PostgreSQL<br/>port 5432"| RDSPrimary
+    
+    Pod2 -->|"MongoDB<br/>port 27017"| DocPrimary
+    Pod5 -->|"MongoDB<br/>port 27017"| DocPrimary
+    Pod6 -->|"MongoDB<br/>port 27017"| DocPrimary
+    
+    Pod1 -->|"Redis<br/>port 6379"| RedisPrimary
+    Pod2 -->|"Redis<br/>port 6379"| RedisPrimary
+    Pod6 -->|"Redis<br/>port 6379"| RedisPrimary
+    
+    Pod7 -->|"Elasticsearch<br/>port 9200"| SearchMaster
+    
+    Pod8 -.->|"AMQP<br/>port 5672"| MQPrimary
+    Pod9 -.->|"AMQP<br/>port 5672"| MQPrimary
+    Pod10 -.->|"AMQP<br/>port 5672"| MQPrimary
+
+    %% External Connections
+    Pod1 -->|"Auth"| Cognito
+    Pod8 -->|"Send Email"| SES
+    Pod8 -->|"Push Notify"| SNS
+    Pod10 -->|"Store/Retrieve"| S3Media
+
+    %% Monitoring
+    Pod1 -.->|"Metrics/Logs"| CloudWatch
+    RDSPrimary -.->|"Metrics"| CloudWatch
+    ElastiCache -.->|"Metrics"| CloudWatch
+
+    %% Styling
+    classDef users fill:#08427b,stroke:#052e56,color:#fff,stroke-width:2px
+    classDef cdn fill:#ff9900,stroke:#cc7a00,color:#fff,stroke-width:2px
+    classDef vpc fill:#e0f2f1,stroke:#00695c,stroke-width:2px
+    classDef public fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef eks fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef pod fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px
+    classDef data fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef db fill:#bbdefb,stroke:#0d47a1,stroke-width:2px
+    classDef s3 fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef aws fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef network fill:#efebe9,stroke:#4e342e,stroke-width:2px
+
+    class EndUsers users
+    class CDNEdge,WAF cdn
+    class VPC vpc
+    class PublicSubnet,IGW,NATGW,ALB,Bastion public
+    class EKSCluster,NodeGroup1,NodeGroup2,NodeGroup3,IngressController,Ingress eks
+    class Pod1,Pod2,Pod3,Pod4,Pod5,Pod6,Pod7,Pod8,Pod9,Pod10 pod
+    class PrivateSubnetData data
+    class RDSCluster,RDSPrimary,RDSReplica,DocumentDB,DocPrimary,DocReplica,ElastiCache,RedisPrimary,RedisReplica,OpenSearch,SearchMaster,SearchData1,SearchData2,MQ,MQPrimary,MQReplica db
+    class S3Storage,S3Media,S3Logs,S3Backup s3
+    class Cognito,SES,SNS,CloudWatch,XRay aws
+
+    %% Title
+    Title["🚀 DECP Platform - Deployment Architecture (AWS Cloud)"]
+    style Title fill:#ff9900,stroke:#cc7a00,color:#fff,stroke-width:3px
+
+    %% Notes
+    Note["Note: Multi-AZ deployment for high availability"]
+    style Note fill:#fff9c4,stroke:#f57f17,stroke-width:2px

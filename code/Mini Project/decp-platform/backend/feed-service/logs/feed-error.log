@@ -1,0 +1,845 @@
+2026-03-01 14:38:40 [FEED-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 14:49:00 [FEED-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 14:53:00 [FEED-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:05:28 [FEED-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:14:29 [FEED-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:18:15 [FEED-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:22:03 [FEED-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:28:08 [FEED-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:33:12 [FEED-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:36:10 [FEED-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:39:36 [FEED-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:51:40 [FEED-SERVICE] [error]: ❌ Unable to start server: database "decp_feed" does not exist {"name":"SequelizeConnectionError","parent":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_feed" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 16:01:46 [FEED-SERVICE] [error]: ❌ Unable to start server: database "decp_feed" does not exist {"name":"SequelizeConnectionError","parent":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_feed" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 16:04:34 [FEED-SERVICE] [error]: ❌ Unable to start server: database "decp_feed" does not exist {"name":"SequelizeConnectionError","parent":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_feed" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 16:08:49 [FEED-SERVICE] [error]: ❌ Unable to start server: connect ETIMEDOUT 172.17.0.2:5432 {"name":"SequelizeConnectionError","parent":{"errno":-4039,"code":"ETIMEDOUT","syscall":"connect","address":"172.17.0.2","port":5432},"original":{"errno":-4039,"code":"ETIMEDOUT","syscall":"connect","address":"172.17.0.2","port":5432}}
+SequelizeConnectionError: connect ETIMEDOUT 172.17.0.2:5432
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-01 18:00:46 [FEED-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"331","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"331","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 18:53:49 [FEED-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError: 
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:184:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-01 18:58:55 [FEED-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError: 
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:184:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-01 19:03:24 [FEED-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError: 
+    at Client._connectionCallback (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:184:24)
+    at Client._handleErrorWhileConnecting (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-02 21:33:13 [FEED-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 21:38:01 [FEED-SERVICE] [error]: ❌ Unable to start server: database "decp_feed" does not exist {"name":"SequelizeConnectionError","parent":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_feed" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 21:40:15 [FEED-SERVICE] [error]: ❌ Unable to start server: database "decp_feed" does not exist {"name":"SequelizeConnectionError","parent":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_feed" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 21:44:29 [FEED-SERVICE] [error]: ❌ Unable to start server: database "decp_feed" does not exist {"name":"SequelizeConnectionError","parent":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_feed" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 22:22:10 [FEED-SERVICE] [error]: Expected double-quoted property name in JSON at position 116 (line 1 column 117) {"url":"/posts","method":"POST","ip":"::1"}
+SyntaxError: Expected double-quoted property name in JSON at position 116 (line 1 column 117)
+    at JSON.parse (<anonymous>)
+    at parse (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\body-parser\lib\types\json.js:92:19)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\body-parser\lib\read.js:128:18
+    at AsyncResource.runInAsyncScope (node:async_hooks:211:14)
+    at invokeCallback (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\raw-body\index.js:238:16)
+    at done (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:524:28)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-02 22:27:59 [FEED-SERVICE] [error]: request aborted {"url":"/","method":"POST"}
+BadRequestError: request aborted
+    at IncomingMessage.onAborted (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\raw-body\index.js:245:10)
+    at IncomingMessage.emit (node:events:524:28)
+    at IncomingMessage._destroy (node:_http_incoming:221:10)
+    at _destroy (node:internal/streams/destroy:122:10)
+    at IncomingMessage.destroy (node:internal/streams/destroy:84:5)
+    at abortIncoming (node:_http_server:809:9)
+    at socketOnClose (node:_http_server:803:3)
+    at Socket.emit (node:events:536:35)
+    at TCP.<anonymous> (node:net:351:12)
+2026-03-03 07:28:28 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:28 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:28 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:28 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:28 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:28 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:28 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:28 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:28 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:29 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:29 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:29 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:29 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:29 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:29 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:29 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:29 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:29 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:29 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:30 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:30 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:30 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:30 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:30 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:30 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:30 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:30 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:30 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:30 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:31 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:31 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:31 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:31 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:31 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:31 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:31 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:31 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:31 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:31 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:31 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:32 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:32 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:32 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:32 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:32 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:32 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:32 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:32 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:32 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:32 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:33 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)
+2026-03-03 07:28:33 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:33 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:33 [FEED-SERVICE] [error]: Like post error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:184:22)
+2026-03-03 07:28:33 [FEED-SERVICE] [error]: Add comment error: invalid input syntax for type uuid: "undefined" {"name":"SequelizeDatabaseError","parent":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"original":{"length":109,"name":"error","severity":"ERROR","code":"22P02","position":"167","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';"},"sql":"SELECT \"id\", \"userId\", \"content\", \"mediaUrls\", \"type\", \"likes\", \"comments\", \"shares\", \"isPublic\", \"createdAt\", \"updatedAt\" FROM \"posts\" AS \"Post\" WHERE \"Post\".\"id\" = 'undefined';","parameters":{}}
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Post.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Post.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async addComment (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:250:22)

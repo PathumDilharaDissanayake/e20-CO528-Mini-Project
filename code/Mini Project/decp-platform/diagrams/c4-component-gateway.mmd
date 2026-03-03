@@ -1,0 +1,136 @@
+%% DECP Platform - C4 Model Level 3: Component Diagram (API Gateway)
+%% Shows the internal components of the API Gateway
+
+flowchart TB
+    subgraph External["External"]
+        WebApp["Web Application"]
+        MobileApp["Mobile Application"]
+        ThirdParty["Third-party Clients"]
+    end
+
+    subgraph APIGateway["🌐 API Gateway [Container]"]
+        subgraph GatewayComponents["API Gateway Components"]
+            %% Entry Point
+            EntryPoint["📥 Request Entry Point<br/><br/>[Component: Nginx/HAProxy]<br/><br/>Initial request handler,<nSSL termination,<br/>request logging"]
+
+            %% Middleware Pipeline
+            subgraph MiddlewarePipeline["Middleware Pipeline"]
+                AuthMiddleware["🔐 Authentication Middleware<br/><br/>[Component: JWT/OAuth Handler]<br/><br/>Validates JWT tokens,<br/>handles OAuth flow,<br/>session management"]
+                
+                RateLimiter["⏱️ Rate Limiter<br/><br/>[Component: Redis-based Limiter]<br/><br/>Token bucket algorithm,<br/>throttling per client,<br/>abuse prevention"]
+                
+                CORSMiddleware["🌐 CORS Middleware<br/><br/>[Component: CORS Handler]<br/><br/>Cross-origin resource<br/>sharing policies"]
+                
+                RequestValidator["✅ Request Validator<br/><br/>[Component: Schema Validator]<br/><br/>Input sanitization,<br/>schema validation,<br/>payload size limits"]
+            end
+
+            %% Routing Layer
+            subgraph RoutingLayer["Routing Layer"]
+                Router["🧭 API Router<br/><br/>[Component: Dynamic Router]<br/><br/>Route matching,<br/>path rewriting,<br/>version handling"]
+                
+                ServiceRegistry["📋 Service Registry<br/><br/>[Component: Consul/Eureka]<br/><br/>Service discovery,<br/>health checks,<br/>instance tracking"]
+                
+                LoadBalancer["⚖️ Load Balancer<br/><br/>[Component: Round Robin LB]<br/><br/>Request distribution,<br/>circuit breaker,<br/>retry logic"]
+            end
+
+            %% Response Layer
+            subgraph ResponseLayer["Response Processing"]
+                ResponseTransformer["🔄 Response Transformer<br/><br/>[Component: Data Mapper]<br/><br/>Response formatting,<br/>data aggregation,<br/>error standardization"]
+                
+                CacheLayer["💾 Response Cache<br/><br/>[Component: Redis Cache]<br/><br/>Cache headers,<br/>ETag handling,<br/>cache invalidation"]
+                
+                ResponseCompressor["🗜️ Response Compressor<br/><br/>[Component: Gzip/Brotli]<br/><br/>Content compression,<br/>encoding negotiation"]
+            end
+
+            %% Monitoring & Logging
+            subgraph Observability["Observability"]
+                Logger["📝 Request Logger<br/><br/>[Component: Structured Logger]<br/><br/>Access logs,<br/>audit trails"]
+                
+                MetricsCollector["📊 Metrics Collector<br/><br/>[Component: Prometheus Client]<br/><br/>Latency metrics,<br/>throughput stats,<br/>error rates"]
+                
+                Tracer["🔍 Distributed Tracer<br/><br/>[Component: Jaeger/Zipkin]<br/><br/>Request tracing,<br/>span collection"]
+            end
+        end
+    end
+
+    subgraph BackendServices["Backend Microservices"]
+        UserService["User Service"]
+        FeedService["Feed Service"]
+        JobService["Job Service"]
+        EventService["Event Service"]
+        ResearchService["Research Service"]
+        MessageService["Message Service"]
+        OtherServices["Other Services..."]
+    end
+
+    subgraph ExternalAuth["External Auth"]
+        OAuthProvider["OAuth Providers<br/>(Google/LinkedIn)"]
+        JWTIssuer["JWT Issuer"]
+    end
+
+    %% Request Flow
+    WebApp -->|"HTTPS Request"| EntryPoint
+    MobileApp -->|"HTTPS Request"| EntryPoint
+    ThirdParty -->|"HTTPS Request<br/>API Key"| EntryPoint
+
+    EntryPoint -->|"Process"| CORSMiddleware
+    CORSMiddleware -->|"Validate Token"| AuthMiddleware
+    AuthMiddleware -->|"Check Limits"| RateLimiter
+    RateLimiter -->|"Validate Input"| RequestValidator
+    RequestValidator -->|"Route"| Router
+
+    %% Auth Flow
+    AuthMiddleware -.->|"Verify Token"| JWTIssuer
+    AuthMiddleware -.->|"OAuth Flow"| OAuthProvider
+
+    %% Routing Flow
+    Router -->|"Lookup"| ServiceRegistry
+    Router -->|"Distribute"| LoadBalancer
+
+    %% Load Balancer to Services
+    LoadBalancer -->|"/api/v1/users/*"| UserService
+    LoadBalancer -->|"/api/v1/feed/*"| FeedService
+    LoadBalancer -->|"/api/v1/jobs/*"| JobService
+    LoadBalancer -->|"/api/v1/events/*"| EventService
+    LoadBalancer -->|"/api/v1/research/*"| ResearchService
+    LoadBalancer -->|"/api/v1/messages/*"| MessageService
+    LoadBalancer -->|"Other routes"| OtherServices
+
+    %% Response Flow
+    UserService -->|"Response"| ResponseTransformer
+    FeedService -->|"Response"| ResponseTransformer
+    JobService -->|"Response"| ResponseTransformer
+    EventService -->|"Response"| ResponseTransformer
+    ResearchService -->|"Response"| ResponseTransformer
+    MessageService -->|"Response"| ResponseTransformer
+    OtherServices -->|"Response"| ResponseTransformer
+
+    ResponseTransformer -->|"Cache Check"| CacheLayer
+    CacheLayer -->|"Compress"| ResponseCompressor
+    ResponseCompressor -->|"Return"| WebApp
+    ResponseCompressor -->|"Return"| MobileApp
+    ResponseCompressor -->|"Return"| ThirdParty
+
+    %% Observability
+    EntryPoint -.->|"Log"| Logger
+    AuthMiddleware -.->|"Log"| Logger
+    RateLimiter -.->|"Metrics"| MetricsCollector
+    LoadBalancer -.->|"Trace"| Tracer
+    Tracer -.->|"Correlation"| BackendServices
+
+    %% Styling
+    classDef external fill:#999999,stroke:#6b6b6b,color:#fff,stroke-width:2px
+    classDef component fill:#438dd5,stroke:#2e629c,color:#fff,stroke-width:2px
+    classDef service fill:#2e629c,stroke:#1a3a5c,color:#fff,stroke-width:2px
+    classDef middleware fill:#5a9fd4,stroke:#438dd5,color:#fff,stroke-width:2px
+    classDef observability fill:#7ab8e0,stroke:#5a9fd4,color:#fff,stroke-width:2px
+
+    class WebApp,MobileApp,ThirdParty,OAuthProvider,JWTIssuer external
+    class EntryPoint,Router,ServiceRegistry,LoadBalancer,ResponseTransformer,CacheLayer,ResponseCompressor component
+    class AuthMiddleware,RateLimiter,CORSMiddleware,RequestValidator middleware
+    class Logger,MetricsCollector,Tracer observability
+    class UserService,FeedService,JobService,EventService,ResearchService,MessageService,OtherServices service
+
+    %% Title
+    Title["🌐 DECP Platform - C4 Model: Component Diagram - API Gateway (Level 3)"]
+    style Title fill:#1168bd,stroke:#0b4884,color:#fff,stroke-width:3px

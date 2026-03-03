@@ -1,0 +1,246 @@
+2026-03-01 14:38:40 [JOBS-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 14:49:00 [JOBS-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 14:53:01 [JOBS-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:05:30 [JOBS-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:14:30 [JOBS-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:18:17 [JOBS-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:22:06 [JOBS-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:28:10 [JOBS-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:33:14 [JOBS-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:51:43 [JOBS-SERVICE] [error]: ❌ Unable to start server: database "decp_jobs" does not exist {"name":"SequelizeConnectionError","parent":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_jobs" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:52:51 [JOBS-SERVICE] [error]: ❌ Unable to start server: database "decp_jobs" does not exist {"name":"SequelizeConnectionError","parent":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_jobs" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 16:04:37 [JOBS-SERVICE] [error]: ❌ Unable to start server: database "decp_jobs" does not exist {"name":"SequelizeConnectionError","parent":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_jobs" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 16:08:52 [JOBS-SERVICE] [error]: ❌ Unable to start server: connect ETIMEDOUT 172.17.0.2:5432 {"name":"SequelizeConnectionError","parent":{"errno":-4039,"code":"ETIMEDOUT","syscall":"connect","address":"172.17.0.2","port":5432},"original":{"errno":-4039,"code":"ETIMEDOUT","syscall":"connect","address":"172.17.0.2","port":5432}}
+SequelizeConnectionError: connect ETIMEDOUT 172.17.0.2:5432
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-01 17:31:51 [JOBS-SERVICE] [error]: Get job error: invalid input syntax for type uuid: "jobs" {"name":"SequelizeDatabaseError","parent":{"length":104,"name":"error","severity":"ERROR","code":"22P02","position":"205","file":"uuid.c","line":"133","routine":"string_to_uuid","sql":"SELECT \"id\", \"title\", \"description\", \"company\", \"location\", \"type\", \"salary\", \"requirements\", \"skills\", \"postedBy\", \"status\", \"expiresAt\", \"createdAt\", \"updatedAt\" FROM \"jobs\" AS \"Job\" WHERE \"Job\".\"id\" = 'jobs';"},"original":{"length":104,"name":"error","severity":"ERROR","code":"22P02","position":"205","file":"uuid.c","line":"133","routine":"string_to_uuid","sql":"SELECT \"id\", \"title\", \"description\", \"company\", \"location\", \"type\", \"salary\", \"requirements\", \"skills\", \"postedBy\", \"status\", \"expiresAt\", \"createdAt\", \"updatedAt\" FROM \"jobs\" AS \"Job\" WHERE \"Job\".\"id\" = 'jobs';"},"sql":"SELECT \"id\", \"title\", \"description\", \"company\", \"location\", \"type\", \"salary\", \"requirements\", \"skills\", \"postedBy\", \"status\", \"expiresAt\", \"createdAt\", \"updatedAt\" FROM \"jobs\" AS \"Job\" WHERE \"Job\".\"id\" = 'jobs';","parameters":{}}
+Error: 
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at Function.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\model.js:1824:21)
+    at Function.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\model.js:1998:12)
+    at Function.findByPk (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\model.js:1955:12)
+    at getJob (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\src\controllers\jobController.ts:75:17)
+2026-03-01 18:54:53 [JOBS-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError: 
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:184:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-01 18:58:57 [JOBS-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError: 
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:184:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-01 19:03:24 [JOBS-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError: 
+    at Client._connectionCallback (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:184:24)
+    at Client._handleErrorWhileConnecting (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-02 21:33:14 [JOBS-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 21:38:00 [JOBS-SERVICE] [error]: ❌ Unable to start server: database "decp_jobs" does not exist {"name":"SequelizeConnectionError","parent":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_jobs" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 21:40:15 [JOBS-SERVICE] [error]: ❌ Unable to start server: database "decp_jobs" does not exist {"name":"SequelizeConnectionError","parent":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_jobs" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 21:44:31 [JOBS-SERVICE] [error]: ❌ Unable to start server: database "decp_jobs" does not exist {"name":"SequelizeConnectionError","parent":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":95,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_jobs" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\jobs-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)

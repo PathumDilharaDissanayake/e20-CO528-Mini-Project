@@ -1,0 +1,403 @@
+2026-03-01 14:38:38 [USER-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 14:49:00 [USER-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 14:52:58 [USER-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:05:26 [USER-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:14:29 [USER-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:18:13 [USER-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:22:01 [USER-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:28:06 [USER-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:33:10 [USER-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:36:07 [USER-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:39:32 [USER-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:51:37 [USER-SERVICE] [error]: ❌ Unable to start server: database "decp_users" does not exist {"name":"SequelizeConnectionError","parent":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_users" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:52:45 [USER-SERVICE] [error]: ❌ Unable to start server: database "decp_users" does not exist {"name":"SequelizeConnectionError","parent":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_users" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:58:06 [USER-SERVICE] [error]: ❌ Unable to start server: database "decp_users" does not exist {"name":"SequelizeConnectionError","parent":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_users" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 16:01:41 [USER-SERVICE] [error]: ❌ Unable to start server: database "decp_users" does not exist {"name":"SequelizeConnectionError","parent":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_users" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 16:04:31 [USER-SERVICE] [error]: ❌ Unable to start server: database "decp_users" does not exist {"name":"SequelizeConnectionError","parent":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_users" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 16:08:46 [USER-SERVICE] [error]: ❌ Unable to start server: connect ETIMEDOUT 172.17.0.2:5432 {"name":"SequelizeConnectionError","parent":{"errno":-4039,"code":"ETIMEDOUT","syscall":"connect","address":"172.17.0.2","port":5432},"original":{"errno":-4039,"code":"ETIMEDOUT","syscall":"connect","address":"172.17.0.2","port":5432}}
+SequelizeConnectionError: connect ETIMEDOUT 172.17.0.2:5432
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-01 16:21:14 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 16:21:14 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 16:21:14 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 16:48:54 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 16:48:55 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 16:48:55 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 16:50:58 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 16:50:58 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 16:50:58 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 16:59:38 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 16:59:38 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 16:59:38 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 17:31:38 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 17:31:38 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 17:31:38 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 17:45:00 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 17:45:00 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 17:45:00 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 18:18:19 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 18:18:19 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 18:18:19 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 18:45:33 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 18:45:34 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 18:45:34 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 18:57:28 [USER-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError: 
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:184:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-01 18:58:53 [USER-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError: 
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:184:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-01 19:03:24 [USER-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError: 
+    at Client._connectionCallback (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:184:24)
+    at Client._handleErrorWhileConnecting (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-01 19:08:55 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 19:08:55 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 19:08:56 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 19:08:56 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 19:08:56 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 19:10:07 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 19:10:07 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 19:10:07 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 19:47:18 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 19:47:19 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 19:48:58 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 19:48:58 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 19:48:58 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 19:50:18 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 19:50:18 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 19:50:18 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 19:54:22 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 19:54:22 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 19:54:22 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 19:58:55 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 19:58:56 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 19:58:56 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 20:24:21 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 20:24:21 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 20:24:21 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 20:28:06 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 20:28:07 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 20:28:07 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 20:36:24 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 20:36:24 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 20:36:24 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 20:41:26 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 20:41:26 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 20:41:26 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 20:54:23 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 20:54:24 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 20:54:24 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 21:03:24 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 21:03:24 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 21:03:24 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 21:09:57 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 21:09:58 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 21:09:58 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 21:16:40 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 21:16:41 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 21:16:41 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 21:30:05 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 21:30:06 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 21:30:06 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-01 21:42:00 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-01 21:42:01 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-01 21:42:01 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-02 21:33:13 [USER-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 21:38:00 [USER-SERVICE] [error]: ❌ Unable to start server: database "decp_users" does not exist {"name":"SequelizeConnectionError","parent":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_users" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 21:40:15 [USER-SERVICE] [error]: ❌ Unable to start server: database "decp_users" does not exist {"name":"SequelizeConnectionError","parent":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_users" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 21:44:27 [USER-SERVICE] [error]: ❌ Unable to start server: database "decp_users" does not exist {"name":"SequelizeConnectionError","parent":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":96,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_users" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\user-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 22:05:38 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-02 22:05:38 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-02 22:05:38 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-02 22:30:58 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-02 22:30:59 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-02 22:35:25 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-02 22:35:25 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-02 22:35:25 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-02 22:44:03 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-02 22:44:03 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-02 22:44:03 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-02 22:54:28 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-02 22:54:28 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-02 22:54:28 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-02 23:28:15 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-02 23:28:15 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-02 23:28:15 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-02 23:36:11 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-02 23:36:11 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-02 23:36:11 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-02 23:41:33 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-02 23:41:33 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-02 23:41:33 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-03 06:44:18 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-03 06:44:18 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 06:44:18 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-03 06:48:25 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-03 06:48:25 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 06:52:13 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-03 06:52:13 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 06:52:13 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-03 07:05:14 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-03 07:05:14 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 07:05:14 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-03 07:26:21 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-03 07:26:21 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 07:26:21 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-03 07:40:08 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-03 07:40:08 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 07:40:08 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-03 08:08:29 [USER-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-03 08:08:29 [USER-SERVICE] [info]: ✅ Database synchronized.
+2026-03-03 08:08:29 [USER-SERVICE] [info]: 👤 User Service running on port 3002

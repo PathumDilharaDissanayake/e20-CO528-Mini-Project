@@ -1,0 +1,106 @@
+2026-03-01 14:53:30 [NOTIFICATION-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:22:18 [NOTIFICATION-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 15:33:21 [NOTIFICATION-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-01 18:59:05 [NOTIFICATION-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError: 
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:184:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-01 19:03:25 [NOTIFICATION-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError: 
+    at Client._connectionCallback (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:184:24)
+    at Client._handleErrorWhileConnecting (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-02 21:33:15 [NOTIFICATION-SERVICE] [error]: ❌ Unable to start server: password authentication failed for user "postgres" {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"},"original":{"length":104,"name":"error","severity":"FATAL","code":"28P01","file":"auth.c","line":"320","routine":"auth_failed"}}
+SequelizeConnectionError: password authentication failed for user "postgres"
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 21:38:13 [NOTIFICATION-SERVICE] [error]: ❌ Unable to start server: database "decp_notifications" does not exist {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":104,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_notifications" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 21:40:17 [NOTIFICATION-SERVICE] [error]: ❌ Unable to start server: database "decp_notifications" does not exist {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":104,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_notifications" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2026-03-02 21:44:39 [NOTIFICATION-SERVICE] [error]: ❌ Unable to start server: database "decp_notifications" does not exist {"name":"SequelizeConnectionError","parent":{"length":104,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"},"original":{"length":104,"name":"error","severity":"FATAL","code":"3D000","file":"postinit.c","line":"1016","routine":"InitPostgres"}}
+SequelizeConnectionError: database "decp_notifications" does not exist
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\sequelize\src\dialects\postgres\connection-manager.js:196:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorMessage (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\client.js:399:19)
+    at Connection.emit (node:events:524:28)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg\lib\connection.js:115:12
+    at Parser.parse (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\parser.ts:106:9)
+    at Socket.<anonymous> (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\notification-service\node_modules\pg-protocol\src\index.ts:7:48)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)

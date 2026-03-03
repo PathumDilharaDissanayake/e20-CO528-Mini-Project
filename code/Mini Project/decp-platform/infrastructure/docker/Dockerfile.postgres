@@ -1,0 +1,40 @@
+# DECP Platform - PostgreSQL with Initialization
+FROM postgres:16-alpine
+
+# Install additional extensions
+RUN apk add --no-cache \
+    postgresql16-contrib \
+    postgresql16-plperl \
+    postgresql16-plpython3
+
+# Copy initialization scripts
+COPY ./init-scripts/ /docker-entrypoint-initdb.d/
+
+# Copy custom PostgreSQL configuration
+COPY ./postgresql.conf /etc/postgresql/postgresql.conf
+COPY ./pg_hba.conf /etc/postgresql/pg_hba.conf
+
+# Set permissions
+RUN chown -R postgres:postgres /docker-entrypoint-initdb.d/ && \
+    chown postgres:postgres /etc/postgresql/postgresql.conf && \
+    chown postgres:postgres /etc/postgresql/pg_hba.conf
+
+# Environment variables
+ENV POSTGRES_USER=decp_admin
+ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme_in_production}
+ENV POSTGRES_DB=decp_platform
+ENV PGDATA=/var/lib/postgresql/data/pgdata
+
+# Create directories for multiple databases
+RUN mkdir -p /var/lib/postgresql/data/backups && \
+    chown -R postgres:postgres /var/lib/postgresql/data
+
+# Expose PostgreSQL port
+EXPOSE 5432
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD pg_isready -U decp_admin -d decp_platform || exit 1
+
+# Use custom config
+CMD ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]

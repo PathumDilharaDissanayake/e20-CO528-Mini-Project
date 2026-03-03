@@ -1,0 +1,109 @@
+%% DECP Platform - Enterprise Architecture Diagram
+%% Shows high-level business processes, department workflow, user roles, and system boundaries
+
+flowchart TB
+    subgraph External["External Environment"]
+        Email["📧 Email Service"]
+        Push["📱 Push Notification Service"]
+        Cloud["☁️ Cloud Storage"]
+        LinkedIn["🔗 LinkedIn API"]
+        GitHub["🐙 GitHub API"]
+    end
+
+    subgraph Enterprise["🏛️ University Enterprise"]
+        subgraph Departments["Academic Departments"]
+            DeptCS["Computer Engineering"]
+            DeptEE["Electrical Engineering"]
+            DeptME["Mechanical Engineering"]
+        end
+        
+        subgraph Administration["University Administration"]
+            AdminOffice["Admin Office"]
+            CareerCenter["Career Center"]
+            AlumniOffice["Alumni Relations"]
+        end
+    end
+
+    subgraph DECP["🎓 DECP Platform"]
+        subgraph BusinessProcesses["Business Processes"]
+            BP1["User Onboarding Process"]
+            BP2["Content Moderation Process"]
+            BP3["Job Matching Process"]
+            BP4["Event Management Process"]
+            BP5["Research Collaboration Process"]
+        end
+        
+        subgraph Workflows["Department Workflows"]
+            WF1["Student Registration Workflow"]
+            WF2["Alumni Engagement Workflow"]
+            WF3["Career Services Workflow"]
+            WF4["Research Project Workflow"]
+        end
+    end
+
+    subgraph UserRoles["👥 User Roles & Personas"]
+        subgraph Students["Current Students"]
+            UG["Undergraduate Students"]
+            PG["Postgraduate Students"]
+        end
+        
+        subgraph Alumni["Alumni Network"]
+            JR["Junior Alumni<br/>(0-5 years)"]
+            SR["Senior Alumni<br/>(5+ years)"]
+            REC["Recruiters"]
+        end
+        
+        subgraph Staff["Staff & Faculty"]
+            ADMIN["Platform Admin"]
+            FAC["Faculty Members"]
+            COORD["Event Coordinators"]
+        end
+    end
+
+    %% Connections - External to Enterprise
+    Email -.->|"Email notifications"| DECP
+    Push -.->|"Push alerts"| DECP
+    Cloud -.->|"Media storage"| DECP
+    LinkedIn -.->|"Job sync"| DECP
+    GitHub -.->|"Project integration"| DECP
+
+    %% Connections - Enterprise to DECP
+    DeptCS -->|"Student data"| DECP
+    AdminOffice -->|"Official announcements"| DECP
+    CareerCenter -->|"Job postings"| DECP
+    AlumniOffice -->|"Alumni directory"| DECP
+
+    %% Connections - User Roles to DECP
+    UG -->|"Access platform"| DECP
+    PG -->|"Access platform"| DECP
+    JR -->|"Mentor & recruit"| DECP
+    SR -->|"Sponsor & advise"| DECP
+    REC -->|"Post jobs"| DECP
+    ADMIN -->|"Manage platform"| DECP
+    FAC -->|"Research collaboration"| DECP
+    COORD -->|"Create events"| DECP
+
+    %% Business Process Details
+    BP1 -.->|"Includes"| WF1
+    BP2 -.->|"Supports"| WF2
+    BP3 -.->|"Enables"| WF3
+    BP4 -.->|"Orchestrates"| WF4
+    BP5 -.->|"Facilitates"| WF4
+
+    %% Styling
+    classDef external fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef enterprise fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef decp fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+    classDef process fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef role fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    classDef workflow fill:#e0f2f1,stroke:#004d40,stroke-width:2px
+
+    class Email,Push,Cloud,LinkedIn,GitHub external
+    class DeptCS,DeptEE,DeptME,AdminOffice,CareerCenter,AlumniOffice enterprise
+    class BP1,BP2,BP3,BP4,BP5 process
+    class WF1,WF2,WF3,WF4 workflow
+    class UG,PG,JR,SR,REC,ADMIN,FAC,COORD role
+
+    %% Title
+    Title["🎓 DECP Platform - Enterprise Architecture"]
+    style Title fill:#1976d2,stroke:#0d47a1,color:#fff,stroke-width:3px

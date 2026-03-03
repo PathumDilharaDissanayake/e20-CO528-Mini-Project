@@ -1,0 +1,336 @@
+%% DECP Platform - Database Schema Diagram (ERD)
+%% Entity Relationship Diagram showing all tables and relationships
+
+erDiagram
+    %% ============== USER MODULE ==============
+    USERS {
+        uuid id PK
+        string email UK
+        string password_hash
+        string first_name
+        string last_name
+        string avatar_url
+        enum user_type "student|alumni|admin|faculty"
+        enum status "active|inactive|suspended"
+        timestamp email_verified_at
+        timestamp created_at
+        timestamp updated_at
+        timestamp last_login_at
+    }
+
+    USER_PROFILES {
+        uuid id PK
+        uuid user_id FK
+        string bio
+        string location
+        string phone
+        string linkedin_url
+        string github_url
+        string website
+        json skills
+        json interests
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    USER_ROLES {
+        uuid id PK
+        string name UK
+        string description
+        json permissions
+        timestamp created_at
+    }
+
+    USER_ROLE_ASSIGNMENTS {
+        uuid user_id FK
+        uuid role_id FK
+        timestamp assigned_at
+    }
+
+    SESSIONS {
+        uuid id PK
+        uuid user_id FK
+        string token
+        string ip_address
+        string user_agent
+        timestamp expires_at
+        timestamp created_at
+    }
+
+    PASSWORD_RESETS {
+        uuid id PK
+        uuid user_id FK
+        string token
+        timestamp expires_at
+        timestamp used_at
+        timestamp created_at
+    }
+
+    %% ============== FEED MODULE ==============
+    POSTS {
+        uuid id PK
+        uuid user_id FK
+        string content
+        enum post_type "text|image|video|link"
+        json media_urls
+        uuid shared_post_id FK
+        int likes_count
+        int comments_count
+        int shares_count
+        enum visibility "public|connections|private"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    POST_LIKES {
+        uuid id PK
+        uuid post_id FK
+        uuid user_id FK
+        timestamp created_at
+    }
+
+    POST_COMMENTS {
+        uuid id PK
+        uuid post_id FK
+        uuid user_id FK
+        uuid parent_id FK
+        string content
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    POST_SHARES {
+        uuid id PK
+        uuid post_id FK
+        uuid user_id FK
+        uuid shared_to_user_id FK
+        string share_message
+        timestamp created_at
+    }
+
+    USER_CONNECTIONS {
+        uuid id PK
+        uuid requester_id FK
+        uuid addressee_id FK
+        enum status "pending|accepted|rejected|blocked"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% ============== JOB MODULE ==============
+    JOBS {
+        uuid id PK
+        uuid posted_by FK
+        string title
+        text description
+        string company
+        string location
+        enum job_type "full_time|part_time|internship|contract"
+        enum experience_level "entry|mid|senior|executive"
+        json requirements
+        json skills_required
+        decimal salary_min
+        decimal salary_max
+        enum salary_currency
+        date application_deadline
+        enum status "active|closed|draft"
+        int views_count
+        int applications_count
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    JOB_APPLICATIONS {
+        uuid id PK
+        uuid job_id FK
+        uuid applicant_id FK
+        string resume_url
+        string cover_letter
+        json answers
+        enum status "pending|reviewing|shortlisted|rejected|hired"
+        timestamp submitted_at
+        timestamp reviewed_at
+    }
+
+    SAVED_JOBS {
+        uuid id PK
+        uuid user_id FK
+        uuid job_id FK
+        timestamp saved_at
+    }
+
+    %% ============== EVENT MODULE ==============
+    EVENTS {
+        uuid id PK
+        uuid organizer_id FK
+        string title
+        text description
+        enum event_type "workshop|seminar|career_fair|networking|other"
+        timestamp start_time
+        timestamp end_time
+        string location
+        string meeting_link
+        int max_attendees
+        enum status "upcoming|ongoing|completed|cancelled"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    EVENT_ATTENDEES {
+        uuid id PK
+        uuid event_id FK
+        uuid user_id FK
+        enum rsvp_status "yes|no|maybe"
+        timestamp rsvp_at
+        boolean attended
+    }
+
+    %% ============== RESEARCH MODULE ==============
+    RESEARCH_PROJECTS {
+        uuid id PK
+        uuid lead_researcher_id FK
+        string title
+        text description
+        text abstract
+        enum status "proposed|active|completed|cancelled"
+        json tags
+        string github_url
+        timestamp start_date
+        timestamp end_date
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    RESEARCH_COLLABORATORS {
+        uuid id PK
+        uuid project_id FK
+        uuid user_id FK
+        enum role "lead|member|mentor"
+        timestamp joined_at
+    }
+
+    RESEARCH_DOCUMENTS {
+        uuid id PK
+        uuid project_id FK
+        uuid uploaded_by FK
+        string title
+        string file_url
+        enum document_type "paper|dataset|code|other"
+        timestamp uploaded_at
+    }
+
+    %% ============== MESSAGING MODULE ==============
+    CONVERSATIONS {
+        uuid id PK
+        enum type "direct|group"
+        string title
+        uuid created_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    CONVERSATION_PARTICIPANTS {
+        uuid conversation_id FK
+        uuid user_id FK
+        timestamp joined_at
+        timestamp last_read_at
+    }
+
+    MESSAGES {
+        uuid id PK
+        uuid conversation_id FK
+        uuid sender_id FK
+        string content
+        json attachments
+        timestamp sent_at
+        timestamp edited_at
+    }
+
+    %% ============== NOTIFICATION MODULE ==============
+    NOTIFICATIONS {
+        uuid id PK
+        uuid user_id FK
+        enum type "like|comment|connection|job|event|message|system"
+        string title
+        string message
+        json data
+        boolean is_read
+        timestamp read_at
+        timestamp created_at
+    }
+
+    NOTIFICATION_PREFERENCES {
+        uuid user_id FK
+        boolean email_likes
+        boolean email_comments
+        boolean email_connections
+        boolean email_jobs
+        boolean email_events
+        boolean push_enabled
+        timestamp updated_at
+    }
+
+    %% ============== ANALYTICS MODULE ==============
+    USER_ACTIVITIES {
+        uuid id PK
+        uuid user_id FK
+        enum activity_type "login|post|like|comment|apply|event_rsvp|message"
+        json metadata
+        timestamp created_at
+    }
+
+    DAILY_METRICS {
+        date date PK
+        int active_users
+        int new_users
+        int posts_created
+        int jobs_posted
+        int applications_submitted
+        int events_created
+        int messages_sent
+    }
+
+    %% ============== RELATIONSHIPS ==============
+    USERS ||--o{ USER_PROFILES : "has"
+    USERS ||--o{ USER_ROLE_ASSIGNMENTS : "has"
+    USER_ROLES ||--o{ USER_ROLE_ASSIGNMENTS : "assigned_to"
+    USERS ||--o{ SESSIONS : "has"
+    USERS ||--o{ PASSWORD_RESETS : "requests"
+    
+    USERS ||--o{ POSTS : "creates"
+    POSTS ||--o{ POST_LIKES : "receives"
+    POSTS ||--o{ POST_COMMENTS : "has"
+    POSTS ||--o{ POST_SHARES : "shared_as"
+    USERS ||--o{ POST_LIKES : "gives"
+    USERS ||--o{ POST_COMMENTS : "writes"
+    USERS ||--o{ POST_SHARES : "shares"
+    POSTS ||--o| POSTS : "shares"
+    USERS ||--o{ USER_CONNECTIONS : "requests"
+    USERS ||--o{ USER_CONNECTIONS : "receives"
+    
+    USERS ||--o{ JOBS : "posts"
+    USERS ||--o{ JOB_APPLICATIONS : "submits"
+    JOBS ||--o{ JOB_APPLICATIONS : "receives"
+    USERS ||--o{ SAVED_JOBS : "saves"
+    JOBS ||--o{ SAVED_JOBS : "saved_as"
+    
+    USERS ||--o{ EVENTS : "organizes"
+    EVENTS ||--o{ EVENT_ATTENDEES : "has"
+    USERS ||--o{ EVENT_ATTENDEES : "rsvps"
+    
+    USERS ||--o{ RESEARCH_PROJECTS : "leads"
+    RESEARCH_PROJECTS ||--o{ RESEARCH_COLLABORATORS : "has"
+    USERS ||--o{ RESEARCH_COLLABORATORS : "participates"
+    RESEARCH_PROJECTS ||--o{ RESEARCH_DOCUMENTS : "contains"
+    USERS ||--o{ RESEARCH_DOCUMENTS : "uploads"
+    
+    USERS ||--o{ CONVERSATIONS : "creates"
+    CONVERSATIONS ||--o{ CONVERSATION_PARTICIPANTS : "has"
+    USERS ||--o{ CONVERSATION_PARTICIPANTS : "joins"
+    CONVERSATIONS ||--o{ MESSAGES : "contains"
+    USERS ||--o{ MESSAGES : "sends"
+    
+    USERS ||--o{ NOTIFICATIONS : "receives"
+    USERS ||--o| NOTIFICATION_PREFERENCES : "configures"
+    
+    USERS ||--o{ USER_ACTIVITIES : "generates"

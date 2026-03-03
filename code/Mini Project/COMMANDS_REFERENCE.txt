@@ -1,0 +1,140 @@
+================================================================================
+DECP PLATFORM - LOCAL DEVELOPMENT COMMANDS
+================================================================================
+
+EASIEST WAY:
+------------
+Just double-click: RUN_LOCAL.bat
+Or right-click: RUN_LOCAL.ps1 -> Run with PowerShell
+
+================================================================================
+MANUAL COMMANDS
+================================================================================
+
+--- STEP 1: START BACKEND (Docker) ---------------------------------------------
+
+cd "E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend"
+
+# Create environment file (first time only)
+echo JWT_SECRET=decp-development-secret > .env
+echo JWT_REFRESH_SECRET=decp-refresh-secret >> .env
+
+# Start all services
+docker-compose up -d
+
+# Check if running
+docker ps
+
+--- STEP 2: START FRONTEND (New Terminal) --------------------------------------
+
+cd "E:\Academic\Semester_7\CO528\Mini Project\decp-platform\frontend"
+
+# Install dependencies (first time only)
+npm install
+
+# Create environment file (first time only)
+echo VITE_API_URL=http://localhost:3000/api > .env
+echo VITE_SOCKET_URL=http://localhost:3007 >> .env
+
+# Start development server
+npm run dev
+
+# Open browser: http://localhost:5173
+
+--- STEP 3: START MOBILE (Optional, New Terminal) -------------------------------
+
+cd "E:\Academic\Semester_7\CO528\Mini Project\decp-platform\mobile"
+
+# Install dependencies (first time only)
+npm install
+
+# Start Expo
+npx expo start
+
+# Press 'i' for iOS or 'a' for Android
+
+================================================================================
+USEFUL DOCKER COMMANDS
+================================================================================
+
+docker ps                              # List running containers
+docker-compose down                    # Stop all services
+docker-compose restart                 # Restart all services
+docker-compose logs -f                 # View all logs
+docker logs decp-api-gateway -f        # View API Gateway logs
+docker logs decp-auth-service -f       # View Auth service logs
+docker logs decp-postgres -f           # View database logs
+
+================================================================================
+DATABASE COMMANDS
+================================================================================
+
+# Access PostgreSQL
+docker exec -it decp-postgres psql -U postgres -d decp_auth
+
+# Inside PostgreSQL:
+\l              # List databases
+\dt             # List tables
+\q              # Quit
+
+# Access Redis
+docker exec -it decp-redis redis-cli
+
+# Inside Redis:
+ping            # Test connection
+keys *          # List all keys
+exit            # Quit
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+# Port already in use
+netstat -ano | findstr :3000
+taskkill /PID <PID> /F
+
+# Reset everything (WARNING: deletes data)
+docker-compose down -v
+docker-compose up -d
+
+# Rebuild containers
+docker-compose up -d --build
+
+# Clean node_modules
+cd frontend
+Remove-Item -Recurse -Force node_modules
+npm install
+
+================================================================================
+ACCESS URLs
+================================================================================
+
+Web Application:        http://localhost:5173
+API Gateway:            http://localhost:3000
+Auth Service:           http://localhost:3001
+User Service:           http://localhost:3002
+Feed Service:           http://localhost:3003
+Jobs Service:           http://localhost:3004
+Events Service:         http://localhost:3005
+Research Service:       http://localhost:3006
+Messaging Service:      http://localhost:3007
+Notification Service:   http://localhost:3008
+Analytics Service:      http://localhost:3009
+PostgreSQL:             localhost:5432
+Redis:                  localhost:6379
+
+================================================================================
+TEST CREDENTIALS
+================================================================================
+
+You can register with any email, or use these test accounts:
+
+Email: student@test.com
+Password: Password123!
+Role: Student
+
+Email: alumni@test.com
+Password: Password123!
+Role: Alumni
+
+================================================================================

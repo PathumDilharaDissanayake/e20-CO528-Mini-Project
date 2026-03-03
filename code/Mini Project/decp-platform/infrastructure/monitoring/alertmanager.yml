@@ -1,0 +1,152 @@
+# DECP Platform - Alertmanager Configuration
+global:
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'alerts@decp.io'
+  smtp_auth_username: 'alerts@decp.io'
+  smtp_auth_password: 'your-app-password'
+  
+  slack_api_url: 'https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK'
+  
+  pagerduty_url: 'https://events.pagerduty.com/v2/enqueue'
+  
+  resolve_timeout: 5m
+
+# Templates for notifications
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+# Inhibition rules (prevent notification spam)
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'namespace']
+
+# Routing tree
+route:
+  receiver: 'default'
+  group_by: ['alertname', 'severity', 'namespace']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  
+  routes:
+    # Critical alerts - immediate notification
+    - match:
+        severity: critical
+      receiver: 'critical'
+      continue: true
+      group_wait: 0s
+      repeat_interval: 30m
+    
+    # Warning alerts - standard notification
+    - match:
+        severity: warning
+      receiver: 'warning'
+      continue: true
+    
+    # Database alerts
+    - match_re:
+        service: postgres|redis|rabbitmq
+      receiver: 'database-team'
+      group_by: ['service', 'alertname']
+    
+    # Infrastructure alerts
+    - match_re:
+        alertname: NodeDown|DiskFull|HighCPU|HighMemory
+      receiver: 'infrastructure-team'
+      group_by: ['instance', 'alertname']
+    
+    # Business metrics alerts
+    - match:
+        category: business
+      receiver: 'product-team'
+      group_by: ['metric_name']
+      group_interval: 1h
+
+# Receivers
+receivers:
+  - name: 'default'
+    slack_configs:
+      - channel: '#alerts'
+        title: '{{ template "slack.default.title" . }}'
+        text: '{{ template "slack.default.text" . }}'
+        send_resolved: true
+
+  - name: 'critical'
+    pagerduty_configs:
+      - service_key: '<PAGERDUTY_INTEGRATION_KEY>'
+        severity: critical
+        description: '{{ .GroupLabels.alertname }}: {{ .GroupLabels.summary }}'
+        details:
+          firing: '{{ template "pagerduty.default.description" . }}'
+          resolved: '{{ template "pagerduty.default.description" . }}'
+    slack_configs:
+      - channel: '#critical-alerts'
+        title: '🔴 CRITICAL: {{ .GroupLabels.alertname }}'
+        text: |
+          {{ range .Alerts }}
+          *Alert:* {{ .Annotations.summary }}
+          *Description:* {{ .Annotations.description }}
+          *Severity:* {{ .Labels.severity }}
+          *Instance:* {{ .Labels.instance }}
+          *Started:* {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          {{ end }}
+        send_resolved: true
+    email_configs:
+      - to: 'oncall@decp.io'
+        subject: '[CRITICAL] {{ .GroupLabels.alertname }}'
+        body: |
+          {{ range .Alerts }}
+          Alert: {{ .Annotations.summary }}
+          Description: {{ .Annotations.description }}
+          Details:
+          {{ range .Labels.SortedPairs }}  - {{ .Name }}: {{ .Value }}
+          {{ end }}
+          {{ end }}
+        send_resolved: true
+
+  - name: 'warning'
+    slack_configs:
+      - channel: '#warnings'
+        title: '⚠️ WARNING: {{ .GroupLabels.alertname }}'
+        text: |
+          {{ range .Alerts }}
+          {{ .Annotations.description }}
+          {{ end }}
+        send_resolved: true
+
+  - name: 'database-team'
+    slack_configs:
+      - channel: '#database-alerts'
+        title: '🗄️ Database Alert: {{ .GroupLabels.alertname }}'
+        text: |
+          {{ range .Alerts }}
+          Service: {{ .Labels.service }}
+          {{ .Annotations.description }}
+          {{ end }}
+        send_resolved: true
+
+  - name: 'infrastructure-team'
+    slack_configs:
+      - channel: '#infrastructure-alerts'
+        title: '🖥️ Infrastructure Alert: {{ .GroupLabels.alertname }}'
+        text: |
+          {{ range .Alerts }}
+          Instance: {{ .Labels.instance }}
+          {{ .Annotations.description }}
+          {{ end }}
+        send_resolved: true
+
+  - name: 'product-team'
+    email_configs:
+      - to: 'product@decp.io'
+        subject: '[DECP] Business Metric Alert: {{ .GroupLabels.alertname }}'
+        body: |
+          {{ range .Alerts }}
+          Metric: {{ .Labels.metric_name }}
+          Current Value: {{ .Annotations.current_value }}
+          Threshold: {{ .Annotations.threshold }}
+          {{ end }}
+        send_resolved: false

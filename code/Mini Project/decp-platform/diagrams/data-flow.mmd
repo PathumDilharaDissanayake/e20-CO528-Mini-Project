@@ -1,0 +1,165 @@
+%% DECP Platform - Data Flow Diagram
+%% Shows key data flows: User Registration, Post Creation, Job Application, Real-time Messaging
+
+flowchart TB
+    subgraph Users["👥 Users"]
+        Student["Student"]
+        Alumni["Alumni"]
+        Admin["Admin"]
+    end
+
+    subgraph ClientLayer["📱 Client Layer"]
+        WebApp["Web Application"]
+        MobileApp["Mobile App"]
+    end
+
+    subgraph APILayer["🌐 API Gateway"]
+        Gateway["API Gateway"]
+    end
+
+    %% Flow 1: User Registration Flow
+    subgraph Flow1["🔐 Flow 1: User Registration"]
+        direction TB
+        F1_Step1["1. Submit Registration<br/>POST /api/v1/users/register"]
+        F1_Step2["2. Validate Input<br/>Check email uniqueness<br/>Password strength"]
+        F1_Step3["3. Hash Password<br/>bcrypt with salt"]
+        F1_Step4["4. Create User Record<br/>INSERT INTO users"]
+        F1_Step5["5. Generate JWT Token"]
+        F1_Step6["6. Send Welcome Email<br/>Publish to message queue"]
+        F1_Step7["7. Return Success<br/>{user, token}"]
+        
+        F1_DB[("PostgreSQL<br/>User DB")]
+        F1_Cache[("Redis<br/>Session")]
+        F1_Queue["Message Queue"]
+        F1_Email["Email Service"]
+    end
+
+    %% Flow 2: Post Creation Flow
+    subgraph Flow2["📝 Flow 2: Post Creation"]
+        direction TB
+        F2_Step1["1. Create Post<br/>POST /api/v1/feed/posts"]
+        F2_Step2["2. Auth Check<br/>Validate JWT"]
+        F2_Step3["3. Upload Media<br/>If images/videos attached"]
+        F2_Step4["4. Save Post<br/>INSERT INTO posts"]
+        F2_Step5["5. Update Feed Cache<br/>Invalidate followers' feed"]
+        F2_Step6["6. Publish Event<br/>'post.created'"]
+        F2_Step7["7. Notify Followers<br/>Push notifications"]
+        F2_Step8["8. Return Post Data"]
+        
+        F2_DB[("MongoDB<br/>Feed DB")]
+        F2_S3["AWS S3<br/>Media Storage"]
+        F2_Cache[("Redis<br/>Feed Cache")]
+        F2_Search[("Elasticsearch<br/>Index")]
+        F2_Notif["Notification Service"]
+    end
+
+    %% Flow 3: Job Application Flow
+    subgraph Flow3["💼 Flow 3: Job Application"]
+        direction TB
+        F3_Step1["1. View Job<br/>GET /api/v1/jobs/:id"]
+        F3_Step2["2. Submit Application<br/>POST /api/v1/jobs/:id/apply"]
+        F3_Step3["3. Validate Profile<br/>Check resume exists"]
+        F3_Step4["4. Upload Resume<br/>If new resume attached"]
+        F3_Step5["5. Create Application<br/>INSERT INTO applications"]
+        F3_Step6["6. Update Job Stats<br/>Increment applicant count"]
+        F3_Step7["7. Notify Employer<br/>Email + Push"]
+        F3_Step8["8. Track in Analytics"]
+        F3_Step9["9. Return Confirmation"]
+        
+        F3_JobDB[("PostgreSQL<br/>Job DB")]
+        F3_UserDB[("PostgreSQL<br/>User DB")]
+        F3_S3["S3<br/>Resume Storage"]
+        F3_Analytics["Analytics Service"]
+    end
+
+    %% Flow 4: Real-time Messaging Flow
+    subgraph Flow4["💬 Flow 4: Real-time Messaging"]
+        direction TB
+        F4_Step1["1. Open App<br/>Connect WebSocket"]
+        F4_Step2["2. Authenticate<br/>Send JWT over WS"]
+        F4_Step3["3. Join Room<br/>Subscribe to conversation"]
+        F4_Step4{"User A sends<br/>message to User B"}
+        F4_Step5["4. Receive Message<br/>WS: chat.message"]
+        F4_Step6["5. Validate & Save<br/>INSERT INTO messages"]
+        F4_Step7["6. Broadcast to Room<br/>WS: chat.message"]
+        F4_Step8["7. Push to Offline User<br/>If not connected"]
+        F4_Step9["8. Update Unread Count<br/>Redis increment"]
+        F4_Step10["9. Deliver to User B"]
+        
+        F4_WS["WebSocket Server<br/>Socket.io"]
+        F4_DB[("MongoDB<br/>Message DB")]
+        F4_Cache[("Redis<br/>Presence Store")]
+        F4_Push["Push Notification<br/>Service"]
+    end
+
+    %% Flow 1 Connections
+    Student -->|"Registration Request"| WebApp
+    WebApp -->|"POST /register"| Gateway
+    Gateway -->|"Route"| F1_Step1
+    F1_Step1 --> F1_Step2 --> F1_Step3 --> F1_Step4 --> F1_Step5 --> F1_Step6 --> F1_Step7
+    F1_Step4 -->|"Write"| F1_DB
+    F1_Step5 -->|"Store"| F1_Cache
+    F1_Step6 -->|"Publish"| F1_Queue
+    F1_Queue -->|"Consume"| F1_Email
+    F1_Step7 -->|"Response"| WebApp
+
+    %% Flow 2 Connections
+    Student -->|"Create Post"| MobileApp
+    MobileApp -->|"POST /posts"| Gateway
+    Gateway -->|"Route"| F2_Step1
+    F2_Step1 --> F2_Step2 --> F2_Step3 --> F2_Step4 --> F2_Step5 --> F2_Step6 --> F2_Step7 --> F2_Step8
+    F2_Step3 -->|"Store"| F2_S3
+    F2_Step4 -->|"Write"| F2_DB
+    F2_Step5 -->|"Update"| F2_Cache
+    F2_Step6 -->|"Index"| F2_Search
+    F2_Step6 -->|"Trigger"| F2_Notif
+    F2_Step8 -->|"Response"| MobileApp
+
+    %% Flow 3 Connections
+    Student -->|"Apply for Job"| WebApp
+    Alumni -->|"Posted Job"| WebApp
+    WebApp -->|"GET/POST /jobs"| Gateway
+    Gateway -->|"Route"| F3_Step1
+    F3_Step1 --> F3_Step2 --> F3_Step3 --> F3_Step4 --> F3_Step5 --> F3_Step6 --> F3_Step7 --> F3_Step8 --> F3_Step9
+    F3_Step1 -->|"Read"| F3_JobDB
+    F3_Step3 -->|"Read"| F3_UserDB
+    F3_Step4 -->|"Store"| F3_S3
+    F3_Step5 -->|"Write"| F3_JobDB
+    F3_Step8 -->|"Track"| F3_Analytics
+    F3_Step9 -->|"Confirmation"| WebApp
+    F3_Step7 -.->|"Notify"| Alumni
+
+    %% Flow 4 Connections
+    Student -->|"User A"| F4_Step4
+    Alumni -->|"User B"| F4_Step10
+    F4_Step1 -->|"WS Connect"| F4_WS
+    F4_WS --> F4_Step2 --> F4_Step3
+    F4_Step4 --> F4_Step5 --> F4_Step6 --> F4_Step7 --> F4_Step9 --> F4_Step10
+    F4_Step6 -->|"Persist"| F4_DB
+    F4_Step3 -->|"Track"| F4_Cache
+    F4_Step9 -->|"Update"| F4_Cache
+    F4_Step7 -->|"If offline"| F4_Push
+    F4_Push -->|"Push"| Alumni
+
+    %% Styling
+    classDef users fill:#08427b,stroke:#052e56,color:#fff,stroke-width:2px
+    classDef client fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef api fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef flow fill:#f5f5f5,stroke:#616161,stroke-width:2px
+    classDef step fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef db fill:#e0f2f1,stroke:#00695c,stroke-width:2px
+    classDef external fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef ws fill:#fff8e1,stroke:#f9a825,stroke-width:2px
+
+    class Student,Alumni,Admin users
+    class WebApp,MobileApp client
+    class Gateway api
+    class Flow1,Flow2,Flow3,Flow4 flow
+    class F1_Step1,F1_Step2,F1_Step3,F1_Step4,F1_Step5,F1_Step6,F1_Step7,F2_Step1,F2_Step2,F2_Step3,F2_Step4,F2_Step5,F2_Step6,F2_Step7,F2_Step8,F3_Step1,F3_Step2,F3_Step3,F3_Step4,F3_Step5,F3_Step6,F3_Step7,F3_Step8,F3_Step9,F4_Step1,F4_Step2,F4_Step3,F4_Step4,F4_Step5,F4_Step6,F4_Step7,F4_Step8,F4_Step9,F4_Step10 step
+    class F1_DB,F1_Cache,F2_DB,F2_Cache,F3_JobDB,F3_UserDB,F4_DB,F4_Cache db
+    class F2_S3,F3_S3,F2_Search external
+    class F4_WS,F1_Queue,F1_Email,F2_Notif,F3_Analytics,F4_Push ws
+
+    %% Title
+    Title["📊 DECP Platform - Data Flow Diagram"]
+    style Title fill:#1976d2,stroke:#0d47a1,color:#fff,stroke-width:3px

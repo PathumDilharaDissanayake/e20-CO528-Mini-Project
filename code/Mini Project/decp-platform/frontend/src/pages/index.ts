@@ -1,0 +1,11 @@
+export { LoginPage } from './LoginPage';
+export { RegisterPage } from './RegisterPage';
+export { ForgotPasswordPage } from './ForgotPasswordPage';
+export { FeedPage } from './FeedPage';
+export { ProfilePage } from './ProfilePage';
+export { JobsPage } from './JobsPage';
+export { EventsPage } from './EventsPage';
+export { ResearchPage } from './ResearchPage';
+export { MessagesPage } from './MessagesPage';
+export { NotificationsPage } from './NotificationsPage';
+export { AnalyticsPage } from './AnalyticsPage';

@@ -1,0 +1,19 @@
+# Development Dockerfile - Builds TypeScript on container start
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install all dependencies (including devDependencies)
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Expose port (change this for each service)
+EXPOSE 3005
+
+# Start in development mode with hot reload
+CMD ["npm", "run", "dev"]
