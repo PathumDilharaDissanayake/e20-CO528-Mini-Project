@@ -14,13 +14,14 @@ export interface EventAttributes {
   organizerId: string;
   capacity?: number;
   imageUrl?: string;
+  coverImage?: string;
   status: 'draft' | 'published' | 'cancelled' | 'completed';
   tags?: string[];
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-interface EventCreationAttributes extends Optional<EventAttributes, 'id' | 'location' | 'isVirtual' | 'meetingLink' | 'capacity' | 'imageUrl' | 'status' | 'tags' | 'createdAt' | 'updatedAt'> {}
+interface EventCreationAttributes extends Optional<EventAttributes, 'id' | 'location' | 'isVirtual' | 'meetingLink' | 'capacity' | 'imageUrl' | 'coverImage' | 'status' | 'tags' | 'createdAt' | 'updatedAt'> {}
 
 class Event extends Model<EventAttributes, EventCreationAttributes> implements EventAttributes {
   public id!: string;
@@ -35,6 +36,7 @@ class Event extends Model<EventAttributes, EventCreationAttributes> implements E
   public organizerId!: string;
   public capacity!: number;
   public imageUrl!: string;
+  public coverImage!: string;
   public status!: 'draft' | 'published' | 'cancelled' | 'completed';
   public tags!: string[];
   public readonly createdAt!: Date;
@@ -54,7 +56,8 @@ Event.init({
   organizerId: { type: DataTypes.UUID, allowNull: false },
   capacity: { type: DataTypes.INTEGER, allowNull: true },
   imageUrl: { type: DataTypes.STRING(500), allowNull: true },
-  status: { type: DataTypes.ENUM('draft', 'published', 'cancelled', 'completed'), defaultValue: 'draft' },
+  coverImage: { type: DataTypes.STRING(500), allowNull: true },
+  status: { type: DataTypes.ENUM('draft', 'published', 'cancelled', 'completed'), defaultValue: 'published' },
   tags: { type: DataTypes.JSONB, defaultValue: [] }
 }, { sequelize, tableName: 'events', timestamps: true });
 

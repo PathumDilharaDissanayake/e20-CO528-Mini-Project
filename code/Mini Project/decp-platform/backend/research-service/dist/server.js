@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
+const path_1 = __importDefault(require("path"));
 const config_1 = require("./config");
 const logger_1 = require("./utils/logger");
 const errorHandler_1 = require("./middleware/errorHandler");
@@ -17,7 +18,12 @@ app.use((0, helmet_1.default)());
 app.use((0, cors_1.default)());
 app.use(express_1.default.json({ limit: '10mb' }));
 app.use(express_1.default.urlencoded({ extended: true, limit: '10mb' }));
-app.use('/uploads', express_1.default.static(process.env.UPLOAD_DIR || 'uploads'));
+// Static files for uploads — use absolute path so it works regardless of CWD
+// __dirname in dist/ is backend/research-service/dist, so go up one level for service root
+const uploadsDir = process.env.UPLOAD_DIR
+    ? path_1.default.resolve(process.env.UPLOAD_DIR)
+    : path_1.default.join(__dirname, '..', 'uploads');
+app.use('/uploads', express_1.default.static(uploadsDir));
 // OBS-002: Prometheus-compatible /metrics endpoint (no external dependency)
 app.get('/metrics', (_req, res) => {
     const m = process.memoryUsage();

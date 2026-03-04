@@ -73,6 +73,14 @@ const USERS = [
       location: 'Building A, Room 204',
       skills: ['Machine Learning', 'Distributed Systems', 'Python', 'TensorFlow', 'Research'],
       socialLinks: { linkedin: 'https://linkedin.com', github: 'https://github.com' },
+      experience: [
+        { company: 'DECP University', title: 'Professor of Computer Science', startDate: '2010', current: true, description: 'Teaching ML, distributed systems, and AI research. Supervising PhD students and leading funded research projects.' },
+        { company: 'Oxford University', title: 'Research Fellow', startDate: '2007', endDate: '2010', description: 'Post-doctoral research in machine learning and neural networks. Published 8 papers in top-tier venues.' },
+      ],
+      education: [
+        { school: 'MIT', degree: 'PhD', field: 'Computer Science', startYear: 2003, endYear: 2007, grade: 'Summa Cum Laude' },
+        { school: 'Imperial College London', degree: 'MSc', field: 'Artificial Intelligence', startYear: 2001, endYear: 2002 },
+      ],
     },
   },
   {
@@ -85,6 +93,14 @@ const USERS = [
       location: 'Building B, Room 110',
       skills: ['Data Science', 'R', 'Python', 'Statistical Learning', 'Big Data', 'Spark'],
       socialLinks: { linkedin: 'https://linkedin.com' },
+      experience: [
+        { company: 'DECP University', title: 'Associate Professor of Data Science', startDate: '2015', current: true, description: 'Leading data science faculty and AI research initiatives. PI on multiple funded research grants totalling £2M.' },
+        { company: 'DeepMind', title: 'Research Scientist', startDate: '2013', endDate: '2015', description: 'Statistical machine learning research. Published papers on generative models and variational inference.' },
+      ],
+      education: [
+        { school: 'Stanford University', degree: 'PhD', field: 'Statistics & Machine Learning', startYear: 2008, endYear: 2013 },
+        { school: 'University of Cambridge', degree: 'BA/MA', field: 'Mathematics', startYear: 2004, endYear: 2008, grade: 'First Class Honours' },
+      ],
     },
   },
   {
@@ -97,6 +113,14 @@ const USERS = [
       location: 'Building C, Room 305',
       skills: ['Software Architecture', 'Agile', 'Java', 'Microservices', 'Cloud Computing'],
       socialLinks: { linkedin: 'https://linkedin.com', github: 'https://github.com' },
+      experience: [
+        { company: 'DECP University', title: 'Senior Lecturer in Software Engineering', startDate: '2015', current: true, description: 'Teaching software architecture, agile methodologies, and cloud computing. Curriculum lead for the SE programme.' },
+        { company: 'Google', title: 'Senior Software Engineer', startDate: '2008', endDate: '2015', description: 'Worked on Google Search infrastructure. Led a team of 8 engineers. Contributed to core search ranking algorithms.' },
+      ],
+      education: [
+        { school: 'Carnegie Mellon University', degree: 'MSc', field: 'Software Engineering', startYear: 2005, endYear: 2007 },
+        { school: 'University of Edinburgh', degree: 'BSc', field: 'Computer Science', startYear: 2001, endYear: 2005, grade: 'First Class' },
+      ],
     },
   },
   {
@@ -110,6 +134,14 @@ const USERS = [
       graduationYear: 2025,
       skills: ['JavaScript', 'React', 'Node.js', 'Python', 'Machine Learning'],
       socialLinks: { linkedin: 'https://linkedin.com', github: 'https://github.com' },
+      openToWork: true,
+      education: [
+        { school: 'DECP University', degree: 'BSc', field: 'Computer Science', startYear: 2021, endYear: 2025 },
+      ],
+      certifications: [
+        { id: 'cert-alice-aws', name: 'AWS Certified Developer – Associate', issuer: 'Amazon Web Services', issueDate: '2024-06', url: 'https://aws.amazon.com/certification' },
+        { id: 'cert-alice-react', name: 'React Developer Certification', issuer: 'Meta', issueDate: '2023-11', url: 'https://developers.facebook.com' },
+      ],
     },
   },
   {
@@ -123,6 +155,9 @@ const USERS = [
       graduationYear: 2026,
       skills: ['Python', 'NLP', 'Pandas', 'Data Visualisation', 'SQL'],
       socialLinks: { github: 'https://github.com' },
+      education: [
+        { school: 'DECP University', degree: 'BSc', field: 'Data Science', startYear: 2022, endYear: 2026 },
+      ],
     },
   },
   {
@@ -136,6 +171,12 @@ const USERS = [
       graduationYear: 2027,
       skills: ['TypeScript', 'React', 'Docker', 'Git', 'CI/CD'],
       socialLinks: { github: 'https://github.com', twitter: 'https://twitter.com' },
+      education: [
+        { school: 'DECP University', degree: 'BSc', field: 'Software Engineering', startYear: 2023, endYear: 2027 },
+      ],
+      certifications: [
+        { id: 'cert-carol-gh', name: 'GitHub Actions Certification', issuer: 'GitHub', issueDate: '2024-03', url: 'https://github.com/skills' },
+      ],
     },
   },
   {
@@ -148,6 +189,13 @@ const USERS = [
       location: 'Student Residences',
       graduationYear: 2025,
       skills: ['Cybersecurity', 'Networking', 'Linux', 'Python', 'Ethical Hacking'],
+      openToWork: true,
+      education: [
+        { school: 'DECP University', degree: 'BSc', field: 'Computer Science', startYear: 2021, endYear: 2025 },
+      ],
+      certifications: [
+        { id: 'cert-dan-sec', name: 'CompTIA Security+', issuer: 'CompTIA', issueDate: '2024-01', url: 'https://www.comptia.org' },
+      ],
     },
   },
   {
@@ -161,6 +209,16 @@ const USERS = [
       graduationYear: 2020,
       skills: ['Go', 'Kubernetes', 'Cloud Architecture', 'System Design', 'Mentoring'],
       socialLinks: { linkedin: 'https://linkedin.com', github: 'https://github.com' },
+      experience: [
+        { company: 'Google', title: 'Software Engineer L5', startDate: '2022', current: true, description: 'Working on distributed systems and infrastructure for Google\'s core services. Tech lead for a team of 6.' },
+        { company: 'Google', title: 'Software Engineer L4', startDate: '2020', endDate: '2022', description: 'Built and scaled backend services handling millions of requests per day.' },
+      ],
+      education: [
+        { school: 'DECP University', degree: 'BSc', field: 'Computer Science', startYear: 2016, endYear: 2020, grade: 'First Class Honours' },
+      ],
+      certifications: [
+        { id: 'cert-david-gcp', name: 'Google Cloud Professional Cloud Architect', issuer: 'Google Cloud', issueDate: '2022-04', url: 'https://cloud.google.com/certification' },
+      ],
     },
   },
   {
@@ -174,6 +232,13 @@ const USERS = [
       graduationYear: 2019,
       skills: ['Product Management', 'Agile', 'UX Research', 'Roadmapping', 'Leadership'],
       socialLinks: { linkedin: 'https://linkedin.com', twitter: 'https://twitter.com' },
+      experience: [
+        { company: 'Microsoft', title: 'Senior Product Manager', startDate: '2022', current: true, description: 'Leading product strategy for Azure cloud developer tools. Managing roadmap and cross-functional teams of 20+.' },
+        { company: 'Microsoft', title: 'Product Manager', startDate: '2019', endDate: '2022', description: 'Drove product development for Microsoft 365 features used by 300M+ users. Worked closely with engineering and design.' },
+      ],
+      education: [
+        { school: 'DECP University', degree: 'BSc', field: 'Software Engineering', startYear: 2015, endYear: 2019, grade: 'First Class' },
+      ],
     },
   },
   {
@@ -187,6 +252,17 @@ const USERS = [
       graduationYear: 2021,
       skills: ['Machine Learning', 'Python', 'SQL', 'MLOps', 'Financial Data'],
       socialLinks: { linkedin: 'https://linkedin.com', github: 'https://github.com', twitter: 'https://twitter.com' },
+      experience: [
+        { company: 'Stripe', title: 'Senior Data Scientist', startDate: '2023', current: true, description: 'Building ML models for fraud detection and payment risk scoring. Working with financial time-series data at scale.' },
+        { company: 'Stripe', title: 'Data Scientist', startDate: '2021', endDate: '2023', description: 'Developed NLP models for merchant support classification and anomaly detection in transaction data.' },
+      ],
+      education: [
+        { school: 'DECP University', degree: 'BSc', field: 'Data Science', startYear: 2017, endYear: 2021, grade: 'First Class Honours' },
+      ],
+      certifications: [
+        { id: 'cert-frank-aws', name: 'AWS Certified Machine Learning – Specialty', issuer: 'Amazon Web Services', issueDate: '2022-09', url: 'https://aws.amazon.com/certification' },
+        { id: 'cert-frank-tf', name: 'TensorFlow Developer Certificate', issuer: 'Google', issueDate: '2021-07', url: 'https://www.tensorflow.org/certificate' },
+      ],
     },
   },
 ];
@@ -209,6 +285,10 @@ const POSTS = [
   { userIdx: 7, content: 'Networking tip that actually worked for me: instead of asking for a job, ask for a 15-minute call to learn about their career path. 80% of my outreach got responses this way. Now working at Stripe thanks to a cold message to a DECP alumnus! The alumni community here is gold. 🙌' },
   { userIdx: 5, content: 'Monthly student coding challenge results are in! 🏆 Congratulations to everyone who participated. Special shoutout to the top 3 teams — your dynamic programming solutions were elegant. Next challenge drops in two weeks, theme: graph algorithms!' },
   { userIdx: 3, content: 'Teaching tip: replace "any questions?" with "what was the most confusing part?" You\'ll get 10x more engagement. Tried this in today\'s lecture on microservices architecture and the discussion was fantastic. Students asked questions about Docker Compose configs I hadn\'t thought to explain explicitly!' },
+  // Poll posts
+  { userIdx: 2, type: 'poll', content: 'Quick poll for the class! Which programming paradigm do you find most challenging to learn first?', pollOptions: ['Object-Oriented Programming', 'Functional Programming', 'Logic Programming', 'Event-Driven & Reactive'] },
+  { userIdx: 4, type: 'poll', content: 'Planning my capstone project — what tech area should I focus on? Vote and drop a comment! 🤔', pollOptions: ['Full-Stack Web Development', 'Machine Learning & AI', 'Cybersecurity & Pen Testing', 'Mobile App Development'] },
+  { userIdx: 1, type: 'poll', content: 'Department survey: What type of industry events are most valuable to you?', pollOptions: ['Company Info Sessions', 'Hackathons & Competitions', 'Alumni Networking Evenings', 'Workshop & Skill-Building'] },
 ];
 
 const JOBS = [
@@ -312,7 +392,7 @@ const EVENTS = [
       startDate: new Date(Date.now() + 7 * 86400000).toISOString(),
       endDate: new Date(Date.now() + 7 * 86400000 + 7200000).toISOString(),
       location: 'Main Auditorium, Building A',
-      isOnline: false,
+      isVirtual: false,
       capacity: 150,
     },
   },
@@ -325,7 +405,7 @@ const EVENTS = [
       startDate: new Date(Date.now() + 3 * 86400000).toISOString(),
       endDate: new Date(Date.now() + 3 * 86400000 + 10800000).toISOString(),
       location: 'Computer Lab 2, Building B',
-      isOnline: false,
+      isVirtual: false,
       capacity: 40,
     },
   },
@@ -338,7 +418,7 @@ const EVENTS = [
       startDate: new Date(Date.now() + 14 * 86400000).toISOString(),
       endDate: new Date(Date.now() + 14 * 86400000 + 28800000).toISOString(),
       location: 'Main Hall, Student Union Building',
-      isOnline: false,
+      isVirtual: false,
       capacity: 500,
     },
   },
@@ -350,7 +430,7 @@ const EVENTS = [
       type: 'webinar',
       startDate: new Date(Date.now() + 5 * 86400000).toISOString(),
       endDate: new Date(Date.now() + 5 * 86400000 + 5400000).toISOString(),
-      isOnline: true,
+      isVirtual: true,
       meetingLink: 'https://meet.google.com/abc-def-ghi',
       capacity: 200,
     },
@@ -364,7 +444,7 @@ const EVENTS = [
       startDate: new Date(Date.now() + 21 * 86400000).toISOString(),
       endDate: new Date(Date.now() + 21 * 86400000 + 18000000).toISOString(),
       location: 'Conference Hall, Building A',
-      isOnline: false,
+      isVirtual: false,
       capacity: 200,
     },
   },
@@ -377,7 +457,7 @@ const EVENTS = [
       startDate: new Date(Date.now() + 10 * 86400000).toISOString(),
       endDate: new Date(Date.now() + 10 * 86400000 + 10800000).toISOString(),
       location: 'Computer Lab 1, Building B',
-      isOnline: false,
+      isVirtual: false,
       capacity: 35,
     },
   },
@@ -390,7 +470,7 @@ const EVENTS = [
       startDate: new Date(Date.now() + 18 * 86400000).toISOString(),
       endDate: new Date(Date.now() + 18 * 86400000 + 10800000).toISOString(),
       location: 'Faculty Lounge, Building A',
-      isOnline: false,
+      isVirtual: false,
       capacity: 80,
     },
   },
@@ -402,7 +482,7 @@ const EVENTS = [
       type: 'webinar',
       startDate: new Date(Date.now() + 8 * 86400000).toISOString(),
       endDate: new Date(Date.now() + 8 * 86400000 + 7200000).toISOString(),
-      isOnline: true,
+      isVirtual: true,
       meetingLink: 'https://zoom.us/j/123456789',
       capacity: 100,
     },
@@ -417,6 +497,8 @@ const RESEARCH = [
       abstract: 'This project investigates federated learning techniques combined with differential privacy to enable collaborative model training on sensitive medical datasets without sharing raw patient data.',
       description: 'Traditional centralised machine learning requires data aggregation, which poses privacy risks, especially in healthcare. Our research explores federated learning frameworks where models are trained locally on distributed data and only model updates are shared. We further apply differential privacy mechanisms to prevent membership inference attacks.',
       status: 'active',
+      field: 'Machine Learning',
+      progress: 65,
       startDate: new Date(Date.now() - 180 * 86400000).toISOString().split('T')[0],
       tags: ['Federated Learning', 'Differential Privacy', 'Healthcare AI', 'Machine Learning'],
       visibility: 'public',
@@ -429,6 +511,8 @@ const RESEARCH = [
       abstract: 'Investigating model compression and distillation techniques to deploy large language models on resource-constrained edge devices while maintaining performance.',
       description: 'Large language models have shown remarkable capabilities but their deployment is restricted by computational requirements. This project focuses on knowledge distillation, quantisation, and pruning techniques to create compact transformer models suitable for edge deployment.',
       status: 'active',
+      field: 'NLP & Edge AI',
+      progress: 40,
       startDate: new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0],
       tags: ['Transformers', 'Edge Computing', 'Model Compression', 'NLP'],
       visibility: 'public',
@@ -441,6 +525,8 @@ const RESEARCH = [
       abstract: 'Developing interpretable machine learning models for credit scoring that provide transparent and auditable decision explanations for regulatory compliance.',
       description: 'Regulatory requirements increasingly demand explainability in AI-driven financial decisions. This project combines gradient boosting models with SHAP (SHapley Additive exPlanations) to provide feature attribution scores, enabling credit officers to understand and validate model predictions.',
       status: 'active',
+      field: 'Explainable AI',
+      progress: 75,
       startDate: new Date(Date.now() - 120 * 86400000).toISOString().split('T')[0],
       tags: ['Explainable AI', 'Credit Scoring', 'XAI', 'FinTech', 'SHAP'],
       visibility: 'public',
@@ -453,6 +539,8 @@ const RESEARCH = [
       abstract: 'Online learning algorithms for detecting anomalies in high-velocity streaming data from IoT sensors, enabling real-time fraud detection and infrastructure monitoring.',
       description: 'Traditional batch-based anomaly detection is insufficient for streaming environments where data arrives continuously at high velocity. We develop adaptive online learning algorithms using techniques from the changepoint detection and robust statistics literature.',
       status: 'planning',
+      field: 'Data Science',
+      progress: 10,
       startDate: new Date(Date.now() + 30 * 86400000).toISOString().split('T')[0],
       tags: ['Anomaly Detection', 'Streaming Data', 'IoT', 'Online Learning'],
       visibility: 'public',
@@ -465,6 +553,8 @@ const RESEARCH = [
       abstract: 'Combining traditional static analysis tools with large language models to provide intelligent, context-aware code review suggestions that go beyond pattern matching.',
       description: 'Code review is a bottleneck in software development. This project investigates a hybrid approach that combines AST-based static analysis with GPT-style language models to generate review comments that consider code semantics, design patterns, and project context.',
       status: 'active',
+      field: 'Software Engineering',
+      progress: 55,
       startDate: new Date(Date.now() - 60 * 86400000).toISOString().split('T')[0],
       tags: ['Code Review', 'LLMs', 'Static Analysis', 'Software Engineering', 'AI'],
       visibility: 'public',
@@ -477,6 +567,8 @@ const RESEARCH = [
       abstract: 'Empirical study of organisations migrating from monolithic to microservices architectures, identifying common patterns, pitfalls, and success factors.',
       description: 'Many organisations are undertaking microservices migration but face unexpected challenges around data consistency, service communication, and organisational alignment. This research conducts a systematic literature review supplemented by practitioner interviews to build a pattern catalogue for successful migrations.',
       status: 'completed',
+      field: 'Software Architecture',
+      progress: 100,
       startDate: new Date(Date.now() - 365 * 86400000).toISOString().split('T')[0],
       endDate: new Date(Date.now() - 30 * 86400000).toISOString().split('T')[0],
       tags: ['Microservices', 'Software Architecture', 'Migration', 'Cloud Native'],
@@ -521,6 +613,24 @@ const CONVERSATIONS = [
   ]},
 ];
 
+// ─── Connection pairs (fromIdx sends request, toIdx accepts) ─────────────────
+
+const CONNECTIONS = [
+  { fromIdx: 4, toIdx: 8 },   // Alice ↔ David (alumni mentor)
+  { fromIdx: 5, toIdx: 10 },  // Bob ↔ Frank (alumni mentor)
+  { fromIdx: 6, toIdx: 9 },   // Carol ↔ Emma (alumni mentor)
+  { fromIdx: 4, toIdx: 1 },   // Alice ↔ Prof. James (research supervisor)
+  { fromIdx: 5, toIdx: 2 },   // Bob ↔ Prof. Sarah (advisor)
+  { fromIdx: 4, toIdx: 5 },   // Alice ↔ Bob (peers)
+  { fromIdx: 6, toIdx: 7 },   // Carol ↔ Dan (peers)
+  { fromIdx: 8, toIdx: 9 },   // David ↔ Emma (alumni network)
+  { fromIdx: 8, toIdx: 10 },  // David ↔ Frank (alumni network)
+  { fromIdx: 1, toIdx: 2 },   // James ↔ Sarah (faculty colleagues)
+  { fromIdx: 1, toIdx: 3 },   // James ↔ Michael (faculty colleagues)
+  { fromIdx: 3, toIdx: 8 },   // Michael ↔ David (industry alumni)
+  { fromIdx: 7, toIdx: 10 },  // Dan ↔ Frank (cybersecurity interest)
+];
+
 // ─── Main Seed Function ───────────────────────────────────────────────────────
 
 async function seed() {
@@ -540,7 +650,7 @@ async function seed() {
   }
 
   // ── Step 1: Register all users ──
-  console.log('\x1b[1m  Step 1/5: Registering users\x1b[0m');
+  console.log('\x1b[1m  Step 1/7: Registering users\x1b[0m');
   const tokens = {}; // email → accessToken
   const userIds = {}; // email → userId
 
@@ -580,7 +690,7 @@ async function seed() {
   console.log('');
 
   // ── Step 2: Update profiles ──
-  console.log('\x1b[1m  Step 2/5: Updating profiles\x1b[0m');
+  console.log('\x1b[1m  Step 2/7: Updating profiles\x1b[0m');
   for (const u of USERS) {
     if (!tokens[u.email]) continue;
     try {
@@ -591,6 +701,10 @@ async function seed() {
         skills: u.profile.skills || [],
         ...(u.profile.socialLinks ? { socialLinks: u.profile.socialLinks } : {}),
         ...(u.profile.graduationYear ? { graduationYear: u.profile.graduationYear } : {}),
+        ...(u.profile.experience ? { experience: u.profile.experience } : {}),
+        ...(u.profile.education ? { education: u.profile.education } : {}),
+        ...(u.profile.certifications ? { certifications: u.profile.certifications } : {}),
+        ...(u.profile.openToWork !== undefined ? { openToWork: u.profile.openToWork } : {}),
       };
       const res = await put('/users/me', profileData, tokens[u.email]);
       if (res.status === 200) {
@@ -605,26 +719,47 @@ async function seed() {
   }
   console.log('');
 
-  // ── Step 3: Create posts, likes, comments ──
-  console.log('\x1b[1m  Step 3/5: Creating posts & interactions\x1b[0m');
+  // ── Step 3: Create posts, reactions, comments, polls, bookmarks ──
+  console.log('\x1b[1m  Step 3/7: Creating posts, polls, reactions & bookmarks\x1b[0m');
+  const REACTION_TYPES = ['like', 'love', 'celebrate', 'insightful', 'curious'];
   const postIds = [];
   for (const p of POSTS) {
     const authorEmail = USERS[p.userIdx].email;
     if (!tokens[authorEmail]) continue;
     try {
-      const res = await post('/posts', { content: p.content, type: 'text' }, tokens[authorEmail]);
+      const postPayload = {
+        content: p.content,
+        type: p.type || 'text',
+        ...(p.pollOptions ? { pollOptions: p.pollOptions.map(t => ({ text: t, votes: [] })) } : {}),
+        ...(p.pollOptions ? { pollEndsAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString() } : {}),
+      };
+      const res = await post('/posts', postPayload, tokens[authorEmail]);
       if (res.status === 201 || res.status === 200) {
         const postId = res.body.data?.post?.id || res.body.data?.post?._id || res.body.data?.id || res.body.data?._id;
         postIds.push(postId);
-        ok(`Post created by ${USERS[p.userIdx].firstName}`);
+        ok(`Post created by ${USERS[p.userIdx].firstName}${p.type === 'poll' ? ' [POLL]' : ''}`);
 
-        // Like the post from 2–4 random users
-        const likers = [4, 5, 6, 7, 8, 9, 10].sort(() => Math.random() - 0.5).slice(0, 3);
-        for (const likerIdx of likers) {
-          const likerEmail = USERS[likerIdx]?.email;
-          if (likerEmail && tokens[likerEmail] && likerIdx !== p.userIdx) {
-            await post(`/posts/${postId}/like`, {}, tokens[likerEmail]);
-            await sleep(50);
+        if (p.type === 'poll' && postId) {
+          // Have 4–5 users vote on the poll
+          const voters = [4, 5, 6, 7, 8, 9, 10].sort(() => Math.random() - 0.5).slice(0, 5);
+          for (const voterIdx of voters) {
+            const voterEmail = USERS[voterIdx]?.email;
+            if (voterEmail && tokens[voterEmail] && voterIdx !== p.userIdx) {
+              const optionIndex = Math.floor(Math.random() * p.pollOptions.length);
+              await post(`/posts/${postId}/vote`, { optionIndex }, tokens[voterEmail]);
+              await sleep(40);
+            }
+          }
+        } else {
+          // React to the post from 2–4 random users with varied reaction types
+          const likers = [4, 5, 6, 7, 8, 9, 10].sort(() => Math.random() - 0.5).slice(0, 3);
+          for (const likerIdx of likers) {
+            const likerEmail = USERS[likerIdx]?.email;
+            if (likerEmail && tokens[likerEmail] && likerIdx !== p.userIdx) {
+              const reactionType = REACTION_TYPES[Math.floor(Math.random() * REACTION_TYPES.length)];
+              await post(`/posts/${postId}/like`, { reactionType }, tokens[likerEmail]);
+              await sleep(50);
+            }
           }
         }
 
@@ -637,6 +772,8 @@ async function seed() {
           'This is really useful — appreciate you posting it.',
           'Completely agree with this. Well said.',
           'Would love to discuss this further. DM me!',
+          'This is exactly what I needed to read today!',
+          'Very helpful — bookmarking this for later.',
         ];
         if (tokens[commenterEmail]) {
           await post(`/posts/${postId}/comments`, { content: comments[p.userIdx % comments.length] }, tokens[commenterEmail]);
@@ -648,10 +785,25 @@ async function seed() {
     }
     await sleep(100);
   }
+
+  // Bookmark some posts for students
+  const bookmarkerEmails = ['alice.student@decp.edu', 'bob.student@decp.edu', 'carol.student@decp.edu', 'dan.student@decp.edu'];
+  for (let bi = 0; bi < bookmarkerEmails.length; bi++) {
+    const bEmail = bookmarkerEmails[bi];
+    if (!tokens[bEmail]) continue;
+    const toBookmark = postIds.filter(Boolean).slice(bi * 2, bi * 2 + 3);
+    for (const pid of toBookmark) {
+      try {
+        await post(`/posts/${pid}/bookmark`, {}, tokens[bEmail]);
+        await sleep(40);
+      } catch { /* ignore */ }
+    }
+  }
+  ok('Post bookmarks created for students');
   console.log('');
 
   // ── Step 4: Create jobs, events, research ──
-  console.log('\x1b[1m  Step 4/5: Creating jobs, events, research\x1b[0m');
+  console.log('\x1b[1m  Step 4/7: Creating jobs, events, research\x1b[0m');
 
   const jobIds = [];
   for (const j of JOBS) {
@@ -698,6 +850,8 @@ async function seed() {
         const eventId = res.body.data?.event?.id || res.body.data?.event?._id || res.body.data?.id || res.body.data?._id;
         eventIds.push(eventId);
         ok(`Event: ${e.event.title.substring(0, 50)}...`);
+      } else {
+        warn(`Event failed "${e.event.title.substring(0, 40)}": ${JSON.stringify(res.body).slice(0, 100)}`);
       }
     } catch (e2) { warn(`Event error: ${e2.message}`); }
     await sleep(100);
@@ -726,6 +880,8 @@ async function seed() {
         abstract: r.project.abstract,
         description: r.project.description,
         status: r.project.status,
+        field: r.project.field,
+        progress: r.project.progress,
         startDate: r.project.startDate,
         endDate: r.project.endDate,
         tags: r.project.tags,
@@ -756,7 +912,7 @@ async function seed() {
   console.log('');
 
   // ── Step 5: Create conversations & messages ──
-  console.log('\x1b[1m  Step 5/5: Creating conversations & messages\x1b[0m');
+  console.log('\x1b[1m  Step 5/7: Creating conversations & messages\x1b[0m');
   for (const conv of CONVERSATIONS) {
     const user1Email = USERS[conv.participantIdxs[0]].email;
     const user2Email = USERS[conv.participantIdxs[1]].email;
@@ -789,6 +945,76 @@ async function seed() {
     await sleep(120);
   }
 
+  // ── Step 6: Create connections ──
+  console.log('\x1b[1m  Step 6/7: Creating connections\x1b[0m');
+  let connectedCount = 0;
+  for (const conn of CONNECTIONS) {
+    const fromEmail = USERS[conn.fromIdx].email;
+    const toEmail   = USERS[conn.toIdx].email;
+    const fromToken = tokens[fromEmail];
+    const toToken   = tokens[toEmail];
+    const fromId    = userIds[fromEmail];
+    const toId      = userIds[toEmail];
+
+    if (!fromToken || !toToken || !fromId || !toId) {
+      warn(`Skipping: ${USERS[conn.fromIdx].firstName} ↔ ${USERS[conn.toIdx].firstName} (missing token/id)`);
+      continue;
+    }
+
+    try {
+      // Send connection request: fromUser → toUser
+      const sendRes = await post(`/users/connections/${toId}/follow`, {}, fromToken);
+      if (sendRes.status === 200 || sendRes.status === 201) {
+        // Accept connection: toUser accepts fromUser's request
+        const acceptRes = await put(`/users/connections/${fromId}/accept`, {}, toToken);
+        if (acceptRes.status === 200) {
+          ok(`Connected: ${USERS[conn.fromIdx].firstName} ↔ ${USERS[conn.toIdx].firstName}`);
+          connectedCount++;
+        } else if (acceptRes.body?.message === 'No pending request found') {
+          // Already connected from a previous seed run — count it
+          ok(`Already connected: ${USERS[conn.fromIdx].firstName} ↔ ${USERS[conn.toIdx].firstName}`);
+          connectedCount++;
+        } else {
+          warn(`Accept failed (${USERS[conn.toIdx].firstName}): ${JSON.stringify(acceptRes.body).slice(0, 80)}`);
+        }
+      } else {
+        warn(`Connect failed (${USERS[conn.fromIdx].firstName}→${USERS[conn.toIdx].firstName}): ${JSON.stringify(sendRes.body).slice(0, 80)}`);
+      }
+    } catch (e) { warn(`Connection error: ${e.message}`); }
+    await sleep(100);
+  }
+  console.log('');
+
+  // ── Step 7: Endorse skills ──
+  console.log('\x1b[1m  Step 7/7: Endorsing skills\x1b[0m');
+  const ENDORSEMENTS = [
+    { fromEmail: 'alice.student@decp.edu',  toEmail: 'prof.james@decp.edu',   skills: ['Machine Learning', 'Research'] },
+    { fromEmail: 'bob.student@decp.edu',    toEmail: 'prof.james@decp.edu',   skills: ['Distributed Systems'] },
+    { fromEmail: 'dan.student@decp.edu',    toEmail: 'prof.james@decp.edu',   skills: ['Python'] },
+    { fromEmail: 'alice.student@decp.edu',  toEmail: 'prof.michael@decp.edu', skills: ['Software Architecture', 'Agile'] },
+    { fromEmail: 'carol.student@decp.edu',  toEmail: 'prof.michael@decp.edu', skills: ['Microservices'] },
+    { fromEmail: 'alice.student@decp.edu',  toEmail: 'david.alumni@decp.edu', skills: ['Go', 'Kubernetes'] },
+    { fromEmail: 'carol.student@decp.edu',  toEmail: 'david.alumni@decp.edu', skills: ['System Design'] },
+    { fromEmail: 'bob.student@decp.edu',    toEmail: 'frank.alumni@decp.edu', skills: ['Machine Learning', 'Python'] },
+    { fromEmail: 'alice.student@decp.edu',  toEmail: 'frank.alumni@decp.edu', skills: ['MLOps'] },
+    { fromEmail: 'carol.student@decp.edu',  toEmail: 'emma.alumni@decp.edu',  skills: ['Product Management', 'Agile'] },
+    { fromEmail: 'alice.student@decp.edu',  toEmail: 'emma.alumni@decp.edu',  skills: ['Leadership'] },
+    { fromEmail: 'prof.james@decp.edu',     toEmail: 'david.alumni@decp.edu', skills: ['Go', 'Cloud Architecture'] },
+    { fromEmail: 'prof.sarah@decp.edu',     toEmail: 'frank.alumni@decp.edu', skills: ['Machine Learning', 'SQL'] },
+  ];
+  for (const end of ENDORSEMENTS) {
+    const toId = userIds[end.toEmail];
+    if (!tokens[end.fromEmail] || !toId) continue;
+    for (const skill of end.skills) {
+      try {
+        await post(`/users/${toId}/endorse`, { skill }, tokens[end.fromEmail]);
+        await sleep(50);
+      } catch { /* ignore */ }
+    }
+    ok(`Endorsements: ${end.fromEmail.split('.')[0]} → ${end.toEmail.split('.')[0]} (${end.skills.join(', ')})`);
+  }
+  console.log('');
+
   // ── Done ──
   console.log('\n\x1b[1m\x1b[32m  ══════════════════════════════════════════════\x1b[0m');
   console.log('\x1b[1m\x1b[32m  ✅  SEEDING COMPLETE!\x1b[0m');
@@ -808,12 +1034,15 @@ async function seed() {
   }
 
   console.log('\x1b[1m  ── Summary ──────────────────────────────────\x1b[0m');
-  console.log(`  • ${USERS.length} users registered`);
-  console.log(`  • ${POSTS.length} posts created with likes & comments`);
+  console.log(`  • ${USERS.length} users registered with full profiles`);
+  console.log(`  • ${POSTS.filter(p => !p.type || p.type === 'text').length} text posts + ${POSTS.filter(p => p.type === 'poll').length} polls (reactions, comments, bookmarks)`);
   console.log(`  • ${JOBS.length} job listings + student applications`);
   console.log(`  • ${EVENTS.length} events + RSVPs`);
   console.log(`  • ${RESEARCH.length} research projects + collaborations`);
   console.log(`  • ${CONVERSATIONS.length} conversations + messages`);
+  console.log(`  • ${connectedCount} connections established (accepted)`);
+  console.log(`  • Experience/Education/Certifications seeded for all users`);
+  console.log(`  • Skill endorsements + bookmarks created`);
   console.log('\n  Access the platform at: \x1b[4m\x1b[36mhttp://localhost:5173\x1b[0m\n');
 }
 

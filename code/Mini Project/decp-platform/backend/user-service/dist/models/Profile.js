@@ -91,6 +91,28 @@ Profile.init({
     socialLinks: {
         type: sequelize_1.DataTypes.JSONB,
         defaultValue: {}
+    },
+    openToWork: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+    openToWorkTitle: {
+        type: sequelize_1.DataTypes.STRING(200),
+        allowNull: true
+    },
+    certifications: {
+        type: sequelize_1.DataTypes.JSONB,
+        allowNull: true,
+        defaultValue: []
+    },
+    endorsements: {
+        type: sequelize_1.DataTypes.JSONB,
+        allowNull: true,
+        defaultValue: {}
+    },
+    featuredPostId: {
+        type: sequelize_1.DataTypes.STRING(255),
+        allowNull: true
     }
 }, {
     sequelize: database_1.default,

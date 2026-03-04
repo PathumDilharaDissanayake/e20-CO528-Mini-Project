@@ -43,17 +43,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sharePost = exports.deleteComment = exports.addComment = exports.getComments = exports.unlikePost = exports.likePost = exports.deletePost = exports.updatePost = exports.createPost = exports.getPost = exports.getFeed = void 0;
+exports.votePoll = exports.getBookmarkedPosts = exports.bookmarkPost = exports.uploadFile = exports.sharePost = exports.deleteComment = exports.addComment = exports.getComments = exports.getPostReactions = exports.unlikePost = exports.likePost = exports.deletePost = exports.updatePost = exports.createPost = exports.getPost = exports.getFeed = void 0;
 const joi_1 = __importDefault(require("joi"));
+const path_1 = __importDefault(require("path"));
 const postService = __importStar(require("../services/postService"));
 const logger_1 = require("../utils/logger");
+const notify_1 = require("../utils/notify");
+const models_1 = require("../models");
 // ─────────────────────────────────────────────────────────────────────────────
 // Validation schemas
 // ─────────────────────────────────────────────────────────────────────────────
 const createPostSchema = joi_1.default.object({
-    content: joi_1.default.string().min(1).max(5000).required(),
-    type: joi_1.default.string().valid('text', 'image', 'video', 'document').default('text'),
-    isPublic: joi_1.default.boolean().default(true)
+    content: joi_1.default.string().min(0).max(5000).allow('').default(''),
+    type: joi_1.default.string().valid('text', 'image', 'video', 'document', 'poll').default('text'),
+    isPublic: joi_1.default.boolean().default(true),
+    pollOptions: joi_1.default.array().items(joi_1.default.object({ text: joi_1.default.string().required(), votes: joi_1.default.array().items(joi_1.default.string()).default([]) })).optional(),
+    pollEndsAt: joi_1.default.date().optional(),
 });
 const createCommentSchema = joi_1.default.object({
     content: joi_1.default.string().min(1).max(2000).required(),
@@ -127,7 +132,17 @@ const createPost = async (req, res) => {
             res.status(401).json({ success: false, message: 'Authentication required' });
             return;
         }
-        const { error, value } = createPostSchema.validate(req.body);
+        // Parse pollOptions from FormData (sent as JSON string)
+        let bodyWithParsedPoll = { ...req.body };
+        if (typeof req.body.pollOptions === 'string') {
+            try {
+                bodyWithParsedPoll.pollOptions = JSON.parse(req.body.pollOptions);
+            }
+            catch {
+                bodyWithParsedPoll.pollOptions = undefined;
+            }
+        }
+        const { error, value } = createPostSchema.validate(bodyWithParsedPoll);
         if (error) {
             res.status(400).json({
                 success: false,
@@ -136,8 +151,16 @@ const createPost = async (req, res) => {
             });
             return;
         }
+        // Build author object from gateway-injected headers
+        const author = {
+            _id: userId,
+            firstName: (req.headers['x-user-firstname'] || req.headers['x-user-firstName'] || ''),
+            lastName: (req.headers['x-user-lastname'] || req.headers['x-user-lastName'] || ''),
+            role: (req.headers['x-user-role'] || ''),
+            avatar: (req.headers['x-user-avatar'] || '')
+        };
         const mediaUrls = req.files?.map(f => `/uploads/${f.filename}`) || [];
-        const post = await postService.createPost({ userId, ...value, mediaUrls });
+        const post = await postService.createPost({ userId, author, ...value, mediaUrls });
         res.status(201).json({ success: true, message: 'Post created successfully', data: { post } });
     }
     catch (err) {
@@ -172,18 +195,44 @@ const deletePost = async (req, res) => {
 };
 exports.deletePost = deletePost;
 // ─────────────────────────────────────────────────────────────────────────────
-// Likes
+// Likes / Reactions
 // ─────────────────────────────────────────────────────────────────────────────
 const likePost = async (req, res) => {
     try {
         const userId = req.headers['x-user-id'];
         const { postId } = req.params;
-        const result = await postService.toggleLike(postId, userId);
-        res.json({
-            success: true,
-            message: result.liked ? 'Post liked' : 'Post unliked',
-            data: result
-        });
+        const reactionType = req.body?.reactionType || 'like';
+        const existingLike = await models_1.Like.findOne({ where: { postId, userId } });
+        if (existingLike) {
+            if (existingLike.reactionType === reactionType) {
+                // Same reaction — toggle off
+                await existingLike.destroy();
+                await models_1.Post.findByPk(postId).then(p => p && p.decrement('likes', { by: 1 })).catch(() => { });
+                const count = await models_1.Like.count({ where: { postId } });
+                res.json({ success: true, data: { liked: false, likesCount: count, reactionType: null } });
+                return;
+            }
+            else {
+                // Different reaction — update it
+                await existingLike.update({ reactionType });
+                const count = await models_1.Like.count({ where: { postId } });
+                res.json({ success: true, data: { liked: true, likesCount: count, reactionType } });
+                return;
+            }
+        }
+        await models_1.Like.create({ postId, userId, reactionType });
+        await models_1.Post.findByPk(postId).then(p => p && p.increment('likes', { by: 1 })).catch(() => { });
+        const count = await models_1.Like.count({ where: { postId } });
+        // Fire-and-forget notification to post author (don't notify self)
+        models_1.Post.findByPk(postId, { attributes: ['userId', 'author'] }).then((post) => {
+            if (post && post.userId !== userId) {
+                const firstName = (req.headers['x-user-firstname'] || req.headers['x-user-firstName'] || '');
+                const lastName = (req.headers['x-user-lastname'] || req.headers['x-user-lastName'] || '');
+                const likerName = `${firstName} ${lastName}`.trim() || 'Someone';
+                (0, notify_1.sendNotification)(post.userId, 'mention', 'Someone reacted to your post', `${likerName} reacted to your post`, { postId });
+            }
+        }).catch(() => { });
+        res.json({ success: true, data: { liked: true, likesCount: count, reactionType } });
     }
     catch (err) {
         handleError(res, err, 'likePost');
@@ -192,6 +241,19 @@ const likePost = async (req, res) => {
 exports.likePost = likePost;
 // Kept for backward-compatibility — delegates to the same toggle
 exports.unlikePost = exports.likePost;
+const getPostReactions = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        const likes = await models_1.Like.findAll({ where: { postId }, attributes: ['userId', 'reactionType'] });
+        const counts = {};
+        likes.forEach((l) => { counts[l.reactionType] = (counts[l.reactionType] || 0) + 1; });
+        res.json({ success: true, data: { reactions: counts, total: likes.length } });
+    }
+    catch (err) {
+        handleError(res, err, 'getPostReactions');
+    }
+};
+exports.getPostReactions = getPostReactions;
 // ─────────────────────────────────────────────────────────────────────────────
 // Comments
 // ─────────────────────────────────────────────────────────────────────────────
@@ -226,7 +288,22 @@ const addComment = async (req, res) => {
             });
             return;
         }
-        const comment = await postService.addComment({ userId, postId, ...value });
+        // Build author object from gateway-injected headers
+        const author = {
+            _id: userId,
+            firstName: (req.headers['x-user-firstname'] || req.headers['x-user-firstName'] || ''),
+            lastName: (req.headers['x-user-lastname'] || req.headers['x-user-lastName'] || ''),
+            role: (req.headers['x-user-role'] || ''),
+            avatar: (req.headers['x-user-avatar'] || '')
+        };
+        const comment = await postService.addComment({ userId, author, postId, ...value });
+        // Fire-and-forget notification to post author (don't notify self-comments)
+        models_1.Post.findByPk(postId, { attributes: ['userId'] }).then((post) => {
+            if (post && post.userId !== userId) {
+                const commenterName = `${author.firstName} ${author.lastName}`.trim() || 'Someone';
+                (0, notify_1.sendNotification)(post.userId, 'mention', 'New comment on your post', `${commenterName} commented on your post`, { postId });
+            }
+        }).catch(() => { });
         res.status(201).json({ success: true, message: 'Comment added successfully', data: { comment } });
     }
     catch (err) {
@@ -262,4 +339,87 @@ const sharePost = async (req, res) => {
     }
 };
 exports.sharePost = sharePost;
+// ─────────────────────────────────────────────────────────────────────────────
+// File upload only — returns URL for use in events, research, profile pictures
+// ─────────────────────────────────────────────────────────────────────────────
+const uploadFile = async (req, res) => {
+    try {
+        if (!req.file) {
+            res.status(400).json({ success: false, message: 'No file provided' });
+            return;
+        }
+        const filename = req.file.filename || path_1.default.basename(req.file.path || '');
+        const url = `/uploads/${filename}`;
+        res.status(200).json({ success: true, data: { url } });
+    }
+    catch (err) {
+        handleError(res, err, 'uploadFile');
+    }
+};
+exports.uploadFile = uploadFile;
+// ─────────────────────────────────────────────────────────────────────────────
+// Bookmarks
+// ─────────────────────────────────────────────────────────────────────────────
+const bookmarkPost = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        const userId = req.headers['x-user-id'];
+        const existing = await models_1.Bookmark.findOne({ where: { postId, userId } });
+        if (existing) {
+            await existing.destroy();
+            res.json({ success: true, data: { bookmarked: false } });
+            return;
+        }
+        await models_1.Bookmark.create({ userId, postId });
+        res.json({ success: true, data: { bookmarked: true } });
+    }
+    catch (err) {
+        handleError(res, err, 'bookmarkPost');
+    }
+};
+exports.bookmarkPost = bookmarkPost;
+const getBookmarkedPosts = async (req, res) => {
+    try {
+        const userId = req.headers['x-user-id'];
+        const bookmarks = await models_1.Bookmark.findAll({ where: { userId }, order: [['createdAt', 'DESC']] });
+        const postIds = bookmarks.map((b) => b.postId);
+        const posts = await models_1.Post.findAll({
+            where: { id: postIds.length > 0 ? postIds : ['none'] },
+            order: [['createdAt', 'DESC']],
+        });
+        res.json({ success: true, data: posts, total: posts.length });
+    }
+    catch (err) {
+        handleError(res, err, 'getBookmarkedPosts');
+    }
+};
+exports.getBookmarkedPosts = getBookmarkedPosts;
+// ─────────────────────────────────────────────────────────────────────────────
+// Poll voting
+// ─────────────────────────────────────────────────────────────────────────────
+const votePoll = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        const { optionIndex } = req.body;
+        const userId = req.headers['x-user-id'];
+        const post = await models_1.Post.findByPk(postId);
+        if (!post || !post.pollOptions) {
+            res.status(404).json({ success: false, message: 'Poll not found' });
+            return;
+        }
+        const options = [...post.pollOptions];
+        // Remove existing vote from all options
+        options.forEach((opt) => { opt.votes = (opt.votes || []).filter((v) => v !== userId); });
+        // Add new vote to selected option
+        if (typeof optionIndex === 'number' && optionIndex >= 0 && optionIndex < options.length) {
+            options[optionIndex].votes = [...(options[optionIndex].votes || []), userId];
+        }
+        await post.update({ pollOptions: options });
+        res.json({ success: true, data: { pollOptions: options } });
+    }
+    catch (err) {
+        handleError(res, err, 'votePoll');
+    }
+};
+exports.votePoll = votePoll;
 //# sourceMappingURL=postController.js.map

@@ -1,4 +1,5 @@
 export { GradientButton } from './GradientButton';
+export { default as LoadingSpinner } from './LoadingSpinner';
 export {
   PostCardSkeleton,
   JobCardSkeleton,

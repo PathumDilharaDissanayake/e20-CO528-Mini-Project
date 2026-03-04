@@ -54,7 +54,11 @@ export const validateAndSaveFile = (req: Request, res: Response, next: NextFunct
     return;
   }
 
-  const uploadDir = process.env.UPLOAD_DIR || 'uploads';
+  // Use absolute path so it works regardless of CWD
+  // __dirname in dist/middleware/ → go up two levels to reach service root
+  const uploadDir = process.env.UPLOAD_DIR
+    ? path.resolve(process.env.UPLOAD_DIR)
+    : path.join(__dirname, '..', '..', 'uploads');
   fs.mkdirSync(uploadDir, { recursive: true });
   const filename = `${randomUUID()}${path.extname(file.originalname)}`;
   const filepath = path.join(uploadDir, filename);

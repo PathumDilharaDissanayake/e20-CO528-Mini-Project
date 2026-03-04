@@ -967,3 +967,1612 @@ Error
 2026-03-03 22:46:47 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
 2026-03-03 22:46:47 [FEED-SERVICE] [info]: ✅ Database synchronized.
 2026-03-03 22:46:47 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-04 06:47:18 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 06:47:18 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 06:47:18 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-04 06:48:01 [FEED-SERVICE] [error]: [getFeed] column "author" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:84:24)
+2026-03-04 06:48:04 [FEED-SERVICE] [error]: [getFeed] column "author" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:84:24)
+2026-03-04 06:48:04 [FEED-SERVICE] [error]: [getFeed] column "author" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:84:24)
+2026-03-04 06:48:05 [FEED-SERVICE] [error]: [getFeed] column "author" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:84:24)
+2026-03-04 06:48:05 [FEED-SERVICE] [error]: [getFeed] column "author" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:84:24)
+2026-03-04 06:49:14 [FEED-SERVICE] [error]: [getFeed] column "author" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:84:24)
+2026-03-04 06:49:20 [FEED-SERVICE] [error]: [getFeed] column "author" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:84:24)
+2026-03-04 06:49:23 [FEED-SERVICE] [error]: [getFeed] column "author" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:84:24)
+2026-03-04 06:56:09 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 06:56:09 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 06:56:09 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-04 09:43:31 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 09:43:31 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 09:43:31 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-04 10:16:03 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 10:16:03 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 10:16:03 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-04 10:44:35 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 10:44:36 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 10:44:36 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-04 10:53:41 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 10:53:41 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 10:53:41 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-04 11:12:48 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 11:12:49 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 11:12:49 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-04 11:26:17 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 11:26:17 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 11:26:17 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-04 17:30:20 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 17:30:20 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 17:30:20 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-04 17:31:06 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:10 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:10 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:11 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:11 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:11 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:11 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:12 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:12 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:12 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:12 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:12 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:12 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:12 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:12 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:12 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:12 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:31:43 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:32:14 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:32:45 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:33:16 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:33:47 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:34:18 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:34:49 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:35:20 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:35:51 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:36:22 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:36:53 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:37:24 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:37:55 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:38:26 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:38:57 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:39:28 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:39:59 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:40:30 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:41:01 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:41:32 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:42:03 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:42:34 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:43:05 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:43:36 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:44:07 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:44:38 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:45:09 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:45:40 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:45:40 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:46:11 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:46:41 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:46:42 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:47:13 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:47:44 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:48:15 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:48:46 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:49:17 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:49:48 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:50:19 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:50:50 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:51:21 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:51:52 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:52:23 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:52:54 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:53:25 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:53:56 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:54:27 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:54:58 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:55:29 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:56:00 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:56:31 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:57:02 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:57:33 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:58:04 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:58:35 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:59:06 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 17:59:37 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:00:08 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:00:39 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:01:10 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:01:41 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:02:12 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:02:43 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:03:14 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:03:45 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:04:16 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:04:47 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:05:18 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:05:49 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:06:20 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:06:51 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:07:22 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:07:53 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:08:24 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:08:55 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:09:26 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:09:57 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:10:28 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:10:59 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:11:30 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:12:01 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:12:32 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:13:03 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:13:34 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:14:05 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:14:36 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:15:07 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:15:38 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:16:09 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:16:40 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:17:11 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:17:42 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:18:13 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:18:44 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:19:15 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:19:46 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:20:17 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:20:48 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:21:19 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:21:50 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:22:21 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:22:52 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:23:23 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:23:54 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:24:25 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:24:56 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:25:27 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:25:58 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:26:29 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:27:00 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:27:31 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:28:02 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:28:33 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:29:04 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:29:35 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:30:06 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:30:37 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 18:31:08 [FEED-SERVICE] [error]: [getFeed] column "pollOptions" does not exist
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-04 22:15:09 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 22:15:09 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 22:15:09 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-04 22:31:04 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 22:31:04 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 22:31:04 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-04 23:16:08 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 23:16:08 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 23:16:08 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003

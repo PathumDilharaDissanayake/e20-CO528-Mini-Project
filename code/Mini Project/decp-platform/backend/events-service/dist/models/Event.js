@@ -20,7 +20,8 @@ Event.init({
     organizerId: { type: sequelize_1.DataTypes.UUID, allowNull: false },
     capacity: { type: sequelize_1.DataTypes.INTEGER, allowNull: true },
     imageUrl: { type: sequelize_1.DataTypes.STRING(500), allowNull: true },
-    status: { type: sequelize_1.DataTypes.ENUM('draft', 'published', 'cancelled', 'completed'), defaultValue: 'draft' },
+    coverImage: { type: sequelize_1.DataTypes.STRING(500), allowNull: true },
+    status: { type: sequelize_1.DataTypes.ENUM('draft', 'published', 'cancelled', 'completed'), defaultValue: 'published' },
     tags: { type: sequelize_1.DataTypes.JSONB, defaultValue: [] }
 }, { sequelize: database_1.default, tableName: 'events', timestamps: true });
 exports.default = Event;

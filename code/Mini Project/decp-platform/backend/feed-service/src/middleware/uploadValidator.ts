@@ -13,12 +13,15 @@ import { Request, Response, NextFunction } from 'express';
 // Magic byte signatures per MIME type
 const SIGNATURES: Record<string, { offset: number; bytes: number[] }[]> = {
   'image/jpeg': [{ offset: 0, bytes: [0xFF, 0xD8, 0xFF] }],
-  'image/png':  [{ offset: 0, bytes: [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A] }],
-  'image/gif':  [
+  'image/png': [{ offset: 0, bytes: [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A] }],
+  'image/gif': [
     { offset: 0, bytes: [0x47, 0x49, 0x46, 0x38, 0x37, 0x61] }, // GIF87a
     { offset: 0, bytes: [0x47, 0x49, 0x46, 0x38, 0x39, 0x61] }  // GIF89a
   ],
-  'video/mp4':  [{ offset: 4, bytes: [0x66, 0x74, 0x79, 0x70] }], // "ftyp" box
+  // WebP: RIFF....WEBP
+  'image/webp': [{ offset: 0, bytes: [0x52, 0x49, 0x46, 0x46] }],
+  'video/mp4': [{ offset: 4, bytes: [0x66, 0x74, 0x79, 0x70] }], // "ftyp" box
+  'video/webm': [{ offset: 0, bytes: [0x1A, 0x45, 0xDF, 0xA3] }], // EBML header
   'application/pdf': [{ offset: 0, bytes: [0x25, 0x50, 0x44, 0x46] }] // %PDF
 };
 
@@ -34,10 +37,10 @@ function matchesMagicBytes(buffer: Buffer, mimetype: string): boolean {
 // Use memory storage so we can inspect bytes before touching disk
 export const memoryUpload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: parseInt(process.env.MAX_FILE_SIZE || '10485760', 10) },
+  limits: { fileSize: parseInt(process.env.MAX_FILE_SIZE || '20971520', 10) }, // 20MB default
   fileFilter: (_req, file, cb) => {
-    const allowed = ['image/jpeg', 'image/png', 'image/gif', 'video/mp4', 'application/pdf'];
-    allowed.includes(file.mimetype) ? cb(null, true) : cb(new Error('Invalid file type'));
+    const allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/webm', 'application/pdf'];
+    allowed.includes(file.mimetype) ? cb(null, true) : cb(new Error(`Invalid file type: ${file.mimetype}. Allowed: jpeg, png, gif, webp, mp4, webm, pdf`));
   }
 });
 
@@ -59,8 +62,11 @@ export const validateAndSaveFiles = (req: Request, res: Response, next: NextFunc
       return;
     }
 
-    // Write buffer to disk
-    const uploadDir = process.env.UPLOAD_DIR || 'uploads';
+    // Write buffer to disk using absolute path so it works regardless of CWD
+    // __dirname in dist/middleware/ → go up two levels to reach service root
+    const uploadDir = process.env.UPLOAD_DIR
+      ? path.resolve(process.env.UPLOAD_DIR)
+      : path.join(__dirname, '..', '..', 'uploads');
     fs.mkdirSync(uploadDir, { recursive: true });
     const filename = `${uuidv4()}${path.extname(file.originalname)}`;
     const filepath = path.join(uploadDir, filename);

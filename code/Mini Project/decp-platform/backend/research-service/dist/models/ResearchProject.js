@@ -19,6 +19,9 @@ ResearchProject.init({
     collaborators: { type: sequelize_1.DataTypes.JSONB, defaultValue: [] },
     tags: { type: sequelize_1.DataTypes.JSONB, defaultValue: [] },
     visibility: { type: sequelize_1.DataTypes.ENUM('public', 'private', 'department'), defaultValue: 'department' },
-    documents: { type: sequelize_1.DataTypes.JSONB, defaultValue: [] }
+    documents: { type: sequelize_1.DataTypes.JSONB, defaultValue: [] },
+    progress: { type: sequelize_1.DataTypes.INTEGER, defaultValue: 0, allowNull: true },
+    field: { type: sequelize_1.DataTypes.STRING(100), allowNull: true },
+    coverImage: { type: sequelize_1.DataTypes.STRING(500), allowNull: true }
 }, { sequelize: database_1.default, tableName: 'research_projects', timestamps: true });
 exports.default = ResearchProject;

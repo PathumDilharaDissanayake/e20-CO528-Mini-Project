@@ -135,3 +135,53 @@ export const unsubscribePush = async (req: Request, res: Response): Promise<void
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
+
+export const deleteNotification = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const userId = req.headers['x-user-id'] as string;
+    const { notificationId } = req.params;
+
+    const notification = await Notification.findOne({ where: { id: notificationId, userId } });
+    if (!notification) {
+      res.status(404).json({ success: false, message: 'Notification not found' });
+      return;
+    }
+
+    await notification.destroy();
+    res.json({ success: true, message: 'Notification deleted' });
+  } catch (error) {
+    logger.error('Delete notification error:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+};
+
+/**
+ * Internal endpoint — called service-to-service (no user auth required).
+ * Token already validated by internalAuthMiddleware at the server level.
+ * POST /internal/notify
+ */
+export const internalCreateNotification = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { userId, type, title, body, data } = req.body;
+    if (!userId || !type || !title || !body) {
+      res.status(400).json({ success: false, message: 'Missing required fields: userId, type, title, body' });
+      return;
+    }
+    // Validate type against the allowed enum values
+    const allowedTypes = ['message', 'connection', 'job', 'event', 'mention', 'system'];
+    const safeType = allowedTypes.includes(type) ? type : 'system';
+
+    await Notification.create({
+      userId,
+      type: safeType as any,
+      title,
+      body,
+      data: data || {},
+      isRead: false,
+    });
+    res.status(200).json({ success: true });
+  } catch (error: any) {
+    logger.error('Internal create notification error:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};

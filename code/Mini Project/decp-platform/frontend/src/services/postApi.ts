@@ -19,6 +19,12 @@ const normalizePost = (raw: any): Post => {
         }))
       : [];
 
+  // Parse pollOptions if it comes back as a JSON string
+  let pollOptions = raw?.pollOptions ?? null;
+  if (typeof pollOptions === 'string') {
+    try { pollOptions = JSON.parse(pollOptions); } catch { pollOptions = null; }
+  }
+
   return {
     _id: postId,
     id: postId,
@@ -31,11 +37,15 @@ const normalizePost = (raw: any): Post => {
       role: 'student',
     },
     content: raw?.content || '',
+    type: raw?.type || 'text',
     media: normalizedMedia,
     mediaUrls: raw?.mediaUrls || [],
     likes: Array.isArray(raw?.likes) ? raw.likes : Number(raw?.likes || 0),
     comments: Array.isArray(raw?.comments) ? raw.comments : Number(raw?.comments || 0),
     shares: Number(raw?.shares || 0),
+    pollOptions,
+    pollEndsAt: raw?.pollEndsAt ?? null,
+    myReaction: raw?.myReaction ?? null,
     createdAt: raw?.createdAt,
     updatedAt: raw?.updatedAt,
   };
@@ -123,42 +133,13 @@ export const postApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, id) => [{ type: 'Post', id }, { type: 'Post', id: 'LIST' }],
     }),
-    likePost: builder.mutation<ApiResponse<Post>, string>({
-      query: (id) => ({
-        url: `/posts/${id}/like`,
+    likePost: builder.mutation<ApiResponse<any>, { postId: string; reactionType?: string }>({
+      query: ({ postId, reactionType = 'like' }) => ({
+        url: `/posts/${postId}/like`,
         method: 'POST',
+        body: { reactionType },
       }),
-      // Optimistic update so like is instant
-      async onQueryStarted(id, { dispatch, queryFulfilled, getState }) {
-        const patches: any[] = [];
-        // Patch all paginated getPosts queries
-        const state = getState() as any;
-        const entries = state.api?.queries || {};
-        Object.keys(entries).forEach((key) => {
-          if (key.startsWith('getPosts(')) {
-            const patch = dispatch(
-              postApi.util.updateQueryData('getPosts', JSON.parse(key.slice(9, -1)), (draft) => {
-                const post = draft.data.find((p) => (p._id || p.id) === id);
-                if (post) {
-                  if (Array.isArray(post.likes)) {
-                    // toggle-like logic handled by server, just increment count
-                    (post.likes as any[]).push('optimistic');
-                  } else {
-                    post.likes = Number(post.likes || 0) + 1;
-                  }
-                }
-              })
-            );
-            patches.push(patch);
-          }
-        });
-        try {
-          await queryFulfilled;
-        } catch {
-          patches.forEach((p) => p.undo());
-        }
-      },
-      invalidatesTags: (result, error, id) => [{ type: 'Post', id }, { type: 'Post', id: 'LIST' }],
+      invalidatesTags: (result, error, { postId }) => [{ type: 'Post', id: postId }, { type: 'Post', id: 'LIST' }],
     }),
     unlikePost: builder.mutation<ApiResponse<Post>, string>({
       query: (id) => ({
@@ -197,6 +178,22 @@ export const postApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [{ type: 'Post', id: 'LIST' }],
     }),
+    bookmarkPost: builder.mutation<any, string>({
+      query: (postId) => ({ url: `/posts/${postId}/bookmark`, method: 'POST' }),
+      invalidatesTags: ['Post'],
+    }),
+    getBookmarkedPosts: builder.query<any, void>({
+      query: () => '/posts/bookmarks/me',
+      providesTags: ['Post'],
+    }),
+    votePoll: builder.mutation<any, { postId: string; optionIndex: number }>({
+      query: ({ postId, optionIndex }) => ({
+        url: `/posts/${postId}/vote`,
+        method: 'POST',
+        body: { optionIndex },
+      }),
+      invalidatesTags: (result, error, { postId }) => [{ type: 'Post', id: postId }, { type: 'Post', id: 'LIST' }],
+    }),
   }),
 });
 
@@ -213,4 +210,7 @@ export const {
   useAddCommentMutation,
   useDeleteCommentMutation,
   useSharePostMutation,
+  useBookmarkPostMutation,
+  useGetBookmarkedPostsQuery,
+  useVotePollMutation,
 } = postApi;

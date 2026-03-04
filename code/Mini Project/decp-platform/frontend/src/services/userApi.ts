@@ -1,6 +1,21 @@
 import { apiSlice } from './api';
 import { User, PaginatedResponse, ApiResponse } from '@types';
 
+interface ConnectionRequest {
+  connectionId: string;
+  userId: string;
+  requestedAt: string;
+  profile: {
+    userId: string;
+    firstName: string;
+    lastName: string;
+    email?: string;
+    role?: string;
+    avatar?: string;
+    headline?: string;
+  };
+}
+
 const normalizeUser = (raw: any): User => {
   // For user-service profiles: userId is the auth user ID; id is the profile's own UUID
   const userId = raw?._id || raw?.userId || raw?.id || '';
@@ -78,7 +93,14 @@ export const userApi = apiSlice.injectEndpoints({
         url: `/users/connections/${userId}/follow`,
         method: 'POST',
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: (result, error, id) => [{ type: 'User', id }, 'User'],
+    }),
+    sendConnectionRequest: builder.mutation<ApiResponse<void>, string>({
+      query: (userId) => ({
+        url: `/users/connections/${userId}/follow`,
+        method: 'POST',
+      }),
+      invalidatesTags: (result, error, id) => [{ type: 'User', id }, 'User'],
     }),
     unfollowUser: builder.mutation<ApiResponse<void>, string>({
       query: (userId) => ({
@@ -87,19 +109,76 @@ export const userApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['User'],
     }),
-    getConnectionStatus: builder.query<ApiResponse<{ status: string }>, string>({
+    acceptConnection: builder.mutation<ApiResponse<void>, string>({
+      query: (userId) => ({
+        url: `/users/connections/${userId}/accept`,
+        method: 'PUT',
+      }),
+      invalidatesTags: (result, error, id) => [{ type: 'User', id }, 'User'],
+    }),
+    declineConnection: builder.mutation<ApiResponse<void>, string>({
+      query: (userId) => ({
+        url: `/users/connections/${userId}/decline`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, id) => [{ type: 'User', id }, 'User'],
+    }),
+    getConnections: builder.query<{ total: number }, void>({
+      query: () => '/users/connections',
+      transformResponse: (response: any) => ({
+        total: response?.meta?.total ?? (response?.data?.connections?.length || 0),
+      }),
+      providesTags: ['User'],
+    }),
+    getConnectionRequests: builder.query<{ data: ConnectionRequest[]; total: number }, void>({
+      query: () => '/users/connections/requests',
+      transformResponse: (response: any) => ({
+        data: response?.data || [],
+        total: response?.total || 0,
+      }),
+      providesTags: ['User'],
+    }),
+    getConnectionStatus: builder.query<any, string>({
       query: (userId) => `/users/connections/${userId}/status`,
+      transformResponse: (response: any) => response,
       providesTags: (result, error, id) => [{ type: 'User', id }],
+    }),
+    endorseSkill: builder.mutation<any, { userId: string; skill: string }>({
+      query: ({ userId, skill }) => ({
+        url: `/users/${userId}/endorse`,
+        method: 'POST',
+        body: { skill },
+      }),
+      invalidatesTags: (result, error, { userId }) => [{ type: 'User', id: userId }, 'User'],
+    }),
+    updateMyProfile: builder.mutation<any, Record<string, any>>({
+      query: (data) => ({
+        url: '/users/me',
+        method: 'PUT',
+        body: data,
+      }),
+      transformResponse: (response: any) => ({
+        ...response,
+        data: response?.data?.profile || response?.data,
+      }),
+      invalidatesTags: ['User'],
     }),
   }),
 });
 
 export const {
+  useGetConnectionsQuery,
   useGetUsersQuery,
   useGetUserByIdQuery,
   useGetMyProfileQuery,
   useSearchUsersQuery,
   useFollowUserMutation,
+  useSendConnectionRequestMutation,
   useUnfollowUserMutation,
+  useAcceptConnectionMutation,
+  useDeclineConnectionMutation,
+  useGetConnectionRequestsQuery,
   useGetConnectionStatusQuery,
+  useEndorseSkillMutation,
+  useUpdateMyProfileMutation,
 } = userApi;

@@ -8,17 +8,22 @@
 
 import { Request, Response } from 'express';
 import Joi from 'joi';
+import path from 'path';
 import * as postService from '../services/postService';
 import { logger } from '../utils/logger';
+import { sendNotification } from '../utils/notify';
+import { Post, Like, Bookmark } from '../models';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Validation schemas
 // ─────────────────────────────────────────────────────────────────────────────
 
 const createPostSchema = Joi.object({
-  content: Joi.string().min(1).max(5000).required(),
-  type: Joi.string().valid('text', 'image', 'video', 'document').default('text'),
-  isPublic: Joi.boolean().default(true)
+  content: Joi.string().min(0).max(5000).allow('').default(''),
+  type: Joi.string().valid('text', 'image', 'video', 'document', 'poll').default('text'),
+  isPublic: Joi.boolean().default(true),
+  pollOptions: Joi.array().items(Joi.object({ text: Joi.string().required(), votes: Joi.array().items(Joi.string()).default([]) })).optional(),
+  pollEndsAt: Joi.date().optional(),
 });
 
 const createCommentSchema = Joi.object({
@@ -98,7 +103,17 @@ export const createPost = async (req: Request, res: Response): Promise<void> => 
       return;
     }
 
-    const { error, value } = createPostSchema.validate(req.body);
+    // Parse pollOptions from FormData (sent as JSON string)
+    let bodyWithParsedPoll = { ...req.body };
+    if (typeof req.body.pollOptions === 'string') {
+      try {
+        bodyWithParsedPoll.pollOptions = JSON.parse(req.body.pollOptions);
+      } catch {
+        bodyWithParsedPoll.pollOptions = undefined;
+      }
+    }
+
+    const { error, value } = createPostSchema.validate(bodyWithParsedPoll);
     if (error) {
       res.status(400).json({
         success: false,
@@ -108,8 +123,17 @@ export const createPost = async (req: Request, res: Response): Promise<void> => 
       return;
     }
 
+    // Build author object from gateway-injected headers
+    const author = {
+      _id: userId,
+      firstName: (req.headers['x-user-firstname'] || req.headers['x-user-firstName'] || '') as string,
+      lastName: (req.headers['x-user-lastname'] || req.headers['x-user-lastName'] || '') as string,
+      role: (req.headers['x-user-role'] || '') as string,
+      avatar: (req.headers['x-user-avatar'] || '') as string
+    };
+
     const mediaUrls = (req.files as Express.Multer.File[])?.map(f => `/uploads/${f.filename}`) || [];
-    const post = await postService.createPost({ userId, ...value, mediaUrls });
+    const post = await postService.createPost({ userId, author, ...value, mediaUrls });
 
     res.status(201).json({ success: true, message: 'Post created successfully', data: { post } });
   } catch (err) {
@@ -144,19 +168,55 @@ export const deletePost = async (req: Request, res: Response): Promise<void> => 
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Likes
+// Likes / Reactions
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const likePost = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = req.headers['x-user-id'] as string;
     const { postId } = req.params;
-    const result = await postService.toggleLike(postId, userId);
-    res.json({
-      success: true,
-      message: result.liked ? 'Post liked' : 'Post unliked',
-      data: result
-    });
+    const reactionType: string = req.body?.reactionType || 'like';
+
+    const existingLike = await Like.findOne({ where: { postId, userId } });
+
+    if (existingLike) {
+      if ((existingLike as any).reactionType === reactionType) {
+        // Same reaction — toggle off
+        await existingLike.destroy();
+        await Post.findByPk(postId).then(p => p && p.decrement('likes', { by: 1 })).catch(() => { });
+        const count = await Like.count({ where: { postId } });
+        res.json({ success: true, data: { liked: false, likesCount: count, reactionType: null } });
+        return;
+      } else {
+        // Different reaction — update it
+        await existingLike.update({ reactionType } as any);
+        const count = await Like.count({ where: { postId } });
+        res.json({ success: true, data: { liked: true, likesCount: count, reactionType } });
+        return;
+      }
+    }
+
+    await Like.create({ postId, userId, reactionType } as any);
+    await Post.findByPk(postId).then(p => p && p.increment('likes', { by: 1 })).catch(() => { });
+    const count = await Like.count({ where: { postId } });
+
+    // Fire-and-forget notification to post author (don't notify self)
+    Post.findByPk(postId, { attributes: ['userId', 'author'] }).then((post) => {
+      if (post && post.userId !== userId) {
+        const firstName = (req.headers['x-user-firstname'] || req.headers['x-user-firstName'] || '') as string;
+        const lastName = (req.headers['x-user-lastname'] || req.headers['x-user-lastName'] || '') as string;
+        const likerName = `${firstName} ${lastName}`.trim() || 'Someone';
+        sendNotification(
+          post.userId,
+          'mention',
+          'Someone reacted to your post',
+          `${likerName} reacted to your post`,
+          { postId }
+        );
+      }
+    }).catch(() => { });
+
+    res.json({ success: true, data: { liked: true, likesCount: count, reactionType } });
   } catch (err) {
     handleError(res, err, 'likePost');
   }
@@ -164,6 +224,18 @@ export const likePost = async (req: Request, res: Response): Promise<void> => {
 
 // Kept for backward-compatibility — delegates to the same toggle
 export const unlikePost = likePost;
+
+export const getPostReactions = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { postId } = req.params;
+    const likes = await Like.findAll({ where: { postId }, attributes: ['userId', 'reactionType'] });
+    const counts: Record<string, number> = {};
+    likes.forEach((l: any) => { counts[l.reactionType] = (counts[l.reactionType] || 0) + 1; });
+    res.json({ success: true, data: { reactions: counts, total: likes.length } });
+  } catch (err) {
+    handleError(res, err, 'getPostReactions');
+  }
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Comments
@@ -201,7 +273,31 @@ export const addComment = async (req: Request, res: Response): Promise<void> => 
       return;
     }
 
-    const comment = await postService.addComment({ userId, postId, ...value });
+    // Build author object from gateway-injected headers
+    const author = {
+      _id: userId,
+      firstName: (req.headers['x-user-firstname'] || req.headers['x-user-firstName'] || '') as string,
+      lastName: (req.headers['x-user-lastname'] || req.headers['x-user-lastName'] || '') as string,
+      role: (req.headers['x-user-role'] || '') as string,
+      avatar: (req.headers['x-user-avatar'] || '') as string
+    };
+
+    const comment = await postService.addComment({ userId, author, postId, ...value });
+
+    // Fire-and-forget notification to post author (don't notify self-comments)
+    Post.findByPk(postId, { attributes: ['userId'] }).then((post) => {
+      if (post && post.userId !== userId) {
+        const commenterName = `${author.firstName} ${author.lastName}`.trim() || 'Someone';
+        sendNotification(
+          post.userId,
+          'mention',
+          'New comment on your post',
+          `${commenterName} commented on your post`,
+          { postId }
+        );
+      }
+    }).catch(() => { });
+
     res.status(201).json({ success: true, message: 'Comment added successfully', data: { comment } });
   } catch (err) {
     handleError(res, err, 'addComment');
@@ -233,5 +329,90 @@ export const sharePost = async (req: Request, res: Response): Promise<void> => {
     res.json({ success: true, message: 'Post shared successfully', data: result });
   } catch (err) {
     handleError(res, err, 'sharePost');
+  }
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// File upload only — returns URL for use in events, research, profile pictures
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const uploadFile = async (req: Request, res: Response): Promise<void> => {
+  try {
+    if (!req.file) {
+      res.status(400).json({ success: false, message: 'No file provided' });
+      return;
+    }
+    const filename = (req.file as any).filename || path.basename((req.file as any).path || '');
+    const url = `/uploads/${filename}`;
+    res.status(200).json({ success: true, data: { url } });
+  } catch (err) {
+    handleError(res, err, 'uploadFile');
+  }
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Bookmarks
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const bookmarkPost = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { postId } = req.params;
+    const userId = req.headers['x-user-id'] as string;
+    const existing = await Bookmark.findOne({ where: { postId, userId } });
+    if (existing) {
+      await existing.destroy();
+      res.json({ success: true, data: { bookmarked: false } });
+      return;
+    }
+    await Bookmark.create({ userId, postId });
+    res.json({ success: true, data: { bookmarked: true } });
+  } catch (err) {
+    handleError(res, err, 'bookmarkPost');
+  }
+};
+
+export const getBookmarkedPosts = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const userId = req.headers['x-user-id'] as string;
+    const bookmarks = await Bookmark.findAll({ where: { userId }, order: [['createdAt', 'DESC']] });
+    const postIds = bookmarks.map((b: any) => b.postId);
+    const posts = await Post.findAll({
+      where: { id: postIds.length > 0 ? postIds : ['none'] },
+      order: [['createdAt', 'DESC']],
+    });
+    res.json({ success: true, data: posts, total: posts.length });
+  } catch (err) {
+    handleError(res, err, 'getBookmarkedPosts');
+  }
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Poll voting
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const votePoll = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { postId } = req.params;
+    const { optionIndex } = req.body;
+    const userId = req.headers['x-user-id'] as string;
+
+    const post = await Post.findByPk(postId);
+    if (!post || !post.pollOptions) {
+      res.status(404).json({ success: false, message: 'Poll not found' });
+      return;
+    }
+
+    const options = [...(post.pollOptions as any[])];
+    // Remove existing vote from all options
+    options.forEach((opt: any) => { opt.votes = (opt.votes || []).filter((v: string) => v !== userId); });
+    // Add new vote to selected option
+    if (typeof optionIndex === 'number' && optionIndex >= 0 && optionIndex < options.length) {
+      options[optionIndex].votes = [...(options[optionIndex].votes || []), userId];
+    }
+
+    await post.update({ pollOptions: options });
+    res.json({ success: true, data: { pollOptions: options } });
+  } catch (err) {
+    handleError(res, err, 'votePoll');
   }
 };

@@ -41,6 +41,17 @@ export interface ProfileAttributes {
     github?: string;
     twitter?: string;
   };
+  openToWork?: boolean;
+  openToWorkTitle?: string;
+  certifications?: {
+    id: string;
+    name: string;
+    issuer: string;
+    issueDate: string;
+    url?: string;
+  }[];
+  endorsements?: Record<string, string[]>;
+  featuredPostId?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -68,6 +79,11 @@ class Profile extends Model<ProfileAttributes, ProfileCreationAttributes> implem
   public education!: any[];
   public experience!: any[];
   public socialLinks!: any;
+  public openToWork!: boolean;
+  public openToWorkTitle!: string;
+  public certifications!: any[];
+  public endorsements!: Record<string, string[]>;
+  public featuredPostId!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -157,6 +173,28 @@ Profile.init(
     socialLinks: {
       type: DataTypes.JSONB,
       defaultValue: {}
+    },
+    openToWork: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    openToWorkTitle: {
+      type: DataTypes.STRING(200),
+      allowNull: true
+    },
+    certifications: {
+      type: DataTypes.JSONB,
+      allowNull: true,
+      defaultValue: []
+    },
+    endorsements: {
+      type: DataTypes.JSONB,
+      allowNull: true,
+      defaultValue: {}
+    },
+    featuredPostId: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   },
   {

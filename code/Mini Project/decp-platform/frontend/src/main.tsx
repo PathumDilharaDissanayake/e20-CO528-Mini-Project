@@ -21,7 +21,7 @@ const lightTheme = createTheme({
     error: { main: '#ef4444' },
     warning: { main: '#f59e0b' },
     info: { main: '#3b82f6' },
-    background: { default: '#f7faf9', paper: '#ffffff' },
+    background: { default: '#f1f5f9', paper: '#ffffff' },
     text: { primary: '#0f172a', secondary: '#475569' },
     divider: 'rgba(0,0,0,0.08)',
   },

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Box,
   Avatar,
@@ -7,6 +7,7 @@ import {
   IconButton,
   Chip,
   Tooltip,
+  CircularProgress,
 } from '@mui/material';
 import {
   Edit,
@@ -21,7 +22,8 @@ import {
 } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
-import { useUploadAvatarMutation } from '@services/authApi';
+import { useUpdateProfileMutation } from '@services/authApi';
+import { useGetConnectionStatusQuery, useAcceptConnectionMutation, useDeclineConnectionMutation } from '@services/userApi';
 import { User } from '@types';
 import { updateUser } from '@features/authSlice';
 import { useDispatch } from 'react-redux';
@@ -30,6 +32,7 @@ import { AppDispatch } from '@store';
 interface ProfileHeaderProps {
   user: User;
   isOwnProfile: boolean;
+  profileId?: string;
   onEditClick?: () => void;
   onConnectClick?: () => void;
 }
@@ -48,11 +51,20 @@ const coverGradients: Record<string, string> = {
   student: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0c0a1e 100%)',
 };
 
-export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, isOwnProfile, onEditClick, onConnectClick }) => {
+export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, isOwnProfile, profileId, onEditClick, onConnectClick }) => {
   const dispatch = useDispatch<AppDispatch>();
   const currentUser = useSelector((state: RootState) => state.auth.user);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [uploadAvatar] = useUploadAvatarMutation();
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const [updateProfile] = useUpdateProfileMutation();
+  const [acceptConnection] = useAcceptConnectionMutation();
+  const [declineConnection] = useDeclineConnectionMutation();
+
+  const resolvedProfileId = profileId || user?._id || (user as any)?.id || '';
+  const { data: connectionStatusData } = useGetConnectionStatusQuery(
+    resolvedProfileId,
+    { skip: isOwnProfile || !resolvedProfileId }
+  );
 
   const safeFirstName = user.firstName || 'User';
   const safeLastName = user.lastName || '';
@@ -62,23 +74,39 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, isOwnProfile
   const coverGrad = coverGradients[safeRole] || coverGradients.student;
   const roleGrad = roleGradients[safeRole] || roleGradients.student;
 
+  const connectionStatus: string = connectionStatusData?.data?.status || connectionStatusData?.status || 'none';
+
   const handleAvatarClick = () => {
     if (isOwnProfile && fileInputRef.current) fileInputRef.current.click();
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const localUrl = URL.createObjectURL(file);
-      if (currentUser) dispatch(updateUser({ avatar: localUrl }));
+    if (!file) return;
+    // Show local preview immediately
+    const localUrl = URL.createObjectURL(file);
+    if (currentUser) dispatch(updateUser({ avatar: localUrl }));
+    setAvatarUploading(true);
+    try {
       const formData = new FormData();
-      formData.append('avatar', file);
-      try {
-        const response = await uploadAvatar(formData).unwrap();
-        if (currentUser) dispatch(updateUser({ avatar: response.data.url }));
-      } catch {
-        // Keep local preview
+      formData.append('file', file);
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';
+      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1';
+      const resp = await fetch(`${apiBase}/posts/upload`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
+      const data = await resp.json();
+      if (data.success && data.data?.url) {
+        await updateProfile({ avatar: data.data.url }).unwrap();
+        if (currentUser) dispatch(updateUser({ avatar: data.data.url }));
       }
+    } catch {
+      // Keep local preview on failure
+    } finally {
+      setAvatarUploading(false);
+      URL.revokeObjectURL(localUrl);
     }
   };
 
@@ -130,6 +158,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, isOwnProfile
                 <IconButton
                   onClick={handleAvatarClick}
                   size="small"
+                  disabled={avatarUploading}
                   sx={{
                     position: 'absolute',
                     bottom: 4,
@@ -141,7 +170,9 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, isOwnProfile
                     '&:hover': { background: '#f3f4f6' },
                   }}
                 >
-                  <CameraAlt sx={{ fontSize: 14 }} />
+                  {avatarUploading
+                    ? <CircularProgress size={14} />
+                    : <CameraAlt sx={{ fontSize: 14 }} />}
                 </IconButton>
               </Tooltip>
             )}
@@ -181,6 +212,49 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, isOwnProfile
               >
                 Edit Profile
               </Button>
+            ) : connectionStatus === 'accepted' ? (
+              <Button
+                variant="outlined"
+                color="success"
+                startIcon={<CheckCircle />}
+                size="small"
+                disabled
+                sx={{ borderRadius: '10px', fontWeight: 600 }}
+              >
+                Connected
+              </Button>
+            ) : connectionStatus === 'pending' ? (
+              <Button
+                variant="outlined"
+                color="warning"
+                size="small"
+                disabled
+                sx={{ borderRadius: '10px', fontWeight: 600 }}
+              >
+                Request Sent
+              </Button>
+            ) : connectionStatus === 'received_pending' ? (
+              <>
+                <Button
+                  variant="contained"
+                  color="success"
+                  startIcon={<CheckCircle />}
+                  size="small"
+                  onClick={async () => { try { await acceptConnection(resolvedProfileId).unwrap(); } catch (e) { console.error(e); } }}
+                  sx={{ borderRadius: '10px', fontWeight: 600 }}
+                >
+                  Accept
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  size="small"
+                  onClick={async () => { try { await declineConnection(resolvedProfileId).unwrap(); } catch (e) { console.error(e); } }}
+                  sx={{ borderRadius: '10px', fontWeight: 600 }}
+                >
+                  Decline
+                </Button>
+              </>
             ) : (
               <Button
                 variant="contained"
@@ -208,6 +282,21 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, isOwnProfile
               <Tooltip title="Verified account">
                 <CheckCircle sx={{ fontSize: 18, color: 'primary.main' }} />
               </Tooltip>
+            )}
+            {(user as any).openToWork && (
+              <Chip
+                label="🟢 Open to Work"
+                size="small"
+                sx={{
+                  background: 'linear-gradient(135deg, #166534, #22c55e)',
+                  color: 'white',
+                  fontWeight: 700,
+                  fontSize: '0.7rem',
+                  border: 'none',
+                  boxShadow: '0 2px 8px rgba(22,163,74,0.3)',
+                  animation: 'notifPulse 2s ease-in-out infinite',
+                }}
+              />
             )}
           </Box>
 

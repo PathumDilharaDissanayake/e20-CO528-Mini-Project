@@ -14,11 +14,14 @@ export interface ResearchProjectAttributes {
   tags?: string[];
   visibility: 'public' | 'private' | 'department';
   documents?: string[];
+  progress?: number;
+  field?: string;
+  coverImage?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-interface ResearchProjectCreationAttributes extends Optional<ResearchProjectAttributes, 'id' | 'description' | 'status' | 'startDate' | 'endDate' | 'collaborators' | 'tags' | 'visibility' | 'documents' | 'createdAt' | 'updatedAt'> {}
+interface ResearchProjectCreationAttributes extends Optional<ResearchProjectAttributes, 'id' | 'description' | 'status' | 'startDate' | 'endDate' | 'collaborators' | 'tags' | 'visibility' | 'documents' | 'progress' | 'field' | 'coverImage' | 'createdAt' | 'updatedAt'> {}
 
 class ResearchProject extends Model<ResearchProjectAttributes, ResearchProjectCreationAttributes> implements ResearchProjectAttributes {
   public id!: string;
@@ -33,6 +36,9 @@ class ResearchProject extends Model<ResearchProjectAttributes, ResearchProjectCr
   public tags!: string[];
   public visibility!: 'public' | 'private' | 'department';
   public documents!: string[];
+  public progress!: number;
+  public field!: string;
+  public coverImage!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -49,7 +55,10 @@ ResearchProject.init({
   collaborators: { type: DataTypes.JSONB, defaultValue: [] },
   tags: { type: DataTypes.JSONB, defaultValue: [] },
   visibility: { type: DataTypes.ENUM('public', 'private', 'department'), defaultValue: 'department' },
-  documents: { type: DataTypes.JSONB, defaultValue: [] }
+  documents: { type: DataTypes.JSONB, defaultValue: [] },
+  progress: { type: DataTypes.INTEGER, defaultValue: 0, allowNull: true },
+  field: { type: DataTypes.STRING(100), allowNull: true },
+  coverImage: { type: DataTypes.STRING(500), allowNull: true }
 }, { sequelize, tableName: 'research_projects', timestamps: true });
 
 export default ResearchProject;

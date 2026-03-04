@@ -17,6 +17,10 @@ Post.init({
         type: sequelize_1.DataTypes.UUID,
         allowNull: false
     },
+    author: {
+        type: sequelize_1.DataTypes.JSONB,
+        allowNull: true
+    },
     content: {
         type: sequelize_1.DataTypes.TEXT,
         allowNull: false
@@ -26,7 +30,7 @@ Post.init({
         defaultValue: []
     },
     type: {
-        type: sequelize_1.DataTypes.ENUM('text', 'image', 'video', 'document'),
+        type: sequelize_1.DataTypes.ENUM('text', 'image', 'video', 'document', 'poll'),
         defaultValue: 'text'
     },
     likes: {
@@ -44,7 +48,17 @@ Post.init({
     isPublic: {
         type: sequelize_1.DataTypes.BOOLEAN,
         defaultValue: true
-    }
+    },
+    pollOptions: {
+        type: sequelize_1.DataTypes.JSONB,
+        allowNull: true,
+        defaultValue: null,
+        // shape: [{ text: string, votes: string[] }]
+    },
+    pollEndsAt: {
+        type: sequelize_1.DataTypes.DATE,
+        allowNull: true,
+    },
 }, {
     sequelize: database_1.default,
     tableName: 'posts',

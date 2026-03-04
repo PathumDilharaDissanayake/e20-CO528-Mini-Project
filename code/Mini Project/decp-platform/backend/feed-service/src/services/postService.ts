@@ -10,6 +10,7 @@
 import { Op, Transaction } from 'sequelize';
 import sequelize from '../config/database';
 import { Post, Like, Comment, Share } from '../models';
+import { AuthorInfo } from '../models/Post';
 import { logger } from '../utils/logger';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -37,14 +38,18 @@ export interface FeedResult {
 
 export interface CreatePostInput {
   userId: string;
+  author?: AuthorInfo;
   content: string;
-  type?: 'text' | 'image' | 'video' | 'document';
+  type?: 'text' | 'image' | 'video' | 'document' | 'poll';
   isPublic?: boolean;
   mediaUrls?: string[];
+  pollOptions?: Array<{ text: string; votes: string[] }>;
+  pollEndsAt?: Date;
 }
 
 export interface CommentInput {
   userId: string;
+  author?: AuthorInfo;
   postId: string;
   content: string;
   parentId?: string;
@@ -125,9 +130,14 @@ export const getPostById = async (postId: string): Promise<Post | null> => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const createPost = async (input: CreatePostInput): Promise<Post> => {
-  const { userId, content, type = 'text', isPublic = true, mediaUrls = [] } = input;
-  const effectiveType = mediaUrls.length > 0 ? (type === 'text' ? 'image' : type) : 'text';
-  return Post.create({ userId, content, type: effectiveType, isPublic, mediaUrls });
+  const { userId, author, content, type = 'text', isPublic = true, mediaUrls = [], pollOptions, pollEndsAt } = input;
+  let effectiveType: 'text' | 'image' | 'video' | 'document' | 'poll' = type;
+  if (pollOptions && pollOptions.length > 0) {
+    effectiveType = 'poll';
+  } else if (mediaUrls.length > 0 && type === 'text') {
+    effectiveType = 'image';
+  }
+  return Post.create({ userId, author, content, type: effectiveType, isPublic, mediaUrls, pollOptions: pollOptions || null, pollEndsAt: pollEndsAt || null });
 };
 
 export const updatePost = async (
@@ -218,7 +228,7 @@ export const getComments = async (
 };
 
 export const addComment = async (input: CommentInput): Promise<Comment> => {
-  const { userId, postId, content, parentId } = input;
+  const { userId, author, postId, content, parentId } = input;
   const t: Transaction = await sequelize.transaction();
   try {
     const post = await Post.findByPk(postId, { transaction: t });
@@ -226,7 +236,7 @@ export const addComment = async (input: CommentInput): Promise<Comment> => {
       await t.rollback();
       throw Object.assign(new Error('Post not found'), { statusCode: 404 });
     }
-    const comment = await Comment.create({ postId, userId, content, parentId }, { transaction: t });
+    const comment = await Comment.create({ postId, userId, author, content, parentId }, { transaction: t });
     await post.increment('comments', { by: 1, transaction: t });
     await t.commit();
     return comment;

@@ -1,19 +1,25 @@
 import { Request, Response } from 'express';
 import { Op } from 'sequelize';
 import { ResearchProject } from '../models';
+import { ResearchProjectAttributes } from '../models/ResearchProject';
 import { logger } from '../utils/logger';
 import Joi from 'joi';
+import { sendNotification } from '../utils/notify';
 
 const projectSchema = Joi.object({
   title: Joi.string().min(5).max(300).required(),
-  abstract: Joi.string().min(10).required(),
-  description: Joi.string().allow(''),
+  abstract: Joi.string().min(10).optional(),
+  description: Joi.string().allow('').optional(),
   status: Joi.string().valid('planning', 'active', 'completed', 'on_hold').default('planning'),
   startDate: Joi.date().iso().allow(null),
   endDate: Joi.date().iso().allow(null),
   collaborators: Joi.array().items(Joi.string().uuid()),
   tags: Joi.array().items(Joi.string()),
-  visibility: Joi.string().valid('public', 'private', 'department').default('department')
+  visibility: Joi.string().valid('public', 'private', 'department').default('department'),
+  field: Joi.string().max(100).allow('').optional(),
+  progress: Joi.number().integer().min(0).max(100).default(0),
+  coverImage: Joi.string().max(500).allow('').optional(),
+  funding: Joi.string().allow('').optional()
 });
 
 export const getProjects = async (req: Request, res: Response): Promise<void> => {
@@ -84,6 +90,13 @@ export const createProject = async (req: Request, res: Response): Promise<void> 
       res.status(400).json({ success: false, message: 'Validation error', error: error.details[0].message });
       return;
     }
+    // description is an alias for abstract
+    if (!value.abstract && value.description) {
+      value.abstract = value.description;
+    }
+    if (!value.abstract) {
+      value.abstract = 'No abstract provided';
+    }
     const project = await ResearchProject.create({ ...value, leadResearcherId });
     res.status(201).json({ success: true, message: 'Project created successfully', data: { project } });
   } catch (error) {
@@ -105,7 +118,41 @@ export const updateProject = async (req: Request, res: Response): Promise<void> 
       res.status(403).json({ success: false, message: 'Not authorized' });
       return;
     }
-    await project.update(req.body);
+
+    // Explicitly extract and sanitize updatable fields to prevent mass-assignment
+    const {
+      title,
+      abstract,
+      description,  // frontend may send 'description' as alias for 'abstract'
+      status,
+      startDate,
+      endDate,
+      collaborators,
+      tags,
+      visibility,
+      field,
+      progress,
+      coverImage,
+    } = req.body;
+
+    const updateData: Partial<ResearchProjectAttributes> = {};
+    if (title !== undefined) updateData.title = title;
+    // Map description → abstract (frontend uses 'description', model uses 'abstract')
+    if (abstract !== undefined) updateData.abstract = abstract;
+    else if (description !== undefined) updateData.abstract = description;
+    if (status !== undefined) updateData.status = status;
+    if (startDate !== undefined) updateData.startDate = startDate;
+    if (endDate !== undefined) updateData.endDate = endDate;
+    if (collaborators !== undefined) updateData.collaborators = collaborators;
+    if (tags !== undefined) updateData.tags = tags;
+    if (visibility !== undefined) updateData.visibility = visibility;
+    if (field !== undefined) updateData.field = field;
+    if (progress !== undefined) updateData.progress = progress;
+    if (coverImage !== undefined) updateData.coverImage = coverImage;
+
+    await project.update(updateData);
+    // Reload so the response reflects the persisted values
+    await project.reload();
     res.json({ success: true, message: 'Project updated successfully', data: { project } });
   } catch (error) {
     logger.error('Update project error:', error);
@@ -178,10 +225,25 @@ export const collaborateProject = async (req: Request, res: Response): Promise<v
       return;
     }
 
-    const collaborators = new Set<string>(project.collaborators || []);
-    collaborators.add(userId);
+    const collaboratorsSet = new Set<string>(project.collaborators || []);
+    const wasAlreadyCollaborator = collaboratorsSet.has(userId);
+    collaboratorsSet.add(userId);
 
-    await project.update({ collaborators: Array.from(collaborators) });
+    await project.update({ collaborators: Array.from(collaboratorsSet) });
+
+    // Fire-and-forget: notify the lead researcher (only on new collaboration, not re-join)
+    if (!wasAlreadyCollaborator && project.leadResearcherId !== userId) {
+      const firstName = (req.headers['x-user-firstname'] || req.headers['x-user-firstName'] || '') as string;
+      const lastName = (req.headers['x-user-lastname'] || req.headers['x-user-lastName'] || '') as string;
+      const userName = `${firstName} ${lastName}`.trim() || 'Someone';
+      sendNotification(
+        project.leadResearcherId,
+        'system',
+        'New Collaboration Request',
+        `${userName} wants to collaborate on "${project.title}"`,
+        { projectId }
+      );
+    }
 
     res.json({
       success: true,
