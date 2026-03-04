@@ -3,6 +3,7 @@ import { Op } from 'sequelize';
 import { Event, RSVP } from '../models';
 import { logger } from '../utils/logger';
 import Joi from 'joi';
+import { sendNotification } from '../utils/notify';
 
 const eventSchema = Joi.object({
   title: Joi.string().min(3).max(200).required(),
@@ -14,7 +15,8 @@ const eventSchema = Joi.object({
   isVirtual: Joi.boolean().default(false),
   meetingLink: Joi.string().uri().allow(''),
   capacity: Joi.number().integer().min(1),
-  imageUrl: Joi.string().uri().allow(''),
+  imageUrl: Joi.string().allow(''),
+  coverImage: Joi.string().allow(''),
   tags: Joi.array().items(Joi.string())
 });
 
@@ -24,23 +26,55 @@ const rsvpSchema = Joi.object({
 
 export const getEvents = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { type, status = 'published', page = 1, limit = 10 } = req.query;
-    const offset = (parseInt(page as string) - 1) * parseInt(limit as string);
+    const { type, status = 'published', upcoming, attending, userId, page = 1, limit = 10 } = req.query;
+    const pageNum = parseInt(page as string);
+    const limitNum = parseInt(limit as string);
+    const offset = (pageNum - 1) * limitNum;
+    const requestingUserId = req.headers['x-user-id'] as string;
+
+    // If attending=true or userId=me, return events where the current user has an RSVP
+    if (attending === 'true' || userId === 'me') {
+      if (!requestingUserId) {
+        res.status(401).json({ success: false, message: 'Authentication required' });
+        return;
+      }
+      const rsvps = await RSVP.findAll({ where: { userId: requestingUserId, status: { [Op.in]: ['going', 'maybe'] } } });
+      const eventIds = rsvps.map((r: any) => r.eventId);
+
+      const where: any = { id: eventIds };
+      if (type) where.type = type;
+      if (upcoming === 'true') where.startDate = { [Op.gte]: new Date() };
+
+      const { count, rows: events } = await Event.findAndCountAll({
+        where,
+        order: [['startDate', 'ASC']],
+        limit: limitNum,
+        offset
+      });
+
+      res.json({
+        success: true,
+        data: events,
+        meta: { page: pageNum, limit: limitNum, total: count, totalPages: Math.ceil(count / limitNum) }
+      });
+      return;
+    }
 
     const where: any = { status };
     if (type) where.type = type;
+    if (upcoming === 'true') where.startDate = { [Op.gte]: new Date() };
 
     const { count, rows: events } = await Event.findAndCountAll({
       where,
       order: [['startDate', 'ASC']],
-      limit: parseInt(limit as string),
+      limit: limitNum,
       offset
     });
 
     res.json({
       success: true,
       data: events,
-      meta: { page: parseInt(page as string), limit: parseInt(limit as string), total: count, totalPages: Math.ceil(count / parseInt(limit as string)) }
+      meta: { page: pageNum, limit: limitNum, total: count, totalPages: Math.ceil(count / limitNum) }
     });
   } catch (error) {
     logger.error('Get events error:', error);
@@ -92,7 +126,26 @@ export const updateEvent = async (req: Request, res: Response): Promise<void> =>
       res.status(403).json({ success: false, message: 'Not authorized' });
       return;
     }
-    await event.update(req.body);
+    // Explicitly extract updatable fields to prevent mass-assignment
+    const {
+      title, description, type, startDate, endDate, location,
+      isVirtual, meetingLink, capacity, imageUrl, coverImage, status, tags,
+    } = req.body;
+    const updateData: Record<string, unknown> = {};
+    if (title !== undefined) updateData.title = title;
+    if (description !== undefined) updateData.description = description;
+    if (type !== undefined) updateData.type = type;
+    if (startDate !== undefined) updateData.startDate = startDate;
+    if (endDate !== undefined) updateData.endDate = endDate;
+    if (location !== undefined) updateData.location = location;
+    if (isVirtual !== undefined) updateData.isVirtual = isVirtual;
+    if (meetingLink !== undefined) updateData.meetingLink = meetingLink;
+    if (capacity !== undefined) updateData.capacity = capacity;
+    if (imageUrl !== undefined) updateData.imageUrl = imageUrl;
+    if (coverImage !== undefined) updateData.coverImage = coverImage;
+    if (status !== undefined) updateData.status = status;
+    if (tags !== undefined) updateData.tags = tags;
+    await event.update(updateData);
     res.json({ success: true, message: 'Event updated successfully', data: { event } });
   } catch (error) {
     logger.error('Update event error:', error);
@@ -153,6 +206,21 @@ export const rsvpEvent = async (req: Request, res: Response): Promise<void> => {
 
     if (!created) {
       await rsvp.update({ status: value.status });
+    }
+
+    // Fire-and-forget: notify the event organizer (don't notify if user is the organizer)
+    const organizerId = (event as any).organizerId;
+    if (organizerId && organizerId !== userId && value.status === 'going') {
+      const firstName = (req.headers['x-user-firstname'] || req.headers['x-user-firstName'] || '') as string;
+      const lastName = (req.headers['x-user-lastname'] || req.headers['x-user-lastName'] || '') as string;
+      const userName = `${firstName} ${lastName}`.trim() || 'Someone';
+      sendNotification(
+        organizerId,
+        'event',
+        'New RSVP',
+        `${userName} RSVPd to your event "${(event as any).title}"`,
+        { eventId }
+      );
     }
 
     res.json({ success: true, message: 'RSVP updated successfully', data: { rsvp } });

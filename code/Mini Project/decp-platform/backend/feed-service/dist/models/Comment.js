@@ -21,6 +21,10 @@ Comment.init({
         type: sequelize_1.DataTypes.UUID,
         allowNull: false
     },
+    author: {
+        type: sequelize_1.DataTypes.JSONB,
+        allowNull: true
+    },
     content: {
         type: sequelize_1.DataTypes.TEXT,
         allowNull: false

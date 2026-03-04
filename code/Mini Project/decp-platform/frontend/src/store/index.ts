@@ -1,10 +1,18 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { apiSlice } from '@services/api';
-import authReducer from '@features/authSlice';
+import authReducer, { logout } from '@features/authSlice';
 import themeReducer from '@features/themeSlice';
 import uiReducer from '@features/uiSlice';
 import socketReducer from '@features/socketSlice';
+
+const listenerMiddleware = createListenerMiddleware();
+listenerMiddleware.startListening({
+  actionCreator: logout,
+  effect: async (_action, listenerApi) => {
+    listenerApi.dispatch(apiSlice.util.resetApiState());
+  },
+});
 
 export const store = configureStore({
   reducer: {
@@ -20,7 +28,7 @@ export const store = configureStore({
         ignoredActions: ['socket/setSocket'],
         ignoredPaths: ['socket.socket'],
       },
-    }).concat(apiSlice.middleware),
+    }).prepend(listenerMiddleware.middleware).concat(apiSlice.middleware),
   devTools: import.meta.env.DEV,
 });
 

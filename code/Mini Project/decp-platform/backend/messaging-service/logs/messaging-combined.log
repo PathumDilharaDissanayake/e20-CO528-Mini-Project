@@ -386,3 +386,49 @@ SequelizeConnectionError: database "decp_messaging" does not exist
 2026-03-03 22:46:51 [MESSAGING-SERVICE] [info]: ✅ Database connected.
 2026-03-03 22:46:51 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
 2026-03-03 22:46:51 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-04 06:47:22 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-04 06:47:22 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 06:47:22 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-04 06:49:08 [MESSAGING-SERVICE] [info]: User connected: 95a2687f-f87c-46a6-9fe4-2854564621f1
+2026-03-04 06:49:11 [MESSAGING-SERVICE] [info]: User disconnected: 95a2687f-f87c-46a6-9fe4-2854564621f1
+2026-03-04 06:56:13 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-04 06:56:13 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 06:56:13 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-04 09:43:35 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-04 09:43:35 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 09:43:35 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-04 10:16:07 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-04 10:16:07 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 10:16:07 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-04 10:44:39 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-04 10:44:39 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 10:44:39 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-04 10:53:46 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-04 10:53:46 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 10:53:46 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-04 11:12:52 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-04 11:12:52 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 11:12:52 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-04 11:26:21 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-04 11:26:21 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 11:26:21 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-04 17:30:24 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-04 17:30:24 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 17:30:24 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-04 22:15:13 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-04 22:15:13 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 22:15:13 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-04 22:31:08 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-04 22:31:08 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 22:31:08 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-04 22:40:53 [MESSAGING-SERVICE] [info]: User connected: 1503f54a-07b4-446e-a4e5-66bab9fe3628
+2026-03-04 22:40:54 [MESSAGING-SERVICE] [info]: User disconnected: 1503f54a-07b4-446e-a4e5-66bab9fe3628
+2026-03-04 22:40:54 [MESSAGING-SERVICE] [info]: User connected: 1503f54a-07b4-446e-a4e5-66bab9fe3628
+2026-03-04 22:41:02 [MESSAGING-SERVICE] [info]: User disconnected: 1503f54a-07b4-446e-a4e5-66bab9fe3628
+2026-03-04 23:16:12 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-04 23:16:12 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 23:16:12 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-04 23:41:46 [MESSAGING-SERVICE] [info]: User connected: ac9057bf-915c-46cb-b9ba-09ad883b894a
+2026-03-04 23:41:47 [MESSAGING-SERVICE] [info]: User disconnected: ac9057bf-915c-46cb-b9ba-09ad883b894a
+2026-03-04 23:41:47 [MESSAGING-SERVICE] [info]: User connected: ac9057bf-915c-46cb-b9ba-09ad883b894a
+2026-03-04 23:41:56 [MESSAGING-SERVICE] [info]: User disconnected: ac9057bf-915c-46cb-b9ba-09ad883b894a

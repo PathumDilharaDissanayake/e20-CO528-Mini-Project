@@ -58,7 +58,7 @@ export const profileSchema = z.object({
 });
 
 export const postSchema = z.object({
-  content: z.string().min(1, 'Content is required').max(5000, 'Content is too long'),
+  content: z.string().min(0).max(5000, 'Content is too long').default(''),
 });
 
 export const commentSchema = z.object({

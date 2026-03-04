@@ -24,7 +24,7 @@ import {
 } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
-import { useGetJobsQuery, useGetMyJobsQuery, useGetAppliedJobsQuery, useCreateJobMutation } from '@services/jobApi';
+import { useGetJobsQuery, useGetMyJobsQuery, useGetAppliedJobsQuery, useCreateJobMutation, useApplyForJobMutation } from '@services/jobApi';
 import { JobCard } from '@components/jobs/JobCard';
 import { JobFilters } from '@components/jobs/JobFilters';
 import { JobCardSkeleton, EmptyState } from '@components/common';
@@ -122,11 +122,16 @@ export const JobsPage: React.FC = () => {
   const [filters, setFilters] = useState({ search: '', type: '', location: '' });
   const [activeTab, setActiveTab] = useState(0);
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
+  const [viewJob, setViewJob] = useState<Job | null>(null);
+  const [applyJob, setApplyJob] = useState<Job | null>(null);
+  const [coverLetter, setCoverLetter] = useState('');
+  const [applySuccess, setApplySuccess] = useState(false);
 
   const { data: allJobsData, isLoading: isLoadingAll } = useGetJobsQuery(filters, { skip: activeTab !== 0 });
   const { data: appliedJobsData, isLoading: isLoadingApplied } = useGetAppliedJobsQuery({}, { skip: activeTab !== 1 });
   const { data: myJobsData, isLoading: isLoadingMine } = useGetMyJobsQuery({}, { skip: activeTab !== 2 });
   const [createJob, { isLoading: isCreating }] = useCreateJobMutation();
+  const [applyForJob, { isLoading: isApplying }] = useApplyForJobMutation();
 
   const canPostJob = user?.role === 'alumni' || user?.role === 'admin' || user?.role === 'faculty';
 
@@ -157,8 +162,18 @@ export const JobsPage: React.FC = () => {
     }
   };
 
+  const handleApply = async () => {
+    if (!applyJob) return;
+    try {
+      await applyForJob({ jobId: applyJob._id || applyJob.id || '', coverLetter }).unwrap();
+      setApplySuccess(true);
+    } catch (err) {
+      console.error('Failed to apply:', err);
+    }
+  };
+
   return (
-    <Box>
+    <Box className="page-enter">
       <HeroBanner jobCount={totalJobs} canPost={canPostJob} onPost={() => setCreateDialogOpen(true)} />
 
       {/* Tabs */}
@@ -221,7 +236,17 @@ export const JobsPage: React.FC = () => {
           }
         />
       ) : (
-        jobs.map((job: Job) => <JobCard key={job._id || job.id} job={job} />)
+        <Box className="stagger-children">
+          {jobs.map((job: Job) => (
+            <Box key={job._id || job.id} className="hover-lift">
+              <JobCard
+                job={job}
+                onView={(j) => setViewJob(j)}
+                onApply={(j) => { setApplyJob(j); setCoverLetter(''); setApplySuccess(false); }}
+              />
+            </Box>
+          ))}
+        </Box>
       )}
 
       {/* Create Job Dialog */}
@@ -262,6 +287,80 @@ export const JobsPage: React.FC = () => {
             </Button>
           </DialogActions>
         </form>
+      </Dialog>
+
+      {/* View Job Dialog */}
+      <Dialog open={!!viewJob} onClose={() => setViewJob(null)} maxWidth="md" fullWidth PaperProps={{ sx: { borderRadius: '20px' } }}>
+        <DialogTitle sx={{ pb: 1, fontWeight: 700 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Box>
+              <Typography variant="h6" fontWeight={700}>{viewJob?.title}</Typography>
+              <Typography variant="body2" color="text.secondary">{viewJob?.company} • {viewJob?.location}</Typography>
+            </Box>
+            <Chip label={viewJob?.type} color="primary" size="small" />
+          </Box>
+        </DialogTitle>
+        <DialogContent>
+          <Typography variant="body1" sx={{ mt: 1, mb: 2, lineHeight: 1.8 }}>{viewJob?.description}</Typography>
+          {viewJob?.requirements && viewJob.requirements.length > 0 && (
+            <Box>
+              <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1 }}>Requirements</Typography>
+              <Box component="ul" sx={{ pl: 2, mt: 0 }}>
+                {viewJob.requirements.map((req, i) => (
+                  <Typography key={i} component="li" variant="body2" sx={{ mb: 0.5 }}>{req}</Typography>
+                ))}
+              </Box>
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 3, gap: 1 }}>
+          <Button onClick={() => setViewJob(null)} variant="outlined" sx={{ borderRadius: '10px' }}>Close</Button>
+          <Button variant="contained" onClick={() => { setApplyJob(viewJob); setCoverLetter(''); setApplySuccess(false); setViewJob(null); }} sx={{ borderRadius: '10px' }}>
+            Apply Now
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Apply Job Dialog */}
+      <Dialog open={!!applyJob} onClose={() => { setApplyJob(null); setApplySuccess(false); }} maxWidth="sm" fullWidth PaperProps={{ sx: { borderRadius: '20px' } }}>
+        <DialogTitle sx={{ pb: 1, fontWeight: 700 }}>
+          {applySuccess ? 'Application Submitted!' : `Apply for ${applyJob?.title}`}
+        </DialogTitle>
+        <DialogContent sx={{ pt: '8px !important' }}>
+          {applySuccess ? (
+            <Box sx={{ textAlign: 'center', py: 3 }}>
+              <Typography variant="h1" sx={{ fontSize: '3rem', mb: 1 }}>🎉</Typography>
+              <Typography variant="body1" color="text.secondary">
+                Your application for <strong>{applyJob?.title}</strong> at <strong>{applyJob?.company}</strong> has been submitted successfully!
+              </Typography>
+            </Box>
+          ) : (
+            <Box>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Applying to <strong>{applyJob?.title}</strong> at <strong>{applyJob?.company}</strong>
+              </Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={5}
+                label="Cover Letter (optional)"
+                placeholder="Tell them why you're a great fit..."
+                value={coverLetter}
+                onChange={(e) => setCoverLetter(e.target.value)}
+              />
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 3, gap: 1 }}>
+          <Button onClick={() => { setApplyJob(null); setApplySuccess(false); }} variant="outlined" sx={{ borderRadius: '10px' }}>
+            {applySuccess ? 'Done' : 'Cancel'}
+          </Button>
+          {!applySuccess && (
+            <Button variant="contained" onClick={handleApply} disabled={isApplying} sx={{ borderRadius: '10px' }}>
+              {isApplying ? 'Submitting…' : 'Submit Application'}
+            </Button>
+          )}
+        </DialogActions>
       </Dialog>
     </Box>
   );

@@ -12,6 +12,7 @@ interface CreateEventData {
   meetingLink?: string;
   maxAttendees?: number;
   banner?: string;
+  coverImage?: string;
 }
 
 const normalizeEvent = (raw: any): Event => {
@@ -42,8 +43,9 @@ const normalizeEvent = (raw: any): Event => {
     rsvps: raw?.rsvps,
     maxAttendees: raw?.maxAttendees ?? raw?.capacity,
     capacity: raw?.capacity ?? raw?.maxAttendees,
-    banner: raw?.banner || raw?.imageUrl,
-    imageUrl: raw?.imageUrl || raw?.banner,
+    banner: raw?.banner || raw?.imageUrl || raw?.coverImage,
+    imageUrl: raw?.imageUrl || raw?.banner || raw?.coverImage,
+    coverImage: raw?.coverImage || raw?.imageUrl || raw?.banner,
     createdAt: raw?.createdAt,
     status: raw?.status,
   };
@@ -78,7 +80,13 @@ export const eventApi = apiSlice.injectEndpoints({
         return `/events?${params.toString()}`;
       },
       transformResponse: (response: any) => toPaginatedEvents(response),
-      providesTags: ['Event'],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.data.map((e) => ({ type: 'Event' as const, id: e._id || e.id })),
+              { type: 'Event' as const, id: 'LIST' },
+            ]
+          : [{ type: 'Event' as const, id: 'LIST' }],
     }),
     getEventById: builder.query<ApiResponse<Event>, string>({
       query: (id) => `/events/${id}`,
@@ -105,7 +113,7 @@ export const eventApi = apiSlice.injectEndpoints({
           hasMore: false,
         };
       },
-      providesTags: ['Event'],
+      providesTags: [{ type: 'Event' as const, id: 'LIST' }],
     }),
     getAttendingEvents: builder.query<PaginatedResponse<Event>, { page?: number; limit?: number }>({
       query: () => `/events/my-rsvps`,
@@ -125,7 +133,7 @@ export const eventApi = apiSlice.injectEndpoints({
           hasMore: false,
         };
       },
-      providesTags: ['Event'],
+      providesTags: [{ type: 'Event' as const, id: 'LIST' }],
     }),
     createEvent: builder.mutation<ApiResponse<Event>, CreateEventData>({
       query: (data) => ({
@@ -142,6 +150,7 @@ export const eventApi = apiSlice.injectEndpoints({
           meetingLink: data.meetingLink || '',
           capacity: data.maxAttendees,
           imageUrl: data.banner || '',
+          coverImage: data.coverImage || '',
         },
       }),
       transformResponse: (response: any) => ({
@@ -160,13 +169,17 @@ export const eventApi = apiSlice.injectEndpoints({
           isVirtual: data.isOnline,
           capacity: data.maxAttendees,
           imageUrl: data.banner,
+          coverImage: data.coverImage,
         },
       }),
       transformResponse: (response: any) => ({
         ...response,
         data: normalizeEvent(response?.data?.event || response?.data),
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: 'Event', id }],
+      invalidatesTags: (result, error, { id }) => [
+        { type: 'Event', id },
+        { type: 'Event', id: 'LIST' },
+      ],
     }),
     deleteEvent: builder.mutation<ApiResponse<void>, string>({
       query: (id) => ({
@@ -181,7 +194,10 @@ export const eventApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: { status: 'going' },
       }),
-      invalidatesTags: (result, error, id) => [{ type: 'Event', id }],
+      invalidatesTags: (result, error, id) => [
+        { type: 'Event', id },
+        { type: 'Event', id: 'LIST' },
+      ],
     }),
     cancelRsvp: builder.mutation<ApiResponse<Event>, string>({
       query: (id) => ({
@@ -189,7 +205,10 @@ export const eventApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: { status: 'not_going' },
       }),
-      invalidatesTags: (result, error, id) => [{ type: 'Event', id }],
+      invalidatesTags: (result, error, id) => [
+        { type: 'Event', id },
+        { type: 'Event', id: 'LIST' },
+      ],
     }),
   }),
 });

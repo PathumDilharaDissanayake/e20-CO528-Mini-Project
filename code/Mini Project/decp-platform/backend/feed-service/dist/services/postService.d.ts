@@ -7,6 +7,7 @@
  * Fixes: FLAW-003, FLAW-004, FLAW-012 (transactions + idempotency)
  */
 import { Post, Comment } from '../models';
+import { AuthorInfo } from '../models/Post';
 export interface FeedOptions {
     page?: number;
     limit?: number;
@@ -26,13 +27,20 @@ export interface FeedResult {
 }
 export interface CreatePostInput {
     userId: string;
+    author?: AuthorInfo;
     content: string;
-    type?: 'text' | 'image' | 'video' | 'document';
+    type?: 'text' | 'image' | 'video' | 'document' | 'poll';
     isPublic?: boolean;
     mediaUrls?: string[];
+    pollOptions?: Array<{
+        text: string;
+        votes: string[];
+    }>;
+    pollEndsAt?: Date;
 }
 export interface CommentInput {
     userId: string;
+    author?: AuthorInfo;
     postId: string;
     content: string;
     parentId?: string;

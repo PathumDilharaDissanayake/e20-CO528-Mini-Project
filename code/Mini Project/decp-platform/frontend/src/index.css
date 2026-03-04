@@ -265,12 +265,12 @@ code {
 
 /* Hover lift effect */
 .hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
 }
 
 /* Glass morphism */
@@ -295,6 +295,58 @@ code {
   opacity: 0.03;
   pointer-events: none;
 }
+
+/* ─── Page transition & stagger animations ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes reactionFadeIn {
+  from { opacity: 0; transform: scale(0.8) translateY(4px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes notifPulse {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Applied to top-level page containers for fade-in on route change */
+.page-enter {
+  animation: fadeInUp 0.3s ease-out both;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.3s ease-out both;
+}
+
+.reaction-pop {
+  animation: reactionFadeIn 0.2s ease-out both;
+}
+
+.notif-pulse {
+  animation: notifPulse 1.5s ease-in-out infinite;
+}
+
+/* Stagger children — supports up to 8 children */
+.stagger-children > * {
+  animation: fadeInUp 0.35s ease-out both;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0.04s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.08s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.12s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.16s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.20s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.24s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.28s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.32s; }
 
 /* Animated background */
 .animated-bg {
@@ -326,4 +378,118 @@ code {
     rgba(255, 255, 255, 0)
   );
   animation: shimmer 2s infinite;
+}
+
+/* ─── DECP Branded Spinner ─── */
+@keyframes decpSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes decpPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.85; }
+}
+
+.decp-spinner {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.decp-spinner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #15803d;
+  border-right-color: #14b8a6;
+  animation: decpSpin 0.8s linear infinite;
+}
+
+.decp-spinner::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-bottom-color: #166534;
+  animation: decpSpin 0.6s linear infinite reverse;
+}
+
+/* ─── Card hover lift ─── */
+.card-hover {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(22, 101, 52, 0.12) !important;
+}
+
+/* ─── Button press effect ─── */
+.btn-press {
+  transition: transform 0.1s ease;
+}
+
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* ─── Smooth image load ─── */
+.img-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* ─── Notification badge pulse ─── */
+@keyframes badgePulse {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.badge-pulse {
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+/* ─── Lightbox overlay ─── */
+@keyframes lightboxIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.lightbox-enter {
+  animation: lightboxIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── Reaction picker ─── */
+@keyframes reactionBounce {
+  0% { transform: scale(0.5) translateY(8px); opacity: 0; }
+  60% { transform: scale(1.15) translateY(-2px); opacity: 1; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.reaction-bounce {
+  animation: reactionBounce 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ─── Typing indicator ─── */
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+.typing-dot:nth-child(1) { animation: typingDot 1.2s ease-in-out infinite; }
+.typing-dot:nth-child(2) { animation: typingDot 1.2s ease-in-out 0.2s infinite; }
+.typing-dot:nth-child(3) { animation: typingDot 1.2s ease-in-out 0.4s infinite; }
+
+/* ─── Progress bar animation ─── */
+@keyframes progressFill {
+  from { width: 0%; }
+  to { width: var(--target-width, 100%); }
+}
+
+.progress-fill {
+  animation: progressFill 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }

@@ -24,14 +24,13 @@ import {
   Refresh as RefreshIcon,
   TrendingUp,
   PhotoCamera,
-  VideoLibrary,
-  Article,
   People,
   Work,
   Event,
   Science,
   EmojiEvents,
   PersonAdd,
+  HourglassEmpty,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -40,7 +39,7 @@ import { CreatePost } from '@components/feed/CreatePost';
 import { PostCard } from '@components/feed/PostCard';
 import { FeedSkeleton, EmptyState, ErrorState } from '@components/common';
 import { useGetPostsQuery } from '@services/postApi';
-import { useGetUsersQuery, useFollowUserMutation } from '@services/userApi';
+import { useGetUsersQuery, useSendConnectionRequestMutation, useGetConnectionsQuery } from '@services/userApi';
 import { useGetUserPostsQuery } from '@services/postApi';
 import { useInfiniteScroll } from '@hooks';
 import { Post } from '@types';
@@ -56,9 +55,10 @@ const StatsWidget: React.FC = () => {
     { userId, page: 1, limit: 1 },
     { skip: !userId, pollingInterval: 60000 }
   );
+  const { data: connectionsData } = useGetConnectionsQuery(undefined, { pollingInterval: 60000 });
 
   const postCount = postsData?.total ?? '—';
-  const connectionCount = Array.isArray(user?.connections) ? user.connections.length : 0;
+  const connectionCount: number | string = connectionsData?.total ?? '—';
 
   return (
     <Card
@@ -193,8 +193,8 @@ const QuickActionsWidget: React.FC = () => {
 const SuggestedUsersWidget: React.FC = () => {
   const navigate = useNavigate();
   const { user: currentUser } = useSelector((state: RootState) => state.auth);
-  const [followUser] = useFollowUserMutation();
-  const [followedIds, setFollowedIds] = useState<Set<string>>(new Set());
+  const [sendConnectionRequest] = useSendConnectionRequestMutation();
+  const [pendingIds, setPendingIds] = useState<Set<string>>(new Set());
 
   const { data, isLoading, isError } = useGetUsersQuery(
     { limit: 6 },
@@ -214,13 +214,13 @@ const SuggestedUsersWidget: React.FC = () => {
     }
   };
 
-  const handleFollow = async (userId: string, e: React.MouseEvent) => {
+  const handleConnect = async (userId: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    setFollowedIds(prev => new Set([...prev, userId]));
+    setPendingIds(prev => new Set([...prev, userId]));
     try {
-      await followUser(userId).unwrap();
+      await sendConnectionRequest(userId).unwrap();
     } catch {
-      setFollowedIds(prev => { const next = new Set(prev); next.delete(userId); return next; });
+      setPendingIds(prev => { const next = new Set(prev); next.delete(userId); return next; });
     }
   };
 
@@ -258,7 +258,7 @@ const SuggestedUsersWidget: React.FC = () => {
         <List disablePadding>
           {users.map((u: any, i: number) => {
             const uid = u._id || u.id || String(i);
-            const isFollowed = followedIds.has(uid);
+            const isPending = pendingIds.has(uid);
             return (
               <ListItem
                 key={uid}
@@ -272,17 +272,21 @@ const SuggestedUsersWidget: React.FC = () => {
                   '&:hover': { background: 'rgba(16,185,129,0.06)' },
                 }}
                 secondaryAction={
-                  <Tooltip title={isFollowed ? 'Connected' : 'Connect'}>
-                    <IconButton
-                      size="small"
-                      onClick={(e) => !isFollowed && handleFollow(uid, e)}
-                      sx={{
-                        color: isFollowed ? 'primary.main' : 'text.secondary',
-                        '&:hover': { color: 'primary.main', background: 'rgba(22,101,52,0.1)' },
-                      }}
-                    >
-                      <PersonAdd fontSize="small" />
-                    </IconButton>
+                  <Tooltip title={isPending ? 'Pending' : 'Connect'}>
+                    <span>
+                      <IconButton
+                        size="small"
+                        onClick={(e) => !isPending && handleConnect(uid, e)}
+                        disabled={isPending}
+                        sx={{
+                          color: isPending ? 'warning.main' : 'text.secondary',
+                          '&:hover': { color: isPending ? 'warning.main' : 'primary.main', background: isPending ? 'rgba(245,158,11,0.1)' : 'rgba(22,101,52,0.1)' },
+                          '&.Mui-disabled': { color: 'warning.main', opacity: 0.85 },
+                        }}
+                      >
+                        {isPending ? <HourglassEmpty fontSize="small" /> : <PersonAdd fontSize="small" />}
+                      </IconButton>
+                    </span>
                   </Tooltip>
                 }
                 onClick={() => navigate(`/users/${uid}`)}
@@ -337,6 +341,7 @@ const SuggestedUsersWidget: React.FC = () => {
 
 export const FeedPage: React.FC = () => {
   const { user } = useSelector((state: RootState) => state.auth);
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [allPosts, setAllPosts] = useState<Post[]>([]);
@@ -365,24 +370,31 @@ export const FeedPage: React.FC = () => {
 
       const result = [...prev];
       const toAppend: Post[] = [];
+      const toPrepend: Post[] = [];
 
       data.data.forEach((post) => {
         const id = post._id || post.id || '';
         if (!id) return;
 
         if (prevIndexMap.has(id)) {
-          // UPDATE the existing post with fresh server data (fixes stale likes/comments)
+          // UPDATE the existing post with fresh server data (fixes stale likes/comments/polls)
           result[prevIndexMap.get(id)!] = post;
         } else if (!seenIds.current.has(id)) {
-          // ADD new post (pagination / new posts from polling)
           seenIds.current.add(id);
-          toAppend.push(post);
+          if (page === 1) {
+            // New posts from page-1 refetches go to the TOP (e.g. just-created post)
+            toPrepend.push(post);
+          } else {
+            // Paginated posts append to the bottom
+            toAppend.push(post);
+          }
         }
       });
 
+      if (toPrepend.length > 0) return [...toPrepend, ...result];
       return toAppend.length > 0 ? [...result, ...toAppend] : result;
     });
-  }, [data]);
+  }, [data, page]);
 
   const handleLoadMore = useCallback(() => {
     if (data?.hasMore && !isFetching) setPage((prev) => prev + 1);
@@ -450,7 +462,7 @@ export const FeedPage: React.FC = () => {
   const userInitials = user?.firstName?.[0]?.toUpperCase() || 'U';
 
   return (
-    <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', xl: '1fr 300px' }, gap: 3, alignItems: 'start' }}>
+    <Box className="page-enter" sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', xl: '1fr 300px' }, gap: 3, alignItems: 'start' }}>
       {/* ── Centre: Feed ── */}
       <Box>
         {/* Create Post Card */}
@@ -503,31 +515,31 @@ export const FeedPage: React.FC = () => {
             <Divider sx={{ mb: 1.5 }} />
 
             {/* Action buttons */}
-            <Box className="flex items-center justify-between gap-2">
-              {[
-                { icon: PhotoCamera, label: 'Photo', color: '#166534' },
-                { icon: VideoLibrary, label: 'Video', color: '#6366f1' },
-                { icon: Article, label: 'Article', color: '#f59e0b' },
-              ].map(({ icon: Icon, label, color }) => (
-                <Button
-                  key={label}
-                  startIcon={<Icon sx={{ fontSize: 18, color }} />}
-                  onClick={() => setIsCreateModalOpen(true)}
-                  size="small"
-                  sx={{
-                    flex: 1,
-                    py: 0.75,
-                    borderRadius: '10px',
-                    color: 'text.secondary',
-                    fontWeight: 500,
-                    fontSize: '0.8rem',
-                    '&:hover': { background: `${color}12`, color },
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  {label}
-                </Button>
-              ))}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
+              <Button
+                startIcon={<PhotoCamera sx={{ fontSize: 18, color: '#45bd62' }} />}
+                onClick={() => setIsCreateModalOpen(true)}
+                size="small"
+                sx={{ flex: 1, py: 0.75, borderRadius: '10px', color: 'text.secondary', fontWeight: 600, fontSize: '0.8rem', '&:hover': { background: '#45bd6212', color: '#45bd62' }, transition: 'all 0.2s' }}
+              >
+                Photo/Video
+              </Button>
+              <Button
+                startIcon={<Event sx={{ fontSize: 18, color: '#e86771' }} />}
+                onClick={() => navigate('/events')}
+                size="small"
+                sx={{ flex: 1, py: 0.75, borderRadius: '10px', color: 'text.secondary', fontWeight: 600, fontSize: '0.8rem', '&:hover': { background: '#e8677112', color: '#e86771' }, transition: 'all 0.2s' }}
+              >
+                Events
+              </Button>
+              <Button
+                startIcon={<Work sx={{ fontSize: 18, color: '#1876f2' }} />}
+                onClick={() => navigate('/jobs')}
+                size="small"
+                sx={{ flex: 1, py: 0.75, borderRadius: '10px', color: 'text.secondary', fontWeight: 600, fontSize: '0.8rem', '&:hover': { background: '#1876f212', color: '#1876f2' }, transition: 'all 0.2s' }}
+              >
+                Jobs
+              </Button>
               <Button
                 variant="contained"
                 size="small"
@@ -549,7 +561,7 @@ export const FeedPage: React.FC = () => {
           </Paper>
         </Fade>
 
-        <CreatePost open={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)} />
+        <CreatePost open={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)} onSuccess={handleRefresh} />
 
         {/* Posts */}
         {displayPosts.length === 0 && !isLoading && !isFetching ? (

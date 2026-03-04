@@ -11,6 +11,8 @@ interface CreateResearchData {
   endDate?: string;
   funding?: string;
   tags: string[];
+  progress?: number;
+  coverImage?: string;
 }
 
 const uiToBackendStatus = (status?: string) => {
@@ -60,8 +62,10 @@ const normalizeResearchProject = (raw: any): ResearchProject => {
     endDate: raw?.endDate,
     tags,
     visibility: raw?.visibility,
+    coverImage: raw?.coverImage,
     createdAt: raw?.createdAt,
-  };
+    progress: raw?.progress || 0,
+  } as any;
 };
 
 const toPaginatedProjects = (response: any): PaginatedResponse<ResearchProject> => {
@@ -93,7 +97,13 @@ export const researchApi = apiSlice.injectEndpoints({
         return `/research?${params.toString()}`;
       },
       transformResponse: (response: any) => toPaginatedProjects(response),
-      providesTags: ['Research'],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.data.map((p) => ({ type: 'Research' as const, id: p._id || p.id })),
+              { type: 'Research' as const, id: 'LIST' },
+            ]
+          : [{ type: 'Research' as const, id: 'LIST' }],
     }),
     getResearchById: builder.query<ApiResponse<ResearchProject>, string>({
       query: (id) => `/research/${id}`,
@@ -107,13 +117,25 @@ export const researchApi = apiSlice.injectEndpoints({
       // leadResearcher=me → backend filters by x-user-id as lead researcher
       query: ({ page = 1, limit = 10 }) => `/research?page=${page}&limit=${limit}&leadResearcher=me`,
       transformResponse: (response: any) => toPaginatedProjects(response),
-      providesTags: ['Research'],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.data.map((p) => ({ type: 'Research' as const, id: p._id || p.id })),
+              { type: 'Research' as const, id: 'LIST' },
+            ]
+          : [{ type: 'Research' as const, id: 'LIST' }],
     }),
     getCollaboratingResearch: builder.query<PaginatedResponse<ResearchProject>, { page?: number; limit?: number }>({
       // collaborator=me → backend filters by x-user-id in collaborators array
       query: ({ page = 1, limit = 10 }) => `/research?page=${page}&limit=${limit}&collaborator=me`,
       transformResponse: (response: any) => toPaginatedProjects(response),
-      providesTags: ['Research'],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.data.map((p) => ({ type: 'Research' as const, id: p._id || p.id })),
+              { type: 'Research' as const, id: 'LIST' },
+            ]
+          : [{ type: 'Research' as const, id: 'LIST' }],
     }),
     createResearch: builder.mutation<ApiResponse<ResearchProject>, CreateResearchData>({
       query: (data) => ({
@@ -123,12 +145,16 @@ export const researchApi = apiSlice.injectEndpoints({
           title: data.title,
           abstract: data.description,
           description: data.description,
+          field: data.field,
           status: uiToBackendStatus(data.status),
           startDate: data.startDate || null,
           endDate: data.endDate || null,
+          funding: data.funding,
           collaborators: data.collaborators || [],
-          tags: [data.field, ...(data.tags || [])].filter(Boolean),
+          tags: data.tags || [],
           visibility: 'department',
+          progress: data.progress || 0,
+          ...(data.coverImage !== undefined && { coverImage: data.coverImage }),
         },
       }),
       transformResponse: (response: any) => ({
@@ -142,22 +168,27 @@ export const researchApi = apiSlice.injectEndpoints({
         url: `/research/${id}`,
         method: 'PUT',
         body: {
-          ...(data.title ? { title: data.title } : {}),
-          ...(data.description ? { abstract: data.description, description: data.description } : {}),
-          ...(data.status ? { status: uiToBackendStatus(data.status) } : {}),
-          ...(data.startDate ? { startDate: data.startDate } : {}),
-          ...(data.endDate ? { endDate: data.endDate } : {}),
-          ...(data.collaborators ? { collaborators: data.collaborators } : {}),
-          ...(data.tags || data.field
-            ? { tags: [data.field, ...(data.tags || [])].filter(Boolean) }
-            : {}),
+          ...(data.title !== undefined && { title: data.title }),
+          ...(data.description !== undefined && { abstract: data.description, description: data.description }),
+          ...(data.field !== undefined && { field: data.field }),
+          ...(data.status !== undefined && { status: uiToBackendStatus(data.status) }),
+          ...(data.startDate !== undefined && { startDate: data.startDate }),
+          ...(data.endDate !== undefined && { endDate: data.endDate }),
+          ...(data.funding !== undefined && { funding: data.funding }),
+          ...(data.collaborators !== undefined && { collaborators: data.collaborators }),
+          ...(data.tags !== undefined && { tags: data.tags }),
+          ...(data.progress !== undefined && { progress: data.progress }),
+          ...(data.coverImage !== undefined && { coverImage: data.coverImage }),
         },
       }),
       transformResponse: (response: any) => ({
         ...response,
         data: normalizeResearchProject(response?.data?.project || response?.data),
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: 'Research', id }],
+      invalidatesTags: (result, error, { id }) => [
+        { type: 'Research' as const, id },
+        { type: 'Research' as const, id: 'LIST' },
+      ],
     }),
     deleteResearch: builder.mutation<ApiResponse<void>, string>({
       query: (id) => ({
@@ -171,14 +202,14 @@ export const researchApi = apiSlice.injectEndpoints({
         url: `/research/${id}/collaborate`,
         method: 'POST',
       }),
-      invalidatesTags: (result, error, id) => [{ type: 'Research', id }],
+      invalidatesTags: ['Research'],  // Changed: broad invalidation so list refetches
     }),
     leaveResearch: builder.mutation<ApiResponse<ResearchProject>, string>({
       query: (id) => ({
         url: `/research/${id}/collaborate`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, id) => [{ type: 'Research', id }],
+      invalidatesTags: ['Research'],  // Changed: broad invalidation
     }),
     uploadDocument: builder.mutation<ApiResponse<ResearchProject>, { researchId: string; file: File }>({
       query: ({ researchId, file }) => {

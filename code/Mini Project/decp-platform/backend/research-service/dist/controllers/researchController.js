@@ -8,16 +8,21 @@ const sequelize_1 = require("sequelize");
 const models_1 = require("../models");
 const logger_1 = require("../utils/logger");
 const joi_1 = __importDefault(require("joi"));
+const notify_1 = require("../utils/notify");
 const projectSchema = joi_1.default.object({
     title: joi_1.default.string().min(5).max(300).required(),
-    abstract: joi_1.default.string().min(10).required(),
-    description: joi_1.default.string().allow(''),
+    abstract: joi_1.default.string().min(10).optional(),
+    description: joi_1.default.string().allow('').optional(),
     status: joi_1.default.string().valid('planning', 'active', 'completed', 'on_hold').default('planning'),
     startDate: joi_1.default.date().iso().allow(null),
     endDate: joi_1.default.date().iso().allow(null),
     collaborators: joi_1.default.array().items(joi_1.default.string().uuid()),
     tags: joi_1.default.array().items(joi_1.default.string()),
-    visibility: joi_1.default.string().valid('public', 'private', 'department').default('department')
+    visibility: joi_1.default.string().valid('public', 'private', 'department').default('department'),
+    field: joi_1.default.string().max(100).allow('').optional(),
+    progress: joi_1.default.number().integer().min(0).max(100).default(0),
+    coverImage: joi_1.default.string().max(500).allow('').optional(),
+    funding: joi_1.default.string().allow('').optional()
 });
 const getProjects = async (req, res) => {
     try {
@@ -93,6 +98,13 @@ const createProject = async (req, res) => {
             res.status(400).json({ success: false, message: 'Validation error', error: error.details[0].message });
             return;
         }
+        // description is an alias for abstract
+        if (!value.abstract && value.description) {
+            value.abstract = value.description;
+        }
+        if (!value.abstract) {
+            value.abstract = 'No abstract provided';
+        }
         const project = await models_1.ResearchProject.create({ ...value, leadResearcherId });
         res.status(201).json({ success: true, message: 'Project created successfully', data: { project } });
     }
@@ -115,7 +127,38 @@ const updateProject = async (req, res) => {
             res.status(403).json({ success: false, message: 'Not authorized' });
             return;
         }
-        await project.update(req.body);
+        // Explicitly extract and sanitize updatable fields to prevent mass-assignment
+        const { title, abstract, description, // frontend may send 'description' as alias for 'abstract'
+        status, startDate, endDate, collaborators, tags, visibility, field, progress, coverImage, } = req.body;
+        const updateData = {};
+        if (title !== undefined)
+            updateData.title = title;
+        // Map description → abstract (frontend uses 'description', model uses 'abstract')
+        if (abstract !== undefined)
+            updateData.abstract = abstract;
+        else if (description !== undefined)
+            updateData.abstract = description;
+        if (status !== undefined)
+            updateData.status = status;
+        if (startDate !== undefined)
+            updateData.startDate = startDate;
+        if (endDate !== undefined)
+            updateData.endDate = endDate;
+        if (collaborators !== undefined)
+            updateData.collaborators = collaborators;
+        if (tags !== undefined)
+            updateData.tags = tags;
+        if (visibility !== undefined)
+            updateData.visibility = visibility;
+        if (field !== undefined)
+            updateData.field = field;
+        if (progress !== undefined)
+            updateData.progress = progress;
+        if (coverImage !== undefined)
+            updateData.coverImage = coverImage;
+        await project.update(updateData);
+        // Reload so the response reflects the persisted values
+        await project.reload();
         res.json({ success: true, message: 'Project updated successfully', data: { project } });
     }
     catch (error) {
@@ -184,9 +227,17 @@ const collaborateProject = async (req, res) => {
             res.status(404).json({ success: false, message: 'Project not found' });
             return;
         }
-        const collaborators = new Set(project.collaborators || []);
-        collaborators.add(userId);
-        await project.update({ collaborators: Array.from(collaborators) });
+        const collaboratorsSet = new Set(project.collaborators || []);
+        const wasAlreadyCollaborator = collaboratorsSet.has(userId);
+        collaboratorsSet.add(userId);
+        await project.update({ collaborators: Array.from(collaboratorsSet) });
+        // Fire-and-forget: notify the lead researcher (only on new collaboration, not re-join)
+        if (!wasAlreadyCollaborator && project.leadResearcherId !== userId) {
+            const firstName = (req.headers['x-user-firstname'] || req.headers['x-user-firstName'] || '');
+            const lastName = (req.headers['x-user-lastname'] || req.headers['x-user-lastName'] || '');
+            const userName = `${firstName} ${lastName}`.trim() || 'Someone';
+            (0, notify_1.sendNotification)(project.leadResearcherId, 'system', 'New Collaboration Request', `${userName} wants to collaborate on "${project.title}"`, { projectId });
+        }
         res.json({
             success: true,
             message: 'Added as collaborator',

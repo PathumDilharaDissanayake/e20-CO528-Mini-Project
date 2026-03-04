@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Box,
   Typography,
@@ -13,8 +13,19 @@ import {
   MenuItem,
   Chip,
   Paper,
+  Slider,
+  CircularProgress,
+  InputAdornment,
+  IconButton,
 } from '@mui/material';
-import { Add, Science, Biotech, Hub, Groups } from '@mui/icons-material';
+import { Add, Science, Biotech, Hub, Groups, PhotoCamera } from '@mui/icons-material';
+
+const getMediaUrl = (url: string): string => {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('blob:')) return url;
+  const base = (import.meta.env.VITE_API_URL || '').replace('/api/v1', '');
+  return `${base}${url.startsWith('/') ? '' : '/'}${url}`;
+};
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
 import {
@@ -22,6 +33,7 @@ import {
   useGetMyResearchQuery,
   useGetCollaboratingResearchQuery,
   useCreateResearchMutation,
+  useUpdateResearchMutation,
   useCollaborateResearchMutation,
   useLeaveResearchMutation,
 } from '@services/researchApi';
@@ -85,18 +97,62 @@ export const ResearchPage: React.FC = () => {
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState('');
+  const [createCoverImage, setCreateCoverImage] = useState('');
+  const [createCoverUploading, setCreateCoverUploading] = useState(false);
+  const createCoverInputRef = useRef<HTMLInputElement>(null);
+
+  // Edit project state
+  const [editProjectOpen, setEditProjectOpen] = useState(false);
+  const [editProjectId, setEditProjectId] = useState('');
+  const [editProjectData, setEditProjectData] = useState({
+    title: '',
+    description: '',
+    status: 'ongoing' as string,
+    field: '',
+    tags: [] as string[],
+    endDate: '',
+    funding: '',
+    progress: 0,
+    coverImage: '',
+  });
+  const [editTagInput, setEditTagInput] = useState('');
+  const [editCoverUploading, setEditCoverUploading] = useState(false);
+  const editCoverInputRef = useRef<HTMLInputElement>(null);
 
   const { data: allProjectsData, isLoading: isLoadingAll } = useGetResearchProjectsQuery({}, { skip: activeTab !== 0 });
   const { data: myProjectsData, isLoading: isLoadingMine } = useGetMyResearchQuery({}, { skip: activeTab !== 1 });
   const { data: collabProjectsData, isLoading: isLoadingCollab } = useGetCollaboratingResearchQuery({}, { skip: activeTab !== 2 });
   const [createResearch, { isLoading: isCreating }] = useCreateResearchMutation();
-  const [collaborate] = useCollaborateResearchMutation();
-  const [leave] = useLeaveResearchMutation();
+  const [updateResearch, { isLoading: isUpdating }] = useUpdateResearchMutation();
+  const [collaborate, { isLoading: isCollaborating }] = useCollaborateResearchMutation();
+  const [leave, { isLoading: isLeaving }] = useLeaveResearchMutation();
 
   const canCreateResearch = user?.role === 'faculty' || user?.role === 'admin';
   const isLoading = activeTab === 0 ? isLoadingAll : activeTab === 1 ? isLoadingMine : isLoadingCollab;
   const projects = activeTab === 0 ? (allProjectsData?.data || []) : activeTab === 1 ? (myProjectsData?.data || []) : (collabProjectsData?.data || []);
   const totalProjects = allProjectsData?.total || allProjectsData?.data?.length || 0;
+
+  const handleCoverUpload = async (
+    file: File,
+    setUploading: (v: boolean) => void,
+    setUrl: (url: string) => void
+  ) => {
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';
+      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1';
+      const resp = await fetch(`${apiBase}/posts/upload`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: fd,
+      });
+      const data = await resp.json();
+      if (data.success) setUrl(data.data.url);
+    } catch (err) { console.error('Cover upload failed', err); }
+    finally { setUploading(false); }
+  };
 
   const handleCreateResearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -111,9 +167,11 @@ export const ResearchPage: React.FC = () => {
         endDate: (formData.get('endDate') as string) || undefined,
         funding: formData.get('funding') as string,
         tags,
+        coverImage: createCoverImage || undefined,
       }).unwrap();
       setCreateDialogOpen(false);
       setTags([]);
+      setCreateCoverImage('');
     } catch (err) { console.error('Failed to create research:', err); }
   };
 
@@ -122,6 +180,54 @@ export const ResearchPage: React.FC = () => {
       e.preventDefault();
       if (!tags.includes(tagInput.trim())) setTags([...tags, tagInput.trim()]);
       setTagInput('');
+    }
+  };
+
+  const handleEditProject = (project: ResearchProject) => {
+    setEditProjectId(project._id || project.id || '');
+    setEditProjectData({
+      title: project.title || '',
+      description: project.description || '',
+      status: project.status || 'ongoing',
+      field: project.field || '',
+      tags: Array.isArray(project.tags) ? project.tags : [],
+      endDate: project.endDate ? new Date(project.endDate).toISOString().split('T')[0] : '',
+      funding: (project as any).funding || '',
+      progress: typeof project.progress === 'number' ? project.progress : 0,
+      coverImage: project.coverImage || '',
+    });
+    setEditProjectOpen(true);
+  };
+
+  const handleEditSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!editProjectId) return;
+    try {
+      await updateResearch({
+        id: editProjectId,
+        data: {
+          title: editProjectData.title,
+          description: editProjectData.description,
+          status: editProjectData.status as any,
+          field: editProjectData.field,
+          tags: editProjectData.tags,
+          endDate: editProjectData.endDate || undefined,
+          funding: editProjectData.funding || undefined,
+          progress: editProjectData.progress,
+          coverImage: editProjectData.coverImage || undefined,
+        },
+      }).unwrap();
+      setEditProjectOpen(false);
+    } catch (err) { console.error('Failed to update research:', err); }
+  };
+
+  const handleAddEditTag = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && editTagInput.trim()) {
+      e.preventDefault();
+      if (!editProjectData.tags.includes(editTagInput.trim())) {
+        setEditProjectData(d => ({ ...d, tags: [...d.tags, editTagInput.trim()] }));
+      }
+      setEditTagInput('');
     }
   };
 
@@ -159,11 +265,15 @@ export const ResearchPage: React.FC = () => {
           <ResearchCard
             key={project._id || project.id}
             project={project}
-            onCollaborate={(id) => collaborate(id)}
-            onLeave={(id) => leave(id)}
+            onCollaborate={(id) => collaborate(id).unwrap().catch(console.error)}
+            onLeave={(id) => leave(id).unwrap().catch(console.error)}
+            isCollaborating={isCollaborating}
+            isLeaving={isLeaving}
             isCollaborator={(project.collaborators || []).some((c: any) =>
               (typeof c === 'string' ? c : c._id || c.id) === (user?._id || user?.id)
             )}
+            isLeadResearcher={project.leadResearcherId === (user?._id || user?.id)}
+            onEdit={() => handleEditProject(project)}
           />
         ))
       )}
@@ -195,6 +305,32 @@ export const ResearchPage: React.FC = () => {
               <TextField fullWidth name="endDate" label="End Date (optional)" type="date" InputLabelProps={{ shrink: true }} />
             </Box>
             <TextField fullWidth name="funding" label="Funding Source (optional)" />
+            {/* Cover image */}
+            <input type="file" accept="image/*" ref={createCoverInputRef} style={{ display: 'none' }}
+              onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCoverUpload(f, setCreateCoverUploading, setCreateCoverImage); }} />
+            <TextField
+              label="Cover Image URL (optional)"
+              fullWidth
+              value={createCoverImage}
+              onChange={(e) => setCreateCoverImage(e.target.value)}
+              placeholder="Paste URL or click camera to upload"
+              size="small"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton size="small" onClick={() => createCoverInputRef.current?.click()} disabled={createCoverUploading}>
+                      {createCoverUploading ? <CircularProgress size={18} /> : <PhotoCamera fontSize="small" />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            {createCoverImage && (
+              <Box component="img" src={getMediaUrl(createCoverImage)} alt="Cover preview"
+                sx={{ width: '100%', height: 110, objectFit: 'cover', borderRadius: '8px' }}
+                onError={(e: any) => { e.target.style.display = 'none'; }}
+              />
+            )}
             <Box>
               <TextField fullWidth label="Tags (press Enter to add)" value={tagInput}
                 onChange={(e) => setTagInput(e.target.value)} onKeyDown={handleAddTag}
@@ -210,6 +346,96 @@ export const ResearchPage: React.FC = () => {
             <Button onClick={() => setCreateDialogOpen(false)} variant="outlined" sx={{ borderRadius: '10px' }}>Cancel</Button>
             <Button type="submit" variant="contained" disabled={isCreating} sx={{ background: 'linear-gradient(135deg,#1d4ed8,#3b82f6)' }}>
               {isCreating ? 'Creating…' : 'Create Project'}
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
+      {/* Edit Research Dialog */}
+      <Dialog open={editProjectOpen} onClose={() => setEditProjectOpen(false)} maxWidth="sm" fullWidth PaperProps={{ sx: { borderRadius: '20px' } }}>
+        <form onSubmit={handleEditSubmit}>
+          <DialogTitle sx={{ pb: 1, fontWeight: 700 }}>
+            <Box className="flex items-center gap-2">
+              <Box sx={{ width: 36, height: 36, borderRadius: '10px', background: 'linear-gradient(135deg,#1d4ed8,#3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Science sx={{ color: '#fff', fontSize: 18 }} />
+              </Box>
+              Edit Research Project
+            </Box>
+          </DialogTitle>
+          <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: '8px !important' }}>
+            <TextField fullWidth label="Project Title" required value={editProjectData.title} onChange={(e) => setEditProjectData(d => ({ ...d, title: e.target.value }))} />
+            <TextField fullWidth label="Description / Abstract" multiline rows={3} required value={editProjectData.description} onChange={(e) => setEditProjectData(d => ({ ...d, description: e.target.value }))} />
+            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+              <TextField select fullWidth label="Research Field" required value={editProjectData.field} onChange={(e) => setEditProjectData(d => ({ ...d, field: e.target.value }))}>
+                {RESEARCH_FIELDS.map((f) => <MenuItem key={f} value={f}>{f}</MenuItem>)}
+              </TextField>
+              <TextField select fullWidth label="Status" required value={editProjectData.status} onChange={(e) => setEditProjectData(d => ({ ...d, status: e.target.value }))}>
+                {RESEARCH_STATUS.map((s) => <MenuItem key={s.value} value={s.value}>{s.label}</MenuItem>)}
+              </TextField>
+            </Box>
+            <TextField fullWidth label="End Date (optional)" type="date" InputLabelProps={{ shrink: true }} value={editProjectData.endDate} onChange={(e) => setEditProjectData(d => ({ ...d, endDate: e.target.value }))} />
+            <TextField fullWidth label="Funding Source (optional)" value={editProjectData.funding} onChange={(e) => setEditProjectData(d => ({ ...d, funding: e.target.value }))} />
+            <Box>
+              <Typography variant="body2" color="text.secondary" gutterBottom>
+                Progress: {editProjectData.progress}%
+              </Typography>
+              <Slider
+                value={editProjectData.progress}
+                onChange={(_, v) => setEditProjectData(d => ({ ...d, progress: v as number }))}
+                min={0}
+                max={100}
+                step={5}
+                marks={[
+                  { value: 0, label: '0%' },
+                  { value: 25, label: '25%' },
+                  { value: 50, label: '50%' },
+                  { value: 75, label: '75%' },
+                  { value: 100, label: '100%' },
+                ]}
+                valueLabelDisplay="auto"
+                sx={{ color: 'primary.main' }}
+              />
+            </Box>
+            <Box>
+              <TextField fullWidth label="Tags (press Enter to add)" value={editTagInput}
+                onChange={(e) => setEditTagInput(e.target.value)} onKeyDown={handleAddEditTag}
+                helperText="Press Enter to add a tag" />
+              <Box className="flex flex-wrap gap-2 mt-2">
+                {editProjectData.tags.map((tag) => (
+                  <Chip key={tag} label={tag} onDelete={() => setEditProjectData(d => ({ ...d, tags: d.tags.filter((t) => t !== tag) }))} size="small" color="info" variant="outlined" />
+                ))}
+              </Box>
+            </Box>
+            {/* Cover image for edit */}
+            <input type="file" accept="image/*" ref={editCoverInputRef} style={{ display: 'none' }}
+              onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCoverUpload(f, setEditCoverUploading, (url) => setEditProjectData(d => ({ ...d, coverImage: url }))); }} />
+            <TextField
+              label="Cover Image URL (optional)"
+              fullWidth
+              value={editProjectData.coverImage}
+              onChange={(e) => setEditProjectData(d => ({ ...d, coverImage: e.target.value }))}
+              placeholder="Paste URL or click camera to upload"
+              size="small"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton size="small" onClick={() => editCoverInputRef.current?.click()} disabled={editCoverUploading}>
+                      {editCoverUploading ? <CircularProgress size={18} /> : <PhotoCamera fontSize="small" />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            {editProjectData.coverImage && (
+              <Box component="img" src={getMediaUrl(editProjectData.coverImage)} alt="Cover preview"
+                sx={{ width: '100%', height: 110, objectFit: 'cover', borderRadius: '8px' }}
+                onError={(e: any) => { e.target.style.display = 'none'; }}
+              />
+            )}
+          </DialogContent>
+          <DialogActions sx={{ px: 3, pb: 3, gap: 1 }}>
+            <Button onClick={() => setEditProjectOpen(false)} variant="outlined" sx={{ borderRadius: '10px' }}>Cancel</Button>
+            <Button type="submit" variant="contained" disabled={isUpdating} sx={{ background: 'linear-gradient(135deg,#1d4ed8,#3b82f6)' }}>
+              {isUpdating ? 'Saving…' : 'Save Changes'}
             </Button>
           </DialogActions>
         </form>

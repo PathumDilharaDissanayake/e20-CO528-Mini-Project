@@ -1991,3 +1991,240 @@ Error
 2026-03-03 22:46:45 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
 2026-03-03 22:48:37 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
 2026-03-03 22:51:26 [AUTH-SERVICE] [info]: User logged in: admin@decp.edu
+2026-03-04 06:47:16 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-04 06:47:16 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 06:47:16 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 06:47:16 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-04 06:48:00 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-04 06:56:07 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-04 06:56:07 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 06:56:07 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 06:56:07 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-04 06:58:02 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-04 07:02:52 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-04 09:43:29 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-04 09:43:29 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 09:43:29 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 09:43:29 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-04 10:16:01 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-04 10:16:01 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 10:16:01 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 10:16:01 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-04 10:16:53 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-04 10:44:33 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-04 10:44:34 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 10:44:34 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 10:44:34 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-04 10:53:39 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-04 10:53:39 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 10:53:39 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 10:53:39 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-04 10:54:02 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-04 10:54:02 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-04 10:54:02 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-04 10:54:02 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-04 10:54:03 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-04 10:54:03 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-04 10:54:03 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-04 10:54:03 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-04 10:54:03 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-04 10:54:03 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-04 11:12:47 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-04 11:12:47 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 11:12:47 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 11:12:47 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-04 11:14:39 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-04 11:14:39 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-04 11:14:40 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-04 11:14:40 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-04 11:14:40 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-04 11:14:40 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-04 11:14:41 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-04 11:14:41 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-04 11:14:41 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-04 11:14:41 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-04 11:26:15 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-04 11:26:15 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 11:26:15 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 11:26:15 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-04 11:26:36 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-04 11:26:36 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-04 11:26:36 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-04 11:26:36 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-04 11:26:36 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-04 11:26:36 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-04 11:26:37 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-04 11:26:37 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-04 11:26:37 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-04 11:26:37 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-04 11:26:38 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-04 11:26:38 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-04 11:26:38 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-04 11:26:38 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-04 11:26:38 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-04 11:26:38 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-04 11:26:39 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-04 11:26:39 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-04 11:26:39 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-04 11:26:39 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-04 11:26:40 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-04 11:26:40 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-04 11:27:28 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-04 11:28:33 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-04 17:30:19 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-04 17:30:19 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 17:30:19 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 17:30:19 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-04 17:31:05 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-04 22:15:07 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-04 22:15:08 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 22:15:08 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 22:15:08 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-04 22:15:47 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-04 22:15:47 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-04 22:15:47 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-04 22:15:47 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-04 22:15:48 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-04 22:15:48 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-04 22:15:48 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-04 22:15:48 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-04 22:15:48 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-04 22:15:48 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-04 22:15:49 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-04 22:15:49 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-04 22:15:49 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-04 22:15:49 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-04 22:15:50 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-04 22:15:50 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-04 22:15:50 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-04 22:15:50 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-04 22:15:50 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-04 22:15:50 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-04 22:15:51 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-04 22:15:51 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-04 22:23:38 [AUTH-SERVICE] [info]: User logged in: admin@decp.edu
+2026-03-04 22:23:38 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-04 22:23:39 [AUTH-SERVICE] [info]: User logged in: prof.sarah@decp.edu
+2026-03-04 22:23:39 [AUTH-SERVICE] [info]: User logged in: prof.michael@decp.edu
+2026-03-04 22:23:39 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-04 22:23:40 [AUTH-SERVICE] [info]: User logged in: bob.student@decp.edu
+2026-03-04 22:23:40 [AUTH-SERVICE] [info]: User logged in: carol.student@decp.edu
+2026-03-04 22:23:41 [AUTH-SERVICE] [info]: User logged in: dan.student@decp.edu
+2026-03-04 22:23:41 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-04 22:23:42 [AUTH-SERVICE] [info]: User logged in: emma.alumni@decp.edu
+2026-03-04 22:23:42 [AUTH-SERVICE] [info]: User logged in: frank.alumni@decp.edu
+2026-03-04 22:25:22 [AUTH-SERVICE] [info]: User logged in: admin@decp.edu
+2026-03-04 22:25:22 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-04 22:25:23 [AUTH-SERVICE] [info]: User logged in: prof.sarah@decp.edu
+2026-03-04 22:25:23 [AUTH-SERVICE] [info]: User logged in: prof.michael@decp.edu
+2026-03-04 22:25:24 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-04 22:25:24 [AUTH-SERVICE] [info]: User logged in: bob.student@decp.edu
+2026-03-04 22:25:24 [AUTH-SERVICE] [info]: User logged in: carol.student@decp.edu
+2026-03-04 22:25:25 [AUTH-SERVICE] [info]: User logged in: dan.student@decp.edu
+2026-03-04 22:25:25 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-04 22:25:26 [AUTH-SERVICE] [info]: User logged in: emma.alumni@decp.edu
+2026-03-04 22:25:26 [AUTH-SERVICE] [info]: User logged in: frank.alumni@decp.edu
+2026-03-04 22:26:48 [AUTH-SERVICE] [info]: User logged in: admin@decp.edu
+2026-03-04 22:26:48 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-04 22:26:49 [AUTH-SERVICE] [info]: User logged in: prof.sarah@decp.edu
+2026-03-04 22:26:49 [AUTH-SERVICE] [info]: User logged in: prof.michael@decp.edu
+2026-03-04 22:26:50 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-04 22:26:50 [AUTH-SERVICE] [info]: User logged in: bob.student@decp.edu
+2026-03-04 22:26:50 [AUTH-SERVICE] [info]: User logged in: carol.student@decp.edu
+2026-03-04 22:26:51 [AUTH-SERVICE] [info]: User logged in: dan.student@decp.edu
+2026-03-04 22:26:51 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-04 22:26:52 [AUTH-SERVICE] [info]: User logged in: emma.alumni@decp.edu
+2026-03-04 22:26:52 [AUTH-SERVICE] [info]: User logged in: frank.alumni@decp.edu
+2026-03-04 22:27:21 [AUTH-SERVICE] [info]: User logged in: admin@decp.edu
+2026-03-04 22:27:21 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-04 22:27:22 [AUTH-SERVICE] [info]: User logged in: prof.sarah@decp.edu
+2026-03-04 22:27:22 [AUTH-SERVICE] [info]: User logged in: prof.michael@decp.edu
+2026-03-04 22:27:23 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-04 22:27:23 [AUTH-SERVICE] [info]: User logged in: bob.student@decp.edu
+2026-03-04 22:27:23 [AUTH-SERVICE] [info]: User logged in: carol.student@decp.edu
+2026-03-04 22:27:24 [AUTH-SERVICE] [info]: User logged in: dan.student@decp.edu
+2026-03-04 22:27:24 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-04 22:27:25 [AUTH-SERVICE] [info]: User logged in: emma.alumni@decp.edu
+2026-03-04 22:27:25 [AUTH-SERVICE] [info]: User logged in: frank.alumni@decp.edu
+2026-03-04 22:28:07 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-04 22:28:07 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-04 22:28:07 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-04 22:28:07 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-04 22:28:08 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-04 22:28:08 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-04 22:28:08 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-04 22:28:08 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-04 22:28:09 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-04 22:28:09 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-04 22:28:09 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-04 22:28:09 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-04 22:28:10 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-04 22:28:10 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-04 22:28:10 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-04 22:28:10 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-04 22:28:10 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-04 22:28:10 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-04 22:28:11 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-04 22:28:11 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-04 22:28:11 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-04 22:28:11 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-04 22:31:02 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-04 22:31:02 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 22:31:02 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 22:31:02 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-04 22:31:59 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-04 22:31:59 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-04 22:31:59 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-04 22:31:59 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-04 22:32:00 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-04 22:32:00 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-04 22:32:00 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-04 22:32:00 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-04 22:32:00 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-04 22:32:00 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-04 22:32:01 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-04 22:32:01 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-04 22:32:01 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-04 22:32:01 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-04 22:32:02 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-04 22:32:02 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-04 22:32:02 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-04 22:32:02 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-04 22:32:02 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-04 22:32:02 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-04 22:32:03 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-04 22:32:03 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-04 22:33:58 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-04 22:43:04 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-04 23:16:07 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-04 23:16:07 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-04 23:16:07 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 23:16:07 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-04 23:19:25 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-04 23:19:25 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-04 23:19:25 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-04 23:19:25 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-04 23:19:26 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-04 23:19:26 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-04 23:19:26 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-04 23:19:26 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-04 23:19:27 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-04 23:19:27 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-04 23:19:27 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-04 23:19:27 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-04 23:19:27 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-04 23:19:27 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-04 23:19:28 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-04 23:19:28 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-04 23:19:28 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-04 23:19:28 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-04 23:19:29 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-04 23:19:29 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-04 23:19:29 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-04 23:19:29 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-04 23:23:21 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-04 23:37:23 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to pathumdilharadissanayake@gmail.com
+2026-03-04 23:37:23 [AUTH-SERVICE] [info]: User registered: pathumdilharadissanayake@gmail.com
+2026-03-04 23:37:44 [AUTH-SERVICE] [info]: User logged in: pathumdilharadissanayake@gmail.com
+2026-03-04 23:38:19 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-04 23:40:14 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu

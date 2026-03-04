@@ -32,26 +32,29 @@ export const mockUser = {
 // ── Default auth state ───────────────────────────────────────────────────────
 export const defaultAuthState = {
   user: mockUser,
-  accessToken: 'mock-access-token',
+  token: 'mock-access-token',
   refreshToken: 'mock-refresh-token',
   isAuthenticated: true,
   isLoading: false,
-  error: null,
 };
 
 // ── Mock store factory ───────────────────────────────────────────────────────
-export function createMockStore(preloadedState?: Record<string, unknown>) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function createMockStore(preloadedState?: any) {
+  // Cast to any to avoid TypeScript preloadedState excess-property check
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const state: any = preloadedState ?? {
+    auth: defaultAuthState,
+    theme: { mode: 'light' },
+    ui: { sidebarOpen: true },
+  };
   return configureStore({
     reducer: {
       auth: authReducer,
       theme: themeReducer,
       ui: uiReducer,
     },
-    preloadedState: preloadedState ?? {
-      auth: defaultAuthState,
-      theme: { mode: 'light' },
-      ui: { sidebarOpen: true },
-    },
+    preloadedState: state,
     middleware: (getDefault) =>
       getDefault({ serializableCheck: false }),
   });

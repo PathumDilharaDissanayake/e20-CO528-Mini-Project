@@ -9,6 +9,13 @@ import {
   Button,
   IconButton,
 } from '@mui/material';
+
+const getMediaUrl = (url: string): string => {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('blob:')) return url;
+  const base = (import.meta.env.VITE_API_URL || '').replace('/api/v1', '');
+  return `${base}${url.startsWith('/') ? '' : '/'}${url}`;
+};
 import {
   CalendarToday,
   LocationOn,
@@ -42,13 +49,14 @@ export const EventCard: React.FC<EventCardProps> = ({
 
   return (
     <Card className="mb-4 shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden">
-      {(event.banner || event.imageUrl) && (
+      {(event.banner || event.imageUrl || event.coverImage) && (
         <CardMedia
           component="img"
           height="160"
-          image={event.banner || event.imageUrl || ''}
+          image={getMediaUrl(event.coverImage || event.banner || event.imageUrl || '')}
           alt={event.title || 'Event banner'}
           className="object-cover"
+          onError={(e: any) => { e.target.style.display = 'none'; }}
         />
       )}
       <CardContent>

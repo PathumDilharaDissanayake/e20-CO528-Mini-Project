@@ -1,32 +1,46 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelize from '../config/database';
 
+export interface AuthorInfo {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  avatar?: string;
+}
+
 export interface PostAttributes {
   id: string;
   userId: string;
+  author?: AuthorInfo;
   content: string;
   mediaUrls?: string[];
-  type: 'text' | 'image' | 'video' | 'document';
+  type: 'text' | 'image' | 'video' | 'document' | 'poll';
   likes: number;
   comments: number;
   shares: number;
   isPublic: boolean;
+  pollOptions?: Array<{ text: string; votes: string[] }> | null;
+  pollEndsAt?: Date | null;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-interface PostCreationAttributes extends Optional<PostAttributes, 'id' | 'likes' | 'comments' | 'shares' | 'isPublic' | 'createdAt' | 'updatedAt'> {}
+interface PostCreationAttributes extends Optional<PostAttributes, 'id' | 'author' | 'likes' | 'comments' | 'shares' | 'isPublic' | 'pollOptions' | 'pollEndsAt' | 'createdAt' | 'updatedAt'> {}
 
 class Post extends Model<PostAttributes, PostCreationAttributes> implements PostAttributes {
   public id!: string;
   public userId!: string;
+  public author!: AuthorInfo;
   public content!: string;
   public mediaUrls!: string[];
-  public type!: 'text' | 'image' | 'video' | 'document';
+  public type!: 'text' | 'image' | 'video' | 'document' | 'poll';
   public likes!: number;
   public comments!: number;
   public shares!: number;
   public isPublic!: boolean;
+  public pollOptions!: Array<{ text: string; votes: string[] }> | null;
+  public pollEndsAt!: Date | null;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -42,6 +56,10 @@ Post.init(
       type: DataTypes.UUID,
       allowNull: false
     },
+    author: {
+      type: DataTypes.JSONB,
+      allowNull: true
+    },
     content: {
       type: DataTypes.TEXT,
       allowNull: false
@@ -51,7 +69,7 @@ Post.init(
       defaultValue: []
     },
     type: {
-      type: DataTypes.ENUM('text', 'image', 'video', 'document'),
+      type: DataTypes.ENUM('text', 'image', 'video', 'document', 'poll'),
       defaultValue: 'text'
     },
     likes: {
@@ -69,7 +87,17 @@ Post.init(
     isPublic: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
-    }
+    },
+    pollOptions: {
+      type: DataTypes.JSONB,
+      allowNull: true,
+      defaultValue: null,
+      // shape: [{ text: string, votes: string[] }]
+    },
+    pollEndsAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
   {
     sequelize,

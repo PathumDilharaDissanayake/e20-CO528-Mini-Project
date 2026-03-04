@@ -15,13 +15,23 @@ import {
   IconButton,
   Tooltip,
   Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  ListItemText,
+  ListItemAvatar,
+  Checkbox,
+  CircularProgress,
 } from '@mui/material';
 import { Search, Edit, GroupAdd } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
 import { useGetChatsQuery } from '@services/chatApi';
+import { useGetUsersQuery } from '@services/userApi';
+import { useCreateChatMutation } from '@services/chatApi';
 import { ChatRoom } from '@components/messaging/ChatRoom';
-import { Chat } from '@types';
+import { Chat, User } from '@types';
 import { formatRelativeTime } from '@utils';
 
 const ChatListItem: React.FC<{
@@ -52,10 +62,10 @@ const ChatListItem: React.FC<{
         gap: 1.5,
         borderRadius: 0,
         '&.Mui-selected': {
-          bgcolor: 'rgba(16,185,129,0.1)',
+          bgcolor: 'rgba(22,101,52,0.1)',
           borderLeft: '3px solid',
           borderColor: 'primary.main',
-          '&:hover': { bgcolor: 'rgba(16,185,129,0.12)' },
+          '&:hover': { bgcolor: 'rgba(22,101,52,0.12)' },
         },
         '&:hover': { bgcolor: 'rgba(0,0,0,0.03)' },
       }}
@@ -107,6 +117,17 @@ export const MessagesPage: React.FC = () => {
     pollingInterval: 10000, // refresh every 10 s for new conversations
   });
 
+  const [newChatOpen, setNewChatOpen] = useState(false);
+  const [newGroupOpen, setNewGroupOpen] = useState(false);
+  const [userQuery, setUserQuery] = useState('');
+  const [groupName, setGroupName] = useState('');
+  const [selectedGroupUsers, setSelectedGroupUsers] = useState<string[]>([]);
+  const [createChat, { isLoading: isCreatingChat }] = useCreateChatMutation();
+  const { data: usersData, isFetching: isSearching } = useGetUsersQuery(
+    { search: userQuery, limit: 10 },
+    { skip: !userQuery.trim() }
+  );
+
   const currentUserId = user?._id || user?.id || '';
   const chats = (chatsData?.data || []).filter((c: Chat) => {
     if (!searchTerm.trim()) return true;
@@ -126,6 +147,29 @@ export const MessagesPage: React.FC = () => {
     setSelectedChat(null);
   };
 
+  const handleStartDirect = async (targetUser: User) => {
+    try {
+      const result = await createChat({ participantId: targetUser._id || targetUser.id || '' }).unwrap();
+      if (result.data) {
+        setSelectedChat(result.data);
+      }
+      setNewChatOpen(false);
+      setUserQuery('');
+    } catch (e) { console.error(e); }
+  };
+
+  const handleCreateGroup = async () => {
+    if (!groupName.trim() || selectedGroupUsers.length === 0) return;
+    try {
+      const result = await createChat({ groupName: groupName.trim(), participantIds: selectedGroupUsers }).unwrap();
+      if (result.data) setSelectedChat(result.data);
+      setNewGroupOpen(false);
+      setGroupName('');
+      setSelectedGroupUsers([]);
+      setUserQuery('');
+    } catch (e) { console.error(e); }
+  };
+
   const sidebarContent = (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Sidebar Header */}
@@ -134,10 +178,10 @@ export const MessagesPage: React.FC = () => {
           <Typography variant="h6" fontWeight={800}>Messages</Typography>
           <Box sx={{ display: 'flex', gap: 0.5 }}>
             <Tooltip title="New group">
-              <IconButton size="small"><GroupAdd fontSize="small" /></IconButton>
+              <IconButton size="small" onClick={() => setNewGroupOpen(true)}><GroupAdd fontSize="small" /></IconButton>
             </Tooltip>
             <Tooltip title="New message">
-              <IconButton size="small"><Edit fontSize="small" /></IconButton>
+              <IconButton size="small" onClick={() => setNewChatOpen(true)}><Edit fontSize="small" /></IconButton>
             </Tooltip>
           </Box>
         </Box>
@@ -177,7 +221,7 @@ export const MessagesPage: React.FC = () => {
               {searchTerm ? 'No conversations found' : 'No messages yet'}
             </Typography>
             {!searchTerm && (
-              <Button variant="outlined" size="small" sx={{ mt: 1, borderRadius: '20px' }}>
+              <Button variant="outlined" size="small" sx={{ mt: 1, borderRadius: '20px' }} onClick={() => setNewChatOpen(true)}>
                 Start a conversation
               </Button>
             )}
@@ -289,6 +333,80 @@ export const MessagesPage: React.FC = () => {
           )}
         </Box>
       </Paper>
+
+      {/* New Direct Chat Dialog */}
+      <Dialog open={newChatOpen} onClose={() => { setNewChatOpen(false); setUserQuery(''); }} maxWidth="xs" fullWidth PaperProps={{ sx: { borderRadius: '16px' } }}>
+        <DialogTitle sx={{ fontWeight: 700, pb: 1 }}>New Conversation</DialogTitle>
+        <DialogContent sx={{ pt: '8px !important' }}>
+          <TextField
+            fullWidth
+            size="small"
+            placeholder="Search people by name…"
+            value={userQuery}
+            onChange={(e) => setUserQuery(e.target.value)}
+            autoFocus
+            sx={{ mb: 1 }}
+            InputProps={{ startAdornment: <InputAdornment position="start"><Search sx={{ fontSize: 18, color: 'text.disabled' }} /></InputAdornment> }}
+          />
+          {isSearching && <Box sx={{ textAlign: 'center', py: 2 }}><CircularProgress size={24} /></Box>}
+          {!isSearching && userQuery.trim() && usersData?.data?.length === 0 && (
+            <Typography variant="body2" color="text.disabled" sx={{ textAlign: 'center', py: 2 }}>No users found</Typography>
+          )}
+          <List dense disablePadding>
+            {(usersData?.data || []).filter(u => (u._id || u.id) !== currentUserId).map((u: User) => (
+              <ListItemButton key={u._id || u.id} onClick={() => handleStartDirect(u)} sx={{ borderRadius: '8px' }} disabled={isCreatingChat}>
+                <ListItemAvatar>
+                  <Avatar src={u.avatar} sx={{ width: 36, height: 36, fontSize: '0.875rem' }}>
+                    {u.firstName?.[0]}{u.lastName?.[0]}
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={`${u.firstName} ${u.lastName}`.trim()} secondary={u.role} />
+              </ListItemButton>
+            ))}
+          </List>
+        </DialogContent>
+        <DialogActions sx={{ px: 2, pb: 2 }}>
+          <Button onClick={() => { setNewChatOpen(false); setUserQuery(''); }} size="small">Cancel</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* New Group Dialog */}
+      <Dialog open={newGroupOpen} onClose={() => { setNewGroupOpen(false); setUserQuery(''); setGroupName(''); setSelectedGroupUsers([]); }} maxWidth="xs" fullWidth PaperProps={{ sx: { borderRadius: '16px' } }}>
+        <DialogTitle sx={{ fontWeight: 700, pb: 1 }}>New Group Chat</DialogTitle>
+        <DialogContent sx={{ pt: '8px !important', display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+          <TextField
+            fullWidth size="small" label="Group Name" value={groupName}
+            onChange={(e) => setGroupName(e.target.value)} required
+          />
+          <TextField
+            fullWidth size="small" placeholder="Search members…"
+            value={userQuery} onChange={(e) => setUserQuery(e.target.value)}
+            InputProps={{ startAdornment: <InputAdornment position="start"><Search sx={{ fontSize: 18, color: 'text.disabled' }} /></InputAdornment> }}
+          />
+          {selectedGroupUsers.length > 0 && (
+            <Typography variant="caption" color="text.secondary">{selectedGroupUsers.length} member(s) selected</Typography>
+          )}
+          <List dense disablePadding sx={{ maxHeight: 200, overflowY: 'auto' }}>
+            {(usersData?.data || []).filter(u => (u._id || u.id) !== currentUserId).map((u: User) => {
+              const uid = u._id || u.id || '';
+              const checked = selectedGroupUsers.includes(uid);
+              return (
+                <ListItemButton key={uid} dense onClick={() => setSelectedGroupUsers(prev => checked ? prev.filter(id => id !== uid) : [...prev, uid])} sx={{ borderRadius: '8px' }}>
+                  <Checkbox size="small" checked={checked} sx={{ p: 0.5, mr: 1 }} />
+                  <ListItemAvatar><Avatar src={u.avatar} sx={{ width: 28, height: 28, fontSize: '0.75rem' }}>{u.firstName?.[0]}</Avatar></ListItemAvatar>
+                  <ListItemText primary={`${u.firstName} ${u.lastName}`.trim()} secondary={u.role} primaryTypographyProps={{ variant: 'body2' }} />
+                </ListItemButton>
+              );
+            })}
+          </List>
+        </DialogContent>
+        <DialogActions sx={{ px: 2, pb: 2, gap: 1 }}>
+          <Button size="small" onClick={() => { setNewGroupOpen(false); setUserQuery(''); setGroupName(''); setSelectedGroupUsers([]); }}>Cancel</Button>
+          <Button size="small" variant="contained" onClick={handleCreateGroup} disabled={isCreatingChat || !groupName.trim() || selectedGroupUsers.length === 0}>
+            {isCreatingChat ? 'Creating…' : 'Create Group'}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

@@ -5,15 +5,17 @@ export interface LikeAttributes {
   id: string;
   postId: string;
   userId: string;
+  reactionType: 'like' | 'love' | 'celebrate' | 'insightful' | 'curious';
   createdAt?: Date;
 }
 
-interface LikeCreationAttributes extends Optional<LikeAttributes, 'id' | 'createdAt'> {}
+interface LikeCreationAttributes extends Optional<LikeAttributes, 'id' | 'reactionType' | 'createdAt'> {}
 
 class Like extends Model<LikeAttributes, LikeCreationAttributes> implements LikeAttributes {
   public id!: string;
   public postId!: string;
   public userId!: string;
+  public reactionType!: 'like' | 'love' | 'celebrate' | 'insightful' | 'curious';
   public readonly createdAt!: Date;
 }
 
@@ -31,7 +33,12 @@ Like.init(
     userId: {
       type: DataTypes.UUID,
       allowNull: false
-    }
+    },
+    reactionType: {
+      type: DataTypes.ENUM('like', 'love', 'celebrate', 'insightful', 'curious'),
+      defaultValue: 'like',
+      allowNull: false,
+    },
   },
   {
     sequelize,

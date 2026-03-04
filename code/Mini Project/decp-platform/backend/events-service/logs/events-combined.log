@@ -365,3 +365,39 @@ SequelizeConnectionError: database "decp_events" does not exist
 2026-03-03 22:46:49 [EVENTS-SERVICE] [info]: ✅ Database connected.
 2026-03-03 22:46:49 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
 2026-03-03 22:46:49 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-04 06:47:20 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-04 06:47:20 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 06:47:20 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-04 06:56:11 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-04 06:56:11 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 06:56:11 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-04 09:43:33 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-04 09:43:33 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 09:43:33 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-04 10:16:05 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-04 10:16:05 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 10:16:05 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-04 10:44:37 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-04 10:44:37 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 10:44:37 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-04 10:53:43 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-04 10:53:43 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 10:53:43 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-04 11:12:50 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-04 11:12:50 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 11:12:50 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-04 11:26:19 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-04 11:26:19 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 11:26:19 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-04 17:30:21 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-04 17:30:22 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 17:30:22 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-04 22:15:11 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-04 22:15:11 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 22:15:11 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-04 22:31:06 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-04 22:31:06 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 22:31:06 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005
+2026-03-04 23:16:10 [EVENTS-SERVICE] [info]: ✅ Database connected.
+2026-03-04 23:16:10 [EVENTS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-04 23:16:10 [EVENTS-SERVICE] [info]: 📅 Events Service running on port 3005

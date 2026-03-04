@@ -156,6 +156,40 @@ const createProxyHandler = (targetService: string, servicePrefix?: string) => {
 };
 
 // ============================================================
+// STATIC FILES — FEED SERVICE (port 3003)
+// Uploaded images/files are served directly by the feed-service at /uploads/*
+// The gateway proxies these WITHOUT the /api/v1 prefix.
+// ============================================================
+router.get('/uploads/*', async (req: Request, res: Response) => {
+  const targetUrl = `${config.services.feed}${req.originalUrl}`;
+  logger.info(`[Proxy Static] GET ${req.originalUrl} -> ${targetUrl}`);
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: targetUrl,
+      responseType: 'stream',
+      timeout: 30000,
+    });
+    res.status(response.status);
+    if (response.headers['content-type']) {
+      res.setHeader('content-type', response.headers['content-type']);
+    }
+    if (response.headers['content-length']) {
+      res.setHeader('content-length', response.headers['content-length']);
+    }
+    (response.data as NodeJS.ReadableStream).pipe(res);
+  } catch (error) {
+    const axiosError = error as { response?: { status: number; data: any }; message?: string };
+    if (axiosError.response) {
+      res.status(axiosError.response.status).json(axiosError.response.data);
+    } else {
+      logger.error(`[Proxy Static Error] ${axiosError.message}`);
+      res.status(404).json({ success: false, message: 'File not found' });
+    }
+  }
+});
+
+// ============================================================
 // AUTH SERVICE (port 3001)
 // Gateway strips /api/v1/auth → service receives /login, /register, etc.
 // ============================================================
@@ -179,10 +213,14 @@ router.get('/api/v1/users/me', authMiddleware, createProxyHandler(config.service
 router.put('/api/v1/users/me', authMiddleware, createProxyHandler(config.services.user, 'users'));
 router.get('/api/v1/users/search', authMiddleware, createProxyHandler(config.services.user, 'users'));
 router.get('/api/v1/users/connections', authMiddleware, createProxyHandler(config.services.user, 'users'));
+router.get('/api/v1/users/connections/requests', authMiddleware, createProxyHandler(config.services.user, 'users'));
 router.get('/api/v1/users/connections/:userId/status', authMiddleware, createProxyHandler(config.services.user, 'users'));
 router.post('/api/v1/users/connections/:userId/follow', authMiddleware, createProxyHandler(config.services.user, 'users'));
 router.delete('/api/v1/users/connections/:userId/unfollow', authMiddleware, createProxyHandler(config.services.user, 'users'));
+router.put('/api/v1/users/connections/:userId/accept', authMiddleware, createProxyHandler(config.services.user, 'users'));
+router.delete('/api/v1/users/connections/:userId/decline', authMiddleware, createProxyHandler(config.services.user, 'users'));
 router.get('/api/v1/users', authMiddleware, createProxyHandler(config.services.user, 'users'));
+router.post('/api/v1/users/:userId/endorse', authMiddleware, createProxyHandler(config.services.user, 'users'));
 router.get('/api/v1/users/:userId', authMiddleware, createProxyHandler(config.services.user, 'users'));
 router.delete('/api/v1/users/:userId', authMiddleware, createProxyHandler(config.services.user, 'users'));
 
@@ -191,6 +229,9 @@ router.delete('/api/v1/users/:userId', authMiddleware, createProxyHandler(config
 // Service mounts at /posts so gateway strips /api/v1 only → /posts/... goes to service
 // ============================================================
 router.get('/api/v1/posts/feed', optionalAuthMiddleware, createProxyHandler(config.services.feed));
+// Bookmarks — MUST come before /:postId
+router.get('/api/v1/posts/bookmarks/me', authMiddleware, createProxyHandler(config.services.feed));
+router.post('/api/v1/posts/upload', authMiddleware, createProxyHandler(config.services.feed));
 router.get('/api/v1/posts', optionalAuthMiddleware, createProxyHandler(config.services.feed));
 router.post('/api/v1/posts', authMiddleware, createProxyHandler(config.services.feed));
 router.get('/api/v1/posts/:postId/comments', optionalAuthMiddleware, createProxyHandler(config.services.feed));
@@ -199,6 +240,9 @@ router.delete('/api/v1/posts/:postId/comments/:commentId', authMiddleware, creat
 router.post('/api/v1/posts/:postId/like', authMiddleware, createProxyHandler(config.services.feed));
 router.delete('/api/v1/posts/:postId/like', authMiddleware, createProxyHandler(config.services.feed));
 router.post('/api/v1/posts/:postId/share', authMiddleware, createProxyHandler(config.services.feed));
+router.post('/api/v1/posts/:postId/bookmark', authMiddleware, createProxyHandler(config.services.feed));
+router.post('/api/v1/posts/:postId/vote', authMiddleware, createProxyHandler(config.services.feed));
+router.get('/api/v1/posts/:postId/reactions', optionalAuthMiddleware, createProxyHandler(config.services.feed));
 router.get('/api/v1/posts/:postId', optionalAuthMiddleware, createProxyHandler(config.services.feed));
 router.put('/api/v1/posts/:postId', authMiddleware, createProxyHandler(config.services.feed));
 router.delete('/api/v1/posts/:postId', authMiddleware, createProxyHandler(config.services.feed));

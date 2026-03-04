@@ -14,19 +14,26 @@ export const updateProfileSchema = Joi.object({
   skills: Joi.array().items(Joi.string().max(50)),
   interests: Joi.array().items(Joi.string().max(50)),
   education: Joi.array().items(Joi.object({
-    institution: Joi.string().required(),
-    degree: Joi.string().required(),
-    fieldOfStudy: Joi.string().required(),
-    startYear: Joi.number().integer().min(1950).max(2100).required(),
-    endYear: Joi.number().integer().min(1950).max(2100),
+    id: Joi.string().allow(''),
+    // Accept both 'school' (frontend) and 'institution' (legacy)
+    school: Joi.string().allow(''),
+    institution: Joi.string().allow(''),
+    degree: Joi.string().allow(''),
+    // Accept both 'field' (frontend) and 'fieldOfStudy' (legacy)
+    field: Joi.string().allow(''),
+    fieldOfStudy: Joi.string().allow(''),
+    startYear: Joi.number().integer().min(1950).max(2100),
+    endYear: Joi.number().integer().min(1950).max(2100).allow(null),
+    grade: Joi.string().allow(''),
     current: Joi.boolean().default(false)
   })),
   experience: Joi.array().items(Joi.object({
+    id: Joi.string().allow(''),
     company: Joi.string().required(),
     title: Joi.string().required(),
     location: Joi.string().allow(''),
-    startDate: Joi.string().isoDate().required(),
-    endDate: Joi.string().isoDate(),
+    startDate: Joi.string().allow(''),
+    endDate: Joi.string().allow('', null),
     current: Joi.boolean().default(false),
     description: Joi.string().allow('')
   })),
@@ -34,7 +41,18 @@ export const updateProfileSchema = Joi.object({
     linkedin: Joi.string().uri().allow(''),
     github: Joi.string().uri().allow(''),
     twitter: Joi.string().uri().allow('')
-  })
+  }),
+  openToWork: Joi.boolean(),
+  openToWorkTitle: Joi.string().max(200).allow(''),
+  certifications: Joi.array().items(Joi.object({
+    id: Joi.string().required(),
+    name: Joi.string().required(),
+    issuer: Joi.string().required(),
+    issueDate: Joi.string().required(),
+    url: Joi.string().uri().allow('')
+  })),
+  endorsements: Joi.object().pattern(Joi.string(), Joi.array().items(Joi.string())),
+  featuredPostId: Joi.string().allow('', null)
 });
 
 export const paginationSchema = Joi.object({

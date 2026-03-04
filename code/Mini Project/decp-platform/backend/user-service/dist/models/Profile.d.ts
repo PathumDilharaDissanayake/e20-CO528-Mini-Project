@@ -39,6 +39,17 @@ export interface ProfileAttributes {
         github?: string;
         twitter?: string;
     };
+    openToWork?: boolean;
+    openToWorkTitle?: string;
+    certifications?: {
+        id: string;
+        name: string;
+        issuer: string;
+        issueDate: string;
+        url?: string;
+    }[];
+    endorsements?: Record<string, string[]>;
+    featuredPostId?: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -65,6 +76,11 @@ declare class Profile extends Model<ProfileAttributes, ProfileCreationAttributes
     education: any[];
     experience: any[];
     socialLinks: any;
+    openToWork: boolean;
+    openToWorkTitle: string;
+    certifications: any[];
+    endorsements: Record<string, string[]>;
+    featuredPostId: string;
     readonly createdAt: Date;
     readonly updatedAt: Date;
 }

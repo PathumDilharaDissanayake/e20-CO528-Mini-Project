@@ -1,3 +1,32 @@
+export interface ExperienceItem {
+  id: string;
+  title: string;
+  company: string;
+  location?: string;
+  startDate: string;
+  endDate?: string;
+  current: boolean;
+  description?: string;
+}
+
+export interface EducationItem {
+  id: string;
+  school: string;
+  degree: string;
+  field: string;
+  startYear: number;
+  endYear?: number;
+  grade?: string;
+}
+
+export interface CertificationItem {
+  id: string;
+  name: string;
+  issuer: string;
+  issueDate: string;
+  url?: string;
+}
+
 export interface User {
   id?: string;
   _id?: string;
@@ -28,6 +57,16 @@ export interface User {
   interests?: string[];
   education?: Array<{ institution?: string; degree?: string; fieldOfStudy?: string; startYear?: number; endYear?: number; current?: boolean }>;
   experience?: Array<{ company?: string; title?: string; location?: string; startDate?: string; endDate?: string; current?: boolean; description?: string }>;
+  openToWork?: boolean;
+  openToWorkTitle?: string;
+  certifications?: CertificationItem[];
+  endorsements?: Record<string, string[]>;
+  featuredPostId?: string;
+}
+
+export interface PollOption {
+  text: string;
+  votes: string[];
 }
 
 export interface Post {
@@ -36,12 +75,15 @@ export interface Post {
   userId?: string;
   author?: User;
   content?: string;
-  type?: 'text' | 'image' | 'video' | 'document';
+  type?: 'text' | 'image' | 'video' | 'document' | 'poll';
   media?: { url: string; type: 'image' | 'video' }[];
   mediaUrls?: string[];
   likes?: string[] | number;
   comments?: Comment[] | number;
   shares?: number;
+  pollOptions?: PollOption[] | null;
+  pollEndsAt?: string | null;
+  myReaction?: string | null;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -112,6 +154,7 @@ export interface Event {
   capacity?: number;
   banner?: string;
   imageUrl?: string;
+  coverImage?: string;
   createdAt?: string;
   status?: string;
 }
@@ -133,7 +176,9 @@ export interface ResearchProject {
   funding?: string;
   tags?: string[];
   visibility?: 'public' | 'private' | 'department';
+  coverImage?: string;
   createdAt?: string;
+  progress?: number;
 }
 
 export interface ResearchDocument {

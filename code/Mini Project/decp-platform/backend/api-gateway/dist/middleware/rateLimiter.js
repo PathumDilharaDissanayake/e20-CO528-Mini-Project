@@ -29,6 +29,11 @@ exports.strictRateLimiter = (0, express_rate_limit_1.default)({
     max: 5, // 5 requests per window
     standardHeaders: true,
     legacyHeaders: false,
+    skip: (req) => {
+        // Skip rate limiting for localhost during development/seeding
+        const ip = req.ip || req.socket.remoteAddress || '';
+        return ip === '127.0.0.1' || ip === '::1' || ip === '::ffff:127.0.0.1';
+    },
     handler: (req, res) => {
         logger_1.logger.warn(`Strict rate limit exceeded for IP: ${req.ip}`);
         res.status(429).json({

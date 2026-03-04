@@ -17,8 +17,10 @@ import {
 } from '@mui/material';
 import { Search, Clear, Person, Work, Event, Science, Article } from '@mui/icons-material';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '@store';
 import { useGetPostsQuery } from '@services/postApi';
-import { useGetUsersQuery } from '@services/userApi';
+import { useGetUsersQuery, useSendConnectionRequestMutation, useAcceptConnectionMutation, useDeclineConnectionMutation } from '@services/userApi';
 import { useGetJobsQuery } from '@services/jobApi';
 import { PostCard } from '@components/feed/PostCard';
 import { formatRelativeTime } from '@utils';
@@ -38,10 +40,16 @@ export const SearchPage: React.FC = () => {
   const [query, setQuery] = useState(initialQuery);
   const [activeTab, setActiveTab] = useState('all');
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
+  const [connectionStates, setConnectionStates] = useState<Map<string, 'none' | 'pending' | 'accepted' | 'received_pending'>>(new Map());
+
+  const currentUser = useSelector((state: RootState) => state.auth.user);
+  const [sendConnectionRequest] = useSendConnectionRequestMutation();
+  const [acceptConnection] = useAcceptConnectionMutation();
+  const [declineConnection] = useDeclineConnectionMutation();
 
   // Debounce search
   useEffect(() => {
-    const t = setTimeout(() => setDebouncedQuery(query), 400);
+    const t = setTimeout(() => setDebouncedQuery(query), 150);
     return () => clearTimeout(t);
   }, [query]);
 
@@ -74,6 +82,28 @@ export const SearchPage: React.FC = () => {
 
   const isLoading = postsLoading || usersLoading || jobsLoading;
   const hasQuery = debouncedQuery.trim().length > 0;
+
+  const getConnectButtonProps = (userId: string) => {
+    if (userId === (currentUser?._id || (currentUser as any)?.id)) return null;
+    const state = connectionStates.get(userId) || 'none';
+    if (state === 'accepted') return { label: 'Connected', color: 'success' as const, variant: 'outlined' as const, disabled: true };
+    if (state === 'pending') return { label: 'Pending', color: 'warning' as const, variant: 'outlined' as const, disabled: true };
+    if (state === 'received_pending') return { label: 'Accept', color: 'success' as const, variant: 'contained' as const, disabled: false };
+    return { label: 'Connect', color: 'primary' as const, variant: 'contained' as const, disabled: false };
+  };
+
+  const handleConnect = async (userId: string) => {
+    const state = connectionStates.get(userId) || 'none';
+    try {
+      if (state === 'none') {
+        await sendConnectionRequest(userId).unwrap();
+        setConnectionStates(prev => new Map(prev).set(userId, 'pending'));
+      } else if (state === 'received_pending') {
+        await acceptConnection(userId).unwrap();
+        setConnectionStates(prev => new Map(prev).set(userId, 'accepted'));
+      }
+    } catch (e) { console.error(e); }
+  };
 
   const getRoleColor = (role?: string) => {
     if (role === 'faculty') return '#166534';
@@ -150,10 +180,17 @@ export const SearchPage: React.FC = () => {
         </Tabs>
       </Paper>
 
-      {/* Loading */}
-      {isLoading && (
+      {/* Loading — full spinner on initial load (no data yet) */}
+      {isLoading && !hasQuery && (
         <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
           <CircularProgress color="primary" />
+        </Box>
+      )}
+
+      {/* Loading — small inline spinner while typing with a query */}
+      {isLoading && hasQuery && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', py: 3 }}>
+          <CircularProgress size={24} color="primary" />
         </Box>
       )}
 
@@ -217,9 +254,23 @@ export const SearchPage: React.FC = () => {
                           {u.department && <Typography variant="caption" color="text.secondary" noWrap>{u.department}</Typography>}
                         </Box>
                       </Box>
-                      <Button size="small" variant="outlined" sx={{ borderRadius: '20px', fontSize: '0.72rem', flexShrink: 0 }}>
-                        Connect
-                      </Button>
+                      {(() => {
+                        const uid = u._id || u.id;
+                        const btnProps = uid ? getConnectButtonProps(uid) : null;
+                        if (!btnProps) return null;
+                        return (
+                          <Button
+                            size="small"
+                            variant={btnProps.variant}
+                            color={btnProps.color}
+                            sx={{ borderRadius: '20px', fontSize: '0.72rem', flexShrink: 0 }}
+                            onClick={(e) => { e.stopPropagation(); if (uid && !btnProps.disabled) handleConnect(uid); }}
+                            disabled={btnProps.disabled}
+                          >
+                            {btnProps.label}
+                          </Button>
+                        );
+                      })()}
                     </CardContent>
                   </Card>
                 ))}

@@ -19,6 +19,8 @@ import {
   ListItemButton,
   ListItemText,
   ClickAwayListener,
+  Button,
+  Chip,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
@@ -34,6 +36,7 @@ import {
   Event,
   Science,
   Home,
+  PeopleAlt,
 } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -43,6 +46,7 @@ import { logout } from '@features/authSlice';
 import { toggleSidebar } from '@features/uiSlice';
 import { useGetUnreadCountQuery } from '@services/notificationApi';
 import { useLogoutMutation } from '@services/authApi';
+import { useGetConnectionRequestsQuery, useAcceptConnectionMutation, useDeclineConnectionMutation } from '@services/userApi';
 
 const SEARCH_SHORTCUTS = [
   { label: 'Feed', path: '/', icon: Home },
@@ -58,12 +62,16 @@ export const Header: React.FC = () => {
   const { user, refreshToken } = useSelector((state: RootState) => state.auth);
   const { mode } = useSelector((state: RootState) => state.theme);
   const { data: unreadData } = useGetUnreadCountQuery(undefined, { pollingInterval: 15000 });
+  const { data: connectionRequestsData } = useGetConnectionRequestsQuery(undefined, { pollingInterval: 30000 });
   const [logoutMutation] = useLogoutMutation();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [requestsAnchorEl, setRequestsAnchorEl] = React.useState<null | HTMLElement>(null);
   const [searchValue, setSearchValue] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+  const [acceptConnectionMutation] = useAcceptConnectionMutation();
+  const [declineConnectionMutation] = useDeclineConnectionMutation();
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -100,6 +108,7 @@ export const Header: React.FC = () => {
   };
 
   const unreadCount = unreadData?.data?.count || 0;
+  const pendingRequestCount = connectionRequestsData?.total || connectionRequestsData?.data?.length || 0;
 
   const displayName = `${user?.firstName || ''} ${user?.lastName || ''}`.trim() || 'User';
   const initials = (user?.firstName?.[0] || '') + (user?.lastName?.[0] || '');
@@ -290,6 +299,23 @@ export const Header: React.FC = () => {
             </IconButton>
           </Tooltip>
 
+          {/* Connection Requests */}
+          <Tooltip title="Connection Requests">
+            <IconButton
+              onClick={(e) => setRequestsAnchorEl(e.currentTarget)}
+              sx={{ color: 'text.primary' }}
+            >
+              <Badge
+                badgeContent={pendingRequestCount}
+                color="primary"
+                max={99}
+                sx={{ '& .MuiBadge-badge': { fontSize: '0.65rem', minWidth: 18, height: 18 } }}
+              >
+                <PeopleAlt />
+              </Badge>
+            </IconButton>
+          </Tooltip>
+
           {/* Notifications */}
           <Tooltip title="Notifications">
             <IconButton onClick={() => navigate('/notifications')} sx={{ color: 'text.primary' }}>
@@ -413,6 +439,117 @@ export const Header: React.FC = () => {
               </ListItemIcon>
               <Typography variant="body2" fontWeight={500} color="error">Sign Out</Typography>
             </MenuItem>
+          </Box>
+        </Menu>
+
+        {/* Connection Requests Dropdown Menu */}
+        <Menu
+          anchorEl={requestsAnchorEl}
+          open={Boolean(requestsAnchorEl)}
+          onClose={() => setRequestsAnchorEl(null)}
+          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+          PaperProps={{
+            sx: {
+              mt: 1,
+              minWidth: 300,
+              maxWidth: 360,
+              borderRadius: '16px',
+              maxHeight: 480,
+              overflow: 'auto',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+              border: '1px solid',
+              borderColor: 'divider',
+            }
+          }}
+        >
+          <Box sx={{ px: 2, py: 1.5, borderBottom: '1px solid', borderColor: 'divider' }}>
+            <Typography variant="subtitle2" fontWeight={700}>Connection Requests</Typography>
+          </Box>
+          {(connectionRequestsData?.data || []).length === 0 ? (
+            <Box sx={{ px: 2, py: 3, textAlign: 'center' }}>
+              <Typography variant="body2" color="text.secondary">No pending requests</Typography>
+            </Box>
+          ) : (
+            (connectionRequestsData?.data || []).map((req: any) => {
+              const profile = req.profile || req;
+              const reqUserId = req.userId || req._id || req.id;
+              const displayFirst = profile.firstName || req.firstName || '';
+              const displayLast = profile.lastName || req.lastName || '';
+              const displayRole = profile.role || req.role || '';
+              const displayAvatar = profile.avatar || req.avatar;
+              return (
+                <Box
+                  key={req.connectionId || reqUserId}
+                  sx={{
+                    px: 2,
+                    py: 1.5,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1.5,
+                    borderBottom: '1px solid',
+                    borderColor: 'divider',
+                    '&:last-of-type': { borderBottom: 'none' },
+                  }}
+                >
+                  <Avatar
+                    src={displayAvatar}
+                    sx={{ width: 40, height: 40, cursor: 'pointer', flexShrink: 0, background: 'linear-gradient(135deg,#15803d,#166534)', fontWeight: 700 }}
+                    onClick={() => { setRequestsAnchorEl(null); navigate(`/users/${reqUserId}`); }}
+                  >
+                    {displayFirst?.[0]}
+                  </Avatar>
+                  <Box sx={{ flex: 1, minWidth: 0 }}>
+                    <Typography variant="body2" fontWeight={600} noWrap>
+                      {displayFirst} {displayLast}
+                    </Typography>
+                    {displayRole && (
+                      <Chip
+                        label={displayRole}
+                        size="small"
+                        sx={{ height: 16, fontSize: '0.6rem', fontWeight: 600, mt: 0.25 }}
+                      />
+                    )}
+                  </Box>
+                  <Box sx={{ display: 'flex', gap: 0.5, flexShrink: 0 }}>
+                    <Button
+                      size="small"
+                      variant="contained"
+                      color="success"
+                      sx={{ borderRadius: '8px', fontSize: '0.7rem', minWidth: 0, px: 1, py: 0.5 }}
+                      onClick={async () => {
+                        try { await acceptConnectionMutation(reqUserId).unwrap(); } catch {}
+                        setRequestsAnchorEl(null);
+                      }}
+                    >
+                      Accept
+                    </Button>
+                    <Button
+                      size="small"
+                      variant="outlined"
+                      color="error"
+                      sx={{ borderRadius: '8px', fontSize: '0.7rem', minWidth: 0, px: 1, py: 0.5 }}
+                      onClick={async () => {
+                        try { await declineConnectionMutation(reqUserId).unwrap(); } catch {}
+                        setRequestsAnchorEl(null);
+                      }}
+                    >
+                      Decline
+                    </Button>
+                  </Box>
+                </Box>
+              );
+            })
+          )}
+          <Box sx={{ px: 2, py: 1, borderTop: '1px solid', borderColor: 'divider' }}>
+            <Button
+              fullWidth
+              size="small"
+              onClick={() => { setRequestsAnchorEl(null); navigate('/profile?tab=connections'); }}
+              sx={{ borderRadius: '8px', fontWeight: 600 }}
+            >
+              View All
+            </Button>
           </Box>
         </Menu>
       </Toolbar>

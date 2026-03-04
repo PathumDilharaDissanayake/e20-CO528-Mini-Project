@@ -53,7 +53,7 @@ const makePost = (overrides = {}) => ({
     id: mockUser.id,
     firstName: 'Alice',
     lastName: 'Student',
-    role: 'student',
+    role: 'student' as const,
     email: mockUser.email,
   },
   ...overrides,
@@ -68,7 +68,7 @@ const otherUserPost = makePost({
     id: 'different-user-999',
     firstName: 'Bob',
     lastName: 'Faculty',
-    role: 'faculty',
+    role: 'faculty' as const,
     email: 'bob@decp.edu',
   },
 });

@@ -24,6 +24,8 @@ import {
   AdminPanelSettings,
   TrendingUp,
   Notifications,
+  Bookmark,
+  Search,
 } from '@mui/icons-material';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -37,11 +39,13 @@ const mainNavItems = [
   { path: '/events', label: 'Events', icon: Event },
   { path: '/research', label: 'Research', icon: Science },
   { path: '/messages', label: 'Messages', icon: Message },
+  { path: '/saved', label: 'Saved Posts', icon: Bookmark },
 ];
 
 const secondaryNavItems = [
   { path: '/notifications', label: 'Notifications', icon: Notifications },
   { path: '/profile', label: 'Profile', icon: Person },
+  { path: '/search', label: 'Search', icon: Search },
   { path: '/admin', label: 'Admin', icon: AdminPanelSettings, adminOnly: true },
 ];
 
@@ -157,19 +161,21 @@ export const Sidebar: React.FC = () => {
                     transition: 'all 0.2s ease',
                     ...(active
                       ? {
-                          background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
-                          boxShadow: '0 4px 12px rgba(16,185,129,0.35)',
-                          '& .MuiListItemIcon-root': { color: '#fff' },
-                          '& .MuiListItemText-primary': { color: '#fff', fontWeight: 700 },
-                        }
+                        background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
+                        boxShadow: '0 4px 12px rgba(16,185,129,0.35)',
+                        transform: 'translateX(4px)',
+                        '& .MuiListItemIcon-root': { color: '#fff' },
+                        '& .MuiListItemText-primary': { color: '#fff', fontWeight: 700 },
+                      }
                       : {
-                          '&:hover': {
-                            background: (theme) =>
-                              theme.palette.mode === 'dark'
-                                ? 'rgba(22,101,52,0.12)'
-                                : 'rgba(16,185,129,0.08)',
-                          },
-                        }),
+                        '&:hover': {
+                          background: (theme) =>
+                            theme.palette.mode === 'dark'
+                              ? 'rgba(22,101,52,0.12)'
+                              : 'rgba(16,185,129,0.08)',
+                          transform: 'translateX(4px)',
+                        },
+                      }),
                   }}
                 >
                   <ListItemIcon sx={{ minWidth: 36, color: active ? '#fff' : 'text.secondary' }}>
@@ -217,19 +223,21 @@ export const Sidebar: React.FC = () => {
                     transition: 'all 0.2s ease',
                     ...(active
                       ? {
-                          background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
-                          boxShadow: '0 4px 12px rgba(16,185,129,0.35)',
-                          '& .MuiListItemIcon-root': { color: '#fff' },
-                          '& .MuiListItemText-primary': { color: '#fff', fontWeight: 700 },
-                        }
+                        background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
+                        boxShadow: '0 4px 12px rgba(16,185,129,0.35)',
+                        transform: 'translateX(4px)',
+                        '& .MuiListItemIcon-root': { color: '#fff' },
+                        '& .MuiListItemText-primary': { color: '#fff', fontWeight: 700 },
+                      }
                       : {
-                          '&:hover': {
-                            background: (theme) =>
-                              theme.palette.mode === 'dark'
-                                ? 'rgba(22,101,52,0.12)'
-                                : 'rgba(16,185,129,0.08)',
-                          },
-                        }),
+                        '&:hover': {
+                          background: (theme) =>
+                            theme.palette.mode === 'dark'
+                              ? 'rgba(22,101,52,0.12)'
+                              : 'rgba(16,185,129,0.08)',
+                          transform: 'translateX(4px)',
+                        },
+                      }),
                   }}
                 >
                   <ListItemIcon sx={{ minWidth: 36, color: active ? '#fff' : 'text.secondary' }}>

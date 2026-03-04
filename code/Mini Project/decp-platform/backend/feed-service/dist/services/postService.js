@@ -84,9 +84,15 @@ exports.getPostById = getPostById;
 // Create / Update / Delete
 // ─────────────────────────────────────────────────────────────────────────────
 const createPost = async (input) => {
-    const { userId, content, type = 'text', isPublic = true, mediaUrls = [] } = input;
-    const effectiveType = mediaUrls.length > 0 ? (type === 'text' ? 'image' : type) : 'text';
-    return models_1.Post.create({ userId, content, type: effectiveType, isPublic, mediaUrls });
+    const { userId, author, content, type = 'text', isPublic = true, mediaUrls = [], pollOptions, pollEndsAt } = input;
+    let effectiveType = type;
+    if (pollOptions && pollOptions.length > 0) {
+        effectiveType = 'poll';
+    }
+    else if (mediaUrls.length > 0 && type === 'text') {
+        effectiveType = 'image';
+    }
+    return models_1.Post.create({ userId, author, content, type: effectiveType, isPublic, mediaUrls, pollOptions: pollOptions || null, pollEndsAt: pollEndsAt || null });
 };
 exports.createPost = createPost;
 const updatePost = async (postId, userId, updates) => {
@@ -160,7 +166,7 @@ const getComments = async (postId, page = 1, limit = 20) => {
 };
 exports.getComments = getComments;
 const addComment = async (input) => {
-    const { userId, postId, content, parentId } = input;
+    const { userId, author, postId, content, parentId } = input;
     const t = await database_1.default.transaction();
     try {
         const post = await models_1.Post.findByPk(postId, { transaction: t });
@@ -168,7 +174,7 @@ const addComment = async (input) => {
             await t.rollback();
             throw Object.assign(new Error('Post not found'), { statusCode: 404 });
         }
-        const comment = await models_1.Comment.create({ postId, userId, content, parentId }, { transaction: t });
+        const comment = await models_1.Comment.create({ postId, userId, author, content, parentId }, { transaction: t });
         await post.increment('comments', { by: 1, transaction: t });
         await t.commit();
         return comment;

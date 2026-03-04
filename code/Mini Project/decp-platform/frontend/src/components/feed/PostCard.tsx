@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Card,
   CardContent,
@@ -18,10 +18,10 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Tooltip,
+  Modal,
 } from '@mui/material';
 import {
-  Favorite,
-  FavoriteBorder,
   Comment,
   Share,
   MoreVert,
@@ -31,6 +31,10 @@ import {
   BookmarkBorder,
   Bookmark,
   Close,
+  ThumbUpOutlined,
+  Check,
+  Link as LinkIcon,
+  Repeat,
 } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
@@ -41,11 +45,20 @@ import {
   useSharePostMutation,
   useGetPostCommentsQuery,
   useUpdatePostMutation,
+  useBookmarkPostMutation,
+  useVotePollMutation,
 } from '@services/postApi';
-import { Post } from '@types';
+import { Post, PollOption } from '@types';
 import { formatRelativeTime } from '@utils';
-import { ImageModal } from '@components/common';
 import { useNavigate } from 'react-router-dom';
+
+const REACTIONS = [
+  { type: 'like', emoji: '👍', label: 'Like', color: '#1877f2' },
+  { type: 'love', emoji: '❤️', label: 'Love', color: '#e0245e' },
+  { type: 'celebrate', emoji: '🎉', label: 'Celebrate', color: '#f5a623' },
+  { type: 'insightful', emoji: '💡', label: 'Insightful', color: '#0073b1' },
+  { type: 'curious', emoji: '🤔', label: 'Curious', color: '#8b5cf6' },
+];
 
 interface PostCardProps {
   post: Post;
@@ -60,20 +73,44 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
   const [addComment] = useAddCommentMutation();
   const [sharePost] = useSharePostMutation();
   const [updatePost] = useUpdatePostMutation();
+  const [bookmarkPost] = useBookmarkPostMutation();
+  const [votePoll] = useVotePollMutation();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showComments, setShowComments] = useState(false);
   const [commentText, setCommentText] = useState('');
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [isSaved, setIsSaved] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [editContent, setEditContent] = useState(post.content || '');
   const [editSubmitting, setEditSubmitting] = useState(false);
 
-  // Optimistic like state — cleared after server confirms so fresh data renders
-  const [isLikedOpt, setIsLikedOpt] = useState<boolean | null>(null);
-  const [likesOpt, setLikesOpt] = useState<number | null>(null);
+  // Reaction state
+  const [showReactionPicker, setShowReactionPicker] = useState(false);
+  const [myReaction, setMyReaction] = useState<string | null>((post as any).myReaction || null);
+  const [reactionCount, setReactionCount] = useState<number>(() => {
+    const v = post.likes;
+    return Array.isArray(v) ? v.length : Number(v || 0);
+  });
+  const reactionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Poll options local state (optimistic updates)
+  const [localPollOptions, setLocalPollOptions] = useState<PollOption[] | null>(post.pollOptions || null);
+  useEffect(() => {
+    setLocalPollOptions(post.pollOptions || null);
+  }, [post.pollOptions]);
+
+  // Bookmark state
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  // Share state
+  const [shareAnchor, setShareAnchor] = useState<null | HTMLElement>(null);
+  const [shareDone, setShareDone] = useState(false);
+
+  // Lightbox state
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+
+  // Video ref for autoplay
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const postId = post._id || post.id || '';
   const currentUserId = user?._id || user?.id || '';
@@ -91,48 +128,127 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
     role: 'student',
   };
 
-  const serverLikesCount = Array.isArray(post.likes)
-    ? post.likes.length
-    : Number(post.likes || 0);
-  const likesCount = likesOpt !== null ? likesOpt : serverLikesCount;
-
-  const serverIsLiked = Array.isArray(post.likes)
-    ? post.likes.includes(currentUserId)
-    : false;
-  const isLiked = isLikedOpt !== null ? isLikedOpt : serverIsLiked;
-
   const commentsArr: any[] = commentsData?.data || [];
   const commentsCount =
     commentsData?.data != null
       ? commentsData.data.length
       : Array.isArray(post.comments)
-      ? post.comments.length
-      : Number(post.comments || 0);
+        ? post.comments.length
+        : Number(post.comments || 0);
 
   const isOwner = (author._id || author.id || post.userId) === currentUserId;
+
+  const getMediaUrl = (url: string): string => {
+    if (!url) return '';
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('blob:')) return url;
+    // /uploads/... paths are served by the API gateway which proxies to feed-service
+    const origin = (import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1').replace('/api/v1', '');
+    // Normalize: ensure single leading slash
+    const normalized = url.startsWith('/') ? url : `/${url}`;
+    return `${origin}${normalized}`;
+  };
 
   const mediaItems: any[] = Array.isArray(post.media)
     ? post.media
     : Array.isArray((post as any).mediaUrls)
-    ? (post as any).mediaUrls.map((url: string) => ({
+      ? (post as any).mediaUrls.map((url: string) => ({
         url,
         type: /\.(mp4|webm|ogg)$/i.test(url) ? 'video' : 'image',
       }))
-    : [];
+      : [];
 
-  const handleLike = async () => {
-    const wasLiked = isLiked;
-    const prevCount = likesCount;
-    setIsLikedOpt(!wasLiked);
-    setLikesOpt(wasLiked ? prevCount - 1 : prevCount + 1);
+  // Video autoplay with IntersectionObserver
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => { });
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  // Reaction handlers
+  const handleReactionHover = () => {
+    reactionTimerRef.current = setTimeout(() => setShowReactionPicker(true), 400);
+  };
+  const handleReactionLeave = () => {
+    if (reactionTimerRef.current) clearTimeout(reactionTimerRef.current);
+    setTimeout(() => setShowReactionPicker(false), 300);
+  };
+
+  const handleReact = async (reactionType: string) => {
+    setShowReactionPicker(false);
+    const prev = myReaction;
+    const isRemoving = myReaction === reactionType;
+    setMyReaction(isRemoving ? null : reactionType);
+    setReactionCount((c) => (isRemoving ? Math.max(0, c - 1) : prev ? c : c + 1));
     try {
-      await likePost(postId).unwrap();
-      // After server confirms, clear optimistic state — the refreshed post data takes over
-      setIsLikedOpt(null);
-      setLikesOpt(null);
+      await likePost({ postId, reactionType }).unwrap();
     } catch {
-      setIsLikedOpt(wasLiked);
-      setLikesOpt(prevCount);
+      setMyReaction(prev);
+      setReactionCount((c) => (isRemoving ? c + 1 : prev ? c : Math.max(0, c - 1)));
+    }
+  };
+
+  const activeReaction = REACTIONS.find((r) => r.type === myReaction);
+
+  // Bookmark handler
+  const handleBookmark = async () => {
+    const prev = isBookmarked;
+    setIsBookmarked(!prev);
+    try {
+      await bookmarkPost(postId).unwrap();
+    } catch {
+      setIsBookmarked(prev);
+    }
+  };
+
+  // Share handlers
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(`${window.location.origin}/posts/${postId}`);
+    setShareDone(true);
+    setShareAnchor(null);
+    setTimeout(() => setShareDone(false), 2000);
+  };
+
+  const handleReshare = async () => {
+    setShareAnchor(null);
+    try {
+      await sharePost(postId).unwrap();
+      setShareDone(true);
+      setTimeout(() => setShareDone(false), 2000);
+    } catch (e) {
+      console.error('Share failed:', e);
+    }
+  };
+
+  // Poll vote handler with optimistic update
+  const handleVotePoll = async (optionIndex: number) => {
+    if (!postId || !localPollOptions) return;
+    const prevOptions = localPollOptions;
+    // Optimistic: toggle vote on selected option, remove from others
+    const newOptions = localPollOptions.map((opt, i) => {
+      const votes = opt.votes || [];
+      if (i === optionIndex) {
+        return { ...opt, votes: votes.includes(currentUserId) ? votes.filter(v => v !== currentUserId) : [...votes, currentUserId] };
+      }
+      return { ...opt, votes: votes.filter(v => v !== currentUserId) };
+    });
+    setLocalPollOptions(newOptions);
+    try {
+      const result = await votePoll({ postId, optionIndex }).unwrap();
+      if (result?.data?.pollOptions) setLocalPollOptions(result.data.pollOptions);
+    } catch (e) {
+      console.error(e);
+      setLocalPollOptions(prevOptions);
     }
   };
 
@@ -173,14 +289,6 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
     }
   };
 
-  const handleShare = async () => {
-    try {
-      await sharePost(postId).unwrap();
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   const getBadge = (role?: string) => {
     if (role === 'alumni') return { bgcolor: '#f59e0b', color: 'white' };
     if (role === 'faculty') return { bgcolor: '#166534', color: 'white' };
@@ -190,6 +298,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
   const bs = getBadge(author.role);
 
   const authorId = author._id || author.id || post.userId || '';
+  const pollOptions: PollOption[] | null = localPollOptions;
 
   return (
     <>
@@ -258,13 +367,11 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
               </Box>
             </Box>
             <Box sx={{ display: 'flex', gap: 0.5, flexShrink: 0 }}>
-              <IconButton size="small" onClick={() => setIsSaved(!isSaved)}>
-                {isSaved ? (
-                  <Bookmark fontSize="small" sx={{ color: 'primary.main' }} />
-                ) : (
-                  <BookmarkBorder fontSize="small" />
-                )}
-              </IconButton>
+              <Tooltip title={isBookmarked ? 'Saved' : 'Save post'}>
+                <IconButton size="small" onClick={handleBookmark} sx={{ color: isBookmarked ? 'primary.main' : 'text.secondary' }}>
+                  {isBookmarked ? <Bookmark fontSize="small" /> : <BookmarkBorder fontSize="small" />}
+                </IconButton>
+              </Tooltip>
               {isOwner && (
                 <IconButton size="small" onClick={(e) => setAnchorEl(e.currentTarget)}>
                   <MoreVert fontSize="small" />
@@ -276,10 +383,42 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
           {/* Post content */}
           <Typography
             variant="body2"
-            sx={{ whiteSpace: 'pre-wrap', lineHeight: 1.7, mb: mediaItems.length > 0 ? 1.5 : 0 }}
+            sx={{ whiteSpace: 'pre-wrap', lineHeight: 1.7, mb: (mediaItems.length > 0 || pollOptions) ? 1.5 : 0 }}
           >
             {post.content || ''}
           </Typography>
+
+          {/* Poll display */}
+          {pollOptions && Array.isArray(pollOptions) && pollOptions.length > 0 && (
+            <Box sx={{ mt: 1.5, mb: 1 }}>
+              {pollOptions.map((option: any, i: number) => {
+                const totalVotes = pollOptions.reduce((s: number, o: any) => s + (o.votes?.length || 0), 0);
+                const myVote = (option.votes || []).includes(currentUserId);
+                const pct = totalVotes > 0 ? Math.round((option.votes?.length || 0) / totalVotes * 100) : 0;
+                return (
+                  <Box key={i} sx={{ mb: 1 }} onClick={() => handleVotePoll(i)}>
+                    <Box sx={{
+                      position: 'relative', border: '1px solid', borderColor: myVote ? 'primary.main' : 'divider',
+                      borderRadius: '8px', overflow: 'hidden', cursor: 'pointer', p: 1.5,
+                      '&:hover': { borderColor: 'primary.main', bgcolor: 'action.hover' },
+                    }}>
+                      <Box sx={{
+                        position: 'absolute', left: 0, top: 0, bottom: 0, width: `${pct}%`,
+                        bgcolor: myVote ? 'primary.main' : 'action.selected', opacity: 0.15, transition: 'width 0.4s ease',
+                      }} />
+                      <Box sx={{ position: 'relative', display: 'flex', justifyContent: 'space-between' }}>
+                        <Typography variant="body2" fontWeight={myVote ? 700 : 400}>{option.text}</Typography>
+                        <Typography variant="body2" color="text.secondary">{pct}%</Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                );
+              })}
+              <Typography variant="caption" color="text.secondary">
+                {pollOptions.reduce((s: number, o: any) => s + (o.votes?.length || 0), 0)} votes
+              </Typography>
+            </Box>
+          )}
 
           {/* Media */}
           {mediaItems.length > 0 && (
@@ -297,11 +436,11 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
                 <Box
                   key={index}
                   sx={{ position: 'relative', cursor: 'pointer', overflow: 'hidden' }}
-                  onClick={() => media.type === 'image' && setSelectedImage(media.url)}
+                  onClick={() => media.type === 'image' && setLightboxSrc(getMediaUrl(media.url))}
                 >
                   {media.type === 'image' ? (
                     <img
-                      src={media.url}
+                      src={getMediaUrl(media.url)}
                       alt="Post media"
                       style={{
                         width: '100%',
@@ -309,12 +448,17 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
                         objectFit: 'cover',
                         display: 'block',
                       }}
+                      onError={(e: any) => { e.target.style.display = 'none'; }}
                     />
                   ) : (
                     <video
-                      src={media.url}
+                      ref={index === 0 ? videoRef : undefined}
+                      src={getMediaUrl(media.url)}
+                      muted
+                      loop
+                      playsInline
                       controls
-                      style={{ width: '100%', height: 280, objectFit: 'cover', display: 'block' }}
+                      style={{ width: '100%', maxHeight: 450, borderRadius: 12, display: 'block' }}
                     />
                   )}
                   {index === 3 && mediaItems.length > 4 && (
@@ -350,21 +494,70 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
               t.palette.mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.015)',
           }}
         >
-          <Button
-            size="small"
-            startIcon={isLiked ? <Favorite sx={{ color: '#ef4444' }} /> : <FavoriteBorder />}
-            onClick={handleLike}
-            sx={{
-              color: isLiked ? '#ef4444' : 'text.secondary',
-              fontWeight: 600,
-              borderRadius: '8px',
-              px: 1.5,
-              '&:hover': { bgcolor: 'rgba(239,68,68,0.08)', color: '#ef4444' },
-              transition: 'all 0.15s',
-            }}
+          {/* Reaction area */}
+          <Box
+            sx={{ position: 'relative' }}
+            onMouseEnter={handleReactionHover}
+            onMouseLeave={handleReactionLeave}
           >
-            {likesCount > 0 ? likesCount : 'Like'}
-          </Button>
+            {/* Reaction picker popup */}
+            {showReactionPicker && (
+              <Box sx={{
+                position: 'absolute', bottom: '110%', left: 0, zIndex: 100,
+                bgcolor: 'background.paper', borderRadius: '24px', p: '6px 8px',
+                display: 'flex', gap: 0.5, boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                border: '1px solid', borderColor: 'divider',
+                animation: 'reactionFadeIn 0.15s ease-out',
+              }}>
+                {REACTIONS.map((r) => (
+                  <Tooltip key={r.type} title={r.label} placement="top">
+                    <Box
+                      onClick={() => handleReact(r.type)}
+                      sx={{
+                        fontSize: '1.6rem', cursor: 'pointer', p: '4px',
+                        borderRadius: '50%', lineHeight: 1,
+                        transition: 'transform 0.15s',
+                        '&:hover': { transform: 'scale(1.4)', bgcolor: 'action.hover' },
+                      }}
+                    >
+                      {r.emoji}
+                    </Box>
+                  </Tooltip>
+                ))}
+              </Box>
+            )}
+
+            {/* Like/Reaction button */}
+            <Button
+              size="small"
+              onClick={() => handleReact('like')}
+              sx={{
+                color: activeReaction ? activeReaction.color : 'text.secondary',
+                textTransform: 'none',
+                borderRadius: '8px',
+                fontWeight: activeReaction ? 700 : 400,
+                px: 1.5,
+                '&:hover': { bgcolor: 'action.hover' },
+              }}
+            >
+              {activeReaction ? (
+                <>
+                  <span style={{ fontSize: '1.1em', marginRight: 4 }}>{activeReaction.emoji}</span>
+                  {activeReaction.label}
+                </>
+              ) : (
+                <>
+                  <ThumbUpOutlined fontSize="small" sx={{ mr: 0.5 }} />
+                  Like
+                </>
+              )}
+              {reactionCount > 0 && (
+                <Typography variant="caption" sx={{ ml: 0.5, fontWeight: 600 }}>{reactionCount}</Typography>
+              )}
+            </Button>
+          </Box>
+
+          {/* Comment button */}
           <Button
             size="small"
             startIcon={<Comment fontSize="small" />}
@@ -374,25 +567,42 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
               fontWeight: 600,
               borderRadius: '8px',
               px: 1.5,
+              textTransform: 'none',
               '&:hover': { bgcolor: 'rgba(16,185,129,0.08)', color: 'primary.main' },
             }}
           >
             {commentsCount > 0 ? commentsCount : 'Comment'}
           </Button>
+
+          {/* Share button */}
           <Button
             size="small"
-            startIcon={<Share fontSize="small" />}
-            onClick={handleShare}
+            onClick={(e) => setShareAnchor(e.currentTarget)}
+            startIcon={shareDone ? <Check fontSize="small" /> : <Share fontSize="small" />}
             sx={{
-              color: 'text.secondary',
-              fontWeight: 600,
+              color: shareDone ? 'success.main' : 'text.secondary',
+              textTransform: 'none',
               borderRadius: '8px',
               px: 1.5,
               '&:hover': { bgcolor: 'rgba(99,102,241,0.08)', color: '#6366f1' },
             }}
           >
-            {post.shares ? post.shares : 'Share'}
+            {shareDone ? 'Done!' : `Share${(post.shares || 0) > 0 ? ` \u00b7 ${post.shares}` : ''}`}
           </Button>
+
+          <Menu
+            anchorEl={shareAnchor}
+            open={Boolean(shareAnchor)}
+            onClose={() => setShareAnchor(null)}
+            PaperProps={{ sx: { borderRadius: '12px', minWidth: 200 } }}
+          >
+            <MenuItem onClick={handleCopyLink}>
+              <LinkIcon sx={{ mr: 1.5, fontSize: 20 }} /> Copy link
+            </MenuItem>
+            <MenuItem onClick={handleReshare}>
+              <Repeat sx={{ mr: 1.5, fontSize: 20 }} /> Share to feed
+            </MenuItem>
+          </Menu>
         </CardActions>
 
         {/* Comments section */}
@@ -598,12 +808,33 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
             onClick={handleEditSave}
             disabled={!editContent.trim() || editSubmitting || editContent.length > 5000}
           >
-            {editSubmitting ? 'Saving…' : 'Save'}
+            {editSubmitting ? 'Saving\u2026' : 'Save'}
           </Button>
         </DialogActions>
       </Dialog>
 
-      <ImageModal open={!!selectedImage} imageUrl={selectedImage} onClose={() => setSelectedImage(null)} />
+      {/* Lightbox */}
+      <Modal
+        open={Boolean(lightboxSrc)}
+        onClose={() => setLightboxSrc(null)}
+        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'rgba(0,0,0,0.9)', zIndex: 9999 }}
+        onClick={() => setLightboxSrc(null)}
+      >
+        <Box onClick={(e) => e.stopPropagation()} sx={{ position: 'relative', maxWidth: '90vw', maxHeight: '90vh' }}>
+          <IconButton
+            onClick={() => setLightboxSrc(null)}
+            sx={{ position: 'absolute', top: -40, right: 0, color: 'white' }}
+          >
+            <Close />
+          </IconButton>
+          <Box
+            component="img"
+            src={lightboxSrc || ''}
+            alt="Full size"
+            sx={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain', borderRadius: '8px', display: 'block' }}
+          />
+        </Box>
+      </Modal>
     </>
   );
 };

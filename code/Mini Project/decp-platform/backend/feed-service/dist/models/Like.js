@@ -20,7 +20,12 @@ Like.init({
     userId: {
         type: sequelize_1.DataTypes.UUID,
         allowNull: false
-    }
+    },
+    reactionType: {
+        type: sequelize_1.DataTypes.ENUM('like', 'love', 'celebrate', 'insightful', 'curious'),
+        defaultValue: 'like',
+        allowNull: false,
+    },
 }, {
     sequelize: database_1.default,
     tableName: 'likes',
