@@ -100,6 +100,11 @@ exports.getJob = getJob;
 const createJob = async (req, res) => {
     try {
         const userId = req.headers['x-user-id'];
+        const userRole = req.headers['x-user-role'];
+        if (!['alumni', 'admin', 'faculty'].includes(userRole)) {
+            res.status(403).json({ success: false, message: 'Not authorized' });
+            return;
+        }
         const { error, value } = createJobSchema.validate(req.body);
         if (error) {
             res.status(400).json({ success: false, message: 'Validation error', error: error.details[0].message });
@@ -173,9 +178,10 @@ const applyForJob = async (req, res) => {
             res.status(404).json({ success: false, message: 'Job not found' });
             return;
         }
+        const resumeUrl = req.file ? `/uploads/resumes/${req.file.filename}` : value.resumeUrl;
         const [application, created] = await models_1.Application.findOrCreate({
             where: { jobId, userId },
-            defaults: { ...value, jobId, userId }
+            defaults: { ...value, jobId, userId, resumeUrl }
         });
         if (!created) {
             res.status(409).json({ success: false, message: 'Already applied for this job' });

@@ -25,6 +25,12 @@ export default defineConfig({
         target: 'http://localhost:3000',
         changeOrigin: true,
       },
+      // Proxy /uploads to the API Gateway which serves uploaded files
+      '/uploads': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path, // Keep the /uploads path as-is
+      },
     },
   },
   build: {

@@ -13,4 +13,5 @@ export declare const getConnectionRequests: (req: Request, res: Response) => Pro
 export declare const unfollowUser: (req: Request, res: Response) => Promise<void>;
 export declare const endorseSkill: (req: Request, res: Response) => Promise<void>;
 export declare const getConnectionStatus: (req: Request, res: Response) => Promise<void>;
+export declare const getSuggestedUsers: (req: Request, res: Response) => Promise<void>;
 //# sourceMappingURL=userController.d.ts.map

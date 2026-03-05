@@ -30,7 +30,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@store';
 
 interface ProfileHeaderProps {
-  user: User;
+  user?: User;
   isOwnProfile: boolean;
   profileId?: string;
   onEditClick?: () => void;
@@ -66,11 +66,11 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, isOwnProfile
     { skip: isOwnProfile || !resolvedProfileId }
   );
 
-  const safeFirstName = user.firstName || 'User';
-  const safeLastName = user.lastName || '';
-  const safeRole = user.role || 'student';
-  const safeConnections = Array.isArray(user.connections) ? user.connections.length : 0;
-  const safeSkills = Array.isArray(user.skills) ? user.skills : [];
+  const safeFirstName = user?.firstName || 'User';
+  const safeLastName = user?.lastName || '';
+  const safeRole = user?.role || 'student';
+  const safeConnections = Array.isArray(user?.connections) ? user.connections.length : 0;
+  const safeSkills = Array.isArray(user?.skills) ? user.skills : [];
   const coverGrad = coverGradients[safeRole] || coverGradients.student;
   const roleGrad = roleGradients[safeRole] || roleGradients.student;
 
@@ -140,7 +140,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, isOwnProfile
           {/* Avatar */}
           <Box className="relative flex-shrink-0">
             <Avatar
-              src={user.avatar || user.profilePicture}
+              src={user?.avatar || user?.profilePicture}
               sx={{
                 width: { xs: 88, sm: 112 },
                 height: { xs: 88, sm: 112 },

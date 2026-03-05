@@ -99,6 +99,12 @@ export const getJob = async (req: Request, res: Response): Promise<void> => {
 export const createJob = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = req.headers['x-user-id'] as string;
+    const userRole = req.headers['x-user-role'] as string;
+    if (!['alumni', 'admin', 'faculty'].includes(userRole)) {
+      res.status(403).json({ success: false, message: 'Not authorized' });
+      return;
+    }
+
     const { error, value } = createJobSchema.validate(req.body);
 
     if (error) {
@@ -180,9 +186,11 @@ export const applyForJob = async (req: Request, res: Response): Promise<void> =>
       return;
     }
 
+    const resumeUrl = req.file ? `/uploads/resumes/${(req.file as any).filename}` : value.resumeUrl;
+
     const [application, created] = await Application.findOrCreate({
       where: { jobId, userId },
-      defaults: { ...value, jobId, userId }
+      defaults: { ...value, jobId, userId, resumeUrl }
     });
 
     if (!created) {

@@ -191,7 +191,14 @@ export const CreatePost: React.FC<CreatePostProps> = ({ open, onClose, onSuccess
 
     const formData = new FormData();
     formData.append('content', data.content);
-    files.forEach((file) => formData.append('media', file));
+
+    if (files.length > 0) {
+      files.forEach((file) => {
+        formData.append('media', file, file.name);
+      });
+      const hasVideo = files.some(f => f.type.startsWith('video/'));
+      formData.append('type', hasVideo ? 'video' : 'image');
+    }
 
     try {
       await createPost(formData).unwrap();

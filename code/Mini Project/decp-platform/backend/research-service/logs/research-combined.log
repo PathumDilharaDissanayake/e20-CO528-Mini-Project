@@ -386,3 +386,65 @@ SequelizeConnectionError: database "decp_research" does not exist
 2026-03-04 23:16:11 [RESEARCH-SERVICE] [info]: ✅ Database connected.
 2026-03-04 23:16:11 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
 2026-03-04 23:16:11 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 12:37:13 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:37:13 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:37:13 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 12:48:58 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:48:58 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:48:58 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 12:52:35 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:52:35 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:52:35 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 12:58:42 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:58:42 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:58:42 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 13:03:18 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:03:18 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:03:18 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 13:06:20 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:06:20 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:06:20 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 13:14:22 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:14:22 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:14:22 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 13:21:03 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:21:03 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:21:03 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 13:35:19 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:35:19 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:35:19 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 13:40:40 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:40:40 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:40:40 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 13:43:40 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:43:40 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:43:40 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 14:25:28 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 14:25:28 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 14:25:28 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 16:04:49 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 16:04:49 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:04:49 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 16:21:04 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 16:21:04 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:21:04 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 16:28:17 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 16:28:17 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:28:17 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 17:01:05 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:01:05 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:01:05 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 17:17:00 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:17:00 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:17:00 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 17:27:01 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:27:01 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:27:01 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 17:57:47 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:57:47 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:57:47 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-05 17:57:48 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:57:48 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:59:31 [RESEARCH-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:59:31 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:59:31 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006

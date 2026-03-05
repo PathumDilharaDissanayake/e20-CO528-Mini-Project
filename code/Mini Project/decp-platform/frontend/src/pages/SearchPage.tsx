@@ -20,9 +20,9 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
 import { useGetPostsQuery } from '@services/postApi';
-import { useGetUsersQuery, useSendConnectionRequestMutation, useAcceptConnectionMutation, useDeclineConnectionMutation } from '@services/userApi';
+import { useGetUsersQuery, useSendConnectionRequestMutation, useAcceptConnectionMutation, useDeclineConnectionMutation, useGetConnectionsQuery } from '@services/userApi';
 import { useGetJobsQuery } from '@services/jobApi';
-import { PostCard } from '@components/feed/PostCard';
+import PostCard from '@components/feed/PostCard';
 import { formatRelativeTime } from '@utils';
 
 const TABS = [
@@ -92,6 +92,8 @@ export const SearchPage: React.FC = () => {
     return { label: 'Connect', color: 'primary' as const, variant: 'contained' as const, disabled: false };
   };
 
+  const { refetch: refetchConnections } = useGetConnectionsQuery();
+
   const handleConnect = async (userId: string) => {
     const state = connectionStates.get(userId) || 'none';
     try {
@@ -101,6 +103,7 @@ export const SearchPage: React.FC = () => {
       } else if (state === 'received_pending') {
         await acceptConnection(userId).unwrap();
         setConnectionStates(prev => new Map(prev).set(userId, 'accepted'));
+        refetchConnections();
       }
     } catch (e) { console.error(e); }
   };

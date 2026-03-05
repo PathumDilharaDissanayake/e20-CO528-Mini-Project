@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import { Bookmark } from '@mui/icons-material';
 import { useGetBookmarkedPostsQuery } from '@services/postApi';
-import { PostCard } from '@components/feed/PostCard';
+import PostCard from '@components/feed/PostCard';
 import { EmptyState } from '@components/common';
 
 export const SavedPostsPage: React.FC = () => {
@@ -74,15 +74,14 @@ export const SavedPostsPage: React.FC = () => {
                 />
             ) : (
                 <Box className="stagger-children">
-                    {posts.map((post: any) => (
-                        <PostCard
-                            key={post._id || post.id}
-                            post={post}
-                            onPostUpdated={refetch}
-                        />
-                    ))}
-                </Box>
-            )}
+                  {posts.map((post: any) => (
+                    <PostCard
+                      key={post._id || post.id}
+                      post={post}
+                      onPostUpdated={refetch}
+                    />
+                  ))}
+                </Box>            )}
         </Box>
     );
 };

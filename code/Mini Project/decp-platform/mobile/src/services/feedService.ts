@@ -65,19 +65,17 @@ export const feedService = {
     
     if (postData.media && postData.media.length > 0) {
       postData.media.forEach((media, index) => {
-        formData.append(`media[${index}]`, {
+        formData.append('media', {
           uri: media.uri,
           type: media.type,
           name: media.name || `media_${index}`,
         } as any);
       });
+      const hasVideo = postData.media.some((media) => String(media?.type || '').startsWith('video/'));
+      formData.append('type', hasVideo ? 'video' : 'image');
     }
 
-    const response = await api.post('/posts', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const response = await api.post('/posts', formData);
     const data = extractData<any>(response);
     return mapPost(data.post || data);
   },

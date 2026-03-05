@@ -1,7 +1,8 @@
-import express, { Application } from 'express';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import path from 'path';
+import fs from 'fs';
 import { config } from './config';
 import { logger } from './utils/logger';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
@@ -21,15 +22,58 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Static files for uploads — use absolute path so it works regardless of CWD
-// __dirname in dist/ is backend/feed-service/dist, so go up one level for service root
+// Static files for uploads — custom handler to properly set CORS headers
 const uploadsDir = process.env.UPLOAD_DIR
   ? path.resolve(process.env.UPLOAD_DIR)
   : path.join(__dirname, '..', 'uploads');
-app.use('/uploads', (req, res, next) => {
+
+// Create a custom static file handler with proper CORS
+app.use('/uploads', (req: Request, res: Response, next: NextFunction) => {
+  // Set CORS headers for all requests to /uploads
   res.setHeader('Access-Control-Allow-Origin', '*');
-  next();
-}, express.static(uploadsDir));
+  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
+  // Handle preflight
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+  
+  // Get the file path
+  const filePath = path.join(uploadsDir, req.path);
+  
+  // Check if file exists and serve it
+  fs.stat(filePath, (err, stats) => {
+    if (err || !stats.isFile()) {
+      return res.status(404).json({ success: false, message: 'File not found' });
+    }
+    
+    // Set content type based on extension
+    const ext = path.extname(filePath).toLowerCase();
+    const contentTypes: { [key: string]: string } = {
+      '.jpg': 'image/jpeg',
+      '.jpeg': 'image/jpeg',
+      '.png': 'image/png',
+      '.gif': 'image/gif',
+      '.webp': 'image/webp',
+      '.mp4': 'video/mp4',
+      '.webm': 'video/webm',
+      '.ogg': 'video/ogg',
+      '.pdf': 'application/pdf',
+    };
+    
+    res.setHeader('Content-Type', contentTypes[ext] || 'application/octet-stream');
+    res.setHeader('Content-Length', stats.size);
+    res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
+    
+    // Stream the file
+    const stream = fs.createReadStream(filePath);
+    stream.on('error', (streamErr) => {
+      res.status(500).json({ success: false, message: 'Error reading file' });
+    });
+    stream.pipe(res);
+  });
+});
 
 // OBS-002: Prometheus-compatible /metrics endpoint (no external dependency)
 app.get('/metrics', (_req, res) => {
@@ -89,7 +133,7 @@ const startServer = async () => {
     await sequelize.authenticate();
     logger.info('✅ Database connection established successfully.');
 
-    await sequelize.sync({ force: false }); // MIGRATE-001: create-if-not-exists only — safe for production
+    await sequelize.sync({ alter: true }); // MIGRATE-001: add new columns to existing tables
     logger.info('✅ Database synchronized.');
 
     app.listen(PORT, () => {

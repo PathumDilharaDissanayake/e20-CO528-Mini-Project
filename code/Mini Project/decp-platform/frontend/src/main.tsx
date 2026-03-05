@@ -15,14 +15,14 @@ import './index.css';
 const lightTheme = createTheme({
   palette: {
     mode: 'light',
-    primary: { main: '#166534', light: '#15803d', dark: '#14532d', contrastText: '#ffffff' },
+    primary: { main: '#166534', light: '#22c55e', dark: '#14532d', contrastText: '#ffffff' },
     secondary: { main: '#6366f1', light: '#818cf8', dark: '#4f46e5', contrastText: '#ffffff' },
     success: { main: '#22c55e' },
     error: { main: '#ef4444' },
     warning: { main: '#f59e0b' },
     info: { main: '#3b82f6' },
-    background: { default: '#f1f5f9', paper: '#ffffff' },
-    text: { primary: '#0f172a', secondary: '#475569' },
+    background: { default: '#f5f5f5', paper: '#ffffff' },
+    text: { primary: '#1f2937', secondary: '#4b5563' },
     divider: 'rgba(0,0,0,0.08)',
   },
   typography: {

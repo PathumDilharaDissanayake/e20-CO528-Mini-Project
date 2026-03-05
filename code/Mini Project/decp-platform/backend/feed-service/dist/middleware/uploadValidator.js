@@ -25,6 +25,7 @@ const SIGNATURES = {
     'image/webp': [{ offset: 0, bytes: [0x52, 0x49, 0x46, 0x46] }],
     'video/mp4': [{ offset: 4, bytes: [0x66, 0x74, 0x79, 0x70] }], // "ftyp" box
     'video/webm': [{ offset: 0, bytes: [0x1A, 0x45, 0xDF, 0xA3] }], // EBML header
+    'video/ogg': [{ offset: 0, bytes: [0x4F, 0x67, 0x67, 0x53] }], // "OggS"
     'application/pdf': [{ offset: 0, bytes: [0x25, 0x50, 0x44, 0x46] }] // %PDF
 };
 function matchesMagicBytes(buffer, mimetype) {
@@ -42,8 +43,8 @@ exports.memoryUpload = (0, multer_1.default)({
     storage: multer_1.default.memoryStorage(),
     limits: { fileSize: parseInt(process.env.MAX_FILE_SIZE || '20971520', 10) }, // 20MB default
     fileFilter: (_req, file, cb) => {
-        const allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/webm', 'application/pdf'];
-        allowed.includes(file.mimetype) ? cb(null, true) : cb(new Error(`Invalid file type: ${file.mimetype}. Allowed: jpeg, png, gif, webp, mp4, webm, pdf`));
+        const allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/webm', 'video/ogg', 'application/pdf'];
+        allowed.includes(file.mimetype) ? cb(null, true) : cb(new Error(`Invalid file type: ${file.mimetype}. Allowed: jpeg, png, gif, webp, mp4, webm, ogg, pdf`));
     }
 });
 /**

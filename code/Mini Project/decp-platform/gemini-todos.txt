@@ -1,0 +1,34 @@
+# Gemini TODO List for decp-platform
+
+## Priority Tasks
+- [x] **Feed:** Implement photo and video uploads.
+
+## Messaging
+- [x] **Message Imports:** Fix message imports to show actual people.
+- [x] **Message Persistence:** Ensure messages are saved to the database.
+
+## Navigation & UI
+- [x] **Sidebar Navigation:** Fix "All Posts," "People," and "Jobs" navigation.
+- [x] **Light Mode Theme:** Adjust the theme to be easier on the eyes with shades of white and gray.
+- [ ] **UI Animations:** Add animations or colorful backgrounds to unused dark areas.
+
+## User & Profile
+- [ ] **Profile Picture:** Implement profile picture uploads that persist in the database.
+- [ ] **Settings Page:** Implement the "Settings" page.
+- [ ] **Sign Out:** Fix the double-click sign-out issue.
+- [ ] **Registration Flow:** Redirect to the login page after registration.
+- [x] **"People You May Know":** Show real users and ensure the "Connect" button works.
+- [x] **Connections:** Fix connection count not incrementing and database updates. (Refetch connections added in ProfilePage.tsx and Header.tsx)
+
+## Features
+- [x] **Saved Posts:** Fix the "Saved Posts" functionality.
+- [x] **Job Applications:** Allow CV uploads when applying for jobs.
+- [x] **Job Posting Permissions:** Define and implement roles for who can post jobs.
+- [x] **Polls:** Make polls persistent in the database.
+- [ ] **Share to Feed:** Fix the "Share to Feed" functionality and credit the original author.
+
+## Notifications
+- [x] **Notification Names:** Display the correct name for connection requests.
+
+## Testing
+- [ ] **Test all implemented functionalities.**

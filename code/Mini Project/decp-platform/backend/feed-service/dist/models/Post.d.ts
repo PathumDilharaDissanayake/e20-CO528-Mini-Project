@@ -12,7 +12,7 @@ export interface PostAttributes {
     author?: AuthorInfo;
     content: string;
     mediaUrls?: string[];
-    type: 'text' | 'image' | 'video' | 'document' | 'poll';
+    type: 'text' | 'image' | 'video' | 'document' | 'poll' | 'share';
     likes: number;
     comments: number;
     shares: number;
@@ -22,10 +22,12 @@ export interface PostAttributes {
         votes: string[];
     }> | null;
     pollEndsAt?: Date | null;
+    originalPostId?: string | null;
+    sharedBy?: AuthorInfo | null;
     createdAt?: Date;
     updatedAt?: Date;
 }
-interface PostCreationAttributes extends Optional<PostAttributes, 'id' | 'author' | 'likes' | 'comments' | 'shares' | 'isPublic' | 'pollOptions' | 'pollEndsAt' | 'createdAt' | 'updatedAt'> {
+interface PostCreationAttributes extends Optional<PostAttributes, 'id' | 'author' | 'likes' | 'comments' | 'shares' | 'isPublic' | 'pollOptions' | 'pollEndsAt' | 'originalPostId' | 'sharedBy' | 'createdAt' | 'updatedAt'> {
 }
 declare class Post extends Model<PostAttributes, PostCreationAttributes> implements PostAttributes {
     id: string;
@@ -33,7 +35,7 @@ declare class Post extends Model<PostAttributes, PostCreationAttributes> impleme
     author: AuthorInfo;
     content: string;
     mediaUrls: string[];
-    type: 'text' | 'image' | 'video' | 'document' | 'poll';
+    type: 'text' | 'image' | 'video' | 'document' | 'poll' | 'share';
     likes: number;
     comments: number;
     shares: number;
@@ -43,6 +45,8 @@ declare class Post extends Model<PostAttributes, PostCreationAttributes> impleme
         votes: string[];
     }> | null;
     pollEndsAt: Date | null;
+    originalPostId?: string | null;
+    sharedBy?: AuthorInfo | null;
     readonly createdAt: Date;
     readonly updatedAt: Date;
 }

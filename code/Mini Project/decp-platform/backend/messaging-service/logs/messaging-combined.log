@@ -432,3 +432,69 @@ SequelizeConnectionError: database "decp_messaging" does not exist
 2026-03-04 23:41:47 [MESSAGING-SERVICE] [info]: User disconnected: ac9057bf-915c-46cb-b9ba-09ad883b894a
 2026-03-04 23:41:47 [MESSAGING-SERVICE] [info]: User connected: ac9057bf-915c-46cb-b9ba-09ad883b894a
 2026-03-04 23:41:56 [MESSAGING-SERVICE] [info]: User disconnected: ac9057bf-915c-46cb-b9ba-09ad883b894a
+2026-03-05 12:37:13 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:37:13 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:37:13 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 12:48:59 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:48:59 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:48:59 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 12:52:36 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:52:36 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:52:36 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 12:58:43 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:58:43 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:58:43 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 13:03:19 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:03:19 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:03:19 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 13:06:21 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:06:21 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:06:21 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 13:14:23 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:14:23 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:14:23 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 13:21:04 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:21:04 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:21:04 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 13:35:20 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:35:20 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:35:20 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 13:40:41 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:40:41 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:40:41 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 13:43:41 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:43:41 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:43:41 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 14:25:29 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 14:25:29 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 14:25:29 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 16:04:50 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 16:04:50 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:04:50 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 16:21:05 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 16:21:05 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:21:05 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 16:28:18 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 16:28:18 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:28:18 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 17:01:07 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:01:07 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:01:07 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 17:17:01 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:17:01 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:17:01 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 17:27:02 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:27:02 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:27:02 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 17:57:48 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:57:48 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:57:48 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 17:57:49 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:57:49 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:59:32 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:59:32 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:59:32 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-05 18:35:41 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-05 18:35:42 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-05 18:35:42 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-05 18:35:45 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7

@@ -250,3 +250,65 @@ SequelizeConnectionError: database "decp_notifications" does not exist
 2026-03-04 23:16:13 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
 2026-03-04 23:16:13 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
 2026-03-04 23:16:13 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 12:37:12 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:37:13 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:37:13 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 12:49:00 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:49:00 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:49:00 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 12:52:37 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:52:37 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:52:37 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 12:58:44 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:58:44 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:58:44 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 13:03:19 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:03:20 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:03:20 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 13:06:22 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:06:22 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:06:22 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 13:14:24 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:14:24 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:14:24 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 13:21:05 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:21:05 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:21:05 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 13:35:21 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:35:21 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:35:21 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 13:40:42 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:40:42 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:40:42 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 13:43:42 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:43:42 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:43:42 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 14:25:30 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 14:25:30 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 14:25:30 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 16:04:51 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 16:04:51 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:04:51 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 16:21:06 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 16:21:06 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:21:06 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 16:28:19 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 16:28:19 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:28:19 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 17:01:07 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:01:07 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:01:07 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 17:17:02 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:17:02 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:17:02 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 17:27:03 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:27:03 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:27:03 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 17:57:49 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:57:49 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:57:49 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008
+2026-03-05 17:57:49 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:57:49 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:59:33 [NOTIFICATION-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:59:33 [NOTIFICATION-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:59:33 [NOTIFICATION-SERVICE] [info]: 🔔 Notification Service running on port 3008

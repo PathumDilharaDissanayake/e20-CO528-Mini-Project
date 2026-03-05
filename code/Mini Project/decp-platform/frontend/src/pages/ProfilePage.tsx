@@ -36,12 +36,12 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '@store';
 import { useGetUserPostsQuery } from '@services/postApi';
-import { useGetUserByIdQuery, useGetMyProfileQuery, useSendConnectionRequestMutation, useGetConnectionRequestsQuery, useAcceptConnectionMutation, useDeclineConnectionMutation, useEndorseSkillMutation, useUpdateMyProfileMutation } from '@services/userApi';
+import { useGetUserByIdQuery, useGetMyProfileQuery, useSendConnectionRequestMutation, useGetConnectionRequestsQuery, useAcceptConnectionMutation, useDeclineConnectionMutation, useEndorseSkillMutation, useUpdateMyProfileMutation, useGetConnectionsQuery } from '@services/userApi';
 import { useUpdateProfileMutation } from '@services/authApi';
 import { useGetEventsQuery, useGetAttendingEventsQuery } from '@services/eventApi';
 import { updateUser } from '@features/authSlice';
 import { ProfileHeader } from '@components/profile/ProfileHeader';
-import { PostCard } from '@components/feed/PostCard';
+import PostCard from '@components/feed/PostCard';
 import { FeedSkeleton, EmptyState, EventCardSkeleton } from '@components/common';
 import { Event as EventIcon } from '@mui/icons-material';
 import { ExperienceItem, EducationItem, CertificationItem } from '@types';
@@ -100,6 +100,10 @@ export const ProfilePage: React.FC = () => {
   const resolvedProfileId = userId || currentUser?._id || currentUser?.id || '';
 
   // Fetch incoming connection requests (only meaningful on own profile)
+  const { data: connectionsData, refetch: refetchConnections } = useGetConnectionsQuery(undefined, {
+    skip: !isOwnProfile,
+  });
+
   const { data: connectionRequestsData, refetch: refetchRequests } = useGetConnectionRequestsQuery(undefined, {
     skip: !isOwnProfile || !currentUser,
     pollingInterval: 30000,
@@ -116,9 +120,28 @@ export const ProfilePage: React.FC = () => {
     skip: !isOwnProfile || !currentUser,
   });
 
+  // Get the other user's profile data - check multiple possible response structures
+  const otherUserRaw = otherUserData?.data as any;
+  const otherUser = otherUserRaw?.profile || otherUserRaw?.user || otherUserRaw || null;
+
+  // For other users, create a robust profile object with fallbacks
+  const otherUserProfile = (otherUser && (otherUser.firstName || otherUser.lastName || otherUser.email)) ? {
+    _id: otherUser.userId || otherUser._id || otherUser.id || '',
+    id: otherUser.id || otherUser._id || otherUser.userId || '',
+    firstName: otherUser.firstName || 'User',
+    lastName: otherUser.lastName || '',
+    role: otherUser.role || 'student',
+    avatar: otherUser.avatar || otherUser.profilePicture,
+    bio: otherUser.bio,
+    headline: otherUser.headline,
+    email: otherUser.email,
+    skills: otherUser.skills || [],
+    ...otherUser
+  } : null;
+
   const profileUser = isOwnProfile
     ? (myProfileData?.data ? { ...currentUser, ...myProfileData.data } : currentUser)
-    : (otherUserData?.data || null);
+    : (otherUserProfile || { firstName: 'Unknown', lastName: 'User', role: 'student', _id: userId });
   const profileId = profileUser?._id || profileUser?.id || '';
 
   const { data: postsData, isLoading: isLoadingPosts, refetch: refetchPosts } = useGetUserPostsQuery(
@@ -150,7 +173,7 @@ export const ProfilePage: React.FC = () => {
 
   const posts = postsData?.data || [];
   const postCount = postsData?.total ?? posts.length;
-  const connectionCount = Array.isArray(profileUser?.connections) ? profileUser.connections.length : 0;
+  const connectionCount = connectionsData?.total || 0;
 
   // Cast for extended profile fields
   const profile = profileUser as any;
@@ -693,7 +716,11 @@ export const ProfilePage: React.FC = () => {
                               color="success"
                               sx={{ borderRadius: '8px', fontSize: '0.75rem' }}
                               onClick={async () => {
-                                try { await acceptConnectionMutation(reqUserId).unwrap(); refetchRequests(); } catch (e) { console.error(e); }
+                                try {
+                                  await acceptConnectionMutation(reqUserId).unwrap();
+                                  refetchRequests();
+                                  refetchConnections();
+                                } catch (e) { console.error(e); }
                               }}
                             >
                               Accept
@@ -704,7 +731,11 @@ export const ProfilePage: React.FC = () => {
                               color="error"
                               sx={{ borderRadius: '8px', fontSize: '0.75rem' }}
                               onClick={async () => {
-                                try { await declineConnectionMutation(reqUserId).unwrap(); refetchRequests(); } catch (e) { console.error(e); }
+                                try {
+                                  await declineConnectionMutation(reqUserId).unwrap();
+                                  refetchRequests();
+                                  refetchConnections();
+                                } catch (e) { console.error(e); }
                               }}
                             >
                               Decline

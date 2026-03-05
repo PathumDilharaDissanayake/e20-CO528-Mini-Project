@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const path_1 = __importDefault(require("path"));
+const fs_1 = __importDefault(require("fs"));
 const config_1 = require("./config");
 const logger_1 = require("./utils/logger");
 const errorHandler_1 = require("./middleware/errorHandler");
@@ -21,15 +22,51 @@ app.use((0, cors_1.default)());
 // Body parsing
 app.use(express_1.default.json({ limit: '10mb' }));
 app.use(express_1.default.urlencoded({ extended: true, limit: '10mb' }));
-// Static files for uploads — use absolute path so it works regardless of CWD
-// __dirname in dist/ is backend/feed-service/dist, so go up one level for service root
+// Static files for uploads — custom handler to properly set CORS headers
 const uploadsDir = process.env.UPLOAD_DIR
     ? path_1.default.resolve(process.env.UPLOAD_DIR)
     : path_1.default.join(__dirname, '..', 'uploads');
+// Create a custom static file handler with proper CORS
 app.use('/uploads', (req, res, next) => {
+    // Set CORS headers for all requests to /uploads
     res.setHeader('Access-Control-Allow-Origin', '*');
-    next();
-}, express_1.default.static(uploadsDir));
+    res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    // Handle preflight
+    if (req.method === 'OPTIONS') {
+        return res.status(204).end();
+    }
+    // Get the file path
+    const filePath = path_1.default.join(uploadsDir, req.path);
+    // Check if file exists and serve it
+    fs_1.default.stat(filePath, (err, stats) => {
+        if (err || !stats.isFile()) {
+            return res.status(404).json({ success: false, message: 'File not found' });
+        }
+        // Set content type based on extension
+        const ext = path_1.default.extname(filePath).toLowerCase();
+        const contentTypes = {
+            '.jpg': 'image/jpeg',
+            '.jpeg': 'image/jpeg',
+            '.png': 'image/png',
+            '.gif': 'image/gif',
+            '.webp': 'image/webp',
+            '.mp4': 'video/mp4',
+            '.webm': 'video/webm',
+            '.ogg': 'video/ogg',
+            '.pdf': 'application/pdf',
+        };
+        res.setHeader('Content-Type', contentTypes[ext] || 'application/octet-stream');
+        res.setHeader('Content-Length', stats.size);
+        res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
+        // Stream the file
+        const stream = fs_1.default.createReadStream(filePath);
+        stream.on('error', (streamErr) => {
+            res.status(500).json({ success: false, message: 'Error reading file' });
+        });
+        stream.pipe(res);
+    });
+});
 // OBS-002: Prometheus-compatible /metrics endpoint (no external dependency)
 app.get('/metrics', (_req, res) => {
     const m = process.memoryUsage();
@@ -81,7 +118,7 @@ const startServer = async () => {
     try {
         await database_1.default.authenticate();
         logger_1.logger.info('✅ Database connection established successfully.');
-        await database_1.default.sync({ force: false }); // MIGRATE-001: create-if-not-exists only — safe for production
+        await database_1.default.sync({ alter: true }); // MIGRATE-001: add new columns to existing tables
         logger_1.logger.info('✅ Database synchronized.');
         app.listen(PORT, () => {
             logger_1.logger.info(`📰 Feed Service running on port ${PORT}`);

@@ -13,12 +13,14 @@ import {
   declineConnection,
   getConnectionRequests,
   getConnections,
-  endorseSkill
+  endorseSkill,
+  getSuggestedUsers
 } from '../controllers/userController';
 
 const router = Router();
 
 router.get('/search', searchUsers);
+router.get('/suggested', getSuggestedUsers);
 router.get('/', getUsers);
 router.get('/me', getMyProfile);
 router.put('/me', updateProfile);

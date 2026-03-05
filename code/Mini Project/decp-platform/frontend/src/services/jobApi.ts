@@ -18,8 +18,8 @@ interface CreateJobData {
 
 interface ApplyJobData {
   jobId: string;
-  resumeUrl?: string;
-  coverLetter?: string;
+  coverLetter: string;
+  resume?: File;
 }
 
 const normalizeJob = (raw: any): Job => {
@@ -142,12 +142,15 @@ export const jobApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Job'],
     }),
-    applyForJob: builder.mutation<ApiResponse<JobApplication>, ApplyJobData>({
-      query: ({ jobId, ...data }) => ({
-        url: `/jobs/${jobId}/apply`,
-        method: 'POST',
-        body: data,
-      }),
+    applyForJob: builder.mutation<ApiResponse<JobApplication>, FormData>({
+      query: (data) => {
+        const jobId = data.get('jobId');
+        return {
+          url: `/jobs/${jobId}/apply`,
+          method: 'POST',
+          body: data,
+        };
+      },
       invalidatesTags: ['Job'],
     }),
     updateApplicationStatus: builder.mutation<

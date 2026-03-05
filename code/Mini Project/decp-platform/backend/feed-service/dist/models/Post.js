@@ -30,7 +30,7 @@ Post.init({
         defaultValue: []
     },
     type: {
-        type: sequelize_1.DataTypes.ENUM('text', 'image', 'video', 'document', 'poll'),
+        type: sequelize_1.DataTypes.ENUM('text', 'image', 'video', 'document', 'poll', 'share'),
         defaultValue: 'text'
     },
     likes: {
@@ -57,6 +57,18 @@ Post.init({
     },
     pollEndsAt: {
         type: sequelize_1.DataTypes.DATE,
+        allowNull: true,
+    },
+    originalPostId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: true,
+        references: {
+            model: 'posts', // This is a self-reference
+            key: 'id',
+        },
+    },
+    sharedBy: {
+        type: sequelize_1.DataTypes.JSONB, // Store AuthorInfo
         allowNull: true,
     },
 }, {
