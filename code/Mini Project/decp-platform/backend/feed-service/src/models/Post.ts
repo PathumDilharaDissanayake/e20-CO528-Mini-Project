@@ -15,18 +15,20 @@ export interface PostAttributes {
   author?: AuthorInfo;
   content: string;
   mediaUrls?: string[];
-  type: 'text' | 'image' | 'video' | 'document' | 'poll';
+  type: 'text' | 'image' | 'video' | 'document' | 'poll' | 'share';
   likes: number;
   comments: number;
   shares: number;
   isPublic: boolean;
   pollOptions?: Array<{ text: string; votes: string[] }> | null;
   pollEndsAt?: Date | null;
+  originalPostId?: string | null; // ID of the original post if this is a shared post
+  sharedBy?: AuthorInfo | null;   // AuthorInfo of the user who shared the post
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-interface PostCreationAttributes extends Optional<PostAttributes, 'id' | 'author' | 'likes' | 'comments' | 'shares' | 'isPublic' | 'pollOptions' | 'pollEndsAt' | 'createdAt' | 'updatedAt'> {}
+interface PostCreationAttributes extends Optional<PostAttributes, 'id' | 'author' | 'likes' | 'comments' | 'shares' | 'isPublic' | 'pollOptions' | 'pollEndsAt' | 'originalPostId' | 'sharedBy' | 'createdAt' | 'updatedAt'> {}
 
 class Post extends Model<PostAttributes, PostCreationAttributes> implements PostAttributes {
   public id!: string;
@@ -34,13 +36,15 @@ class Post extends Model<PostAttributes, PostCreationAttributes> implements Post
   public author!: AuthorInfo;
   public content!: string;
   public mediaUrls!: string[];
-  public type!: 'text' | 'image' | 'video' | 'document' | 'poll';
+  public type!: 'text' | 'image' | 'video' | 'document' | 'poll' | 'share';
   public likes!: number;
   public comments!: number;
   public shares!: number;
   public isPublic!: boolean;
   public pollOptions!: Array<{ text: string; votes: string[] }> | null;
   public pollEndsAt!: Date | null;
+  public originalPostId?: string | null;
+  public sharedBy?: AuthorInfo | null;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -69,7 +73,7 @@ Post.init(
       defaultValue: []
     },
     type: {
-      type: DataTypes.ENUM('text', 'image', 'video', 'document', 'poll'),
+      type: DataTypes.ENUM('text', 'image', 'video', 'document', 'poll', 'share'),
       defaultValue: 'text'
     },
     likes: {
@@ -96,6 +100,18 @@ Post.init(
     },
     pollEndsAt: {
       type: DataTypes.DATE,
+      allowNull: true,
+    },
+    originalPostId: {
+      type: DataTypes.UUID,
+      allowNull: true,
+      references: {
+        model: 'posts', // This is a self-reference
+        key: 'id',
+      },
+    },
+    sharedBy: {
+      type: DataTypes.JSONB, // Store AuthorInfo
       allowNull: true,
     },
   },

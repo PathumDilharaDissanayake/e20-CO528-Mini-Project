@@ -352,6 +352,7 @@ export const MessagesPage: React.FC = () => {
           {!isSearching && userQuery.trim() && usersData?.data?.length === 0 && (
             <Typography variant="body2" color="text.disabled" sx={{ textAlign: 'center', py: 2 }}>No users found</Typography>
           )}
+          
           <List dense disablePadding>
             {(usersData?.data || []).filter(u => (u._id || u.id) !== currentUserId).map((u: User) => (
               <ListItemButton key={u._id || u.id} onClick={() => handleStartDirect(u)} sx={{ borderRadius: '8px' }} disabled={isCreatingChat}>

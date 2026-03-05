@@ -34,7 +34,8 @@ const getFeed = async (options) => {
         const posts = await models_1.Post.findAll({
             where,
             order: [['createdAt', 'DESC'], ['id', 'DESC']],
-            limit: safeLimit + 1 // +1 to detect hasNext
+            limit: safeLimit + 1, // +1 to detect hasNext
+            raw: false, // Get full objects with getters
         });
         const hasNext = posts.length > safeLimit;
         const result = hasNext ? posts.slice(0, safeLimit) : posts;
@@ -56,7 +57,8 @@ const getFeed = async (options) => {
         where,
         order: [['createdAt', 'DESC'], ['id', 'DESC']],
         limit: safeLimit,
-        offset
+        offset,
+        raw: false, // Get full objects with getters
     });
     const totalPages = Math.ceil(count / safeLimit);
     const nextCursor = posts.length > 0
@@ -90,7 +92,8 @@ const createPost = async (input) => {
         effectiveType = 'poll';
     }
     else if (mediaUrls.length > 0 && type === 'text') {
-        effectiveType = 'image';
+        const hasVideo = mediaUrls.some(url => /\.(mp4|webm|ogg)$/i.test(url));
+        effectiveType = hasVideo ? 'video' : 'image';
     }
     return models_1.Post.create({ userId, author, content, type: effectiveType, isPublic, mediaUrls, pollOptions: pollOptions || null, pollEndsAt: pollEndsAt || null });
 };

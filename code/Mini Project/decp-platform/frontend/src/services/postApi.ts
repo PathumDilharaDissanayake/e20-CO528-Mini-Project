@@ -4,6 +4,8 @@ import { Post, PaginatedResponse, ApiResponse } from '@types';
 interface CreatePostData {
   content: string;
   media?: File[];
+  pollOptions?: Array<{ text: string; votes: string[] }>;
+  pollEndsAt?: Date;
 }
 
 const normalizePost = (raw: any): Post => {
@@ -14,9 +16,9 @@ const normalizePost = (raw: any): Post => {
     ? raw.media
     : Array.isArray(raw?.mediaUrls)
       ? raw.mediaUrls.map((url: string) => ({
-          url,
-          type: /\.(mp4|webm|ogg)$/i.test(url) ? 'video' : 'image',
-        }))
+        url,
+        type: /\.(mp4|webm|ogg)$/i.test(url) ? 'video' : 'image',
+      }))
       : [];
 
   // Parse pollOptions if it comes back as a JSON string
@@ -24,6 +26,7 @@ const normalizePost = (raw: any): Post => {
   if (typeof pollOptions === 'string') {
     try { pollOptions = JSON.parse(pollOptions); } catch { pollOptions = null; }
   }
+  const pollEndsAt = raw?.pollEndsAt ?? null;
 
   return {
     _id: postId,
@@ -44,7 +47,7 @@ const normalizePost = (raw: any): Post => {
     comments: Array.isArray(raw?.comments) ? raw.comments : Number(raw?.comments || 0),
     shares: Number(raw?.shares || 0),
     pollOptions,
-    pollEndsAt: raw?.pollEndsAt ?? null,
+    pollEndsAt,
     myReaction: raw?.myReaction ?? null,
     createdAt: raw?.createdAt,
     updatedAt: raw?.updatedAt,
@@ -75,9 +78,9 @@ export const postApi = apiSlice.injectEndpoints({
       providesTags: (result) =>
         result
           ? [
-              ...result.data.map(({ _id, id }) => ({ type: 'Post' as const, id: _id || id })),
-              { type: 'Post', id: 'LIST' },
-            ]
+            ...result.data.map(({ _id, id }) => ({ type: 'Post' as const, id: _id || id })),
+            { type: 'Post', id: 'LIST' },
+          ]
           : [{ type: 'Post', id: 'LIST' }],
     }),
     getPostById: builder.query<ApiResponse<Post>, string>({
@@ -192,6 +195,11 @@ export const postApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: { optionIndex },
       }),
+      // The response is { success: true, data: { pollOptions: [...] } }
+      // We return the pollOptions directly so the caller can use them
+      transformResponse: (response: any) => {
+        return response?.data?.pollOptions || null;
+      },
       invalidatesTags: (result, error, { postId }) => [{ type: 'Post', id: postId }, { type: 'Post', id: 'LIST' }],
     }),
   }),

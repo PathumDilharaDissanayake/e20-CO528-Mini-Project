@@ -13,8 +13,8 @@ import {
 const getMediaUrl = (url: string): string => {
   if (!url) return '';
   if (url.startsWith('http') || url.startsWith('blob:')) return url;
-  const base = (import.meta.env.VITE_API_URL || '').replace('/api/v1', '');
-  return `${base}${url.startsWith('/') ? '' : '/'}${url}`;
+  // Use relative path - Vite will proxy /uploads to API Gateway
+  return `${url.startsWith('/') ? '' : '/'}${url}`;
 };
 import {
   CalendarToday,
@@ -62,7 +62,7 @@ export const EventCard: React.FC<EventCardProps> = ({
       <CardContent>
         <Box className="flex justify-between items-start mb-3">
           <Chip
-          label={eventTypeLabel || 'Event'}
+            label={eventTypeLabel || 'Event'}
             size="small"
             color="primary"
             className="rounded-full"
@@ -96,7 +96,7 @@ export const EventCard: React.FC<EventCardProps> = ({
           </Typography>
         </Box>
 
-          {event.location && (
+        {event.location && (
           <Box className="flex items-center gap-2 mb-3">
             <LocationOn fontSize="small" className="text-gray-400" />
             <Typography variant="body2" className="text-gray-600 dark:text-gray-400">
@@ -126,7 +126,7 @@ export const EventCard: React.FC<EventCardProps> = ({
             <IconButton size="small">
               <Share fontSize="small" />
             </IconButton>
-            
+
             {isAttending ? (
               <Button
                 variant="outlined"

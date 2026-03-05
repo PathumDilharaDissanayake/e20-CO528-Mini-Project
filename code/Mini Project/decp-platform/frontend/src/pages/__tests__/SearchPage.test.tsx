@@ -6,41 +6,7 @@
 import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import { screen, fireEvent, waitFor } from '@testing-library/react';
-import { renderWithProviders } from '../../test/testUtils';
-
-// ── Mock all data-fetching hooks used by SearchPage ──────────────────────────
-vi.mock('@services/postApi', () => ({
-  useGetPostsQuery: vi.fn(() => ({
-    data: { data: [{ id: 'p1', content: 'ML post', userId: 'u1', type: 'text', likes: [], comments: 0, shares: 0, createdAt: '', updatedAt: '' }] },
-    isLoading: false,
-    isFetching: false,
-  })),
-  useLikePostMutation: () => [vi.fn(), {}],
-  useDeletePostMutation: () => [vi.fn(), {}],
-  useAddCommentMutation: () => [vi.fn(), {}],
-  useSharePostMutation: () => [vi.fn(), {}],
-  useUpdatePostMutation: () => [vi.fn(), {}],
-  useGetPostCommentsQuery: () => ({ data: { data: [] }, isLoading: false }),
-}));
-
-vi.mock('@services/userApi', () => ({
-  useGetUsersQuery: vi.fn(() => ({
-    data: { data: [{ id: 'u1', firstName: 'Alice', lastName: 'Student', role: 'student', email: 'alice@decp.edu' }] },
-    isLoading: false,
-  })),
-  useGetProfileQuery: vi.fn(() => ({ data: null, isLoading: false })),
-}));
-
-vi.mock('@services/jobsApi', () => ({
-  useGetJobsQuery: vi.fn(() => ({
-    data: { data: [{ id: 'j1', title: 'Software Intern', company: 'DECP', type: 'internship' }] },
-    isLoading: false,
-  })),
-}));
-
-vi.mock('@components/feed/PostCard', () => ({
-  PostCard: ({ post }: any) => <div data-testid="post-card">{post.content}</div>,
-}));
+import { screen, fireEvent, waitFor } from '@testing-library/react';
 
 // Lazy import after mocks
 const { SearchPage } = await vi.importActual<typeof import('@pages/SearchPage')>(

@@ -54,7 +54,7 @@ const createProxyHandler = (targetService: string, servicePrefix?: string) => {
     // ---- Header construction ----
     const headers: Record<string, string> = {};
     if (req.headers.authorization) {
-      headers['Authorization'] = req.headers.authorization;
+      headers['authorization'] = req.headers.authorization;
     }
 
     // Inject user identity so downstream services don't need to re-verify JWT
@@ -87,17 +87,30 @@ const createProxyHandler = (targetService: string, servicePrefix?: string) => {
           ? parseInt(targetUrlObj.port)
           : isHttps ? 443 : 80;
 
+        // Preserve multipart boundary and body size for Multer in downstream services
+        const contentLength = req.headers['content-length'];
+        const proxyHeaders: Record<string, string> = {
+          host: targetUrlObj.host,
+          ...headers,
+          'content-type': contentType,
+        };
+        if (typeof contentLength === 'string' && contentLength.length > 0) {
+          proxyHeaders['content-length'] = contentLength;
+        }
+        if (typeof req.headers.accept === 'string' && req.headers.accept.length > 0) {
+          proxyHeaders['accept'] = req.headers.accept;
+        }
+        if (typeof req.headers['transfer-encoding'] === 'string' && req.headers['transfer-encoding'].length > 0) {
+          proxyHeaders['transfer-encoding'] = req.headers['transfer-encoding'];
+        }
+
         const proxyReq = transport.request(
           {
             hostname: targetUrlObj.hostname,
             port,
             path: targetUrlObj.pathname + targetUrlObj.search,
             method: req.method,
-            headers: {
-              ...req.headers,
-              host: targetUrlObj.host,
-              ...headers, // includes x-user-id, x-internal-token, x-correlation-id
-            },
+            headers: proxyHeaders,
           },
           (proxyRes) => {
             let body = '';
@@ -128,7 +141,7 @@ const createProxyHandler = (targetService: string, servicePrefix?: string) => {
     }
 
     // ---- Standard JSON / URL-encoded proxy via axios ----
-    headers['Content-Type'] = contentType || 'application/json';
+    headers['content-type'] = contentType || 'application/json';
 
     try {
       const response = await axios({

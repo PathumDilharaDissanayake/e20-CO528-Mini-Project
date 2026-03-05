@@ -2228,3 +2228,587 @@ Error
 2026-03-04 23:37:44 [AUTH-SERVICE] [info]: User logged in: pathumdilharadissanayake@gmail.com
 2026-03-04 23:38:19 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
 2026-03-04 23:40:14 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 12:37:11 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 12:37:11 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 12:37:12 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:37:12 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 12:37:14 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-05 12:37:14 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-05 12:37:15 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-05 12:37:15 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-05 12:37:15 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-05 12:37:15 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-05 12:37:15 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-05 12:37:15 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-05 12:37:16 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-05 12:37:16 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-05 12:37:16 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-05 12:37:16 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-05 12:37:17 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-05 12:37:17 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-05 12:37:17 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-05 12:37:17 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-05 12:37:18 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-05 12:37:18 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-05 12:37:19 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-05 12:37:19 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-05 12:37:19 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-05 12:37:19 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-05 12:38:28 [AUTH-SERVICE] [info]: User logged in: admin@decp.edu
+2026-03-05 12:38:29 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-05 12:38:29 [AUTH-SERVICE] [info]: User logged in: prof.sarah@decp.edu
+2026-03-05 12:38:30 [AUTH-SERVICE] [info]: User logged in: prof.michael@decp.edu
+2026-03-05 12:38:30 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 12:38:30 [AUTH-SERVICE] [info]: User logged in: bob.student@decp.edu
+2026-03-05 12:38:31 [AUTH-SERVICE] [info]: User logged in: carol.student@decp.edu
+2026-03-05 12:38:31 [AUTH-SERVICE] [info]: User logged in: dan.student@decp.edu
+2026-03-05 12:38:32 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-05 12:39:07 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 12:44:45 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-05 12:44:45 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-05 12:44:45 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-05 12:44:45 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-05 12:44:46 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-05 12:44:46 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-05 12:44:46 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-05 12:44:46 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-05 12:44:47 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-05 12:44:47 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-05 12:44:47 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-05 12:44:47 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-05 12:44:47 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-05 12:44:47 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-05 12:44:48 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-05 12:44:48 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-05 12:44:48 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-05 12:44:48 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-05 12:44:49 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-05 12:44:49 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-05 12:44:49 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-05 12:44:49 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-05 12:48:54 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 12:48:54 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 12:48:54 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:48:54 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 12:49:06 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-05 12:49:06 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-05 12:49:07 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-05 12:49:07 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-05 12:49:07 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-05 12:49:07 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-05 12:49:08 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-05 12:49:08 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-05 12:49:08 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-05 12:49:08 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-05 12:49:09 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-05 12:49:09 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-05 12:49:09 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-05 12:49:09 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-05 12:49:10 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-05 12:49:10 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-05 12:49:10 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-05 12:49:10 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-05 12:49:11 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-05 12:49:11 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-05 12:49:11 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-05 12:49:11 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-05 12:49:51 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 12:52:30 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 12:52:31 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 12:52:31 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:52:31 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 12:52:45 [AUTH-SERVICE] [info]: User logged in: admin@decp.edu
+2026-03-05 12:52:45 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-05 12:52:46 [AUTH-SERVICE] [info]: User logged in: prof.sarah@decp.edu
+2026-03-05 12:52:47 [AUTH-SERVICE] [info]: User logged in: prof.michael@decp.edu
+2026-03-05 12:52:47 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 12:52:48 [AUTH-SERVICE] [info]: User logged in: bob.student@decp.edu
+2026-03-05 12:52:48 [AUTH-SERVICE] [info]: User logged in: carol.student@decp.edu
+2026-03-05 12:52:48 [AUTH-SERVICE] [info]: User logged in: dan.student@decp.edu
+2026-03-05 12:52:49 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-05 12:52:49 [AUTH-SERVICE] [info]: User logged in: emma.alumni@decp.edu
+2026-03-05 12:52:50 [AUTH-SERVICE] [info]: User logged in: frank.alumni@decp.edu
+2026-03-05 12:58:37 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 12:58:37 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 12:58:37 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:58:37 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 12:58:52 [AUTH-SERVICE] [info]: User logged in: admin@decp.edu
+2026-03-05 12:58:53 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-05 12:58:53 [AUTH-SERVICE] [info]: User logged in: prof.sarah@decp.edu
+2026-03-05 12:58:54 [AUTH-SERVICE] [info]: User logged in: prof.michael@decp.edu
+2026-03-05 12:58:54 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 12:58:55 [AUTH-SERVICE] [info]: User logged in: bob.student@decp.edu
+2026-03-05 12:58:55 [AUTH-SERVICE] [info]: User logged in: carol.student@decp.edu
+2026-03-05 12:58:56 [AUTH-SERVICE] [info]: User logged in: dan.student@decp.edu
+2026-03-05 12:58:56 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-05 12:58:56 [AUTH-SERVICE] [info]: User logged in: emma.alumni@decp.edu
+2026-03-05 12:58:57 [AUTH-SERVICE] [info]: User logged in: frank.alumni@decp.edu
+2026-03-05 13:03:13 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 13:03:13 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 13:03:14 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:03:14 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 13:03:26 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-05 13:03:26 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-05 13:03:26 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-05 13:03:26 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-05 13:03:27 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-05 13:03:27 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-05 13:03:28 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-05 13:03:28 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-05 13:03:28 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-05 13:03:28 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-05 13:03:29 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-05 13:03:29 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-05 13:03:29 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-05 13:03:29 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-05 13:03:30 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-05 13:03:30 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-05 13:03:30 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-05 13:03:31 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-05 13:03:31 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-05 13:03:31 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-05 13:06:15 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 13:06:15 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 13:06:15 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:06:15 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 13:06:28 [AUTH-SERVICE] [info]: User logged in: admin@decp.edu
+2026-03-05 13:06:28 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-05 13:06:29 [AUTH-SERVICE] [info]: User logged in: prof.sarah@decp.edu
+2026-03-05 13:06:29 [AUTH-SERVICE] [info]: User logged in: prof.michael@decp.edu
+2026-03-05 13:06:30 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 13:06:30 [AUTH-SERVICE] [info]: User logged in: bob.student@decp.edu
+2026-03-05 13:06:31 [AUTH-SERVICE] [info]: User logged in: carol.student@decp.edu
+2026-03-05 13:06:32 [AUTH-SERVICE] [info]: User logged in: dan.student@decp.edu
+2026-03-05 13:06:32 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-05 13:06:33 [AUTH-SERVICE] [info]: User logged in: emma.alumni@decp.edu
+2026-03-05 13:06:33 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-05 13:06:33 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-05 13:07:22 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 13:14:17 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 13:14:17 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 13:14:17 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:14:17 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 13:14:30 [AUTH-SERVICE] [info]: User logged in: admin@decp.edu
+2026-03-05 13:14:30 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-05 13:14:31 [AUTH-SERVICE] [info]: User logged in: prof.sarah@decp.edu
+2026-03-05 13:14:31 [AUTH-SERVICE] [info]: User logged in: prof.michael@decp.edu
+2026-03-05 13:14:32 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 13:14:32 [AUTH-SERVICE] [info]: User logged in: bob.student@decp.edu
+2026-03-05 13:14:33 [AUTH-SERVICE] [info]: User logged in: carol.student@decp.edu
+2026-03-05 13:14:33 [AUTH-SERVICE] [info]: User logged in: dan.student@decp.edu
+2026-03-05 13:14:34 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-05 13:14:34 [AUTH-SERVICE] [info]: User logged in: emma.alumni@decp.edu
+2026-03-05 13:14:35 [AUTH-SERVICE] [info]: User logged in: frank.alumni@decp.edu
+2026-03-05 13:20:58 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 13:20:59 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 13:20:59 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:20:59 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 13:21:11 [AUTH-SERVICE] [info]: User logged in: admin@decp.edu
+2026-03-05 13:21:11 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-05 13:21:12 [AUTH-SERVICE] [info]: User logged in: prof.sarah@decp.edu
+2026-03-05 13:21:12 [AUTH-SERVICE] [info]: User logged in: prof.michael@decp.edu
+2026-03-05 13:21:13 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 13:21:13 [AUTH-SERVICE] [info]: User logged in: bob.student@decp.edu
+2026-03-05 13:21:14 [AUTH-SERVICE] [info]: User logged in: carol.student@decp.edu
+2026-03-05 13:21:14 [AUTH-SERVICE] [info]: User logged in: dan.student@decp.edu
+2026-03-05 13:21:14 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-05 13:21:15 [AUTH-SERVICE] [info]: User logged in: emma.alumni@decp.edu
+2026-03-05 13:21:15 [AUTH-SERVICE] [info]: User logged in: frank.alumni@decp.edu
+2026-03-05 13:26:52 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 13:26:53 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 13:26:53 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:26:53 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 13:31:11 [AUTH-SERVICE] [error]: Registration error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'admin@decp.edu';"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'admin@decp.edu';"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'admin@decp.edu';","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async register (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:33:26)
+2026-03-05 13:31:11 [AUTH-SERVICE] [error]: Login error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'admin@decp.edu' AND \"User\".\"isActive\" = true;"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'admin@decp.edu' AND \"User\".\"isActive\" = true;"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'admin@decp.edu' AND \"User\".\"isActive\" = true;","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async login (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:136:18)
+2026-03-05 13:31:11 [AUTH-SERVICE] [error]: Registration error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.james@decp.edu';"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.james@decp.edu';"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.james@decp.edu';","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async register (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:33:26)
+2026-03-05 13:31:11 [AUTH-SERVICE] [error]: Login error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.james@decp.edu' AND \"User\".\"isActive\" = true;"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.james@decp.edu' AND \"User\".\"isActive\" = true;"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.james@decp.edu' AND \"User\".\"isActive\" = true;","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async login (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:136:18)
+2026-03-05 13:31:11 [AUTH-SERVICE] [error]: Registration error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.sarah@decp.edu';"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.sarah@decp.edu';"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.sarah@decp.edu';","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async register (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:33:26)
+2026-03-05 13:31:11 [AUTH-SERVICE] [error]: Login error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.sarah@decp.edu' AND \"User\".\"isActive\" = true;"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.sarah@decp.edu' AND \"User\".\"isActive\" = true;"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.sarah@decp.edu' AND \"User\".\"isActive\" = true;","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async login (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:136:18)
+2026-03-05 13:31:11 [AUTH-SERVICE] [error]: Registration error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.michael@decp.edu';"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.michael@decp.edu';"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.michael@decp.edu';","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async register (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:33:26)
+2026-03-05 13:31:11 [AUTH-SERVICE] [error]: Login error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.michael@decp.edu' AND \"User\".\"isActive\" = true;"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.michael@decp.edu' AND \"User\".\"isActive\" = true;"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'prof.michael@decp.edu' AND \"User\".\"isActive\" = true;","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async login (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:136:18)
+2026-03-05 13:31:11 [AUTH-SERVICE] [error]: Registration error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'alice.student@decp.edu';"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'alice.student@decp.edu';"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'alice.student@decp.edu';","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async register (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:33:26)
+2026-03-05 13:31:11 [AUTH-SERVICE] [error]: Login error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'alice.student@decp.edu' AND \"User\".\"isActive\" = true;"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'alice.student@decp.edu' AND \"User\".\"isActive\" = true;"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'alice.student@decp.edu' AND \"User\".\"isActive\" = true;","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async login (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:136:18)
+2026-03-05 13:31:12 [AUTH-SERVICE] [error]: Registration error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'bob.student@decp.edu';"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'bob.student@decp.edu';"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'bob.student@decp.edu';","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async register (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:33:26)
+2026-03-05 13:31:12 [AUTH-SERVICE] [error]: Login error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'bob.student@decp.edu' AND \"User\".\"isActive\" = true;"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'bob.student@decp.edu' AND \"User\".\"isActive\" = true;"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'bob.student@decp.edu' AND \"User\".\"isActive\" = true;","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async login (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:136:18)
+2026-03-05 13:31:12 [AUTH-SERVICE] [error]: Registration error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'carol.student@decp.edu';"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'carol.student@decp.edu';"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'carol.student@decp.edu';","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async register (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:33:26)
+2026-03-05 13:31:12 [AUTH-SERVICE] [error]: Login error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'carol.student@decp.edu' AND \"User\".\"isActive\" = true;"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'carol.student@decp.edu' AND \"User\".\"isActive\" = true;"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'carol.student@decp.edu' AND \"User\".\"isActive\" = true;","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async login (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:136:18)
+2026-03-05 13:31:12 [AUTH-SERVICE] [error]: Registration error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'dan.student@decp.edu';"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'dan.student@decp.edu';"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'dan.student@decp.edu';","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async register (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:33:26)
+2026-03-05 13:31:12 [AUTH-SERVICE] [error]: Login error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'dan.student@decp.edu' AND \"User\".\"isActive\" = true;"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'dan.student@decp.edu' AND \"User\".\"isActive\" = true;"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'dan.student@decp.edu' AND \"User\".\"isActive\" = true;","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async login (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:136:18)
+2026-03-05 13:31:12 [AUTH-SERVICE] [error]: Registration error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'david.alumni@decp.edu';"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'david.alumni@decp.edu';"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'david.alumni@decp.edu';","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async register (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:33:26)
+2026-03-05 13:31:12 [AUTH-SERVICE] [error]: Login error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'david.alumni@decp.edu' AND \"User\".\"isActive\" = true;"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'david.alumni@decp.edu' AND \"User\".\"isActive\" = true;"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'david.alumni@decp.edu' AND \"User\".\"isActive\" = true;","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async login (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:136:18)
+2026-03-05 13:31:12 [AUTH-SERVICE] [error]: Registration error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'emma.alumni@decp.edu';"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'emma.alumni@decp.edu';"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'emma.alumni@decp.edu';","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async register (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:33:26)
+2026-03-05 13:31:12 [AUTH-SERVICE] [error]: Login error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'emma.alumni@decp.edu' AND \"User\".\"isActive\" = true;"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'emma.alumni@decp.edu' AND \"User\".\"isActive\" = true;"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'emma.alumni@decp.edu' AND \"User\".\"isActive\" = true;","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async login (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:136:18)
+2026-03-05 13:31:12 [AUTH-SERVICE] [error]: Registration error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'frank.alumni@decp.edu';"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'frank.alumni@decp.edu';"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'frank.alumni@decp.edu';","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async register (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:33:26)
+2026-03-05 13:31:12 [AUTH-SERVICE] [error]: Login error: relation "users" does not exist {"name":"SequelizeDatabaseError","parent":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'frank.alumni@decp.edu' AND \"User\".\"isActive\" = true;"},"original":{"length":105,"name":"error","severity":"ERROR","code":"42P01","position":"276","file":"parse_relation.c","line":"1469","routine":"parserOpenTable","sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'frank.alumni@decp.edu' AND \"User\".\"isActive\" = true;"},"sql":"SELECT \"id\", \"email\", \"password\", \"firstName\", \"lastName\", \"role\", \"department\", \"graduationYear\", \"isEmailVerified\", \"emailVerificationToken\", \"passwordResetToken\", \"passwordResetExpires\", \"googleId\", \"profilePicture\", \"lastLogin\", \"isActive\", \"createdAt\", \"updatedAt\" FROM \"users\" AS \"User\" WHERE \"User\".\"email\" = 'frank.alumni@decp.edu' AND \"User\".\"isActive\" = true;","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Function.findOne (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\node_modules\sequelize\src\model.js:1998:12)
+    at async login (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\auth-service\src\controllers\authController.ts:136:18)
+2026-03-05 13:35:14 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 13:35:14 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 13:35:15 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:35:15 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 13:35:27 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-05 13:35:27 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-05 13:35:27 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-05 13:35:27 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-05 13:35:28 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-05 13:35:28 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-05 13:35:28 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-05 13:35:28 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-05 13:35:29 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-05 13:35:29 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-05 13:35:29 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-05 13:35:29 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-05 13:35:30 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-05 13:35:30 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-05 13:35:30 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-05 13:35:30 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-05 13:35:30 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-05 13:35:30 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-05 13:35:31 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-05 13:35:31 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-05 13:35:31 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-05 13:35:31 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-05 13:35:46 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 13:40:35 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 13:40:35 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 13:40:35 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:40:35 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 13:40:48 [AUTH-SERVICE] [info]: User logged in: admin@decp.edu
+2026-03-05 13:40:48 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-05 13:40:49 [AUTH-SERVICE] [info]: User logged in: prof.sarah@decp.edu
+2026-03-05 13:40:49 [AUTH-SERVICE] [info]: User logged in: prof.michael@decp.edu
+2026-03-05 13:40:50 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 13:40:50 [AUTH-SERVICE] [info]: User logged in: bob.student@decp.edu
+2026-03-05 13:40:51 [AUTH-SERVICE] [info]: User logged in: carol.student@decp.edu
+2026-03-05 13:40:51 [AUTH-SERVICE] [info]: User logged in: dan.student@decp.edu
+2026-03-05 13:40:52 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-05 13:40:52 [AUTH-SERVICE] [info]: User logged in: emma.alumni@decp.edu
+2026-03-05 13:40:53 [AUTH-SERVICE] [info]: User logged in: frank.alumni@decp.edu
+2026-03-05 13:43:36 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 13:43:36 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 13:43:36 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:43:36 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 13:43:48 [AUTH-SERVICE] [info]: User logged in: admin@decp.edu
+2026-03-05 13:43:48 [AUTH-SERVICE] [info]: User logged in: prof.james@decp.edu
+2026-03-05 13:43:49 [AUTH-SERVICE] [info]: User logged in: prof.sarah@decp.edu
+2026-03-05 13:43:50 [AUTH-SERVICE] [info]: User logged in: prof.michael@decp.edu
+2026-03-05 13:43:50 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 13:43:51 [AUTH-SERVICE] [info]: User logged in: bob.student@decp.edu
+2026-03-05 13:43:51 [AUTH-SERVICE] [info]: User logged in: carol.student@decp.edu
+2026-03-05 13:43:52 [AUTH-SERVICE] [info]: User logged in: dan.student@decp.edu
+2026-03-05 13:43:52 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-05 13:43:53 [AUTH-SERVICE] [info]: User logged in: emma.alumni@decp.edu
+2026-03-05 13:43:53 [AUTH-SERVICE] [info]: User logged in: frank.alumni@decp.edu
+2026-03-05 14:25:23 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 14:25:23 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 14:25:23 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 14:25:23 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 14:25:36 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-05 14:25:36 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-05 14:25:37 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-05 14:25:37 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-05 14:25:37 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-05 14:25:37 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-05 14:25:38 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-05 14:25:38 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-05 14:25:38 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-05 14:25:38 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-05 14:25:39 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-05 14:25:39 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-05 14:25:39 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-05 14:25:39 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-05 14:25:40 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-05 14:25:40 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-05 14:25:40 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-05 14:25:40 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-05 14:25:41 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-05 14:25:41 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-05 14:25:41 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-05 14:25:41 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-05 14:26:17 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 14:26:36 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-05 14:26:36 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-05 14:26:37 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-05 14:26:37 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-05 14:26:37 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-05 14:26:37 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-05 14:26:37 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-05 14:26:37 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-05 14:26:38 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-05 14:26:38 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-05 14:26:38 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-05 14:26:38 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-05 14:26:39 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-05 14:26:39 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-05 14:26:39 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-05 14:26:39 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-05 14:26:39 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-05 14:26:39 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-05 14:26:40 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-05 14:26:40 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-05 14:26:40 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-05 14:26:40 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-05 14:27:01 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 16:04:44 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 16:04:44 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 16:04:44 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:04:44 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 16:20:59 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 16:20:59 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 16:20:59 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:20:59 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 16:21:35 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-05 16:21:35 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-05 16:21:36 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-05 16:21:36 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-05 16:21:36 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-05 16:21:36 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-05 16:21:36 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-05 16:21:36 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-05 16:21:37 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-05 16:21:37 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-05 16:21:37 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-05 16:21:37 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-05 16:21:38 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-05 16:21:38 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-05 16:21:38 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-05 16:21:38 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-05 16:21:38 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-05 16:21:38 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-05 16:21:39 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-05 16:21:39 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-05 16:21:39 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-05 16:21:39 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-05 16:22:21 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 16:28:12 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 16:28:13 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 16:28:13 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:28:13 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 16:30:47 [AUTH-SERVICE] [info]: User logged in: david.alumni@decp.edu
+2026-03-05 16:35:44 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 17:01:01 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 17:01:01 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 17:01:01 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:01:01 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 17:04:40 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 17:16:56 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 17:16:56 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 17:16:56 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:16:56 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 17:17:35 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 17:26:56 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 17:26:56 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 17:26:56 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:26:56 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 17:44:33 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 17:55:33 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 17:57:42 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 17:57:42 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 17:57:42 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:57:42 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 17:57:43 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 17:57:43 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 17:57:43 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:59:27 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-05 17:59:27 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-05 17:59:27 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:59:27 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-05 18:00:06 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 18:32:15 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to admin@decp.edu
+2026-03-05 18:32:15 [AUTH-SERVICE] [info]: User registered: admin@decp.edu
+2026-03-05 18:32:16 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.james@decp.edu
+2026-03-05 18:32:16 [AUTH-SERVICE] [info]: User registered: prof.james@decp.edu
+2026-03-05 18:32:16 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.sarah@decp.edu
+2026-03-05 18:32:16 [AUTH-SERVICE] [info]: User registered: prof.sarah@decp.edu
+2026-03-05 18:32:17 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to prof.michael@decp.edu
+2026-03-05 18:32:17 [AUTH-SERVICE] [info]: User registered: prof.michael@decp.edu
+2026-03-05 18:32:17 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to alice.student@decp.edu
+2026-03-05 18:32:17 [AUTH-SERVICE] [info]: User registered: alice.student@decp.edu
+2026-03-05 18:32:17 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to bob.student@decp.edu
+2026-03-05 18:32:17 [AUTH-SERVICE] [info]: User registered: bob.student@decp.edu
+2026-03-05 18:32:18 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to carol.student@decp.edu
+2026-03-05 18:32:18 [AUTH-SERVICE] [info]: User registered: carol.student@decp.edu
+2026-03-05 18:32:18 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to dan.student@decp.edu
+2026-03-05 18:32:18 [AUTH-SERVICE] [info]: User registered: dan.student@decp.edu
+2026-03-05 18:32:19 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to david.alumni@decp.edu
+2026-03-05 18:32:19 [AUTH-SERVICE] [info]: User registered: david.alumni@decp.edu
+2026-03-05 18:32:19 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to emma.alumni@decp.edu
+2026-03-05 18:32:19 [AUTH-SERVICE] [info]: User registered: emma.alumni@decp.edu
+2026-03-05 18:32:19 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to frank.alumni@decp.edu
+2026-03-05 18:32:19 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
+2026-03-05 18:32:48 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-05 23:22:25 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu

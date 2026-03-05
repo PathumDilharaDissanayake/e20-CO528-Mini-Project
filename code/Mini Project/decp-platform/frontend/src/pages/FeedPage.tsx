@@ -36,7 +36,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
 import { CreatePost } from '@components/feed/CreatePost';
-import { PostCard } from '@components/feed/PostCard';
+import PostCard from '@components/feed/PostCard';
 import { FeedSkeleton, EmptyState, ErrorState } from '@components/common';
 import { useGetPostsQuery } from '@services/postApi';
 import { useGetUsersQuery, useSendConnectionRequestMutation, useGetConnectionsQuery } from '@services/userApi';
@@ -196,10 +196,11 @@ const SuggestedUsersWidget: React.FC = () => {
   const [sendConnectionRequest] = useSendConnectionRequestMutation();
   const [pendingIds, setPendingIds] = useState<Set<string>>(new Set());
 
-  const { data, isLoading, isError } = useGetUsersQuery(
+  const { data, isLoading, isError, refetch } = useGetUsersQuery(
     { limit: 6 },
     { refetchOnMountOrArgChange: 60 }
   );
+  const { refetch: refetchConnections } = useGetConnectionsQuery(undefined);
 
   const users = (data?.data || [])
     .filter((u: any) => (u._id || u.id) !== (currentUser?._id || currentUser?.id))
@@ -219,6 +220,8 @@ const SuggestedUsersWidget: React.FC = () => {
     setPendingIds(prev => new Set([...prev, userId]));
     try {
       await sendConnectionRequest(userId).unwrap();
+      refetch(); // Refetch suggested users to remove the pending user
+      refetchConnections(); // Refetch connections to update the count
     } catch {
       setPendingIds(prev => { const next = new Set(prev); next.delete(userId); return next; });
     }

@@ -1,2 +1,3 @@
 export { CreatePost } from './CreatePost';
-export { PostCard } from './PostCard';
+export { default as PostCard } from './PostCard';
+export { default as CommentSection } from './CommentSection';

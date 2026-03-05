@@ -49,8 +49,8 @@ import { EVENT_TYPES } from '@utils';
 const getMediaUrl = (url: string): string => {
   if (!url) return '';
   if (url.startsWith('http') || url.startsWith('blob:')) return url;
-  const base = (import.meta.env.VITE_API_URL || '').replace('/api/v1', '');
-  return `${base}${url.startsWith('/') ? '' : '/'}${url}`;
+  // Use relative path - Vite will proxy /uploads to API Gateway
+  return `${url.startsWith('/') ? '' : '/'}${url}`;
 };
 
 const HeroBanner: React.FC<{ eventCount: number; canCreate: boolean; onCreate: () => void }> = ({ eventCount, canCreate, onCreate }) => (

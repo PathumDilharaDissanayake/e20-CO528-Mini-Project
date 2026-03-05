@@ -1,0 +1,134 @@
+﻿# Codex Changes Handoff
+
+## Request addressed
+- Investigated why image/video attachments were not persisting/visible in feed.
+- Prioritized upload path (frontend/mobile -> API gateway -> feed-service -> DB -> feed rendering).
+- Updated `start.bat`, `seed.js`, `reset-db.js` per request.
+
+## Files changed
+1. backend/api-gateway/src/routes/proxyRoutes.ts
+2. backend/feed-service/src/controllers/postController.ts
+3. backend/feed-service/src/middleware/uploadValidator.ts
+4. backend/feed-service/src/services/postService.ts
+5. mobile/src/services/feedService.ts
+6. start.bat
+7. reset-db.js
+8. seed.js
+9. tests/unit/postService.test.js
+
+## Exact logic changes
+
+### 1) API Gateway multipart forwarding fix
+File: `backend/api-gateway/src/routes/proxyRoutes.ts`
+- Fixed multipart proxy header forwarding so uploads reach Multer correctly.
+- Key fixes:
+  - Forward `content-type` (including multipart boundary).
+  - Forward `content-length` when present.
+  - Forward `accept` and `transfer-encoding` when present.
+  - Use normalized lowercase header keys (`authorization`, `content-type`).
+- Why: without boundary/header forwarding, media files can be dropped and posts become text-only/empty.
+
+### 2) Feed createPost validation hardening
+File: `backend/feed-service/src/controllers/postController.ts`
+- Added server-side guard:
+  - Reject post if it has no text, no media, and no poll options.
+- Why: prevents silent creation of blank posts if upload parsing fails upstream.
+
+### 3) Feed upload validator support expanded
+File: `backend/feed-service/src/middleware/uploadValidator.ts`
+- Added `video/ogg` signature support (`OggS` magic bytes).
+- Added `video/ogg` to allowed MIME list and error messaging.
+- Why: frontend allows OGG; backend previously rejected it.
+
+### 4) Feed post type inference fixed for OGG
+File: `backend/feed-service/src/services/postService.ts`
+- Updated media type inference regex from `(mp4|webm)` to `(mp4|webm|ogg)`.
+- Why: OGG uploads were being misclassified as images when `type=text`.
+
+### 5) Mobile multipart field-name fix
+File: `mobile/src/services/feedService.ts`
+- Changed media append key from `media[0]`, `media[1]`, ... to repeated `media`.
+- Removed manual `'Content-Type': 'multipart/form-data'` override.
+- Added `type` form field (`video` if any selected media is video; else `image`).
+- Why: backend expects `memoryUpload.array('media', 5)` and boundary should be auto-managed.
+
+### 6) start.bat rewritten
+File: `start.bat`
+- Replaced script with a Docker-first startup flow.
+- Added infra container start (`decp-postgres`, `decp-redis`, `decp-rabbitmq`).
+- Added PostgreSQL readiness wait and DB auto-create loop.
+- Added upload directory checks.
+- Added dependency install checks and backend build step.
+- Added service launch with environment variables (DB host/port/user/password + internal token).
+- Added gateway wait + seed execution + final URLs.
+
+IMPORTANT:
+- This rewritten script currently hardcodes DB port `5433` for services.
+- During my local checks, this machine had PostgreSQL listening on `5432`, not `5433`.
+- Another AI should make this auto-detect/fallback (`5433` then `5432`) to avoid startup failures.
+
+### 7) reset-db.js updated for current config inputs
+File: `reset-db.js`
+- DB connection now reads env vars with defaults:
+  - `DB_HOST` (default `localhost`)
+  - `DB_PORT` (default `5433`)
+  - `DB_USER` (default `postgres`)
+  - `DB_PASSWORD` (default `12345`)
+- Improved startup log to print host/port.
+
+### 8) seed.js modernized + media seed path
+File: `seed.js`
+- Added API host/port env support:
+  - `API_HOST` (default `localhost`)
+  - `API_PORT` (default `3000`)
+- Added helper utilities:
+  - `extractPostId()`
+  - multipart capability check (`fetch/FormData/Blob`)
+  - seed image/video path resolution (`SEED_IMAGE_FILE`, `SEED_VIDEO_FILE`)
+  - mime-type inference by extension
+  - multipart media-post creator against `/api/v1/posts`
+- Added media seed behavior in Step 3:
+  - Always attempts one image media post via multipart.
+  - Attempts one video media post if sample video exists.
+  - Logs warning if video sample missing.
+- Updated summary line to include media post count.
+
+### 9) Unit test update
+File: `tests/unit/postService.test.js`
+- Added test case verifying `.ogg` media is inferred as `video` type.
+
+## Validation I ran
+
+### Passed
+- `backend/api-gateway`: `npm run build` passed.
+- `backend/feed-service`: `npm run build` passed.
+- `node --check seed.js` passed.
+- `node --check reset-db.js` passed.
+
+### Failed / blocked
+- Frontend feed component tests failed due existing unrelated transform error:
+  - `frontend/src/test/setup.ts` parse error (`Expected ">" but found "store"`).
+- Backend jest from repo root failed because no root jest config is present.
+- End-to-end smoke upload test was attempted, but environment mismatch blocked it:
+  - Feed service could not connect when forced to `DB_PORT=5433`.
+  - Actual local listener observed on `5432`.
+
+## Environment facts discovered during checks
+- `netstat` showed PostgreSQL listening on port `5432` (not `5433`) on this machine.
+- This means current `start.bat` and default `reset-db.js` may need immediate DB port fallback logic.
+
+## Priority TODO for next AI
+1. Add DB port auto-detection/fallback (`5433` -> `5432`) in:
+   - `start.bat`
+   - `reset-db.js`
+   - optionally service env exports used by script.
+2. Re-run end-to-end media test after startup succeeds:
+   - Create image post via multipart through gateway.
+   - Verify `mediaUrls` stored in DB response/feed.
+   - Verify `/uploads/...` returns 200.
+3. Do same for video (mp4/webm/ogg).
+4. Keep gateway multipart header forwarding change (this is core fix).
+
+## Notes
+- I did not revert any pre-existing user changes.
+- Main technical fix for media pipeline is in gateway multipart header forwarding + feed validation/mime alignment.

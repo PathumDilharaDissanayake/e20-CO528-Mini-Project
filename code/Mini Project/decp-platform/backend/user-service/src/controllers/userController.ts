@@ -321,12 +321,12 @@ export const followUser = async (req: Request, res: Response): Promise<void> => 
       const requesterProfile = await Profile.findOne({ where: { userId: followerId } });
       const requesterName = requesterProfile
         ? `${requesterProfile.firstName} ${requesterProfile.lastName}`.trim()
-        : 'Someone';
+        : 'A user';
       sendNotification(
         followingId,
         'connection',
         'New Connection Request',
-        `${requesterName} wants to connect with you`,
+        `${requesterName} wants to connect with you.`,
         { fromUserId: followerId, fromUserName: requesterName }
       );
     }
@@ -521,6 +521,56 @@ export const getConnectionStatus = async (req: Request, res: Response): Promise<
     });
   } catch (error) {
     logger.error('Get connection status error:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+};
+
+export const getSuggestedUsers = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const currentUserId = req.headers['x-user-id'] as string;
+    if (!currentUserId) {
+      res.status(401).json({ success: false, message: 'Authentication required' });
+      return;
+    }
+
+    const limit = parseInt(req.query.limit as string) || 5;
+
+    // Get current user's connections
+    const connections = await Connection.findAll({
+      where: {
+        [Op.or]: [
+          { followerId: currentUserId },
+          { followingId: currentUserId }
+        ],
+        status: 'accepted'
+      }
+    });
+
+    // Get IDs of connected users
+    const connectedUserIds = new Set<string>();
+    connections.forEach(conn => {
+      connectedUserIds.add(conn.followerId);
+      connectedUserIds.add(conn.followingId);
+    });
+    connectedUserIds.add(currentUserId); // Exclude self
+
+    // Get users who are not connected (excluding self and existing connections)
+    const suggestedProfiles = await Profile.findAll({
+      where: {
+        userId: { [Op.notIn]: Array.from(connectedUserIds) }
+      },
+      limit,
+      order: [['createdAt', 'DESC']]
+    });
+
+    res.json({
+      success: true,
+      message: 'Suggested users retrieved',
+      data: suggestedProfiles,
+      meta: { total: suggestedProfiles.length }
+    });
+  } catch (error) {
+    logger.error('Get suggested users error:', error);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };

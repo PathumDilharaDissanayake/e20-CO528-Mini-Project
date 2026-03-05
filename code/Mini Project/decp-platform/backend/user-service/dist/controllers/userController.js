@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getConnectionStatus = exports.endorseSkill = exports.unfollowUser = exports.getConnectionRequests = exports.declineConnection = exports.acceptConnection = exports.followUser = exports.getConnections = exports.searchUsers = exports.deleteUser = exports.updateProfile = exports.getMyProfile = exports.getUserById = exports.getUsers = void 0;
+exports.getSuggestedUsers = exports.getConnectionStatus = exports.endorseSkill = exports.unfollowUser = exports.getConnectionRequests = exports.declineConnection = exports.acceptConnection = exports.followUser = exports.getConnections = exports.searchUsers = exports.deleteUser = exports.updateProfile = exports.getMyProfile = exports.getUserById = exports.getUsers = void 0;
 const sequelize_1 = require("sequelize");
 const models_1 = require("../models");
 const validation_1 = require("../utils/validation");
@@ -313,8 +313,8 @@ const followUser = async (req, res) => {
             const requesterProfile = await models_1.Profile.findOne({ where: { userId: followerId } });
             const requesterName = requesterProfile
                 ? `${requesterProfile.firstName} ${requesterProfile.lastName}`.trim()
-                : 'Someone';
-            (0, notify_1.sendNotification)(followingId, 'connection', 'New Connection Request', `${requesterName} wants to connect with you`, { fromUserId: followerId, fromUserName: requesterName });
+                : 'A user';
+            (0, notify_1.sendNotification)(followingId, 'connection', 'New Connection Request', `${requesterName} wants to connect with you.`, { fromUserId: followerId, fromUserName: requesterName });
         }
         res.json({
             success: true,
@@ -501,4 +501,50 @@ const getConnectionStatus = async (req, res) => {
     }
 };
 exports.getConnectionStatus = getConnectionStatus;
+const getSuggestedUsers = async (req, res) => {
+    try {
+        const currentUserId = req.headers['x-user-id'];
+        if (!currentUserId) {
+            res.status(401).json({ success: false, message: 'Authentication required' });
+            return;
+        }
+        const limit = parseInt(req.query.limit) || 5;
+        // Get current user's connections
+        const connections = await models_1.Connection.findAll({
+            where: {
+                [sequelize_1.Op.or]: [
+                    { followerId: currentUserId },
+                    { followingId: currentUserId }
+                ],
+                status: 'accepted'
+            }
+        });
+        // Get IDs of connected users
+        const connectedUserIds = new Set();
+        connections.forEach(conn => {
+            connectedUserIds.add(conn.followerId);
+            connectedUserIds.add(conn.followingId);
+        });
+        connectedUserIds.add(currentUserId); // Exclude self
+        // Get users who are not connected (excluding self and existing connections)
+        const suggestedProfiles = await models_1.Profile.findAll({
+            where: {
+                userId: { [sequelize_1.Op.notIn]: Array.from(connectedUserIds) }
+            },
+            limit,
+            order: [['createdAt', 'DESC']]
+        });
+        res.json({
+            success: true,
+            message: 'Suggested users retrieved',
+            data: suggestedProfiles,
+            meta: { total: suggestedProfiles.length }
+        });
+    }
+    catch (error) {
+        logger_1.logger.error('Get suggested users error:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+};
+exports.getSuggestedUsers = getSuggestedUsers;
 //# sourceMappingURL=userController.js.map

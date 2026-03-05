@@ -2416,3 +2416,1116 @@ Error
     at async Post.findAndCountAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
     at async Object.getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
     at async getFeed (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:37:21 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:21 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:21 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:21 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:21 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:22 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:22 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:22 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:22 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:22 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:22 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:22 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:22 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:23 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:23 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:23 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:23 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:37:23 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:39:07 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:39:09 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:39:09 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:39:10 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:39:10 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:39:41 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:40:12 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:40:43 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:41:14 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:41:45 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:42:16 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:42:47 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:43:18 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:43:48 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:43:48 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:44:18 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:44:18 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:44:49 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:44:51 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:51 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:51 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:51 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:51 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:51 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:51 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:52 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:52 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:52 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:52 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:52 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:52 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:52 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:52 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:52 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:53 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:44:53 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:45:20 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:45:51 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:46:22 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:46:53 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:47:24 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:49:13 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:13 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:13 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:13 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:13 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:13 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:14 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:14 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:14 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:14 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:14 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:14 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:14 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:14 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:15 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:15 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:15 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:15 [FEED-SERVICE] [error]: [createPost] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.insert (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Post.save (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:2490:35)
+    at async Post.create (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPost (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:163:22)
+2026-03-05 12:49:32 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:49:52 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:49:54 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:49:54 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:50:03 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:50:24 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:50:24 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:50:34 [FEED-SERVICE] [error]: [getFeed] column "originalPostId" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Promise.all (index 1)
+    at async Post.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1322:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\services\postService.js:55:36)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:89:24)
+2026-03-05 12:52:32 [FEED-SERVICE] [error]: ❌ Unable to start server: default for column "reactionType" cannot be cast automatically to type "enum_likes_reactionType" {"name":"SequelizeDatabaseError","parent":{"length":167,"name":"error","severity":"ERROR","code":"42804","file":"tablecmds.c","line":"14816","routine":"ATExecAlterColumnType","sql":"ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" SET NOT NULL;ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" SET DEFAULT 'like';DO 'BEGIN CREATE TYPE \"public\".\"enum_likes_reactionType\" AS ENUM(''like'', ''love'', ''celebrate'', ''insightful'', ''curious''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" TYPE \"public\".\"enum_likes_reactionType\" USING (\"reactionType\"::\"public\".\"enum_likes_reactionType\");"},"original":{"length":167,"name":"error","severity":"ERROR","code":"42804","file":"tablecmds.c","line":"14816","routine":"ATExecAlterColumnType","sql":"ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" SET NOT NULL;ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" SET DEFAULT 'like';DO 'BEGIN CREATE TYPE \"public\".\"enum_likes_reactionType\" AS ENUM(''like'', ''love'', ''celebrate'', ''insightful'', ''curious''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" TYPE \"public\".\"enum_likes_reactionType\" USING (\"reactionType\"::\"public\".\"enum_likes_reactionType\");"},"sql":"ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" SET NOT NULL;ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" SET DEFAULT 'like';DO 'BEGIN CREATE TYPE \"public\".\"enum_likes_reactionType\" AS ENUM(''like'', ''love'', ''celebrate'', ''insightful'', ''curious''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" TYPE \"public\".\"enum_likes_reactionType\" USING (\"reactionType\"::\"public\".\"enum_likes_reactionType\");","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Like.sync (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:984:11)
+    at async Sequelize.sync (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:377:9)
+    at async startServer (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\server.js:84:9)
+2026-03-05 12:58:39 [FEED-SERVICE] [error]: ❌ Unable to start server: default for column "reactionType" cannot be cast automatically to type "enum_likes_reactionType" {"name":"SequelizeDatabaseError","parent":{"length":167,"name":"error","severity":"ERROR","code":"42804","file":"tablecmds.c","line":"14816","routine":"ATExecAlterColumnType","sql":"ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" SET NOT NULL;ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" SET DEFAULT 'like';DO 'BEGIN CREATE TYPE \"public\".\"enum_likes_reactionType\" AS ENUM(''like'', ''love'', ''celebrate'', ''insightful'', ''curious''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" TYPE \"public\".\"enum_likes_reactionType\" USING (\"reactionType\"::\"public\".\"enum_likes_reactionType\");"},"original":{"length":167,"name":"error","severity":"ERROR","code":"42804","file":"tablecmds.c","line":"14816","routine":"ATExecAlterColumnType","sql":"ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" SET NOT NULL;ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" SET DEFAULT 'like';DO 'BEGIN CREATE TYPE \"public\".\"enum_likes_reactionType\" AS ENUM(''like'', ''love'', ''celebrate'', ''insightful'', ''curious''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" TYPE \"public\".\"enum_likes_reactionType\" USING (\"reactionType\"::\"public\".\"enum_likes_reactionType\");"},"sql":"ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" SET NOT NULL;ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" SET DEFAULT 'like';DO 'BEGIN CREATE TYPE \"public\".\"enum_likes_reactionType\" AS ENUM(''like'', ''love'', ''celebrate'', ''insightful'', ''curious''); EXCEPTION WHEN duplicate_object THEN null; END';ALTER TABLE \"likes\" ALTER COLUMN \"reactionType\" TYPE \"public\".\"enum_likes_reactionType\" USING (\"reactionType\"::\"public\".\"enum_likes_reactionType\");","parameters":{}}
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Like.sync (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:984:11)
+    at async Sequelize.sync (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:377:9)
+    at async startServer (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\server.js:84:9)
+2026-03-05 13:31:11 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:31:24 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:31:26 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Promise.all (index 1)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:31:29 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:31:31 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:31:32 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:31:33 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:31:42 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:31:55 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:31:56 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1001:12)
+    at async Function.findAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:1824:21)
+    at async Promise.all (index 1)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:31:59 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:32:00 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:32:02 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:32:03 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:32:08 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 13:32:13 [FEED-SERVICE] [error]: [getFeed] relation "posts" does not exist
+Error
+    at Query.run (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\postgres\query.js:76:25)
+    at e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.rawSelect (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\dialects\abstract\query-interface.js:1043:18)
+    at async Function.aggregate (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2067:19)
+    at async Function.count (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2124:20)
+    at async Promise.all (index 0)
+    at async Function.findAndCountAll (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\src\model.js:2183:27)
+    at async Object.getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\services\postService.ts:98:34)
+    at async getFeed (e:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\src\controllers\postController.ts:59:20)
+2026-03-05 15:20:47 [FEED-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\connection-manager.js:133:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-05 15:22:37 [FEED-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\connection-manager.js:133:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-05 15:23:35 [FEED-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\connection-manager.js:133:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-05 15:24:53 [FEED-SERVICE] [error]: ❌ Unable to start server: {"name":"SequelizeConnectionRefusedError","parent":{"code":"ECONNREFUSED"},"original":{"code":"ECONNREFUSED"}}
+SequelizeConnectionRefusedError
+    at Client._connectionCallback (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\connection-manager.js:133:24)
+    at Client._handleErrorWhileConnecting (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:379:19)
+    at Client._handleErrorEvent (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\client.js:389:19)
+    at Connection.emit (node:events:524:28)
+    at Socket.reportStreamError (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\pg\lib\connection.js:56:12)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-03-05 18:33:07 [FEED-SERVICE] [error]: [likePost] invalid input syntax for type uuid: "undefined"
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Like.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Like.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:214:30)
+2026-03-05 18:33:58 [FEED-SERVICE] [error]: [likePost] invalid input syntax for type uuid: "undefined"
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Like.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Like.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:214:30)
+2026-03-05 18:35:26 [FEED-SERVICE] [error]: [likePost] invalid input syntax for type uuid: "undefined"
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Like.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Like.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:214:30)
+2026-03-05 18:35:27 [FEED-SERVICE] [error]: [likePost] invalid input syntax for type uuid: "undefined"
+Error
+    at Query.run (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Like.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Like.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:214:30)

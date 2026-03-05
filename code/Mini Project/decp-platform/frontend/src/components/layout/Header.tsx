@@ -49,11 +49,11 @@ import { useLogoutMutation } from '@services/authApi';
 import { useGetConnectionRequestsQuery, useAcceptConnectionMutation, useDeclineConnectionMutation } from '@services/userApi';
 
 const SEARCH_SHORTCUTS = [
-  { label: 'Feed', path: '/', icon: Home },
+  { label: 'All Posts', path: '/?tab=all', icon: Home },
+  { label: 'People', path: '/search?tab=people', icon: PeopleAlt },
   { label: 'Jobs', path: '/jobs', icon: Work },
   { label: 'Events', path: '/events', icon: Event },
   { label: 'Research', path: '/research', icon: Science },
-  { label: 'Profile', path: '/profile', icon: Person },
 ];
 
 export const Header: React.FC = () => {
@@ -82,6 +82,9 @@ export const Header: React.FC = () => {
   };
 
   const handleLogout = async () => {
+    // Prevent double logout
+    if (anchorEl === null) return;
+    setAnchorEl(null);
     try {
       if (refreshToken) {
         await logoutMutation({ refreshToken }).unwrap();
@@ -421,7 +424,7 @@ export const Header: React.FC = () => {
               <Typography variant="body2" fontWeight={500}>My Profile</Typography>
             </MenuItem>
             <MenuItem
-              onClick={handleMenuClose}
+              onClick={() => { handleMenuClose(); navigate('/settings'); }}
               sx={{ py: 1.25, px: 2, '&:hover': { background: 'rgba(16,185,129,0.08)' } }}
             >
               <ListItemIcon>
@@ -518,7 +521,10 @@ export const Header: React.FC = () => {
                       color="success"
                       sx={{ borderRadius: '8px', fontSize: '0.7rem', minWidth: 0, px: 1, py: 0.5 }}
                       onClick={async () => {
-                        try { await acceptConnectionMutation(reqUserId).unwrap(); } catch {}
+                        try {
+                          await acceptConnectionMutation(reqUserId).unwrap();
+                          refetchConnections();
+                        } catch { }
                         setRequestsAnchorEl(null);
                       }}
                     >
@@ -530,7 +536,10 @@ export const Header: React.FC = () => {
                       color="error"
                       sx={{ borderRadius: '8px', fontSize: '0.7rem', minWidth: 0, px: 1, py: 0.5 }}
                       onClick={async () => {
-                        try { await declineConnectionMutation(reqUserId).unwrap(); } catch {}
+                        try {
+                          await declineConnectionMutation(reqUserId).unwrap();
+                          refetchConnections();
+                        } catch { }
                         setRequestsAnchorEl(null);
                       }}
                     >

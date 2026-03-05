@@ -125,6 +125,7 @@ export const JobsPage: React.FC = () => {
   const [viewJob, setViewJob] = useState<Job | null>(null);
   const [applyJob, setApplyJob] = useState<Job | null>(null);
   const [coverLetter, setCoverLetter] = useState('');
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [applySuccess, setApplySuccess] = useState(false);
 
   const { data: allJobsData, isLoading: isLoadingAll } = useGetJobsQuery(filters, { skip: activeTab !== 0 });
@@ -164,8 +165,14 @@ export const JobsPage: React.FC = () => {
 
   const handleApply = async () => {
     if (!applyJob) return;
+    const formData = new FormData();
+    formData.append('jobId', applyJob._id || applyJob.id || '');
+    formData.append('coverLetter', coverLetter);
+    if (resumeFile) {
+      formData.append('resume', resumeFile);
+    }
     try {
-      await applyForJob({ jobId: applyJob._id || applyJob.id || '', coverLetter }).unwrap();
+      await applyForJob(formData).unwrap();
       setApplySuccess(true);
     } catch (err) {
       console.error('Failed to apply:', err);
@@ -348,6 +355,24 @@ export const JobsPage: React.FC = () => {
                 value={coverLetter}
                 onChange={(e) => setCoverLetter(e.target.value)}
               />
+              <Button
+                component="label"
+                variant="outlined"
+                startIcon={<Add />}
+                sx={{ mt: 2 }}
+              >
+                Upload Resume
+                <input
+                  type="file"
+                  hidden
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setResumeFile(file);
+                    }
+                  }}
+                />
+              </Button>
             </Box>
           )}
         </DialogContent>

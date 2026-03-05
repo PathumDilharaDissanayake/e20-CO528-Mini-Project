@@ -5,19 +5,7 @@
 import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import { screen, fireEvent } from '@testing-library/react';
-import { renderWithProviders } from '../../../test/testUtils';
-
-// ── Mock all hooks used by Header ────────────────────────────────────────────
-vi.mock('@services/notificationApi', () => ({
-  useGetUnreadCountQuery: () => ({
-    data: { data: { count: 5, unread: 5 } },
-    isLoading: false,
-  }),
-}));
-
-vi.mock('@services/authApi', () => ({
-  useLogoutMutation: () => [vi.fn().mockResolvedValue({}), { isLoading: false }],
-}));
+import { screen, fireEvent } from '@testing-library/react';
 
 // Lazy import after mocks are hoisted
 const { Header } = await vi.importActual<typeof import('@components/layout/Header')>(
@@ -109,7 +97,7 @@ describe('Header — user menu', () => {
   it('shows user avatar button', () => {
     renderWithProviders(<Header />);
     // Avatar is a button that opens the user menu
-    const avatarBtn = document.querySelector('[aria-haspopup="true"]');
-    expect(avatarBtn ?? screen.queryByRole('button', { name: /account/i })).toBeTruthy();
+    const avatarBtn = screen.getByLabelText(/account of current user/i);
+    expect(avatarBtn).toBeInTheDocument();
   });
 });

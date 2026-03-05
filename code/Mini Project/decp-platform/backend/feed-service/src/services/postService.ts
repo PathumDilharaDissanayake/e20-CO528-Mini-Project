@@ -76,7 +76,8 @@ export const getFeed = async (options: FeedOptions): Promise<FeedResult> => {
     const posts = await Post.findAll({
       where,
       order: [['createdAt', 'DESC'], ['id', 'DESC']],
-      limit: safeLimit + 1 // +1 to detect hasNext
+      limit: safeLimit + 1, // +1 to detect hasNext
+      raw: false,  // Get full objects with getters
     });
     const hasNext = posts.length > safeLimit;
     const result = hasNext ? posts.slice(0, safeLimit) : posts;
@@ -99,7 +100,8 @@ export const getFeed = async (options: FeedOptions): Promise<FeedResult> => {
     where,
     order: [['createdAt', 'DESC'], ['id', 'DESC']],
     limit: safeLimit,
-    offset
+    offset,
+    raw: false,  // Get full objects with getters
   });
 
   const totalPages = Math.ceil(count / safeLimit);
@@ -135,7 +137,8 @@ export const createPost = async (input: CreatePostInput): Promise<Post> => {
   if (pollOptions && pollOptions.length > 0) {
     effectiveType = 'poll';
   } else if (mediaUrls.length > 0 && type === 'text') {
-    effectiveType = 'image';
+    const hasVideo = mediaUrls.some(url => /\.(mp4|webm|ogg)$/i.test(url));
+    effectiveType = hasVideo ? 'video' : 'image';
   }
   return Post.create({ userId, author, content, type: effectiveType, isPublic, mediaUrls, pollOptions: pollOptions || null, pollEndsAt: pollEndsAt || null });
 };

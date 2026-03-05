@@ -140,7 +140,8 @@ export const RegisterPage: React.FC = () => {
             refreshToken,
           })
         );
-        navigate('/', { replace: true });
+        // After successful registration, redirect to login page
+        navigate('/login', { replace: true });
       } else {
         setErrorMessage(response.message || 'Registration failed. Please try again.');
       }

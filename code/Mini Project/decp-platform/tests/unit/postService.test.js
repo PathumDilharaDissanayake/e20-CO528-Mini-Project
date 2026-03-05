@@ -250,6 +250,19 @@ describe('postService', () => {
       expect(Post.create).toHaveBeenCalledWith(expect.objectContaining({ type: 'video' }));
     });
 
+    it('upgrades type to video when ogg media is uploaded', async () => {
+      Post.create.mockResolvedValue(makePost({ type: 'video' }));
+
+      await postService.createPost({
+        userId: 'user-uuid-001',
+        content: 'Ogg video post',
+        type: 'text',
+        mediaUrls: ['/uploads/video.ogg']
+      });
+
+      expect(Post.create).toHaveBeenCalledWith(expect.objectContaining({ type: 'video' }));
+    });
+
     it('defaults isPublic to true', async () => {
       Post.create.mockResolvedValue(makePost());
 

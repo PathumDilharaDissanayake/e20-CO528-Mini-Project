@@ -163,6 +163,49 @@ export const userApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['User'],
     }),
+    uploadProfilePicture: builder.mutation<ApiResponse<{ url: string }>, FormData>({
+      queryFn: async (formData, { dispatch }) => {
+        try {
+          // Upload to feed-service
+          const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'}/feed/upload`, {
+            method: 'POST',
+            body: formData,
+          });
+          const result = await response.json();
+
+          if (result.success && result.data?.url) {
+            // Update profile with the new avatar URL
+            const userId = JSON.parse(atob(localStorage.getItem('token')?.split('.')[1] || '{}'))?.userId;
+            if (userId) {
+              await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'}/users/me`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ avatar: result.data.url }),
+              });
+            }
+            return { data: { success: true, data: { url: result.data.url } } };
+          }
+          return { error: { status: 500, data: { message: 'Upload failed' } } };
+        } catch (error) {
+          return { error: { status: 500, data: { message: 'Upload failed' } } };
+        }
+      },
+      invalidatesTags: ['User'],
+    }),
+    getSuggestedUsers: builder.query<PaginatedResponse<User>, { limit?: number }>({
+      query: ({ limit = 5 }) => `/users/suggested?limit=${limit}`,
+      transformResponse: (response: any) => {
+        const items = Array.isArray(response?.data) ? response.data : [];
+        return {
+          data: items.map(normalizeUser),
+          page: 1,
+          limit: items.length,
+          total: items.length,
+          hasMore: false,
+        };
+      },
+      providesTags: ['User'],
+    }),
   }),
 });
 
@@ -181,4 +224,6 @@ export const {
   useGetConnectionStatusQuery,
   useEndorseSkillMutation,
   useUpdateMyProfileMutation,
+  useGetSuggestedUsersQuery,
+  useUploadProfilePictureMutation,
 } = userApi;

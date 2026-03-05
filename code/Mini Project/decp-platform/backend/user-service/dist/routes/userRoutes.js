@@ -4,6 +4,7 @@ const express_1 = require("express");
 const userController_1 = require("../controllers/userController");
 const router = (0, express_1.Router)();
 router.get('/search', userController_1.searchUsers);
+router.get('/suggested', userController_1.getSuggestedUsers);
 router.get('/', userController_1.getUsers);
 router.get('/me', userController_1.getMyProfile);
 router.put('/me', userController_1.updateProfile);

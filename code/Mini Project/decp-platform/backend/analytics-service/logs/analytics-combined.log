@@ -226,3 +226,65 @@ SequelizeConnectionError: database "decp_analytics" does not exist
 2026-03-04 23:16:14 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
 2026-03-04 23:16:14 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
 2026-03-04 23:16:14 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 12:37:13 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:37:13 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:37:13 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 12:49:01 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:49:01 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:49:01 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 12:52:38 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:52:38 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:52:38 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 12:58:45 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 12:58:45 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 12:58:45 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 13:03:20 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:03:20 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:03:20 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 13:06:23 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:06:23 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:06:23 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 13:14:25 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:14:25 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:14:25 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 13:21:06 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:21:06 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:21:06 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 13:35:22 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:35:22 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:35:22 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 13:40:43 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:40:43 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:40:43 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 13:43:43 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 13:43:43 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 13:43:43 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 14:25:31 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 14:25:31 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 14:25:31 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 16:04:52 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 16:04:52 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:04:52 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 16:21:07 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 16:21:07 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:21:07 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 16:28:19 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 16:28:19 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 16:28:19 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 17:01:08 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:01:08 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:01:08 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 17:17:03 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:17:03 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:17:03 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 17:27:04 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:27:04 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:27:04 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 17:57:50 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:57:50 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:57:50 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009
+2026-03-05 17:57:50 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:57:50 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:59:34 [ANALYTICS-SERVICE] [info]: ✅ Database connected.
+2026-03-05 17:59:34 [ANALYTICS-SERVICE] [info]: ✅ Database synchronized.
+2026-03-05 17:59:34 [ANALYTICS-SERVICE] [info]: 📊 Analytics Service running on port 3009

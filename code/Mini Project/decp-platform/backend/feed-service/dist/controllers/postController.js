@@ -160,6 +160,15 @@ const createPost = async (req, res) => {
             avatar: (req.headers['x-user-avatar'] || '')
         };
         const mediaUrls = req.files?.map(f => `/uploads/${f.filename}`) || [];
+        const hasPoll = Array.isArray(value.pollOptions) && value.pollOptions.length > 0;
+        const hasText = typeof value.content === 'string' && value.content.trim().length > 0;
+        if (!hasText && mediaUrls.length === 0 && !hasPoll) {
+            res.status(400).json({
+                success: false,
+                message: 'Post must contain text, media, or poll options'
+            });
+            return;
+        }
         const post = await postService.createPost({ userId, author, ...value, mediaUrls });
         res.status(201).json({ success: true, message: 'Post created successfully', data: { post } });
     }
@@ -386,6 +395,7 @@ const getBookmarkedPosts = async (req, res) => {
         const posts = await models_1.Post.findAll({
             where: { id: postIds.length > 0 ? postIds : ['none'] },
             order: [['createdAt', 'DESC']],
+            attributes: { include: ['id', 'userId', 'content', 'type', 'mediaUrls', 'likes', 'comments', 'shares', 'pollOptions', 'pollEndsAt', 'isPublic', 'author', 'createdAt', 'updatedAt'] }
         });
         res.json({ success: true, data: posts, total: posts.length });
     }

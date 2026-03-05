@@ -22,6 +22,7 @@ import {
   SearchPage,
 } from '@pages';
 import { SavedPostsPage } from '@pages/SavedPostsPage';
+import { SettingsPage } from '@pages/SettingsPage';
 
 // Loading Component — branded DECP spinner
 const PageLoader: React.FC = () => (
@@ -142,6 +143,9 @@ const App: React.FC = () => {
 
           {/* Saved Posts */}
           <Route path="/saved" element={<SavedPostsPage />} />
+
+          {/* Settings */}
+          <Route path="/settings" element={<SettingsPage />} />
         </Route>
 
         {/* Admin Routes */}
