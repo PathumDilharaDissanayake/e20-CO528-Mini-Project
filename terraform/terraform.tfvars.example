@@ -1,0 +1,32 @@
+###############################################################################
+# terraform.tfvars – Default values (DO NOT commit secrets here)
+# Copy to terraform.tfvars and fill in sensitive values
+###############################################################################
+
+aws_region   = "us-east-1"
+project_name = "decp-platform"
+environment  = "dev"
+
+availability_zones = ["us-east-1a", "us-east-1b"]
+vpc_cidr           = "10.0.0.0/16"
+
+# Database (use terraform.tfvars or TF_VAR_ env vars for secrets)
+db_instance_class = "db.t3.micro"
+# db_username     = "postgres"          # Set via TF_VAR_db_username
+# db_password     = "change-me-please"  # Set via TF_VAR_db_password
+
+# ECS sizing (Fargate)
+api_gateway_cpu           = 512
+api_gateway_memory        = 1024
+api_gateway_desired_count = 2
+
+service_cpu           = 256
+service_memory        = 512
+service_desired_count = 1
+
+# JWT (set via TF_VAR_ env vars)
+# jwt_secret         = ""
+# jwt_refresh_secret = ""
+
+# SSL/TLS – leave empty for HTTP-only (dev), set ACM ARN for HTTPS (prod)
+certificate_arn = ""
