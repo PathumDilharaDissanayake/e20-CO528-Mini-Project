@@ -28,10 +28,11 @@ variables:
   image: hashicorp/terraform:1.7
   before_script:
     - cd $TF_DIR
-    - terraform init
-        -backend-config="bucket=${TF_STATE_BUCKET}"
-        -backend-config="key=${PROJECT_NAME}/${ENVIRONMENT}/terraform.tfstate"
-        -backend-config="region=${AWS_DEFAULT_REGION}"
+    - |
+      terraform init \
+        -backend-config="bucket=${TF_STATE_BUCKET}" \
+        -backend-config="key=${PROJECT_NAME}/${ENVIRONMENT}/terraform.tfstate" \
+        -backend-config="region=${AWS_DEFAULT_REGION}" \
         -backend-config="dynamodb_table=${TF_LOCK_TABLE}"
 
 .docker_template: &docker_template
@@ -40,9 +41,10 @@ variables:
     - docker:24-dind
   before_script:
     - apk add --no-cache aws-cli bash
-    - aws ecr get-login-password --region $AWS_DEFAULT_REGION |
-      docker login --username AWS --password-stdin
-      "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+    - |
+      aws ecr get-login-password --region $AWS_DEFAULT_REGION | \
+        docker login --username AWS --password-stdin \
+        "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
 
 # ═══════════════════════════ STAGE: VALIDATE ══════════════════════════════
 
@@ -169,16 +171,16 @@ terraform-plan:
   <<: *terraform_template
   stage: deploy-infra
   script:
-    - >
-      terraform plan
-      -var="project_name=${PROJECT_NAME}"
-      -var="environment=${ENVIRONMENT}"
-      -var="aws_region=${AWS_DEFAULT_REGION}"
-      -var="db_username=${DB_USERNAME}"
-      -var="db_password=${DB_PASSWORD}"
-      -var="jwt_secret=${JWT_SECRET}"
-      -var="jwt_refresh_secret=${JWT_REFRESH_SECRET}"
-      -out=tfplan
+    - |
+      terraform plan \
+        -var="project_name=${PROJECT_NAME}" \
+        -var="environment=${ENVIRONMENT}" \
+        -var="aws_region=${AWS_DEFAULT_REGION}" \
+        -var="db_username=${DB_USERNAME}" \
+        -var="db_password=${DB_PASSWORD}" \
+        -var="jwt_secret=${JWT_SECRET}" \
+        -var="jwt_refresh_secret=${JWT_REFRESH_SECRET}" \
+        -out=tfplan
   artifacts:
     paths:
       - ${TF_DIR}/tfplan
