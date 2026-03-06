@@ -92,11 +92,11 @@ module "ecs" {
   vpc_id             = module.vpc.vpc_id
   private_subnet_ids = module.vpc.private_subnet_ids
 
-  ecs_security_group_id       = module.security_groups.ecs_tasks_security_group_id
+  ecs_security_group_id        = module.security_groups.ecs_tasks_security_group_id
   api_gateway_target_group_arn = module.alb.api_gateway_target_group_arn
-  ecr_repository_urls         = module.ecr.repository_urls
-  uploads_bucket_arn          = module.s3.uploads_bucket_arn
-  redis_endpoint              = module.rds.redis_endpoint
+  ecr_repository_urls          = module.ecr.repository_urls
+  uploads_bucket_arn           = module.s3.uploads_bucket_arn
+  redis_endpoint               = module.rds.redis_endpoint
 
   api_gateway_cpu           = var.api_gateway_cpu
   api_gateway_memory        = var.api_gateway_memory
