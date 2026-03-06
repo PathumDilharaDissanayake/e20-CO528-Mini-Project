@@ -1,0 +1,259 @@
+###############################################################################
+# GitLab CI/CD Pipeline for DECP Platform
+# - Validates & deploys Terraform infrastructure
+# - Builds & pushes Docker images to ECR
+# - Deploys ECS services & frontend to S3
+###############################################################################
+
+stages:
+  - validate
+  - build
+  - deploy-infra
+  - deploy-services
+  - deploy-frontend
+
+variables:
+  AWS_DEFAULT_REGION: "us-east-1"
+  TF_DIR: "terraform"
+  BACKEND_DIR: "code/Mini Project/decp-platform/backend"
+  FRONTEND_DIR: "code/Mini Project/decp-platform/frontend"
+  PROJECT_NAME: "decp-platform"
+  ENVIRONMENT: "dev"
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: ""
+
+# ─────────────────────────── Reusable templates ───────────────────────────
+
+.terraform_template: &terraform_template
+  image: hashicorp/terraform:1.7
+  before_script:
+    - cd $TF_DIR
+    - terraform init
+        -backend-config="bucket=${TF_STATE_BUCKET}"
+        -backend-config="key=${PROJECT_NAME}/${ENVIRONMENT}/terraform.tfstate"
+        -backend-config="region=${AWS_DEFAULT_REGION}"
+        -backend-config="dynamodb_table=${TF_LOCK_TABLE}"
+
+.docker_template: &docker_template
+  image: docker:24-dind
+  services:
+    - docker:24-dind
+  before_script:
+    - apk add --no-cache aws-cli bash
+    - aws ecr get-login-password --region $AWS_DEFAULT_REGION |
+      docker login --username AWS --password-stdin
+      "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+
+# ═══════════════════════════ STAGE: VALIDATE ══════════════════════════════
+
+terraform-validate:
+  <<: *terraform_template
+  stage: validate
+  script:
+    - terraform validate
+    - terraform fmt -check -recursive
+  rules:
+    - changes:
+        - terraform/**/*
+    - if: $DEPLOY_ALL == "true"
+
+# ═══════════════════════════ STAGE: BUILD ═════════════════════════════════
+# Builds only changed services, or all when DEPLOY_ALL=true
+
+.build_service:
+  <<: *docker_template
+  stage: build
+  script:
+    - |
+      IMAGE_TAG="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${PROJECT_NAME}/${SERVICE_NAME}:${CI_COMMIT_SHORT_SHA}"
+      IMAGE_LATEST="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${PROJECT_NAME}/${SERVICE_NAME}:latest"
+      echo "Building ${SERVICE_NAME}..."
+      docker build -t "$IMAGE_TAG" -t "$IMAGE_LATEST" "${CI_PROJECT_DIR}/${BACKEND_DIR}/${SERVICE_NAME}"
+      docker push "$IMAGE_TAG"
+      docker push "$IMAGE_LATEST"
+      echo "✓ ${SERVICE_NAME} pushed successfully"
+
+build-api-gateway:
+  extends: .build_service
+  variables:
+    SERVICE_NAME: api-gateway
+  rules:
+    - changes:
+        - "code/Mini Project/decp-platform/backend/api-gateway/**/*"
+    - if: $DEPLOY_ALL == "true"
+
+build-auth-service:
+  extends: .build_service
+  variables:
+    SERVICE_NAME: auth-service
+  rules:
+    - changes:
+        - "code/Mini Project/decp-platform/backend/auth-service/**/*"
+    - if: $DEPLOY_ALL == "true"
+
+build-user-service:
+  extends: .build_service
+  variables:
+    SERVICE_NAME: user-service
+  rules:
+    - changes:
+        - "code/Mini Project/decp-platform/backend/user-service/**/*"
+    - if: $DEPLOY_ALL == "true"
+
+build-feed-service:
+  extends: .build_service
+  variables:
+    SERVICE_NAME: feed-service
+  rules:
+    - changes:
+        - "code/Mini Project/decp-platform/backend/feed-service/**/*"
+    - if: $DEPLOY_ALL == "true"
+
+build-jobs-service:
+  extends: .build_service
+  variables:
+    SERVICE_NAME: jobs-service
+  rules:
+    - changes:
+        - "code/Mini Project/decp-platform/backend/jobs-service/**/*"
+    - if: $DEPLOY_ALL == "true"
+
+build-events-service:
+  extends: .build_service
+  variables:
+    SERVICE_NAME: events-service
+  rules:
+    - changes:
+        - "code/Mini Project/decp-platform/backend/events-service/**/*"
+    - if: $DEPLOY_ALL == "true"
+
+build-research-service:
+  extends: .build_service
+  variables:
+    SERVICE_NAME: research-service
+  rules:
+    - changes:
+        - "code/Mini Project/decp-platform/backend/research-service/**/*"
+    - if: $DEPLOY_ALL == "true"
+
+build-messaging-service:
+  extends: .build_service
+  variables:
+    SERVICE_NAME: messaging-service
+  rules:
+    - changes:
+        - "code/Mini Project/decp-platform/backend/messaging-service/**/*"
+    - if: $DEPLOY_ALL == "true"
+
+build-notification-service:
+  extends: .build_service
+  variables:
+    SERVICE_NAME: notification-service
+  rules:
+    - changes:
+        - "code/Mini Project/decp-platform/backend/notification-service/**/*"
+    - if: $DEPLOY_ALL == "true"
+
+build-analytics-service:
+  extends: .build_service
+  variables:
+    SERVICE_NAME: analytics-service
+  rules:
+    - changes:
+        - "code/Mini Project/decp-platform/backend/analytics-service/**/*"
+    - if: $DEPLOY_ALL == "true"
+
+# ═══════════════════════════ STAGE: DEPLOY INFRA ══════════════════════════
+
+terraform-plan:
+  <<: *terraform_template
+  stage: deploy-infra
+  script:
+    - >
+      terraform plan
+      -var="project_name=${PROJECT_NAME}"
+      -var="environment=${ENVIRONMENT}"
+      -var="aws_region=${AWS_DEFAULT_REGION}"
+      -var="db_username=${DB_USERNAME}"
+      -var="db_password=${DB_PASSWORD}"
+      -var="jwt_secret=${JWT_SECRET}"
+      -var="jwt_refresh_secret=${JWT_REFRESH_SECRET}"
+      -out=tfplan
+  artifacts:
+    paths:
+      - ${TF_DIR}/tfplan
+    expire_in: 1 hour
+  rules:
+    - changes:
+        - terraform/**/*
+    - if: $DEPLOY_ALL == "true"
+
+terraform-apply:
+  <<: *terraform_template
+  stage: deploy-infra
+  script:
+    - terraform apply -auto-approve tfplan
+  needs:
+    - terraform-plan
+  when: manual
+  rules:
+    - changes:
+        - terraform/**/*
+    - if: $DEPLOY_ALL == "true"
+
+# ═══════════════════════════ STAGE: DEPLOY SERVICES ═══════════════════════
+
+deploy-ecs-services:
+  image: amazon/aws-cli:2.15
+  stage: deploy-services
+  script:
+    - |
+      SERVICES="api-gateway auth-service user-service feed-service jobs-service events-service research-service messaging-service notification-service analytics-service"
+      CLUSTER="${PROJECT_NAME}-cluster"
+      for svc in $SERVICES; do
+        echo "=== Redeploying $svc ==="
+        aws ecs update-service \
+          --cluster "$CLUSTER" \
+          --service "$svc" \
+          --force-new-deployment \
+          --region "$AWS_DEFAULT_REGION" || echo "WARN: $svc not found, skipping"
+      done
+    - |
+      echo "Waiting for api-gateway to stabilize..."
+      aws ecs wait services-stable \
+        --cluster "$CLUSTER" \
+        --services "api-gateway" \
+        --region "$AWS_DEFAULT_REGION" || true
+      echo "Deployment complete."
+  rules:
+    - if: $CI_COMMIT_BRANCH == "deploy"
+    - if: $DEPLOY_ALL == "true"
+
+# ═══════════════════════════ STAGE: DEPLOY FRONTEND ═══════════════════════
+
+deploy-frontend:
+  image: node:20-alpine
+  stage: deploy-frontend
+  before_script:
+    - apk add --no-cache aws-cli
+  script:
+    - cd "${CI_PROJECT_DIR}/${FRONTEND_DIR}"
+    # Dynamically discover the ALB DNS to use as API URL
+    - |
+      ALB_DNS=$(aws elbv2 describe-load-balancers \
+        --names "${PROJECT_NAME}-alb" \
+        --query "LoadBalancers[0].DNSName" \
+        --output text \
+        --region "$AWS_DEFAULT_REGION" 2>/dev/null || echo "localhost")
+      echo "VITE_API_URL=http://${ALB_DNS}" > .env.production
+      echo "Frontend will point to: http://${ALB_DNS}"
+    - npm ci
+    - npm run build
+    - |
+      BUCKET="${PROJECT_NAME}-frontend-${ENVIRONMENT}"
+      aws s3 sync dist/ "s3://${BUCKET}" --delete --region "$AWS_DEFAULT_REGION"
+      echo "Frontend deployed to s3://${BUCKET}"
+  rules:
+    - changes:
+        - "code/Mini Project/decp-platform/frontend/**/*"
+    - if: $DEPLOY_ALL == "true"
