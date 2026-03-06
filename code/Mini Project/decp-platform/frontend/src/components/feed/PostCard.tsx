@@ -47,20 +47,20 @@ interface PollOption {
 interface Post {
   _id?: string;
   id?: string;
-  userId: string;
-  author: Author;
-  content: string;
-  type: 'text' | 'image' | 'video' | 'poll' | 'event' | 'announcement';
+  userId?: string;
+  author?: Author;
+  content?: string;
+  type?: 'text' | 'image' | 'video' | 'poll' | 'event' | 'announcement';
   media?: Array<{ url: string; type: string }>;
   mediaUrls?: string[];
-  likes: number;
-  comments: number;
-  shares: number;
+  likes?: number;
+  comments?: number;
+  shares?: number;
   pollOptions?: PollOption[];
   pollEndsAt?: string;
   myReaction?: string | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 interface PostCardProps {
