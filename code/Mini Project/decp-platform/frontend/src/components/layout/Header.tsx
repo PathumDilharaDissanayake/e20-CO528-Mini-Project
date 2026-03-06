@@ -62,7 +62,7 @@ export const Header: React.FC = () => {
   const { user, refreshToken } = useSelector((state: RootState) => state.auth);
   const { mode } = useSelector((state: RootState) => state.theme);
   const { data: unreadData } = useGetUnreadCountQuery(undefined, { pollingInterval: 15000 });
-  const { data: connectionRequestsData } = useGetConnectionRequestsQuery(undefined, { pollingInterval: 30000 });
+  const { data: connectionRequestsData, refetch: refetchConnections } = useGetConnectionRequestsQuery(undefined, { pollingInterval: 30000 });
   const [logoutMutation] = useLogoutMutation();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

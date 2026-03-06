@@ -78,7 +78,7 @@ export const SavedPostsPage: React.FC = () => {
                     <PostCard
                       key={post._id || post.id}
                       post={post}
-                      onPostUpdated={refetch}
+                      onPostUpdate={refetch}
                     />
                   ))}
                 </Box>            )}

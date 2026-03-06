@@ -45,7 +45,7 @@ interface PollOption {
 }
 
 interface Post {
-  _id: string;
+  _id?: string;
   id?: string;
   userId: string;
   author: Author;

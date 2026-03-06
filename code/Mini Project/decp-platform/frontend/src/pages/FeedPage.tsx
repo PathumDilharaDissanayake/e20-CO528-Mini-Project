@@ -587,7 +587,7 @@ export const FeedPage: React.FC = () => {
                 style={{ transitionDelay: `${Math.min(index * 30, 200)}ms` }}
               >
                 <Box>
-                  <PostCard post={post} onPostUpdated={handleRefresh} />
+                  <PostCard post={post} onPostUpdate={handleRefresh} />
                 </Box>
               </Fade>
             ))}

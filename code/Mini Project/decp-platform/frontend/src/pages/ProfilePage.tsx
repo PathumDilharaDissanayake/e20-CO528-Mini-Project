@@ -385,7 +385,7 @@ export const ProfilePage: React.FC = () => {
                   <PostCard
                     key={post._id || post.id}
                     post={post}
-                    onPostUpdated={() => refetchPosts()}
+                    onPostUpdate={() => refetchPosts()}
                   />
                 ))
               )}
