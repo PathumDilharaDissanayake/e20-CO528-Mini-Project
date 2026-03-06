@@ -29,39 +29,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDeletePostMutation, useBookmarkPostMutation, useLikePostMutation, useUnlikePostMutation, useVotePollMutation } from '@services/postApi';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
+import { Post } from '@/types';
 import CommentSection from './CommentSection';
-
-interface Author {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  avatar?: string;
-  role: string;
-}
-
-interface PollOption {
-  text: string;
-  votes: string[];
-}
-
-interface Post {
-  _id?: string;
-  id?: string;
-  userId?: string;
-  author?: Author;
-  content?: string;
-  type?: 'text' | 'image' | 'video' | 'poll' | 'event' | 'announcement';
-  media?: Array<{ url: string; type: string }>;
-  mediaUrls?: string[];
-  likes?: number;
-  comments?: number;
-  shares?: number;
-  pollOptions?: PollOption[];
-  pollEndsAt?: string;
-  myReaction?: string | null;
-  createdAt?: string;
-  updatedAt?: string;
-}
 
 interface PostCardProps {
   post: Post;
@@ -73,7 +42,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdate }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showComments, setShowComments] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
-  const [likesCount, setLikesCount] = useState(post.likes);
+  const [likesCount, setLikesCount] = useState<number>(typeof post.likes === 'number' ? post.likes : Array.isArray(post.likes) ? post.likes.length : 0);
   const [hasLiked, setHasLiked] = useState(!!post.myReaction);
 
   const { user: currentUser } = useSelector((state: RootState) => state.auth);
@@ -133,7 +102,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdate }) => {
 
   const handleProfileClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    navigate(`/profile/${post.author._id}`);
+    navigate(`/profile/${post.author?._id}`);
   };
 
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -406,7 +375,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdate }) => {
       <CardContent sx={{ pb: 1 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1.5 }}>
           <Avatar
-            src={post.author.avatar}
+            src={post.author?.avatar}
             onClick={handleProfileClick}
             sx={{
               cursor: 'pointer',
@@ -416,17 +385,17 @@ const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdate }) => {
               bgcolor: 'primary.main',
             }}
           >
-            {getInitials(post.author.firstName, post.author.lastName)}
+            {getInitials(post.author?.firstName, post.author?.lastName)}
           </Avatar>
           <Box sx={{ flex: 1, cursor: 'pointer' }} onClick={handleProfileClick}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <Typography variant="subtitle1" fontWeight="600">
-                {post.author.firstName} {post.author.lastName}
+                {post.author?.firstName} {post.author?.lastName}
               </Typography>
               <Chip
-                label={post.author.role}
+                label={post.author?.role}
                 size="small"
-                color={getRoleColor(post.author.role) as any}
+                color={getRoleColor(post.author?.role) as any}
                 sx={{ height: 20, fontSize: '0.7rem' }}
               />
             </Box>
@@ -492,7 +461,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdate }) => {
             <ChatBubbleOutline />
           </IconButton>
           <Typography variant="body2" color="text.secondary">
-            {post.comments}
+            {typeof post.comments === 'number' ? post.comments : Array.isArray(post.comments) ? post.comments.length : 0}
           </Typography>
         </Box>
 
