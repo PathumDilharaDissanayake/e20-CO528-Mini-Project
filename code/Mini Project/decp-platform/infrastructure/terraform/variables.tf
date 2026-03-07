@@ -107,6 +107,12 @@ variable "db_multi_az" {
   default     = true
 }
 
+variable "db_force_ssl" {
+  description = "Whether to enforce SSL-only PostgreSQL connections (rds.force_ssl)"
+  type        = bool
+  default     = false
+}
+
 variable "redis_node_type" {
   description = "ElastiCache Redis node type"
   type        = string

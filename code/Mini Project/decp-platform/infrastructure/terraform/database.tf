@@ -46,7 +46,7 @@ resource "aws_db_parameter_group" "main" {
 
   parameter {
     name  = "rds.force_ssl"
-    value = "1"
+    value = var.db_force_ssl ? "1" : "0"
   }
 
   tags = local.common_tags
