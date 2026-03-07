@@ -53,7 +53,6 @@ resource "null_resource" "create_databases" {
   depends_on = [aws_db_instance.postgres]
 
   provisioner "local-exec" {
-    interpreter = ["bash", "-c"]
     environment = {
       PGHOST     = aws_db_instance.postgres.address
       PGPORT     = tostring(aws_db_instance.postgres.port)

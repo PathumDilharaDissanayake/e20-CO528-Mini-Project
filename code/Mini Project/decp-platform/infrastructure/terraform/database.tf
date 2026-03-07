@@ -154,7 +154,6 @@ resource "null_resource" "create_databases" {
   depends_on = [aws_db_instance.main]
 
   provisioner "local-exec" {
-    interpreter = ["bash", "-c"]
     environment = {
       PGHOST     = aws_db_instance.main.address
       PGPORT     = tostring(aws_db_instance.main.port)
