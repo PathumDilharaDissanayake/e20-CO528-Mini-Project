@@ -108,15 +108,15 @@ locals {
       health_path = "/health"
       environment = concat(var.common_env_vars, [
         { name = "PORT", value = "3000" },
-        { name = "AUTH_SERVICE_URL", value = "http://localhost:3001" },
-        { name = "USER_SERVICE_URL", value = "http://localhost:3002" },
-        { name = "FEED_SERVICE_URL", value = "http://localhost:3003" },
-        { name = "JOBS_SERVICE_URL", value = "http://localhost:3004" },
-        { name = "EVENTS_SERVICE_URL", value = "http://localhost:3005" },
-        { name = "RESEARCH_SERVICE_URL", value = "http://localhost:3006" },
-        { name = "MESSAGING_SERVICE_URL", value = "http://localhost:3007" },
-        { name = "NOTIFICATION_SERVICE_URL", value = "http://localhost:3008" },
-        { name = "ANALYTICS_SERVICE_URL", value = "http://localhost:3009" },
+        { name = "AUTH_SERVICE_URL", value = "http://auth-service.${var.project_name}.local:3001" },
+        { name = "USER_SERVICE_URL", value = "http://user-service.${var.project_name}.local:3002" },
+        { name = "FEED_SERVICE_URL", value = "http://feed-service.${var.project_name}.local:3003" },
+        { name = "JOBS_SERVICE_URL", value = "http://jobs-service.${var.project_name}.local:3004" },
+        { name = "EVENTS_SERVICE_URL", value = "http://events-service.${var.project_name}.local:3005" },
+        { name = "RESEARCH_SERVICE_URL", value = "http://research-service.${var.project_name}.local:3006" },
+        { name = "MESSAGING_SERVICE_URL", value = "http://messaging-service.${var.project_name}.local:3007" },
+        { name = "NOTIFICATION_SERVICE_URL", value = "http://notification-service.${var.project_name}.local:3008" },
+        { name = "ANALYTICS_SERVICE_URL", value = "http://analytics-service.${var.project_name}.local:3009" },
       ])
     }
     auth-service = {

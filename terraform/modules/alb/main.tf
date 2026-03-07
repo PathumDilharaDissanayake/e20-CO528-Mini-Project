@@ -41,8 +41,9 @@ resource "aws_lb_target_group" "api_gateway" {
   }
 }
 
-# ---------- HTTP Listener (redirect to HTTPS) ----------
+# ---------- HTTP Listener (redirect to HTTPS when cert exists) ----------
 resource "aws_lb_listener" "http" {
+  count             = var.certificate_arn != "" ? 1 : 0
   load_balancer_arn = aws_lb.main.arn
   port              = 80
   protocol          = "HTTP"
@@ -72,7 +73,7 @@ resource "aws_lb_listener" "https" {
   }
 }
 
-# ---------- HTTP listener forwarding (when no cert) ----------
+# ---------- HTTP listener forwarding (when no cert — HTTP-only mode) ----------
 resource "aws_lb_listener" "http_forward" {
   count             = var.certificate_arn == "" ? 1 : 0
   load_balancer_arn = aws_lb.main.arn
