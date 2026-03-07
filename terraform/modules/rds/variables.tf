@@ -38,12 +38,6 @@ variable "db_name" {
   default     = "decp_auth"
 }
 
-variable "additional_database_names" {
-  description = "Additional databases to create on the RDS instance after launch"
-  type        = list(string)
-  default     = []
-}
-
 variable "db_username" {
   type      = string
   sensitive = true

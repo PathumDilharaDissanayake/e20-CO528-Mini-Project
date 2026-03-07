@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize';
+import { Sequelize, QueryTypes } from 'sequelize';
 import { config } from './index';
 import { logger } from '../utils/logger';
 
@@ -47,18 +47,48 @@ const sequelize = new Sequelize({
     : {})
 });
 
+const ensureDatabaseExists = async (): Promise<void> => {
+  const adminSequelize = new Sequelize({
+    database: 'postgres',
+    username: config.db.user,
+    password: config.db.password,
+    host: config.db.host,
+    port: config.db.port,
+    dialect: 'postgres',
+    logging: false,
+    ...(useSsl
+      ? { dialectOptions: { ssl: { require: true, rejectUnauthorized } } }
+      : {}),
+  });
+  try {
+    const result = await adminSequelize.query(
+      'SELECT 1 FROM pg_database WHERE datname = $1',
+      { bind: [config.db.name], type: QueryTypes.SELECT }
+    );
+    if (result.length === 0) {
+      await adminSequelize.query(`CREATE DATABASE "${config.db.name}"`);
+      logger.info(`Database "${config.db.name}" created successfully`);
+    }
+  } finally {
+    await adminSequelize.close();
+  }
+};
+
 export const connectDatabase = async (): Promise<void> => {
   try {
     await sequelize.authenticate();
-    logger.info('Database connection established successfully');
-
-    // Sync models (development only)
-    await sequelize.sync({ alter: true });
-    logger.info('Database models synchronized');
-  } catch (error) {
-    logger.error('Unable to connect to database:', error);
-    throw error;
+  } catch (error: any) {
+    if (error?.original?.code === '3D000') {
+      logger.info(`Database "${config.db.name}" does not exist, creating...`);
+      await ensureDatabaseExists();
+      await sequelize.authenticate();
+    } else {
+      throw error;
+    }
   }
+  logger.info('Database connection established successfully');
+  await sequelize.sync({ alter: true });
+  logger.info('Database models synchronized');
 };
 
 export default sequelize;
