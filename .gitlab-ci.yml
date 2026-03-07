@@ -249,8 +249,8 @@ deploy-frontend:
         --query "LoadBalancers[0].DNSName" \
         --output text \
         --region "$AWS_DEFAULT_REGION" 2>/dev/null || echo "localhost")
-      echo "VITE_API_URL=http://${ALB_DNS}" > .env.production
-      echo "Frontend will point to: http://${ALB_DNS}"
+      echo "VITE_API_URL=http://${ALB_DNS}/api/v1" > .env.production
+      echo "Frontend will point to: http://${ALB_DNS}/api/v1"
     - npm ci
     - npm run build
     - |
