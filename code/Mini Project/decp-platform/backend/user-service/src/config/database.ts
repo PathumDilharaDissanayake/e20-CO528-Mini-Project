@@ -2,9 +2,24 @@ import { Sequelize } from 'sequelize';
 import { config } from './index';
 import { logger } from '../utils/logger';
 
-const isLocalDatabaseHost = ['localhost', '127.0.0.1', 'postgres'].includes(config.db.host);
-const useSsl = (process.env.DB_SSL ?? (isLocalDatabaseHost ? 'false' : 'true')).toLowerCase() === 'true';
-const rejectUnauthorized = (process.env.DB_SSL_REJECT_UNAUTHORIZED || 'false').toLowerCase() === 'true';
+const localDatabaseHosts = new Set(['localhost', '127.0.0.1', '::1', 'postgres']);
+const normalizedDbHost = (config.db.host || '').trim().toLowerCase();
+const isLocalDatabaseHost = localDatabaseHosts.has(normalizedDbHost);
+
+const parseBoolean = (value: string | undefined, defaultValue: boolean): boolean => {
+  if (value === undefined) {
+    return defaultValue;
+  }
+
+  return value.trim().toLowerCase() === 'true';
+};
+
+const useSsl = parseBoolean(process.env.DB_SSL, !isLocalDatabaseHost);
+const rejectUnauthorized = parseBoolean(process.env.DB_SSL_REJECT_UNAUTHORIZED, false);
+
+logger.info(
+  `DB connection config: host=${config.db.host}, port=${config.db.port}, ssl=${useSsl}, sslRejectUnauthorized=${rejectUnauthorized}`
+);
 
 const sequelize = new Sequelize({
   database: config.db.name,
