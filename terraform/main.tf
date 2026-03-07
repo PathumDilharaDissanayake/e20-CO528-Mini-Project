@@ -116,6 +116,7 @@ module "ecs" {
     { name = "DB_PORT", value = tostring(module.rds.postgres_port) },
     { name = "DB_USER", value = var.db_username },
     { name = "DB_PASSWORD", value = var.db_password },
+    { name = "PGSSLMODE", value = "require" },
     { name = "DB_SSL", value = "true" },
     { name = "DB_SSL_REJECT_UNAUTHORIZED", value = "false" },
   ]
