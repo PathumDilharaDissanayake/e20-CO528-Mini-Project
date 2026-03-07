@@ -21,6 +21,7 @@ variables:
   ENVIRONMENT: "dev"
   DOCKER_HOST: tcp://docker:2375
   DOCKER_TLS_CERTDIR: ""
+  VITE_API_URL: "http://decp-platform-alb-440905668.us-east-1.elb.amazonaws.com/api/v1"
 
 # ─────────────────────────── Reusable templates ───────────────────────────
 
@@ -69,8 +70,14 @@ terraform-validate:
   stage: build
   script:
     - |
-      IMAGE_TAG="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${PROJECT_NAME}/${SERVICE_NAME}:${CI_COMMIT_SHORT_SHA}"
-      IMAGE_LATEST="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${PROJECT_NAME}/${SERVICE_NAME}:latest"
+      REPO_NAME="${PROJECT_NAME}/${SERVICE_NAME}"
+      IMAGE_TAG="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${REPO_NAME}:${CI_COMMIT_SHORT_SHA}"
+      IMAGE_LATEST="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${REPO_NAME}:latest"
+
+      # Ensure ECR repository exists before pushing
+      aws ecr describe-repositories --repository-names "$REPO_NAME" --region "$AWS_DEFAULT_REGION" 2>/dev/null || \
+        aws ecr create-repository --repository-name "$REPO_NAME" --region "$AWS_DEFAULT_REGION"
+
       echo "Building ${SERVICE_NAME}..."
       docker build -t "$IMAGE_TAG" -t "$IMAGE_LATEST" "${CI_PROJECT_DIR}/${BACKEND_DIR}/${SERVICE_NAME}"
       docker push "$IMAGE_TAG"
