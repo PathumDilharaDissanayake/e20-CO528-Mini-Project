@@ -180,6 +180,29 @@ terraform-plan:
   <<: *terraform_template
   stage: deploy-infra
   script:
+    - apk add --no-cache aws-cli bash
+    - |
+      # Import existing ECR repos into Terraform state (avoids RepositoryAlreadyExistsException)
+      SERVICES="api-gateway auth-service user-service feed-service jobs-service events-service research-service messaging-service notification-service analytics-service"
+      for svc in $SERVICES; do
+        REPO="${PROJECT_NAME}/${svc}"
+        # Check if already in state
+        if ! terraform state show "module.ecr.aws_ecr_repository.services[\"${svc}\"]" >/dev/null 2>&1; then
+          # Check if repo exists in ECR
+          if aws ecr describe-repositories --repository-names "$REPO" --region "$AWS_DEFAULT_REGION" >/dev/null 2>&1; then
+            echo "Importing existing ECR repo: $REPO"
+            terraform import \
+              -var="project_name=${PROJECT_NAME}" \
+              -var="environment=${ENVIRONMENT}" \
+              -var="aws_region=${AWS_DEFAULT_REGION}" \
+              -var="db_username=${DB_USERNAME}" \
+              -var="db_password=${DB_PASSWORD}" \
+              -var="jwt_secret=${JWT_SECRET}" \
+              -var="jwt_refresh_secret=${JWT_REFRESH_SECRET}" \
+              "module.ecr.aws_ecr_repository.services[\"${svc}\"]" "$REPO" || true
+          fi
+        fi
+      done
     - |
       terraform plan \
         -var="project_name=${PROJECT_NAME}" \

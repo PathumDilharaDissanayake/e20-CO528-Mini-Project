@@ -14,7 +14,7 @@ variable "private_subnet_ids" {
 # ----- PostgreSQL -----
 variable "postgres_engine_version" {
   type    = string
-  default = "16.1"
+  default = "16.4"
 }
 
 variable "db_instance_class" {
