@@ -9,7 +9,7 @@ import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 import { internalAuthMiddleware } from './middleware/internalAuth';
 import conversationRoutes from './routes/conversationRoutes';
 import { setupSocketIO } from './socket';
-import sequelize from './config/database';
+import sequelize, { connectDatabase } from './config/database';
 
 const app: Application = express();
 const httpServer = createServer(app);
@@ -73,10 +73,7 @@ setupSocketIO(io);
 const PORT = config.port;
 const startServer = async () => {
   try {
-    await sequelize.authenticate();
-    logger.info('✅ Database connected.');
-    await sequelize.sync({ force: false }); // MIGRATE-001: create-if-not-exists only — safe for production
-    logger.info('✅ Database synchronized.');
+    await connectDatabase();
     httpServer.listen(PORT, () => { logger.info(`💬 Messaging Service running on port ${PORT}`); });
   } catch (error) { logger.error('❌ Unable to start server:', error); process.exit(1); }
 };

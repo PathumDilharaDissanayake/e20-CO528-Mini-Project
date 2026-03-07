@@ -8,7 +8,7 @@ import { logger } from './utils/logger';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 import { internalAuthMiddleware } from './middleware/internalAuth';
 import postRoutes from './routes/postRoutes';
-import sequelize from './config/database';
+import sequelize, { connectDatabase } from './config/database';
 
 const app: Application = express();
 
@@ -136,11 +136,7 @@ const PORT = config.port;
 
 const startServer = async () => {
   try {
-    await sequelize.authenticate();
-    logger.info('✅ Database connection established successfully.');
-
-    await sequelize.sync({ alter: true }); // MIGRATE-001: add new columns to existing tables
-    logger.info('✅ Database synchronized.');
+    await connectDatabase();
 
     app.listen(PORT, () => {
       logger.info(`📰 Feed Service running on port ${PORT}`);

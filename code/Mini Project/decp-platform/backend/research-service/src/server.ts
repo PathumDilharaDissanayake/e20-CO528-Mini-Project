@@ -7,7 +7,7 @@ import { logger } from './utils/logger';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 import { internalAuthMiddleware } from './middleware/internalAuth';
 import researchRoutes from './routes/researchRoutes';
-import sequelize from './config/database';
+import sequelize, { connectDatabase } from './config/database';
 
 const app: Application = express();
 app.use(helmet());
@@ -69,10 +69,7 @@ app.use(errorHandler);
 const PORT = config.port;
 const startServer = async () => {
   try {
-    await sequelize.authenticate();
-    logger.info('✅ Database connected.');
-    await sequelize.sync({ force: false }); // MIGRATE-001: create-if-not-exists only — safe for production
-    logger.info('✅ Database synchronized.');
+    await connectDatabase();
     app.listen(PORT, () => { logger.info(`🔬 Research Service running on port ${PORT}`); });
   } catch (error) { logger.error('❌ Unable to start server:', error); process.exit(1); }
 };

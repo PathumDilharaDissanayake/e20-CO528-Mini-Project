@@ -6,7 +6,7 @@ import { logger } from './utils/logger';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 import { internalAuthMiddleware } from './middleware/internalAuth';
 import routes from './routes';
-import sequelize from './config/database';
+import sequelize, { connectDatabase } from './config/database';
 
 const app: Application = express();
 
@@ -81,11 +81,7 @@ const PORT = config.port;
 
 const startServer = async () => {
   try {
-    await sequelize.authenticate();
-    logger.info('✅ Database connection established successfully.');
-
-    await sequelize.sync({ force: false }); // MIGRATE-001: create-if-not-exists only — safe for production
-    logger.info('✅ Database synchronized.');
+    await connectDatabase();
 
     app.listen(PORT, () => {
       logger.info(`👤 User Service running on port ${PORT}`);
