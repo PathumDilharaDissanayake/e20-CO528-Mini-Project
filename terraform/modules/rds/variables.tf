@@ -33,9 +33,15 @@ variable "db_max_allocated_storage" {
 }
 
 variable "db_name" {
-  description = "Default database name (additional databases created via init script)"
+  description = "Default database created by the RDS instance"
   type        = string
   default     = "decp_auth"
+}
+
+variable "additional_database_names" {
+  description = "Additional databases to create on the RDS instance after launch"
+  type        = list(string)
+  default     = []
 }
 
 variable "db_username" {

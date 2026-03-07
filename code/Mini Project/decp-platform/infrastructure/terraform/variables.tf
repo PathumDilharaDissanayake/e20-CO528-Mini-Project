@@ -90,9 +90,24 @@ variable "db_max_allocated_storage" {
 }
 
 variable "db_name" {
-  description = "Database name"
+  description = "Default database created by the RDS instance"
   type        = string
-  default     = "decp_platform"
+  default     = "decp_auth"
+}
+
+variable "additional_database_names" {
+  description = "Additional databases to create on the RDS instance after launch"
+  type        = list(string)
+  default = [
+    "decp_users",
+    "decp_feed",
+    "decp_jobs",
+    "decp_events",
+    "decp_research",
+    "decp_messaging",
+    "decp_notifications",
+    "decp_analytics",
+  ]
 }
 
 variable "db_username" {

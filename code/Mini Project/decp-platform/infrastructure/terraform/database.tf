@@ -146,6 +146,38 @@ resource "aws_db_instance" "main" {
 }
 
 # ==========================================
+# Create additional service databases
+# ==========================================
+resource "null_resource" "create_databases" {
+  count = length(var.additional_database_names) > 0 ? 1 : 0
+
+  depends_on = [aws_db_instance.main]
+
+  provisioner "local-exec" {
+    interpreter = ["bash", "-c"]
+    environment = {
+      PGHOST     = aws_db_instance.main.address
+      PGPORT     = tostring(aws_db_instance.main.port)
+      PGUSER     = var.db_username
+      PGPASSWORD = random_password.db_password.result
+      PGDATABASE = var.db_name
+      PGSSLMODE  = "require"
+    }
+    command = <<-EOT
+      for db in ${join(" ", var.additional_database_names)}; do
+        echo "Creating database $db (if not exists)..."
+        psql -tc "SELECT 1 FROM pg_database WHERE datname='$db'" | grep -q 1 \
+          || psql -c "CREATE DATABASE \"$db\";"
+      done
+    EOT
+  }
+
+  triggers = {
+    db_list = join(",", var.additional_database_names)
+  }
+}
+
+# ==========================================
 # Read Replica (Production only)
 # ==========================================
 resource "aws_db_instance" "replica" {

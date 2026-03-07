@@ -59,6 +59,17 @@ module "rds" {
   db_password          = var.db_password
   db_security_group_id = module.security_groups.database_security_group_id
 
+  additional_database_names = [
+    "decp_users",
+    "decp_feed",
+    "decp_jobs",
+    "decp_events",
+    "decp_research",
+    "decp_messaging",
+    "decp_notifications",
+    "decp_analytics",
+  ]
+
   redis_security_group_id = module.security_groups.redis_security_group_id
 }
 

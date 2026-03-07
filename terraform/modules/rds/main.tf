@@ -45,6 +45,37 @@ resource "aws_db_instance" "postgres" {
   }
 }
 
+# ---------- Create additional databases ----------
+# RDS only creates one default database; services need their own.
+resource "null_resource" "create_databases" {
+  count = length(var.additional_database_names) > 0 ? 1 : 0
+
+  depends_on = [aws_db_instance.postgres]
+
+  provisioner "local-exec" {
+    interpreter = ["bash", "-c"]
+    environment = {
+      PGHOST     = aws_db_instance.postgres.address
+      PGPORT     = tostring(aws_db_instance.postgres.port)
+      PGUSER     = var.db_username
+      PGPASSWORD = var.db_password
+      PGDATABASE = var.db_name
+      PGSSLMODE  = "require"
+    }
+    command = <<-EOT
+      for db in ${join(" ", var.additional_database_names)}; do
+        echo "Creating database $db (if not exists)..."
+        psql -tc "SELECT 1 FROM pg_database WHERE datname='$db'" | grep -q 1 \
+          || psql -c "CREATE DATABASE \"$db\";"
+      done
+    EOT
+  }
+
+  triggers = {
+    db_list = join(",", var.additional_database_names)
+  }
+}
+
 # ---------- ElastiCache Redis ----------
 resource "aws_elasticache_subnet_group" "main" {
   name       = "${var.project_name}-redis-subnet-group"
