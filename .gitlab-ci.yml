@@ -226,6 +226,7 @@ terraform-apply:
   <<: *terraform_template
   stage: deploy-infra
   script:
+    - apk add --no-cache aws-cli bash
     - terraform apply -auto-approve tfplan
   needs:
     - terraform-plan
