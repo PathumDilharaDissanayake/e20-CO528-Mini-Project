@@ -174,9 +174,9 @@ resource "aws_ecs_task_definition" "db_init" {
 
     environment = [
       { name = "PGPASSWORD", value = var.db_password },
-      { name = "DB_HOST",    value = module.rds.postgres_address },
-      { name = "DB_PORT",    value = tostring(module.rds.postgres_port) },
-      { name = "DB_USER",    value = var.db_username },
+      { name = "DB_HOST", value = module.rds.postgres_address },
+      { name = "DB_PORT", value = tostring(module.rds.postgres_port) },
+      { name = "DB_USER", value = var.db_username },
     ]
 
     command = ["sh", "-c", local.db_init_script]
