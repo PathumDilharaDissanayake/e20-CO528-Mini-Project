@@ -1,12 +1,22 @@
 /**
  * DECP Platform — Database Seed Script
- * Run with:  node seed.js
- * Requires:  All services running (run start.bat first)
+ * Run locally:  node seed.js
+ * Run on cloud: API_URL=http://<alb-dns-name> node seed.js
+ * Requires:  All services running
  */
 
-const http = require('http');
+const http  = require('http');
+const https = require('https');
 
-const BASE = 'http://localhost:3000/api/v1';
+// Allow overriding via environment variable for cloud deployments.
+// e.g. API_URL=http://decp-alb-xxxx.us-east-1.elb.amazonaws.com
+const API_URL = process.env.API_URL || 'http://localhost:3000';
+const parsedUrl = new URL(API_URL);
+const BASE_HOST  = parsedUrl.hostname;
+const BASE_PORT  = parsedUrl.port ? parseInt(parsedUrl.port, 10) : (parsedUrl.protocol === 'https:' ? 443 : 80);
+const BASE_PROTO = parsedUrl.protocol === 'https:' ? https : http;
+
+const BASE = `${API_URL}/api/v1`;
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -14,8 +24,8 @@ function request(method, path, body, token) {
   return new Promise((resolve, reject) => {
     const data = body ? JSON.stringify(body) : null;
     const opts = {
-      hostname: 'localhost',
-      port: 3000,
+      hostname: BASE_HOST,
+      port: BASE_PORT,
       path: `/api/v1${path}`,
       method,
       headers: {
@@ -24,7 +34,7 @@ function request(method, path, body, token) {
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
     };
-    const req = http.request(opts, (res) => {
+    const req = BASE_PROTO.request(opts, (res) => {
       let raw = '';
       res.on('data', (c) => (raw += c));
       res.on('end', () => {
@@ -642,10 +652,10 @@ async function seed() {
   try {
     const health = await get('/auth/health');
     if (health.status !== 200) throw new Error('Gateway not ready');
-    ok('API Gateway is healthy\n');
+    ok(`API Gateway is healthy at ${API_URL}\n`);
   } catch {
-    err('Cannot reach API Gateway at http://localhost:3000');
-    err('Please start all services with start.bat first.\n');
+    err(`Cannot reach API Gateway at ${API_URL}`);
+    err('Please ensure all services are running.\n');
     process.exit(1);
   }
 
