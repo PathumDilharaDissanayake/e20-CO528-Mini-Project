@@ -814,7 +814,6 @@ Architecture diagrams (C4 model, DFD, deployment, security) are in [`diagrams/`]
 
 ## License
 
-This project is licensed under the [MIT License](code/Mini%20Project/decp-platform/LICENSE).
 
 ---
 
