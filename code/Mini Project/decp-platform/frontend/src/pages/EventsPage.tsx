@@ -44,14 +44,7 @@ import {
 import { EventCard } from '@components/events/EventCard';
 import { EventCardSkeleton, EmptyState } from '@components/common';
 import { Event as EventType } from '@types';
-import { EVENT_TYPES } from '@utils';
-
-const getMediaUrl = (url: string): string => {
-  if (!url) return '';
-  if (url.startsWith('http') || url.startsWith('blob:')) return url;
-  // Use relative path - Vite will proxy /uploads to API Gateway
-  return `${url.startsWith('/') ? '' : '/'}${url}`;
-};
+import { EVENT_TYPES, getMediaUrl } from '@utils';
 
 const HeroBanner: React.FC<{ eventCount: number; canCreate: boolean; onCreate: () => void }> = ({ eventCount, canCreate, onCreate }) => (
   <Paper

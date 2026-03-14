@@ -150,6 +150,7 @@ locals {
       environment = concat(var.common_env_vars, var.db_env_vars, [
         { name = "PORT", value = "3003" },
         { name = "DB_NAME", value = "decp_feed" },
+        { name = "UPLOADS_BUCKET_NAME", value = trimprefix(var.uploads_bucket_arn, "arn:aws:s3:::") },
       ])
     }
     jobs-service = {

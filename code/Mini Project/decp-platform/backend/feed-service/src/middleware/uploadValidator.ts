@@ -8,6 +8,7 @@ import multer from 'multer';
 import fs from 'fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { Request, Response, NextFunction } from 'express';
 
 // Magic byte signatures per MIME type
@@ -35,6 +36,11 @@ function matchesMagicBytes(buffer: Buffer, mimetype: string): boolean {
   });
 }
 
+const uploadsBucket = process.env.UPLOADS_BUCKET_NAME;
+const s3Client = uploadsBucket
+  ? new S3Client({ region: process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION || 'us-east-1' })
+  : null;
+
 // Use memory storage so we can inspect bytes before touching disk
 export const memoryUpload = multer({
   storage: multer.memoryStorage(),
@@ -49,34 +55,54 @@ export const memoryUpload = multer({
  * After memoryUpload, validate magic bytes then persist the file to disk.
  * Populates req.file.filename so downstream handlers keep working unchanged.
  */
-export const validateAndSaveFiles = (req: Request, res: Response, next: NextFunction): void => {
+export const validateAndSaveFiles = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const files = req.files as Express.Multer.File[] | undefined;
   const single = req.file as Express.Multer.File | undefined;
   const allFiles = files ?? (single ? [single] : []);
 
-  for (const file of allFiles) {
-    if (!matchesMagicBytes(file.buffer, file.mimetype)) {
-      res.status(400).json({
-        success: false,
-        message: `File "${file.originalname}" failed magic-byte validation. Claimed type: ${file.mimetype}`
-      });
-      return;
+  try {
+    for (const file of allFiles) {
+      if (!matchesMagicBytes(file.buffer, file.mimetype)) {
+        res.status(400).json({
+          success: false,
+          message: `File "${file.originalname}" failed magic-byte validation. Claimed type: ${file.mimetype}`
+        });
+        return;
+      }
+
+      const filename = `${uuidv4()}${path.extname(file.originalname)}`;
+
+      if (uploadsBucket && s3Client) {
+        await s3Client.send(new PutObjectCommand({
+          Bucket: uploadsBucket,
+          Key: filename,
+          Body: file.buffer,
+          ContentType: file.mimetype,
+          Metadata: {
+            originalname: file.originalname
+          }
+        }));
+
+        // Keep the same downstream contract: only filename is required to build /uploads/<filename> URL
+        (file as any).filename = filename;
+        (file as any).path = `s3://${uploadsBucket}/${filename}`;
+        continue;
+      }
+
+      // Development fallback: write buffer to local disk
+      const uploadDir = process.env.UPLOAD_DIR
+        ? path.resolve(process.env.UPLOAD_DIR)
+        : path.join(__dirname, '..', '..', 'uploads');
+      fs.mkdirSync(uploadDir, { recursive: true });
+      const filepath = path.join(uploadDir, filename);
+      fs.writeFileSync(filepath, file.buffer);
+
+      (file as any).filename = filename;
+      (file as any).path = filepath;
     }
 
-    // Write buffer to disk using absolute path so it works regardless of CWD
-    // __dirname in dist/middleware/ → go up two levels to reach service root
-    const uploadDir = process.env.UPLOAD_DIR
-      ? path.resolve(process.env.UPLOAD_DIR)
-      : path.join(__dirname, '..', '..', 'uploads');
-    fs.mkdirSync(uploadDir, { recursive: true });
-    const filename = `${uuidv4()}${path.extname(file.originalname)}`;
-    const filepath = path.join(uploadDir, filename);
-    fs.writeFileSync(filepath, file.buffer);
-
-    // Patch file object so existing controller code works without change
-    (file as any).filename = filename;
-    (file as any).path = filepath;
+    next();
+  } catch (error) {
+    next(error);
   }
-
-  next();
 };

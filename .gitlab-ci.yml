@@ -295,7 +295,9 @@ deploy-frontend:
         --output text \
         --region "$AWS_DEFAULT_REGION" 2>/dev/null || echo "localhost")
       echo "VITE_API_URL=http://${ALB_DNS}/api/v1" > .env.production
-      echo "Frontend will point to: http://${ALB_DNS}/api/v1"
+      echo "VITE_MEDIA_BASE_URL=http://${ALB_DNS}" >> .env.production
+      echo "Frontend API URL: http://${ALB_DNS}/api/v1"
+      echo "Frontend media base URL: http://${ALB_DNS}"
     - npm ci
     - npm run build
     - |

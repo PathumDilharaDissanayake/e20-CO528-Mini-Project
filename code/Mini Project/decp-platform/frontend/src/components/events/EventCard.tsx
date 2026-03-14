@@ -9,13 +9,6 @@ import {
   Button,
   IconButton,
 } from '@mui/material';
-
-const getMediaUrl = (url: string): string => {
-  if (!url) return '';
-  if (url.startsWith('http') || url.startsWith('blob:')) return url;
-  // Use relative path - Vite will proxy /uploads to API Gateway
-  return `${url.startsWith('/') ? '' : '/'}${url}`;
-};
 import {
   CalendarToday,
   LocationOn,
@@ -25,7 +18,7 @@ import {
 } from '@mui/icons-material';
 import { Event } from '@types';
 import { formatDateTime } from '@utils';
-import { EVENT_TYPES } from '@utils';
+import { EVENT_TYPES, getMediaUrl } from '@utils';
 
 interface EventCardProps {
   event: Event;

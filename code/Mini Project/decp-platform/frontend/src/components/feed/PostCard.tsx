@@ -30,6 +30,7 @@ import { useDeletePostMutation, useBookmarkPostMutation, useLikePostMutation, us
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
 import { Post } from '@/types';
+import { getMediaUrl } from '@utils';
 import CommentSection from './CommentSection';
 
 interface PostCardProps {
@@ -71,16 +72,6 @@ const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdate }) => {
   }, [post.pollOptions, currentUser]);
 
   const isOwner = currentUser?._id === post.userId || currentUser?.id === post.userId;
-
-  const getMediaUrl = (url: string): string => {
-    if (!url) return '';
-    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('blob:')) return url;
-
-    // Use relative path - Vite will proxy /uploads to API Gateway (port 3000)
-    // This avoids CORS issues since it's same-origin
-    const normalized = url.startsWith('/') ? url : `/${url}`;
-    return normalized;
-  };
 
   const getMediaItems = (post: Post): any[] => {
     // Try post.media first (normalized format)

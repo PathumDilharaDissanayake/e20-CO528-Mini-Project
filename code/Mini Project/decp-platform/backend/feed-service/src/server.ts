@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import path from 'path';
 import fs from 'fs';
+import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { config } from './config';
 import { logger } from './utils/logger';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
@@ -32,6 +33,10 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 const uploadsDir = process.env.UPLOAD_DIR
   ? path.resolve(process.env.UPLOAD_DIR)
   : path.join(__dirname, '..', 'uploads');
+const uploadsBucket = process.env.UPLOADS_BUCKET_NAME;
+const s3Client = uploadsBucket
+  ? new S3Client({ region: process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION || 'us-east-1' })
+  : null;
 
 // Create a custom static file handler with proper CORS
 app.use('/uploads', (req: Request, res: Response, next: NextFunction) => {
@@ -45,7 +50,46 @@ app.use('/uploads', (req: Request, res: Response, next: NextFunction) => {
     return res.status(204).end();
   }
   
-  // Get the file path
+  const key = req.path.replace(/^\/+/, '');
+
+  if (uploadsBucket && s3Client) {
+    s3Client.send(new GetObjectCommand({ Bucket: uploadsBucket, Key: key }))
+      .then((obj) => {
+        const ext = path.extname(key).toLowerCase();
+        const contentTypes: { [key: string]: string } = {
+          '.jpg': 'image/jpeg',
+          '.jpeg': 'image/jpeg',
+          '.png': 'image/png',
+          '.gif': 'image/gif',
+          '.webp': 'image/webp',
+          '.mp4': 'video/mp4',
+          '.webm': 'video/webm',
+          '.ogg': 'video/ogg',
+          '.pdf': 'application/pdf',
+        };
+
+        res.setHeader('Content-Type', String(obj.ContentType || contentTypes[ext] || 'application/octet-stream'));
+        if (obj.ContentLength !== undefined) {
+          res.setHeader('Content-Length', String(obj.ContentLength));
+        }
+        res.setHeader('Cache-Control', 'public, max-age=86400');
+
+        const body = obj.Body as any;
+        if (body && typeof body.pipe === 'function') {
+          body.on('error', () => res.status(500).json({ success: false, message: 'Error reading file' }));
+          body.pipe(res);
+          return;
+        }
+
+        res.status(404).json({ success: false, message: 'File not found' });
+      })
+      .catch(() => {
+        res.status(404).json({ success: false, message: 'File not found' });
+      });
+    return;
+  }
+
+  // Get the local file path (development fallback)
   const filePath = path.join(uploadsDir, req.path);
   
   // Check if file exists and serve it
@@ -74,7 +118,7 @@ app.use('/uploads', (req: Request, res: Response, next: NextFunction) => {
     
     // Stream the file
     const stream = fs.createReadStream(filePath);
-    stream.on('error', (streamErr) => {
+    stream.on('error', () => {
       res.status(500).json({ success: false, message: 'Error reading file' });
     });
     stream.pipe(res);

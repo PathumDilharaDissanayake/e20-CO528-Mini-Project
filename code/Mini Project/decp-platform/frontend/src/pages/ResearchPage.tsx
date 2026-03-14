@@ -19,13 +19,6 @@ import {
   IconButton,
 } from '@mui/material';
 import { Add, Science, Biotech, Hub, Groups, PhotoCamera } from '@mui/icons-material';
-
-const getMediaUrl = (url: string): string => {
-  if (!url) return '';
-  if (url.startsWith('http') || url.startsWith('blob:')) return url;
-  // Use relative path - Vite will proxy /uploads to API Gateway
-  return `${url.startsWith('/') ? '' : '/'}${url}`;
-};
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
 import {
@@ -40,7 +33,7 @@ import {
 import { ResearchCard } from '@components/research/ResearchCard';
 import { EventCardSkeleton, EmptyState } from '@components/common';
 import { ResearchProject } from '@types';
-import { RESEARCH_FIELDS, RESEARCH_STATUS } from '@utils';
+import { RESEARCH_FIELDS, RESEARCH_STATUS, getMediaUrl } from '@utils';
 
 const HeroBanner: React.FC<{ count: number; canCreate: boolean; onCreate: () => void }> = ({ count, canCreate, onCreate }) => (
   <Paper

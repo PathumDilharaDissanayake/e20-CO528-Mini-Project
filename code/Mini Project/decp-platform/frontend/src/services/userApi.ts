@@ -166,9 +166,11 @@ export const userApi = apiSlice.injectEndpoints({
     uploadProfilePicture: builder.mutation<ApiResponse<{ url: string }>, FormData>({
       queryFn: async (formData, { dispatch }) => {
         try {
+          const token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';
           // Upload to feed-service
-          const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'}/feed/upload`, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'}/posts/upload`, {
             method: 'POST',
+            headers: token ? { Authorization: `Bearer ${token}` } : undefined,
             body: formData,
           });
           const result = await response.json();
@@ -179,7 +181,10 @@ export const userApi = apiSlice.injectEndpoints({
             if (userId) {
               await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'}/users/me`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                  'Content-Type': 'application/json',
+                  ...(token ? { Authorization: `Bearer ${token}` } : {}),
+                },
                 body: JSON.stringify({ avatar: result.data.url }),
               });
             }
