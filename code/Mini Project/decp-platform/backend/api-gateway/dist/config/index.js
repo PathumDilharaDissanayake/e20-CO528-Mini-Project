@@ -28,7 +28,11 @@ exports.config = {
     },
     rateLimit: {
         windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000', 10),
-        max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '100', 10)
+        max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '1000', 10)
+    },
+    strictRateLimit: {
+        windowMs: parseInt(process.env.STRICT_RATE_LIMIT_WINDOW_MS || '900000', 10),
+        max: parseInt(process.env.STRICT_RATE_LIMIT_MAX_REQUESTS || '20', 10)
     },
     cors: {
         origin: process.env.CORS_ORIGIN?.split(',') || ['http://localhost:3000', 'http://localhost:5173']

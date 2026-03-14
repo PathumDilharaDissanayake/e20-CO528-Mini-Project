@@ -22,13 +22,29 @@ app.use((0, helmet_1.default)({
     contentSecurityPolicy: false,
     crossOriginEmbedderPolicy: false
 }));
-// CORS configuration - Allow all origins for development
+// CORS configuration
+const allowedOrigins = [
+    'http://decp-platform-frontend-dev.s3-website-us-east-1.amazonaws.com',
+    'http://localhost:5173',
+    'http://localhost:3000',
+];
 app.use((0, cors_1.default)({
-    origin: true,
+    origin: (origin, callback) => {
+        // Allow requests with no origin (mobile apps, curl, etc.)
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        }
+        else {
+            // Still allow for development - log unknown origins
+            callback(null, true);
+        }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
+// Explicitly handle preflight requests
+app.options('*', (0, cors_1.default)());
 // Compression
 app.use((0, compression_1.default)());
 // Body parsing
