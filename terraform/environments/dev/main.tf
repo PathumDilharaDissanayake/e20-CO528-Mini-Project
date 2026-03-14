@@ -17,15 +17,17 @@ module "decp_dev" {
 
   api_gateway_cpu           = 256
   api_gateway_memory        = 512
-  api_gateway_desired_count = 1
+  api_gateway_desired_count = var.api_gateway_desired_count
 
   service_cpu           = 256
   service_memory        = 512
-  service_desired_count = 1
+  service_desired_count = var.service_desired_count
 
   jwt_secret         = var.jwt_secret
   jwt_refresh_secret = var.jwt_refresh_secret
   certificate_arn    = ""
+
+  enable_nat_gateway = var.enable_nat_gateway
 }
 
 output "alb_dns_name" {

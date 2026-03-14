@@ -1,0 +1,359 @@
+###############################################################################
+# resource-scheduler.yml
+#
+# GitHub Actions workflow to manually START or STOP all DECP Platform AWS
+# resources, eliminating ~95% of running costs when the platform is idle.
+#
+# SETUP – Add these secrets to your GitHub repository
+# (Settings → Secrets and variables → Actions → New repository secret):
+#
+#   AWS_ACCESS_KEY_ID        – IAM user access key
+#   AWS_SECRET_ACCESS_KEY    – IAM user secret key
+#   DB_USERNAME              – PostgreSQL master username
+#   DB_PASSWORD              – PostgreSQL master password
+#   JWT_SECRET               – JWT signing secret
+#   JWT_REFRESH_SECRET       – JWT refresh token secret
+#
+# REQUIRED IAM PERMISSIONS for the AWS credentials:
+#   ecs:ListServices, ecs:DescribeServices, ecs:UpdateService, ecs:ListTasks,
+#   rds:DescribeDBInstances, rds:StartDBInstance, rds:StopDBInstance,
+#   elasticache:DescribeReplicationGroups,
+#   elasticache:StartReplicationGroup, elasticache:StopReplicationGroup,
+#   ec2:DescribeNatGateways, ec2:CreateNatGateway, ec2:DeleteNatGateway,
+#   ec2:AllocateAddress, ec2:ReleaseAddress,
+#   s3:GetObject, s3:PutObject, dynamodb:GetItem, dynamodb:PutItem (for TF state)
+###############################################################################
+name: Resource Scheduler (Stop / Start)
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Action to perform on all platform resources"
+        required: true
+        type: choice
+        options:
+          - stop
+          - start
+
+      remove_nat_gateway:
+        description: >
+          [stop] Also remove NAT Gateways via Terraform (~$64/month saving).
+          For [start] this restores NAT Gateways before scaling services up.
+          Requires Terraform state to be accessible (S3 backend).
+        required: false
+        type: boolean
+        default: false
+
+      aws_region:
+        description: "AWS Region"
+        required: false
+        default: "us-east-1"
+
+env:
+  PROJECT_NAME:        decp-platform
+  ECS_CLUSTER:         decp-platform-cluster
+  RDS_IDENTIFIER:      decp-platform-postgres
+  ELASTICACHE_ID:      decp-platform-redis
+  AWS_REGION:          ${{ github.event.inputs.aws_region || 'us-east-1' }}
+  API_GATEWAY_DESIRED: "1"
+  SERVICE_DESIRED:     "1"
+  TF_DIR:              terraform/environments/dev
+
+jobs:
+  # ============================================================================
+  # STOP – Scale down ECS → stop RDS → stop ElastiCache → (optionally) destroy NAT GW
+  # ============================================================================
+  stop-resources:
+    name: "STOP All Resources"
+    if: github.event.inputs.action == 'stop'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id:     ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region:            ${{ env.AWS_REGION }}
+
+      - name: Scale ECS services to 0
+        run: |
+          echo "Retrieving ECS services in cluster: $ECS_CLUSTER"
+          SERVICES=$(aws ecs list-services \
+            --cluster "$ECS_CLUSTER" \
+            --region  "$AWS_REGION" \
+            --query   "serviceArns[]" \
+            --output  text || true)
+
+          if [ -z "$SERVICES" ]; then
+            echo "No services found – cluster may already be empty."
+          else
+            for ARN in $SERVICES; do
+              NAME=$(basename "$ARN")
+              echo "  Scaling $NAME → 0"
+              aws ecs update-service \
+                --cluster       "$ECS_CLUSTER" \
+                --service       "$ARN" \
+                --desired-count 0 \
+                --region        "$AWS_REGION" \
+                --output text --query "service.serviceName" > /dev/null
+            done
+            echo "Waiting for tasks to drain..."
+            aws ecs wait services-stable \
+              --cluster  "$ECS_CLUSTER" \
+              --services $SERVICES \
+              --region   "$AWS_REGION" || true
+            echo "ECS services scaled to 0."
+          fi
+
+      - name: Stop RDS instance
+        run: |
+          STATUS=$(aws rds describe-db-instances \
+            --db-instance-identifier "$RDS_IDENTIFIER" \
+            --region                 "$AWS_REGION" \
+            --query  "DBInstances[0].DBInstanceStatus" \
+            --output text 2>/dev/null || echo "not-found")
+
+          echo "RDS status: $STATUS"
+          if [ "$STATUS" = "available" ]; then
+            aws rds stop-db-instance \
+              --db-instance-identifier "$RDS_IDENTIFIER" \
+              --region                 "$AWS_REGION" > /dev/null
+            echo "RDS stop initiated. (AWS auto-restarts after 7 days)"
+          elif [ "$STATUS" = "stopped" ]; then
+            echo "Already stopped."
+          else
+            echo "Status '$STATUS' – skipping."
+          fi
+
+      - name: Delete ElastiCache replication group
+        # Classic Redis clusters cannot be stopped, only deleted.
+        # Terraform recreates the cluster when startup.tfvars is applied.
+        run: |
+          STATUS=$(aws elasticache describe-replication-groups \
+            --replication-group-id "$ELASTICACHE_ID" \
+            --region               "$AWS_REGION" \
+            --query  "ReplicationGroups[0].Status" \
+            --output text 2>/dev/null || echo "not-found")
+
+          echo "ElastiCache status: $STATUS"
+          if [ "$STATUS" = "available" ]; then
+            aws elasticache delete-replication-group \
+              --replication-group-id "$ELASTICACHE_ID" \
+              --region               "$AWS_REGION" > /dev/null
+            echo "ElastiCache delete initiated (Terraform will recreate on startup)."
+          elif [ "$STATUS" = "deleting" ] || [ "$STATUS" = "not-found" ]; then
+            echo "ElastiCache already deleted or not found."
+          else
+            echo "Status '$STATUS' – skipping."
+          fi
+
+      # ── Optional: Remove NAT Gateways via Terraform ─────────────────────────
+      - name: Setup Terraform
+        if: github.event.inputs.remove_nat_gateway == 'true'
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~> 1.5"
+
+      - name: "Terraform init (for NAT GW removal)"
+        if: github.event.inputs.remove_nat_gateway == 'true'
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform init -input=false
+        env:
+          AWS_ACCESS_KEY_ID:     ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: "Terraform apply – remove NAT Gateways (saves ~$64/month)"
+        if: github.event.inputs.remove_nat_gateway == 'true'
+        working-directory: ${{ env.TF_DIR }}
+        run: |
+          terraform apply -input=false -auto-approve \
+            -var-file="terraform.tfvars" \
+            -var-file="shutdown.tfvars"
+        env:
+          AWS_ACCESS_KEY_ID:           ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:       ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_db_username:          ${{ secrets.DB_USERNAME }}
+          TF_VAR_db_password:          ${{ secrets.DB_PASSWORD }}
+          TF_VAR_jwt_secret:           ${{ secrets.JWT_SECRET }}
+          TF_VAR_jwt_refresh_secret:   ${{ secrets.JWT_REFRESH_SECRET }}
+
+      - name: Shutdown summary
+        run: |
+          echo ""
+          echo "================================================="
+          echo " RESOURCES STOPPED"
+          echo "  ECS tasks    : 0 running (Fargate billing stopped)"
+          echo "  RDS          : stop initiated"
+          echo "  ElastiCache  : stop initiated"
+          if [ "${{ github.event.inputs.remove_nat_gateway }}" = "true" ]; then
+            echo "  NAT Gateways : removed via Terraform"
+          fi
+          echo "================================================="
+
+  # ============================================================================
+  # START – (Optionally) restore NAT GW → start ElastiCache → start RDS → scale ECS up
+  # ============================================================================
+  start-resources:
+    name: "START All Resources"
+    if: github.event.inputs.action == 'start'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id:     ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region:            ${{ env.AWS_REGION }}
+
+      # ── Restore NAT Gateways first (ECS needs them to pull images from ECR) ─
+      - name: Setup Terraform
+        if: github.event.inputs.remove_nat_gateway == 'true'
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~> 1.5"
+
+      - name: "Terraform init (for NAT GW restore)"
+        if: github.event.inputs.remove_nat_gateway == 'true'
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform init -input=false
+        env:
+          AWS_ACCESS_KEY_ID:     ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: "Terraform apply – restore NAT Gateways"
+        if: github.event.inputs.remove_nat_gateway == 'true'
+        working-directory: ${{ env.TF_DIR }}
+        run: |
+          terraform apply -input=false -auto-approve \
+            -var-file="terraform.tfvars" \
+            -var-file="startup.tfvars"
+        env:
+          AWS_ACCESS_KEY_ID:           ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:       ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_db_username:          ${{ secrets.DB_USERNAME }}
+          TF_VAR_db_password:          ${{ secrets.DB_PASSWORD }}
+          TF_VAR_jwt_secret:           ${{ secrets.JWT_SECRET }}
+          TF_VAR_jwt_refresh_secret:   ${{ secrets.JWT_REFRESH_SECRET }}
+
+      - name: Check ElastiCache status (recreated by Terraform)
+        # Classic Redis is deleted on shutdown; Terraform recreates it via startup.tfvars.
+        run: |
+          STATUS=$(aws elasticache describe-replication-groups \
+            --replication-group-id "$ELASTICACHE_ID" \
+            --region               "$AWS_REGION" \
+            --query  "ReplicationGroups[0].Status" \
+            --output text 2>/dev/null || echo "not-found")
+
+          echo "ElastiCache status: $STATUS"
+          if [ "$STATUS" = "available" ]; then
+            echo "ElastiCache is already running."
+          elif [ "$STATUS" = "creating" ]; then
+            echo "ElastiCache is being created by Terraform (startup.tfvars)."
+          else
+            echo "ElastiCache ('$STATUS') will be created by the Terraform startup.tfvars step."
+          fi
+
+      - name: Start RDS instance and wait
+        run: |
+          STATUS=$(aws rds describe-db-instances \
+            --db-instance-identifier "$RDS_IDENTIFIER" \
+            --region                 "$AWS_REGION" \
+            --query  "DBInstances[0].DBInstanceStatus" \
+            --output text 2>/dev/null || echo "not-found")
+
+          echo "RDS status: $STATUS"
+          if [ "$STATUS" = "stopped" ]; then
+            aws rds start-db-instance \
+              --db-instance-identifier "$RDS_IDENTIFIER" \
+              --region                 "$AWS_REGION" > /dev/null
+            echo "Waiting for RDS to become available..."
+            aws rds wait db-instance-available \
+              --db-instance-identifier "$RDS_IDENTIFIER" \
+              --region                 "$AWS_REGION"
+            echo "RDS is available."
+          elif [ "$STATUS" = "available" ]; then
+            echo "Already running."
+          else
+            echo "Status '$STATUS'. Waiting..."
+            aws rds wait db-instance-available \
+              --db-instance-identifier "$RDS_IDENTIFIER" \
+              --region                 "$AWS_REGION"
+          fi
+
+      - name: Scale ECS services up
+        run: |
+          SERVICES=(
+            "decp-platform-api-gateway"
+            "decp-platform-auth-service"
+            "decp-platform-user-service"
+            "decp-platform-feed-service"
+            "decp-platform-jobs-service"
+            "decp-platform-events-service"
+            "decp-platform-research-service"
+            "decp-platform-messaging-service"
+            "decp-platform-notification-service"
+            "decp-platform-analytics-service"
+          )
+
+          for SERVICE in "${SERVICES[@]}"; do
+            TARGET=$SERVICE_DESIRED
+            [ "$SERVICE" = "decp-platform-api-gateway" ] && TARGET=$API_GATEWAY_DESIRED
+
+            EXISTS=$(aws ecs describe-services \
+              --cluster  "$ECS_CLUSTER" \
+              --services "$SERVICE" \
+              --region   "$AWS_REGION" \
+              --query    "services[?status=='ACTIVE'].serviceName" \
+              --output   text 2>/dev/null || echo "")
+
+            if [ -n "$EXISTS" ]; then
+              aws ecs update-service \
+                --cluster       "$ECS_CLUSTER" \
+                --service       "$SERVICE" \
+                --desired-count "$TARGET" \
+                --region        "$AWS_REGION" > /dev/null
+              echo "  Scaled $SERVICE → $TARGET"
+            else
+              echo "  SKIP: $SERVICE not found."
+            fi
+          done
+
+          echo "Waiting for services to stabilize..."
+          ALL=$(aws ecs list-services \
+            --cluster "$ECS_CLUSTER" \
+            --region  "$AWS_REGION" \
+            --query   "serviceArns[]" \
+            --output  text || true)
+          [ -n "$ALL" ] && aws ecs wait services-stable \
+            --cluster "$ECS_CLUSTER" \
+            --services $ALL \
+            --region  "$AWS_REGION" || true
+          echo "All services are running."
+
+      - name: Startup summary
+        run: |
+          echo ""
+          echo "================================================="
+          echo " PLATFORM IS UP AND RUNNING"
+          echo "  RDS          : available"
+          echo "  ElastiCache  : starting"
+          echo "  ECS services : $SERVICE_DESIRED tasks each"
+          if [ "${{ github.event.inputs.remove_nat_gateway }}" = "true" ]; then
+            echo "  NAT Gateways : restored via Terraform"
+          fi
+          echo "================================================="

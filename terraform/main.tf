@@ -56,7 +56,7 @@ module "vpc" {
   environment        = var.environment
   vpc_cidr           = var.vpc_cidr
   availability_zones = var.availability_zones
-  enable_nat_gateway = true
+  enable_nat_gateway = var.enable_nat_gateway
 }
 
 # ======================== Security Groups ========================

@@ -100,3 +100,10 @@ variable "certificate_arn" {
   type        = string
   default     = ""
 }
+
+# ---------- Cost Management ----------
+variable "enable_nat_gateway" {
+  description = "Create NAT Gateways for private subnets. Set false during shutdown to eliminate ~$64/month NAT cost."
+  type        = bool
+  default     = true
+}
