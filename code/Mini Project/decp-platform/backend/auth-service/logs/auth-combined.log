@@ -2812,3 +2812,9 @@ Error
 2026-03-05 18:32:19 [AUTH-SERVICE] [info]: User registered: frank.alumni@decp.edu
 2026-03-05 18:32:48 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
 2026-03-05 23:22:25 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu
+2026-03-19 08:39:36 [AUTH-SERVICE] [info]: DB connection config: host=localhost, port=5432, ssl=false, sslRejectUnauthorized=false
+2026-03-19 08:39:41 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-19 08:39:42 [AUTH-SERVICE] [info]: Database connection established successfully
+2026-03-19 08:39:43 [AUTH-SERVICE] [info]: Database models synchronized
+2026-03-19 08:39:43 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-19 08:40:58 [AUTH-SERVICE] [info]: User logged in: alice.student@decp.edu

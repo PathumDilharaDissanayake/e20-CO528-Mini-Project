@@ -3756,3 +3756,7 @@ Error
     at async Like.findAll (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
     at async Like.findOne (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1240:12)
     at async likePost (E:\Academic\Semester_7\CO528\Mini Project\decp-platform\backend\feed-service\dist\controllers\postController.js:214:30)
+2026-03-19 08:39:39 [FEED-SERVICE] [info]: DB connection config: host=localhost, port=5432, ssl=false, sslRejectUnauthorized=false
+2026-03-19 08:39:42 [FEED-SERVICE] [info]: Database connection established successfully
+2026-03-19 08:39:43 [FEED-SERVICE] [info]: Database models synchronized
+2026-03-19 08:39:43 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003

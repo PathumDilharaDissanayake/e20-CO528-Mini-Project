@@ -466,3 +466,7 @@ SequelizeConnectionError: database "decp_jobs" does not exist
 2026-03-05 17:59:29 [JOBS-SERVICE] [info]: ✅ Database connected.
 2026-03-05 17:59:29 [JOBS-SERVICE] [info]: ✅ Database synchronized.
 2026-03-05 17:59:29 [JOBS-SERVICE] [info]: 💼 Jobs Service running on port 3004
+2026-03-19 08:39:39 [JOBS-SERVICE] [info]: DB connection config: host=localhost, port=5432, ssl=false, sslRejectUnauthorized=false
+2026-03-19 08:39:43 [JOBS-SERVICE] [info]: Database connection established successfully
+2026-03-19 08:39:44 [JOBS-SERVICE] [info]: Database models synchronized
+2026-03-19 08:39:44 [JOBS-SERVICE] [info]: 💼 Jobs Service running on port 3004
