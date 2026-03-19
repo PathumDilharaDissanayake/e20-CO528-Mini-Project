@@ -116,7 +116,7 @@ const AppWithTheme: React.FC = () => {
   return (
     <ThemeProvider theme={mode === 'dark' ? darkTheme : lightTheme}>
       <CssBaseline />
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.VITE_BASE_URL ?? '/'}>
         <App />
         <ToastContainer
           position="top-right"
