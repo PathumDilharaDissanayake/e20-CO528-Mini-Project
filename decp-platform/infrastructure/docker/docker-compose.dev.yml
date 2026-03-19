@@ -1,0 +1,328 @@
+# DECP Platform - Development Docker Compose
+version: '3.8'
+
+services:
+  # ===================
+  # Infrastructure Services
+  # ===================
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile.postgres
+    container_name: decp-postgres-dev
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-decp_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-decp_platform}
+      POSTGRES_MULTIPLE_DATABASES: auth_db,user_db,product_db,order_db,payment_db,notification_db
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+      - ./backups:/backups
+    ports:
+      - "5432:5432"
+    networks:
+      - decp-network-dev
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-decp_admin} -d ${POSTGRES_DB:-decp_platform}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    build:
+      context: .
+      dockerfile: Dockerfile.redis
+    container_name: decp-redis-dev
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data_dev:/data
+    networks:
+      - decp-network-dev
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  rabbitmq:
+    build:
+      context: .
+      dockerfile: Dockerfile.rabbitmq
+    container_name: decp-rabbitmq-dev
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-decp_admin}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-dev_password}
+      RABBITMQ_DEFAULT_VHOST: /decp
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      - "15692:15692"
+    volumes:
+      - rabbitmq_data_dev:/var/lib/rabbitmq
+    networks:
+      - decp-network-dev
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ===================
+  # Backend Services
+  # ===================
+  api-gateway:
+    build:
+      context: ../../services/api-gateway
+      dockerfile: ../../infrastructure/docker/Dockerfile.api-gateway
+    container_name: decp-api-gateway-dev
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      DATABASE_URL: postgresql://${POSTGRES_USER:-decp_admin}:${POSTGRES_PASSWORD:-dev_password}@postgres:5432/decp_platform
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER:-decp_admin}:${RABBITMQ_PASSWORD:-dev_password}@rabbitmq:5672/decp
+      JWT_SECRET: ${JWT_SECRET:-dev_jwt_secret_key}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-1d}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../../services/api-gateway:/app
+      - /app/node_modules
+    networks:
+      - decp-network-dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    command: npm run start:dev
+
+  auth-service:
+    build:
+      context: ../../services/auth-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.auth-service
+    container_name: decp-auth-service-dev
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      DATABASE_URL: postgresql://${POSTGRES_USER:-decp_admin}:${POSTGRES_PASSWORD:-dev_password}@postgres:5432/auth_db
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER:-decp_admin}:${RABBITMQ_PASSWORD:-dev_password}@rabbitmq:5672/decp
+      JWT_SECRET: ${JWT_SECRET:-dev_jwt_secret_key}
+    volumes:
+      - ../../services/auth-service:/app
+      - /app/node_modules
+    networks:
+      - decp-network-dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: npm run start:dev
+
+  user-service:
+    build:
+      context: ../../services/user-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.user-service
+    container_name: decp-user-service-dev
+    environment:
+      NODE_ENV: development
+      PORT: 3002
+      DATABASE_URL: postgresql://${POSTGRES_USER:-decp_admin}:${POSTGRES_PASSWORD:-dev_password}@postgres:5432/user_db
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER:-decp_admin}:${RABBITMQ_PASSWORD:-dev_password}@rabbitmq:5672/decp
+    volumes:
+      - ../../services/user-service:/app
+      - /app/node_modules
+    networks:
+      - decp-network-dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: npm run start:dev
+
+  product-service:
+    build:
+      context: ../../services/product-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.product-service
+    container_name: decp-product-service-dev
+    environment:
+      NODE_ENV: development
+      PORT: 3003
+      DATABASE_URL: postgresql://${POSTGRES_USER:-decp_admin}:${POSTGRES_PASSWORD:-dev_password}@postgres:5432/product_db
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER:-decp_admin}:${RABBITMQ_PASSWORD:-dev_password}@rabbitmq:5672/decp
+    volumes:
+      - ../../services/product-service:/app
+      - /app/node_modules
+    networks:
+      - decp-network-dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: npm run start:dev
+
+  order-service:
+    build:
+      context: ../../services/order-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.order-service
+    container_name: decp-order-service-dev
+    environment:
+      NODE_ENV: development
+      PORT: 3004
+      DATABASE_URL: postgresql://${POSTGRES_USER:-decp_admin}:${POSTGRES_PASSWORD:-dev_password}@postgres:5432/order_db
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER:-decp_admin}:${RABBITMQ_PASSWORD:-dev_password}@rabbitmq:5672/decp
+      PAYMENT_SERVICE_URL: http://payment-service:3005
+    volumes:
+      - ../../services/order-service:/app
+      - /app/node_modules
+    networks:
+      - decp-network-dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: npm run start:dev
+
+  payment-service:
+    build:
+      context: ../../services/payment-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.payment-service
+    container_name: decp-payment-service-dev
+    environment:
+      NODE_ENV: development
+      PORT: 3005
+      DATABASE_URL: postgresql://${POSTGRES_USER:-decp_admin}:${POSTGRES_PASSWORD:-dev_password}@postgres:5432/payment_db
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER:-decp_admin}:${RABBITMQ_PASSWORD:-dev_password}@rabbitmq:5672/decp
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-sk_test_placeholder}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-whsec_placeholder}
+    volumes:
+      - ../../services/payment-service:/app
+      - /app/node_modules
+    networks:
+      - decp-network-dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: npm run start:dev
+
+  notification-service:
+    build:
+      context: ../../services/notification-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.notification-service
+    container_name: decp-notification-service-dev
+    environment:
+      NODE_ENV: development
+      PORT: 3006
+      DATABASE_URL: postgresql://${POSTGRES_USER:-decp_admin}:${POSTGRES_PASSWORD:-dev_password}@postgres:5432/notification_db
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER:-decp_admin}:${RABBITMQ_PASSWORD:-dev_password}@rabbitmq:5672/decp
+      SMTP_HOST: ${SMTP_HOST:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID:-}
+      FIREBASE_PRIVATE_KEY: ${FIREBASE_PRIVATE_KEY:-}
+      FIREBASE_CLIENT_EMAIL: ${FIREBASE_CLIENT_EMAIL:-}
+    volumes:
+      - ../../services/notification-service:/app
+      - /app/node_modules
+    networks:
+      - decp-network-dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: npm run start:dev
+
+  # ===================
+  # Frontend
+  # ===================
+  frontend:
+    build:
+      context: ../../frontend
+      dockerfile: ../infrastructure/docker/Dockerfile.frontend
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:3000
+        NEXT_PUBLIC_APP_NAME: DECP Platform
+        NEXT_PUBLIC_STRIPE_PUBLIC_KEY: ${STRIPE_PUBLIC_KEY:-pk_test_placeholder}
+    container_name: decp-frontend-dev
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_URL: http://localhost:3000
+    ports:
+      - "3007:3000"
+    volumes:
+      - ../../frontend:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - decp-network-dev
+    depends_on:
+      - api-gateway
+    command: npm run dev
+
+  # ===================
+  # Development Tools
+  # ===================
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: decp-pgadmin-dev
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@decp.local}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data_dev:/var/lib/pgadmin
+    networks:
+      - decp-network-dev
+    depends_on:
+      - postgres
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: decp-redis-commander-dev
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    ports:
+      - "8081:8081"
+    networks:
+      - decp-network-dev
+    depends_on:
+      - redis
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: decp-mailhog-dev
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - decp-network-dev
+
+volumes:
+  postgres_data_dev:
+  redis_data_dev:
+  rabbitmq_data_dev:
+  pgadmin_data_dev:
+
+networks:
+  decp-network-dev:
+    driver: bridge

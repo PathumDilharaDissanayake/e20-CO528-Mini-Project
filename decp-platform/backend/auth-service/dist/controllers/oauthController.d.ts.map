@@ -1,0 +1,1 @@
+{"version":3,"file":"oauthController.d.ts","sourceRoot":"","sources":["../../src/controllers/oauthController.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,QAAQ,EAAE,MAAM,SAAS,CAAC;AAC5C,OAAO,QAAQ,MAAM,UAAU,CAAC;AA0EhC,eAAO,MAAM,UAAU,GAAI,KAAK,OAAO,EAAE,KAAK,QAAQ,QAQrD,CAAC;AAEF,eAAO,MAAM,cAAc,OA4C1B,CAAC;AAEF,eAAO,MAAM,YAAY,QAAO,OAAO,QAAoB,CAAC"}

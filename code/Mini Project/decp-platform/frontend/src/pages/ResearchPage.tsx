@@ -19,13 +19,8 @@ import {
   IconButton,
 } from '@mui/material';
 import { Add, Science, Biotech, Hub, Groups, PhotoCamera } from '@mui/icons-material';
+import { getMediaUrl, getPostUploadUrl } from '@utils';
 
-const getMediaUrl = (url: string): string => {
-  if (!url) return '';
-  if (url.startsWith('http') || url.startsWith('blob:')) return url;
-  // Use relative path - Vite will proxy /uploads to API Gateway
-  return `${url.startsWith('/') ? '' : '/'}${url}`;
-};
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
 import {
@@ -142,8 +137,7 @@ export const ResearchPage: React.FC = () => {
       const fd = new FormData();
       fd.append('file', file);
       const token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';
-      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1';
-      const resp = await fetch(`${apiBase}/posts/upload`, {
+      const resp = await fetch(getPostUploadUrl(), {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: fd,

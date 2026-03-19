@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const researchController_1 = require("../controllers/researchController");
+const uploadValidator_1 = require("../middleware/uploadValidator");
+const router = (0, express_1.Router)();
+router.get('/', researchController_1.getProjects);
+router.post('/', researchController_1.createProject);
+router.get('/:projectId', researchController_1.getProject);
+router.put('/:projectId', researchController_1.updateProject);
+router.delete('/:projectId', researchController_1.deleteProject);
+router.post('/:projectId/collaborate', researchController_1.collaborateProject);
+router.delete('/:projectId/collaborate', researchController_1.leaveProject);
+router.post('/:projectId/documents', uploadValidator_1.memoryUpload.single('document'), uploadValidator_1.validateAndSaveFile, researchController_1.addDocument);
+router.delete('/:projectId/documents/:documentId', researchController_1.deleteDocument);
+exports.default = router;

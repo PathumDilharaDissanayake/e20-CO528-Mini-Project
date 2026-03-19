@@ -37,3 +37,21 @@ variable "jwt_refresh_secret" {
   type      = string
   sensitive = true
 }
+
+variable "enable_nat_gateway" {
+  description = "Create NAT Gateways. Set false during planned shutdown to save ~$64/month."
+  type        = bool
+  default     = true
+}
+
+variable "api_gateway_desired_count" {
+  description = "Desired task count for API Gateway. Set 0 to stop Fargate billing."
+  type        = number
+  default     = 1
+}
+
+variable "service_desired_count" {
+  description = "Desired task count for each microservice. Set 0 to stop Fargate billing."
+  type        = number
+  default     = 1
+}

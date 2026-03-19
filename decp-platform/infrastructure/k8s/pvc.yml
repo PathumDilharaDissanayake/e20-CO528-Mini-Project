@@ -1,0 +1,149 @@
+# DECP Platform - Persistent Volume Claims
+---
+# PostgreSQL PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: postgres
+    app.kubernetes.io/component: storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: gp3-retained
+  resources:
+    requests:
+      storage: 100Gi
+---
+# Redis PVC (for AOF persistence)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-pvc
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: redis
+    app.kubernetes.io/component: storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: gp3-retained
+  resources:
+    requests:
+      storage: 20Gi
+---
+# RabbitMQ PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rabbitmq-pvc
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: rabbitmq
+    app.kubernetes.io/component: storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: gp3-retained
+  resources:
+    requests:
+      storage: 10Gi
+---
+# Shared Storage for Uploads
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: uploads-pvc
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: uploads
+    app.kubernetes.io/component: storage
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: efs-sc
+  resources:
+    requests:
+      storage: 500Gi
+---
+# Grafana Data PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grafana-pvc
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/component: storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: gp3
+  resources:
+    requests:
+      storage: 10Gi
+---
+# Prometheus Data PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-pvc
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/component: storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: gp3
+  resources:
+    requests:
+      storage: 100Gi
+---
+# Storage Class for GP3 volumes (AWS EBS)
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gp3-retained
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "false"
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+reclaimPolicy: Retain
+parameters:
+  type: gp3
+  encrypted: "true"
+  kmsKeyId: "alias/aws/ebs"
+  iops: "3000"
+  throughput: "125"
+---
+# Storage Class for GP3 volumes (Delete policy for non-critical data)
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gp3
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+parameters:
+  type: gp3
+  encrypted: "true"
+---
+# EFS Storage Class for shared storage
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: efs-sc
+provisioner: efs.csi.aws.com
+volumeBindingMode: Immediate
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: fs-xxxxxxxxx
+  directoryPerms: "700"
+  gidRangeStart: "1000"
+  gidRangeEnd: "2000"
+  basePath: "/dynamic_provisioning"

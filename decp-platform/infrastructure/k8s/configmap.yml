@@ -1,0 +1,281 @@
+# DECP Platform - ConfigMaps
+---
+# Global ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: decp-global-config
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: decp-platform
+    app.kubernetes.io/component: config
+data:
+  NODE_ENV: "production"
+  LOG_LEVEL: "info"
+  JWT_EXPIRES_IN: "1d"
+  JWT_REFRESH_EXPIRES_IN: "7d"
+  RATE_LIMIT_WINDOW_MS: "900000"
+  RATE_LIMIT_MAX_REQUESTS: "100"
+  CORS_ORIGIN: "https://decp.io"
+  API_VERSION: "v1"
+  RABBITMQ_VHOST: "/decp"
+  REDIS_DB: "0"
+  REDIS_KEY_PREFIX: "decp:"
+  ENABLE_SWAGGER: "false"
+  ENABLE_METRICS: "true"
+  METRICS_PORT: "9090"
+  PASSWORD_SALT_ROUNDS: "12"
+  SESSION_TIMEOUT: "3600"
+  UPLOAD_MAX_FILE_SIZE: "10485760"
+  UPLOAD_ALLOWED_TYPES: "image/jpeg,image/png,image/webp,application/pdf"
+---
+# API Gateway ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-gateway-config
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: api-gateway
+    app.kubernetes.io/component: config
+data:
+  PORT: "3000"
+  SERVICE_NAME: "api-gateway"
+  AUTH_SERVICE_URL: "http://auth-service:3001"
+  USER_SERVICE_URL: "http://user-service:3002"
+  PRODUCT_SERVICE_URL: "http://product-service:3003"
+  ORDER_SERVICE_URL: "http://order-service:3004"
+  PAYMENT_SERVICE_URL: "http://payment-service:3005"
+  NOTIFICATION_SERVICE_URL: "http://notification-service:3006"
+  ENABLE_RATE_LIMITING: "true"
+  ENABLE_CACHING: "true"
+  CACHE_TTL: "300"
+---
+# Auth Service ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-service-config
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: auth-service
+    app.kubernetes.io/component: config
+data:
+  PORT: "3001"
+  SERVICE_NAME: "auth-service"
+  OAUTH_GOOGLE_CALLBACK_URL: "/api/v1/auth/google/callback"
+  OAUTH_FACEBOOK_CALLBACK_URL: "/api/v1/auth/facebook/callback"
+  MFA_ISSUER: "DECP Platform"
+  TOKEN_BLACKLIST_PREFIX: "blacklist:token:"
+---
+# Product Service ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-service-config
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: product-service
+    app.kubernetes.io/component: config
+data:
+  PORT: "3003"
+  SERVICE_NAME: "product-service"
+  SEARCH_INDEX_NAME: "products"
+  PRODUCT_CACHE_TTL: "600"
+  CATEGORY_CACHE_TTL: "3600"
+  MAX_PRODUCTS_PER_PAGE: "50"
+  ENABLE_FULL_TEXT_SEARCH: "true"
+---
+# Order Service ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: order-service-config
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: order-service
+    app.kubernetes.io/component: config
+data:
+  PORT: "3004"
+  SERVICE_NAME: "order-service"
+  ORDER_EXPIRY_MINUTES: "30"
+  MAX_ORDER_ITEMS: "100"
+  ENABLE_INVENTORY_CHECK: "true"
+  ORDER_STATUS_UPDATE_QUEUE: "order.status.updates"
+---
+# Payment Service ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment-service-config
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: payment-service
+    app.kubernetes.io/component: config
+data:
+  PORT: "3005"
+  SERVICE_NAME: "payment-service"
+  PAYMENT_TIMEOUT_MINUTES: "30"
+  STRIPE_CURRENCY: "usd"
+  WEBHOOK_PATH: "/webhooks/stripe"
+  INVOICE_QUEUE: "payment.invoices"
+  REFUND_QUEUE: "payment.refunds"
+---
+# Notification Service ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notification-service-config
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: notification-service
+    app.kubernetes.io/component: config
+data:
+  PORT: "3006"
+  SERVICE_NAME: "notification-service"
+  EMAIL_QUEUE: "notifications.email"
+  SMS_QUEUE: "notifications.sms"
+  PUSH_QUEUE: "notifications.push"
+  EMAIL_FROM_NAME: "DECP Platform"
+  EMAIL_FROM_ADDRESS: "noreply@decp.io"
+  TEMPLATE_CACHE_TTL: "3600"
+  MAX_RETRY_ATTEMPTS: "3"
+---
+# NGINX ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/component: config
+data:
+  nginx.conf: |
+    user nginx;
+    worker_processes auto;
+    error_log /var/log/nginx/error.log warn;
+    pid /var/run/nginx.pid;
+
+    events {
+        worker_connections 1024;
+    }
+
+    http {
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+
+        log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                       '$status $body_bytes_sent "$http_referer" '
+                       '"$http_user_agent" "$http_x_forwarded_for" '
+                       'rt=$request_time uct="$upstream_connect_time" '
+                       'uht="$upstream_header_time" urt="$upstream_response_time"';
+
+        access_log /var/log/nginx/access.log main;
+
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 65;
+        types_hash_max_size 2048;
+        client_max_body_size 50M;
+
+        # Gzip compression
+        gzip on;
+        gzip_vary on;
+        gzip_proxied any;
+        gzip_comp_level 6;
+        gzip_types text/plain text/css text/xml application/json application/javascript application/rss+xml application/atom+xml image/svg+xml;
+
+        # Rate limiting
+        limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
+        limit_req_zone $binary_remote_addr zone=auth:10m rate=5r/m;
+
+        # Upstream definitions
+        upstream api_gateway {
+            least_conn;
+            server api-gateway:3000 max_fails=3 fail_timeout=30s;
+        }
+
+        upstream frontend {
+            least_conn;
+            server frontend:3000 max_fails=3 fail_timeout=30s;
+        }
+
+        # Health check endpoint
+        server {
+            listen 80;
+            server_name localhost;
+            
+            location /health {
+                access_log off;
+                return 200 "healthy\n";
+                add_header Content-Type text/plain;
+            }
+        }
+
+        # Main server block
+        server {
+            listen 80;
+            server_name api.decp.io;
+            
+            # Security headers
+            add_header X-Frame-Options "SAMEORIGIN" always;
+            add_header X-Content-Type-Options "nosniff" always;
+            add_header X-XSS-Protection "1; mode=block" always;
+            add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+            # API routes
+            location /api/ {
+                limit_req zone=api burst=20 nodelay;
+                
+                proxy_pass http://api_gateway;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_cache_bypass $http_upgrade;
+                proxy_read_timeout 86400;
+            }
+
+            # WebSocket support
+            location /ws/ {
+                proxy_pass http://api_gateway;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+            }
+
+            # Static files
+            location /static/ {
+                alias /var/www/static/;
+                expires 1y;
+                add_header Cache-Control "public, immutable";
+            }
+        }
+
+        # Frontend server block
+        server {
+            listen 80;
+            server_name app.decp.io;
+
+            location / {
+                proxy_pass http://frontend;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_cache_bypass $http_upgrade;
+            }
+        }
+    }

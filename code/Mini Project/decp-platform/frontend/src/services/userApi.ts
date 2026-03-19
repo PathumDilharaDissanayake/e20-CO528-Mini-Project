@@ -1,5 +1,6 @@
 import { apiSlice } from './api';
 import { User, PaginatedResponse, ApiResponse } from '@types';
+import { getApiBaseUrl, getPostUploadUrl } from '@utils';
 
 interface ConnectionRequest {
   connectionId: string;
@@ -166,9 +167,12 @@ export const userApi = apiSlice.injectEndpoints({
     uploadProfilePicture: builder.mutation<ApiResponse<{ url: string }>, FormData>({
       queryFn: async (formData, { dispatch }) => {
         try {
-          // Upload to feed-service
-          const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'}/feed/upload`, {
+          const token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';
+
+          // Upload through API gateway feed route
+          const response = await fetch(getPostUploadUrl(), {
             method: 'POST',
+            headers: token ? { Authorization: `Bearer ${token}` } : undefined,
             body: formData,
           });
           const result = await response.json();
@@ -177,7 +181,7 @@ export const userApi = apiSlice.injectEndpoints({
             // Update profile with the new avatar URL
             const userId = JSON.parse(atob(localStorage.getItem('token')?.split('.')[1] || '{}'))?.userId;
             if (userId) {
-              await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'}/users/me`, {
+              await fetch(`${getApiBaseUrl()}/users/me`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ avatar: result.data.url }),

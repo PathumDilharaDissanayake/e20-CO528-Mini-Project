@@ -22,6 +22,10 @@ export declare const config: {
         windowMs: number;
         max: number;
     };
+    strictRateLimit: {
+        windowMs: number;
+        max: number;
+    };
     cors: {
         origin: string[];
     };

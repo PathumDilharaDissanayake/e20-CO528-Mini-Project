@@ -1,0 +1,156 @@
+%% DECP Platform - Security Architecture
+%% Shows authentication flow, authorization, encryption, WAF, security groups
+
+flowchart TB
+    subgraph Users["👥 Users"]
+        Student["Student"]
+        Alumni["Alumni"]
+        Admin["Admin"]
+        Faculty["Faculty"]
+    end
+
+    subgraph ClientSecurity["🔒 Client Security"]
+        HTTPS["HTTPS/TLS 1.3<br/>Certificate Pinning"]
+        LocalStorage["Secure Storage<br/>Encrypted Preferences"]
+        InputValidation["Input Validation<br/>XSS Prevention"]
+    end
+
+    subgraph EdgeSecurity["🛡️ Edge Security"]
+        WAF["AWS WAF<br/><br/>• SQL Injection Protection<br/>• XSS Protection<br/>• Rate Limiting<br/>• Geo-blocking<br/>• Bot Detection"]
+        
+        DDoS["AWS Shield<br/>DDoS Protection"]
+        
+        CDN["CloudFront<br/><br/>• Origin Access Identity<br/>• Signed URLs/Cookies<br/>• Field Level Encryption"]
+    end
+
+    subgraph APISecurity["🔐 API Security Layer"]
+        subgraph GatewaySecurity["API Gateway Security"]
+            RateLimit["Rate Limiting<br/>Token Bucket Algorithm<br/>100 req/min per user"]
+            AuthZ["Authorization<br/>RBAC Middleware"]
+            RequestSigning["Request Signing<br/>HMAC Validation"]
+            APIToken["API Token Validation<br/>JWT Verification"]
+        end
+        
+        subgraph AuthFlow["Authentication Flow"]
+            OAuth["OAuth 2.0 / OIDC<br/>Google, LinkedIn"]
+            JWT["JWT Token Service<br/>RS256 Signing"]
+            Refresh["Refresh Token<br/>Rotation"]
+            MFA["Multi-Factor Auth<br/>TOTP/SMS"]
+        end
+    end
+
+    subgraph ServiceSecurity["🔒 Service-to-Service Security"]
+        mTLS["Mutual TLS<br/>Service Mesh (Istio)"]
+        ServiceToken["Service Tokens<br/>Internal JWT"]
+        NetworkPolicy["Network Policies<br/>Pod-to-Pod ACLs"]
+    end
+
+    subgraph DataSecurity["💾 Data Security"]
+        subgraph EncryptionAtRest["Encryption at Rest"]
+            DBEncrypt["Database Encryption<br/>AES-256"]
+            S3Encrypt["S3 Encryption<br/>SSE-S3/SSE-KMS"]
+            SecretManager["AWS Secrets Manager<br/>Credential Storage"]
+            ParamStore["AWS Systems Manager<br/>Parameter Store"]
+        end
+        
+        subgraph EncryptionInTransit["Encryption in Transit"]
+            TLSEndToEnd["TLS 1.3<br/>End-to-End"]
+            CertManager["Cert-Manager<br/>Auto TLS Rotation"]
+        end
+    end
+
+    subgraph IAM["👤 Identity & Access Management"]
+        subgraph RBAC["Role-Based Access Control"]
+            Roles["User Roles"]
+            Permissions["Permissions"]
+            Policies["IAM Policies"]
+        end
+        
+        subgraph Roles["Role Definitions"]
+            RoleStudent["Student<br/>- Read feed<br/>- Create posts<br/>- Apply jobs<br/>- Message"]
+            RoleAlumni["Alumni<br/>- All student perms<br/>- Post jobs<br/>- Mentor<br/>- Analytics view"]
+            RoleAdmin["Admin<br/>- Full access<br/>- User management<br/>- Content moderation<br/>- System config"]
+            RoleFaculty["Faculty<br/>- Research mgmt<br/>- Event creation<br/>- Student analytics"]
+        end
+    end
+
+    subgraph AuditSecurity["📋 Audit & Compliance"]
+        CloudTrail["AWS CloudTrail<br/>API Audit Logs"]
+        Config["AWS Config<br/>Compliance Monitoring"]
+        SecurityHub["Security Hub<br/>Security Findings"]
+        GuardDuty["GuardDuty<br/>Threat Detection"]
+    end
+
+    %% Flow Connections
+    Users -->|"Login Request"| HTTPS
+    HTTPS -->|"Encrypted Connection"| WAF
+    WAF -->|"Filtered Traffic"| DDoS
+    DDoS -->|"Protected Traffic"| CDN
+    CDN -->|"Deliver Content"| RateLimit
+    
+    RateLimit -->|"Check Limits"| AuthZ
+    AuthZ -->|"Verify Permissions"| APIToken
+    APIToken -->|"Validate JWT"| JWT
+    
+    JWT -.->|"Issue Token"| OAuth
+    OAuth -.->|"Social Login"| Users
+    JWT -.->|"Refresh"| Refresh
+    JWT -.->|"Require 2FA"| MFA
+    
+    %% Service Communication
+    AuthZ -->|"Authorized Request"| mTLS
+    mTLS -->|"Secure Channel"| ServiceToken
+    ServiceToken -->|"Internal Auth"| NetworkPolicy
+    
+    %% Data Protection
+    NetworkPolicy -->|"Read/Write"| DBEncrypt
+    NetworkPolicy -->|"Store Files"| S3Encrypt
+    
+    DBEncrypt -.->|"Get Keys"| SecretManager
+    S3Encrypt -.->|"Get Keys"| SecretManager
+    
+    %% TLS
+    HTTPS -.->|"Encrypt"| TLSEndToEnd
+    TLSEndToEnd -.->|"Manage"| CertManager
+    
+    %% RBAC
+    AuthZ -.->|"Check"| Roles
+    Roles -.->|"Has"| Permissions
+    Permissions -.->|"Defined in"| Policies
+    
+    %% Audit
+    WAF -.->|"Log"| CloudTrail
+    AuthZ -.->|"Log"| CloudTrail
+    DBEncrypt -.->|"Monitor"| GuardDuty
+    
+    %% Styling
+    classDef users fill:#08427b,stroke:#052e56,color:#fff,stroke-width:2px
+    classDef client fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef edge fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef api fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef service fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef data fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef iam fill:#e0f2f1,stroke:#00695c,stroke-width:2px
+    classDef audit fill:#efebe9,stroke:#4e342e,stroke-width:2px
+
+    class Student,Alumni,Admin,Faculty users
+    class HTTPS,LocalStorage,InputValidation client
+    class WAF,DDoS,CDN edge
+    class RateLimit,AuthZ,RequestSigning,APIToken,OAuth,JWT,Refresh,MFA api
+    class mTLS,ServiceToken,NetworkPolicy service
+    class DBEncrypt,S3Encrypt,SecretManager,ParamStore,TLSEndToEnd,CertManager data
+    class Roles,Permissions,Policies,RoleStudent,RoleAlumni,RoleAdmin,RoleFaculty iam
+    class CloudTrail,Config,SecurityHub,GuardDuty audit
+
+    %% Title
+    Title["🛡️ DECP Platform - Security Architecture"]
+    style Title fill:#d32f2f,stroke:#b71c1c,color:#fff,stroke-width:3px
+
+    %% Security Levels
+    subgraph SecurityLevels["Security Layers"]
+        direction LR
+        SL1["Edge"]:::edge
+        SL2["Network"]:::service
+        SL3["Application"]:::api
+        SL4["Data"]:::data
+    end

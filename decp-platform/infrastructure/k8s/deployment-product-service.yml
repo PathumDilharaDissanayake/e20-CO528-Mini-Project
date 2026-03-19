@@ -1,0 +1,129 @@
+# DECP Platform - Product Service Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: product-service
+    app.kubernetes.io/component: service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: product-service
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: product-service
+        app.kubernetes.io/component: service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+    spec:
+      serviceAccountName: decp-platform-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+      containers:
+        - name: product-service
+          image: decp-platform/product-service:latest
+          ports:
+            - name: http
+              containerPort: 3003
+            - name: metrics
+              containerPort: 9090
+          envFrom:
+            - configMapRef:
+                name: decp-global-config
+            - configMapRef:
+                name: product-service-config
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: DATABASE_URL
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: REDIS_URL
+            - name: RABBITMQ_URL
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secrets
+                  key: RABBITMQ_URL
+            - name: S3_BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets
+                  key: S3_BUCKET_NAME
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets
+                  key: AWS_SECRET_ACCESS_KEY
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+  namespace: decp-platform
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3003
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: product-service
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: product-service-hpa
+  namespace: decp-platform
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: product-service
+  minReplicas: 2
+  maxReplicas: 8
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70

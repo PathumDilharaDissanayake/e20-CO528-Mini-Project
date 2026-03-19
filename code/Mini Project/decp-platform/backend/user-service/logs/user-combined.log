@@ -649,3 +649,7 @@ Error
 2026-03-05 17:59:27 [USER-SERVICE] [info]: ✅ Database connection established successfully.
 2026-03-05 17:59:27 [USER-SERVICE] [info]: ✅ Database synchronized.
 2026-03-05 17:59:27 [USER-SERVICE] [info]: 👤 User Service running on port 3002
+2026-03-19 11:44:38 [USER-SERVICE] [info]: DB connection config: host=localhost, port=5432, ssl=false, sslRejectUnauthorized=false
+2026-03-19 11:44:39 [USER-SERVICE] [info]: Database connection established successfully
+2026-03-19 11:44:40 [USER-SERVICE] [info]: Database models synchronized
+2026-03-19 11:44:40 [USER-SERVICE] [info]: 👤 User Service running on port 3002

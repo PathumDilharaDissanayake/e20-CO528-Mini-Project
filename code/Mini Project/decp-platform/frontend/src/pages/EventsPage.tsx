@@ -44,14 +44,7 @@ import {
 import { EventCard } from '@components/events/EventCard';
 import { EventCardSkeleton, EmptyState } from '@components/common';
 import { Event as EventType } from '@types';
-import { EVENT_TYPES } from '@utils';
-
-const getMediaUrl = (url: string): string => {
-  if (!url) return '';
-  if (url.startsWith('http') || url.startsWith('blob:')) return url;
-  // Use relative path - Vite will proxy /uploads to API Gateway
-  return `${url.startsWith('/') ? '' : '/'}${url}`;
-};
+import { EVENT_TYPES, getMediaUrl, getPostUploadUrl } from '@utils';
 
 const HeroBanner: React.FC<{ eventCount: number; canCreate: boolean; onCreate: () => void }> = ({ eventCount, canCreate, onCreate }) => (
   <Paper
@@ -144,8 +137,7 @@ export const EventsPage: React.FC = () => {
       const fd = new FormData();
       fd.append('file', file);
       const token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';
-      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1';
-      const resp = await fetch(`${apiBase}/posts/upload`, {
+      const resp = await fetch(getPostUploadUrl(), {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: fd,

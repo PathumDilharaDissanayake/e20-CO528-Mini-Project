@@ -21,7 +21,6 @@ variables:
   ENVIRONMENT: "dev"
   DOCKER_HOST: tcp://docker:2375
   DOCKER_TLS_CERTDIR: ""
-  VITE_API_URL: "http://decp-platform-alb-440905668.us-east-1.elb.amazonaws.com/api/v1"
 
 # ─────────────────────────── Reusable templates ───────────────────────────
 
@@ -32,11 +31,22 @@ variables:
   before_script:
     - cd $TF_DIR
     - |
+      : "${TF_STATE_BUCKET:?TF_STATE_BUCKET is required for remote Terraform backend}"
+      : "${TF_LOCK_TABLE:?TF_LOCK_TABLE is required for remote Terraform backend}"
+    - |
       terraform init \
         -backend-config="bucket=${TF_STATE_BUCKET}" \
         -backend-config="key=${PROJECT_NAME}/${ENVIRONMENT}/terraform.tfstate" \
         -backend-config="region=${AWS_DEFAULT_REGION}" \
         -backend-config="dynamodb_table=${TF_LOCK_TABLE}"
+
+.terraform_validate_template: &terraform_validate_template
+  image:
+    name: hashicorp/terraform:1.7
+    entrypoint: ["/bin/sh", "-c"]
+  before_script:
+    - cd $TF_DIR
+    - terraform init -backend=false
 
 .docker_template: &docker_template
   image: docker:24-dind
@@ -45,14 +55,17 @@ variables:
   before_script:
     - apk add --no-cache aws-cli bash
     - |
-      aws ecr get-login-password --region $AWS_DEFAULT_REGION | \
-        docker login --username AWS --password-stdin \
+      : "${AWS_ACCESS_KEY_ID:?AWS_ACCESS_KEY_ID is required for ECR login}"
+      : "${AWS_SECRET_ACCESS_KEY:?AWS_SECRET_ACCESS_KEY is required for ECR login}"
+      : "${AWS_ACCOUNT_ID:?AWS_ACCOUNT_ID is required for ECR login}"
+      ECR_PASSWORD="$(aws ecr get-login-password --region "$AWS_DEFAULT_REGION")"
+      printf '%s' "$ECR_PASSWORD" | docker login --username AWS --password-stdin \
         "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
 
 # ═══════════════════════════ STAGE: VALIDATE ══════════════════════════════
 
 terraform-validate:
-  <<: *terraform_template
+  <<: *terraform_validate_template
   stage: validate
   script:
     - terraform validate
@@ -270,7 +283,7 @@ deploy-frontend:
   image: node:20-alpine
   stage: deploy-frontend
   before_script:
-    - apk add --no-cache aws-cli
+    - apk add --no-cache aws-cli bind-tools
   script:
     - cd "${CI_PROJECT_DIR}/${FRONTEND_DIR}"
     # Dynamically discover the ALB DNS to use as API URL
@@ -279,9 +292,25 @@ deploy-frontend:
         --names "${PROJECT_NAME}-alb" \
         --query "LoadBalancers[0].DNSName" \
         --output text \
-        --region "$AWS_DEFAULT_REGION" 2>/dev/null || echo "localhost")
-      echo "VITE_API_URL=http://${ALB_DNS}/api/v1" > .env.production
-      echo "Frontend will point to: http://${ALB_DNS}/api/v1"
+        --region "$AWS_DEFAULT_REGION")
+
+      if [ -z "$ALB_DNS" ] || [ "$ALB_DNS" = "None" ] || [ "$ALB_DNS" = "null" ]; then
+        echo "ERROR: Could not resolve ALB DNS from AWS for ${PROJECT_NAME}-alb"
+        exit 1
+      fi
+
+      if ! nslookup "$ALB_DNS" >/dev/null 2>&1; then
+        echo "ERROR: ALB DNS is not resolvable: ${ALB_DNS}"
+        exit 1
+      fi
+
+      {
+        echo "VITE_API_URL=http://${ALB_DNS}/api/v1"
+        echo "VITE_MEDIA_BASE_URL=http://${ALB_DNS}"
+      } > .env.production
+
+      echo "Frontend API URL: http://${ALB_DNS}/api/v1"
+      echo "Frontend media URL: http://${ALB_DNS}"
     - npm ci
     - npm run build
     - |
@@ -291,4 +320,8 @@ deploy-frontend:
   rules:
     - changes:
         - "code/Mini Project/decp-platform/frontend/**/*"
+    - changes:
+        - terraform/**/*
+    - changes:
+      - .gitlab-ci.yml
     - if: $DEPLOY_ALL == "true"

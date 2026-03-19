@@ -1,0 +1,49 @@
+# DECP Platform - NGINX Reverse Proxy Dockerfile
+FROM nginx:1.25-alpine
+
+# Install additional tools
+RUN apk add --no-cache \
+    curl \
+    ca-certificates \
+    openssl
+
+# Remove default nginx config
+RUN rm -rf /etc/nginx/conf.d/default.conf
+
+# Copy custom configurations
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY conf.d/ /etc/nginx/conf.d/
+COPY ssl/ /etc/nginx/ssl/
+COPY includes/ /etc/nginx/includes/
+
+# Create SSL directory if not exists
+RUN mkdir -p /etc/nginx/ssl && \
+    chmod 755 /etc/nginx/ssl
+
+# Generate self-signed certificate for development (replace in production)
+RUN if [ ! -f /etc/nginx/ssl/cert.pem ]; then \
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /etc/nginx/ssl/key.pem \
+    -out /etc/nginx/ssl/cert.pem \
+    -subj "/C=US/ST=State/L=City/O=DECP/CN=localhost"; \
+    fi
+
+# Set proper permissions
+RUN chown -R nginx:nginx /etc/nginx/ssl && \
+    chmod 600 /etc/nginx/ssl/*.pem
+
+# Create log directory
+RUN mkdir -p /var/log/nginx && \
+    chown -R nginx:nginx /var/log/nginx
+
+# Security: Run as nginx user
+USER nginx
+
+# Expose ports
+EXPOSE 80 443
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost/health || exit 1
+
+CMD ["nginx", "-g", "daemon off;"]

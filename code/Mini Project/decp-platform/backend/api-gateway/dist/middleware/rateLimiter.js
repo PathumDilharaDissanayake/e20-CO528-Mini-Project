@@ -25,8 +25,8 @@ exports.rateLimiter = (0, express_rate_limit_1.default)({
     }
 });
 exports.strictRateLimiter = (0, express_rate_limit_1.default)({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 5, // 5 requests per window
+    windowMs: config_1.config.strictRateLimit.windowMs,
+    max: config_1.config.strictRateLimit.max,
     standardHeaders: true,
     legacyHeaders: false,
     skip: (req) => {

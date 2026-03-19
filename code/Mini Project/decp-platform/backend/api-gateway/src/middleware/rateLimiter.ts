@@ -21,8 +21,8 @@ export const rateLimiter = rateLimit({
 });
 
 export const strictRateLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // 5 requests per window
+  windowMs: config.strictRateLimit.windowMs,
+  max: config.strictRateLimit.max,
   standardHeaders: true,
   legacyHeaders: false,
   skip: (req) => {

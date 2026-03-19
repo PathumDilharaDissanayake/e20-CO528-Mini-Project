@@ -1,0 +1,193 @@
+# DECP Platform - RBAC Configuration
+---
+# Service Account
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: decp-platform-sa
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: decp-platform
+    app.kubernetes.io/component: rbac
+  annotations:
+    # EKS IRSA annotation (replace with actual IAM role ARN)
+    eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT_ID:role/decp-platform-role
+automountServiceAccountToken: true
+---
+# Role for namespace-specific permissions
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: decp-platform-role
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: decp-platform
+    app.kubernetes.io/component: rbac
+rules:
+  # Allow reading ConfigMaps and Secrets
+  - apiGroups: [""]
+    resources: ["configmaps", "secrets"]
+    verbs: ["get", "list", "watch"]
+  
+  # Allow reading Pod information
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+  
+  # Allow leader election
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leases"]
+    verbs: ["get", "list", "create", "update", "patch"]
+  
+  # Allow events creation
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+---
+# RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: decp-platform-rolebinding
+  namespace: decp-platform
+  labels:
+    app.kubernetes.io/name: decp-platform
+    app.kubernetes.io/component: rbac
+subjects:
+  - kind: ServiceAccount
+    name: decp-platform-sa
+    namespace: decp-platform
+roleRef:
+  kind: Role
+  name: decp-platform-role
+  apiGroup: rbac.authorization.k8s.io
+---
+# ClusterRole for cross-namespace permissions (if needed)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: decp-platform-clusterrole
+  labels:
+    app.kubernetes.io/name: decp-platform
+    app.kubernetes.io/component: rbac
+rules:
+  # Allow reading nodes (for topology awareness)
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list", "watch"]
+  
+  # Allow reading ingresses
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["ingresses"]
+    verbs: ["get", "list", "watch"]
+  
+  # Allow metrics access
+  - apiGroups: ["metrics.k8s.io"]
+    resources: ["pods", "nodes"]
+    verbs: ["get", "list"]
+---
+# ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: decp-platform-clusterrolebinding
+  labels:
+    app.kubernetes.io/name: decp-platform
+    app.kubernetes.io/component: rbac
+subjects:
+  - kind: ServiceAccount
+    name: decp-platform-sa
+    namespace: decp-platform
+roleRef:
+  kind: ClusterRole
+  name: decp-platform-clusterrole
+  apiGroup: rbac.authorization.k8s.io
+---
+# Network Policy - Deny all ingress/egress by default
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: decp-platform
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+---
+# Network Policy - Allow ingress to API Gateway
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api-gateway-ingress
+  namespace: decp-platform
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: api-gateway
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: ingress-nginx
+        - namespaceSelector:
+            matchLabels:
+              name: kube-system
+      ports:
+        - protocol: TCP
+          port: 3000
+---
+# Network Policy - Allow internal service communication
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-internal-communication
+  namespace: decp-platform
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/part-of: decp-platform
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/part-of: decp-platform
+      ports:
+        - protocol: TCP
+          port: 3000
+        - protocol: TCP
+          port: 3001
+        - protocol: TCP
+          port: 3002
+        - protocol: TCP
+          port: 3003
+        - protocol: TCP
+          port: 3004
+        - protocol: TCP
+          port: 3005
+        - protocol: TCP
+          port: 3006
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/part-of: decp-platform
+    # Allow DNS resolution
+    - to:
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+    # Allow external HTTPS (for webhooks, APIs)
+    - to: []
+      ports:
+        - protocol: TCP
+          port: 443
