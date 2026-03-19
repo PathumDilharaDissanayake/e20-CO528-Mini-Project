@@ -58,6 +58,16 @@ const TabPanel: React.FC<TabPanelProps> = ({ children, value, index }) => (
   </Box>
 );
 
+// Skill colour palette — cycles through emerald + accent hues
+const SKILL_PALETTE = [
+  { bg: 'rgba(16,185,129,0.12)', color: '#059669', border: 'rgba(16,185,129,0.3)' },
+  { bg: 'rgba(99,102,241,0.12)', color: '#6366f1', border: 'rgba(99,102,241,0.3)' },
+  { bg: 'rgba(245,158,11,0.12)', color: '#d97706', border: 'rgba(245,158,11,0.3)' },
+  { bg: 'rgba(20,184,166,0.12)', color: '#0d9488', border: 'rgba(20,184,166,0.3)' },
+  { bg: 'rgba(168,85,247,0.12)', color: '#9333ea', border: 'rgba(168,85,247,0.3)' },
+  { bg: 'rgba(59,130,246,0.12)', color: '#2563eb', border: 'rgba(59,130,246,0.3)' },
+];
+
 export const ProfilePage: React.FC = () => {
   const { userId } = useParams<{ userId: string }>();
   const currentUser = useSelector((state: RootState) => state.auth.user);
@@ -76,6 +86,7 @@ export const ProfilePage: React.FC = () => {
     twitter: '',
   });
   const [editSubmitting, setEditSubmitting] = useState(false);
+  const [editError, setEditError] = useState('');
 
   // Experience
   const [addExpOpen, setAddExpOpen] = useState(false);
@@ -195,6 +206,7 @@ export const ProfilePage: React.FC = () => {
 
   const handleEditSave = async () => {
     setEditSubmitting(true);
+    setEditError('');
     try {
       const ensureHttps = (url: string) => {
         if (!url) return '';
@@ -214,11 +226,15 @@ export const ProfilePage: React.FC = () => {
           twitter: ensureHttps(editData.twitter),
         },
       };
-      const result = await updateProfile(payload).unwrap();
-      if (result?.data) dispatch(updateUser(result.data as any));
+      // Use updateMyProfile (userApi) as the primary path — it invalidates the User cache
+      // and goes through RTK baseQuery which injects the auth header automatically.
+      const result = await updateMyProfile(payload).unwrap();
+      const updatedProfile = result?.data || result;
+      if (updatedProfile) dispatch(updateUser(updatedProfile as any));
       setEditOpen(false);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
+      setEditError(e?.data?.message || e?.message || 'Failed to update profile. Please try again.');
     } finally {
       setEditSubmitting(false);
     }
@@ -351,12 +367,31 @@ export const ProfilePage: React.FC = () => {
         </Box>
 
         <Box>
+          {/* Styled tab navigation */}
           <Tabs
             value={activeTab}
             onChange={(_, newValue) => setActiveTab(newValue)}
             variant="scrollable"
             scrollButtons="auto"
-            sx={{ borderBottom: '1px solid', borderColor: 'divider' }}
+            sx={{
+              borderBottom: '1px solid',
+              borderColor: 'divider',
+              '& .MuiTabs-indicator': {
+                background: 'linear-gradient(90deg, #10b981, #059669)',
+                height: 3,
+                borderRadius: '3px 3px 0 0',
+              },
+              '& .MuiTab-root': {
+                textTransform: 'none',
+                fontWeight: 600,
+                fontSize: '0.875rem',
+                letterSpacing: 0,
+                minHeight: 48,
+                transition: 'color 0.2s, background-color 0.2s',
+                '&:hover': { color: 'primary.main', bgcolor: 'action.hover' },
+                '&.Mui-selected': { fontWeight: 700, color: 'primary.main' },
+              },
+            }}
           >
             <Tab label={`Posts (${postCount})`} />
             <Tab label="About" />
@@ -385,7 +420,7 @@ export const ProfilePage: React.FC = () => {
                   <PostCard
                     key={post._id || post.id}
                     post={post}
-                    onPostUpdated={() => refetchPosts()}
+                    onPostUpdate={() => refetchPosts()}
                   />
                 ))
               )}
@@ -394,11 +429,26 @@ export const ProfilePage: React.FC = () => {
             {/* About Tab */}
             <TabPanel value={activeTab} index={1}>
               <Box sx={{ maxWidth: 640, mx: 'auto', display: 'flex', flexDirection: 'column', gap: 2.5 }}>
+
                 {/* Bio */}
                 {profileUser?.bio && (
-                  <Card variant="outlined" sx={{ borderRadius: '14px' }}>
-                    <CardContent>
-                      <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1, color: 'primary.main' }}>
+                  <Card
+                    variant="outlined"
+                    sx={{
+                      borderRadius: '14px',
+                      overflow: 'hidden',
+                      borderColor: 'divider',
+                      '&::before': {
+                        content: '""',
+                        display: 'block',
+                        height: 3,
+                        background: 'linear-gradient(90deg, #10b981, #059669, #14b8a6)',
+                      },
+                    }}
+                  >
+                    <CardContent sx={{ pt: 2 }}>
+                      <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1, color: 'primary.main', display: 'flex', alignItems: 'center', gap: 0.75 }}>
+                        <Box sx={{ width: 3, height: 14, borderRadius: '2px', background: 'linear-gradient(180deg,#10b981,#059669)', flexShrink: 0 }} />
                         About
                       </Typography>
                       <Typography variant="body2" sx={{ lineHeight: 1.9, color: 'text.secondary', whiteSpace: 'pre-wrap' }}>
@@ -409,33 +459,71 @@ export const ProfilePage: React.FC = () => {
                 )}
 
                 {/* Details */}
-                <Card variant="outlined" sx={{ borderRadius: '14px' }}>
-                  <CardContent>
-                    <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1.5, color: 'primary.main' }}>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    borderRadius: '14px',
+                    overflow: 'hidden',
+                    borderColor: 'divider',
+                    '&::before': {
+                      content: '""',
+                      display: 'block',
+                      height: 3,
+                      background: 'linear-gradient(90deg, #6366f1, #818cf8)',
+                    },
+                  }}
+                >
+                  <CardContent sx={{ pt: 2 }}>
+                    <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1.5, color: '#6366f1', display: 'flex', alignItems: 'center', gap: 0.75 }}>
+                      <Box sx={{ width: 3, height: 14, borderRadius: '2px', background: 'linear-gradient(180deg,#6366f1,#818cf8)', flexShrink: 0 }} />
                       Details
                     </Typography>
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.25 }}>
                       {profileUser?.department && (
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                          <School sx={{ fontSize: 18, color: 'text.disabled' }} />
+                          <Box sx={{
+                            width: 28, height: 28, borderRadius: '8px',
+                            background: 'rgba(99,102,241,0.1)',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                          }}>
+                            <School sx={{ fontSize: 15, color: '#6366f1' }} />
+                          </Box>
                           <Typography variant="body2">{profileUser.department}</Typography>
                         </Box>
                       )}
                       {(profileUser as any)?.location && (
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                          <LocationOn sx={{ fontSize: 18, color: 'text.disabled' }} />
+                          <Box sx={{
+                            width: 28, height: 28, borderRadius: '8px',
+                            background: 'rgba(16,185,129,0.1)',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                          }}>
+                            <LocationOn sx={{ fontSize: 15, color: '#10b981' }} />
+                          </Box>
                           <Typography variant="body2">{(profileUser as any).location}</Typography>
                         </Box>
                       )}
                       {profileUser?.graduationYear && (
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                          <School sx={{ fontSize: 18, color: 'text.disabled' }} />
+                          <Box sx={{
+                            width: 28, height: 28, borderRadius: '8px',
+                            background: 'rgba(99,102,241,0.1)',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                          }}>
+                            <School sx={{ fontSize: 15, color: '#6366f1' }} />
+                          </Box>
                           <Typography variant="body2">Class of {profileUser.graduationYear}</Typography>
                         </Box>
                       )}
                       {(profileUser as any)?.website && (
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                          <Language sx={{ fontSize: 18, color: 'text.disabled' }} />
+                          <Box sx={{
+                            width: 28, height: 28, borderRadius: '8px',
+                            background: 'rgba(20,184,166,0.1)',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                          }}>
+                            <Language sx={{ fontSize: 15, color: '#14b8a6' }} />
+                          </Box>
                           <Typography variant="body2" component="a" href={(profileUser as any).website} target="_blank" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
                             {(profileUser as any).website}
                           </Typography>
@@ -443,7 +531,13 @@ export const ProfilePage: React.FC = () => {
                       )}
                       {(profileUser as any)?.socialLinks?.linkedin && (
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                          <LinkedIn sx={{ fontSize: 18, color: '#0077b5' }} />
+                          <Box sx={{
+                            width: 28, height: 28, borderRadius: '8px',
+                            background: 'rgba(0,119,181,0.1)',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                          }}>
+                            <LinkedIn sx={{ fontSize: 15, color: '#0077b5' }} />
+                          </Box>
                           <Typography variant="body2" component="a" href={(profileUser as any).socialLinks.linkedin} target="_blank" sx={{ color: '#0077b5', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
                             LinkedIn Profile
                           </Typography>
@@ -451,7 +545,13 @@ export const ProfilePage: React.FC = () => {
                       )}
                       {(profileUser as any)?.socialLinks?.github && (
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                          <GitHub sx={{ fontSize: 18, color: 'text.primary' }} />
+                          <Box sx={{
+                            width: 28, height: 28, borderRadius: '8px',
+                            background: (t) => t.palette.mode === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                          }}>
+                            <GitHub sx={{ fontSize: 15, color: 'text.primary' }} />
+                          </Box>
                           <Typography variant="body2" component="a" href={(profileUser as any).socialLinks.github} target="_blank" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
                             GitHub Profile
                           </Typography>
@@ -463,41 +563,74 @@ export const ProfilePage: React.FC = () => {
 
                 {/* Skills with endorsements */}
                 {Array.isArray(profileUser?.skills) && profileUser.skills.length > 0 && (
-                  <Card variant="outlined" sx={{ borderRadius: '14px' }}>
-                    <CardContent>
-                      <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1.5, color: 'primary.main' }}>
+                  <Card
+                    variant="outlined"
+                    sx={{
+                      borderRadius: '14px',
+                      overflow: 'hidden',
+                      borderColor: 'divider',
+                      '&::before': {
+                        content: '""',
+                        display: 'block',
+                        height: 3,
+                        background: 'linear-gradient(90deg, #14b8a6, #0d9488)',
+                      },
+                    }}
+                  >
+                    <CardContent sx={{ pt: 2 }}>
+                      <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1.5, color: '#0d9488', display: 'flex', alignItems: 'center', gap: 0.75 }}>
+                        <Box sx={{ width: 3, height: 14, borderRadius: '2px', background: 'linear-gradient(180deg,#14b8a6,#0d9488)', flexShrink: 0 }} />
                         Skills & Endorsements
                       </Typography>
-                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 0.5 }}>
                         {profileUser.skills.map((skill, i) => {
                           const endorsements = (profile?.endorsements || {}) as Record<string, string[]>;
                           const endorserIds: string[] = endorsements[skill] || [];
                           const endorseCount = endorserIds.length;
                           const alreadyEndorsed = endorserIds.includes(currentUser?._id || currentUser?.id || '');
+                          const palette = SKILL_PALETTE[i % SKILL_PALETTE.length];
                           return (
-                            <Box key={i} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 1.25, borderRadius: '10px', border: '1px solid', borderColor: 'divider', '&:hover': { borderColor: 'primary.light', bgcolor: 'action.hover' } }}>
-                              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <Box
+                              key={i}
+                              sx={{
+                                display: 'flex', alignItems: 'center', gap: 0.75,
+                                px: 1.25, py: 0.5,
+                                borderRadius: '20px',
+                                background: palette.bg,
+                                border: `1px solid ${palette.border}`,
+                                transition: 'all 0.2s ease',
+                                '&:hover': { transform: 'translateY(-1px)', boxShadow: `0 3px 10px ${palette.border}` },
+                              }}
+                            >
+                              <Typography variant="caption" sx={{ fontWeight: 700, color: palette.color, fontSize: '0.75rem' }}>
+                                {skill}
+                              </Typography>
+                              {endorseCount > 0 && (
                                 <Chip
-                                  label={skill}
+                                  label={endorseCount}
                                   size="small"
-                                  sx={{ fontWeight: 600, fontSize: '0.75rem', background: (t) => t.palette.mode === 'dark' ? 'rgba(22,101,52,0.15)' : 'rgba(22,101,52,0.1)', color: 'primary.main', border: '1px solid', borderColor: 'primary.light' }}
+                                  sx={{
+                                    height: 16, minWidth: 22, fontSize: '0.6rem', fontWeight: 700,
+                                    background: palette.bg, color: palette.color,
+                                    border: `1px solid ${palette.border}`,
+                                  }}
                                 />
-                                {endorseCount > 0 && (
-                                  <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600 }}>
-                                    {endorseCount} endorsement{endorseCount !== 1 ? 's' : ''}
-                                  </Typography>
-                                )}
-                              </Box>
+                              )}
                               {!isOwnProfile && currentUser && (
                                 <Tooltip title={alreadyEndorsed ? 'Remove endorsement' : 'Endorse this skill'}>
                                   <Button
                                     size="small"
-                                    variant={alreadyEndorsed ? 'contained' : 'outlined'}
-                                    color="primary"
+                                    variant={alreadyEndorsed ? 'contained' : 'text'}
                                     onClick={() => handleEndorseSkill(skill)}
-                                    sx={{ borderRadius: '8px', fontSize: '0.7rem', py: 0.25, px: 1, minWidth: 0, textTransform: 'none' }}
+                                    sx={{
+                                      borderRadius: '12px', fontSize: '0.65rem', py: 0, px: 0.75,
+                                      minWidth: 0, textTransform: 'none', fontWeight: 700,
+                                      color: alreadyEndorsed ? '#fff' : palette.color,
+                                      background: alreadyEndorsed ? palette.color : 'transparent',
+                                      '&:hover': { background: alreadyEndorsed ? palette.color : `${palette.bg}` },
+                                    }}
                                   >
-                                    {alreadyEndorsed ? '✓ Endorsed' : '+ Endorse'}
+                                    {alreadyEndorsed ? '✓' : '+'}
                                   </Button>
                                 </Tooltip>
                               )}
@@ -510,16 +643,43 @@ export const ProfilePage: React.FC = () => {
                 )}
 
                 {/* Experience */}
-                <Card variant="outlined" sx={{ borderRadius: '14px' }}>
-                  <CardContent>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    borderRadius: '14px',
+                    overflow: 'hidden',
+                    borderColor: 'divider',
+                    '&::before': {
+                      content: '""',
+                      display: 'block',
+                      height: 3,
+                      background: 'linear-gradient(90deg, #166534, #15803d)',
+                    },
+                  }}
+                >
+                  <CardContent sx={{ pt: 2 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
                       <Typography variant="subtitle2" fontWeight={700} sx={{ color: 'primary.main', display: 'flex', alignItems: 'center', gap: 0.75 }}>
-                        <Work sx={{ fontSize: 18 }} /> Experience
+                        <Box sx={{ width: 3, height: 14, borderRadius: '2px', background: 'linear-gradient(180deg,#166534,#15803d)', flexShrink: 0 }} />
+                        <Work sx={{ fontSize: 16 }} /> Experience
                       </Typography>
                       {isOwnProfile && (
-                        <IconButton size="small" onClick={() => setAddExpOpen(true)} sx={{ color: 'primary.main' }}>
-                          <Add fontSize="small" />
-                        </IconButton>
+                        <Button
+                          size="small"
+                          startIcon={<Add sx={{ fontSize: '16px !important' }} />}
+                          onClick={() => setAddExpOpen(true)}
+                          sx={{
+                            borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700,
+                            px: 1.5, py: 0.4, textTransform: 'none',
+                            background: 'linear-gradient(135deg, rgba(16,185,129,0.12), rgba(5,150,105,0.12))',
+                            color: 'primary.main',
+                            border: '1px solid',
+                            borderColor: 'primary.light',
+                            '&:hover': { background: 'linear-gradient(135deg, rgba(16,185,129,0.22), rgba(5,150,105,0.22))' },
+                          }}
+                        >
+                          Add
+                        </Button>
                       )}
                     </Box>
                     {(profile?.experience || []).length === 0 ? (
@@ -527,27 +687,68 @@ export const ProfilePage: React.FC = () => {
                         {isOwnProfile ? 'Add your work experience to showcase your career journey.' : 'No experience added yet.'}
                       </Typography>
                     ) : (
-                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                        {(profile?.experience || []).map((exp: any, i: number) => (
-                          <Box key={getExpId(exp, i)} sx={{ display: 'flex', gap: 1.5, position: 'relative' }}>
-                            <Box sx={{ width: 40, height: 40, borderRadius: '10px', background: 'linear-gradient(135deg,#166534,#15803d)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                              <Work sx={{ color: 'white', fontSize: 18 }} />
-                            </Box>
-                            <Box sx={{ flex: 1 }}>
-                              <Typography variant="body2" fontWeight={700}>{exp.title}</Typography>
-                              <Typography variant="body2" color="text.secondary">{exp.company}{exp.location ? ` · ${exp.location}` : ''}</Typography>
-                              <Typography variant="caption" color="text.disabled">
-                                {exp.startDate ? new Date(exp.startDate).toLocaleDateString(undefined, { month: 'short', year: 'numeric' }) : ''}{' '}
-                                — {exp.current ? 'Present' : exp.endDate ? new Date(exp.endDate).toLocaleDateString(undefined, { month: 'short', year: 'numeric' }) : ''}
-                              </Typography>
-                              {exp.description && (
-                                <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 0.5, lineHeight: 1.6 }}>
-                                  {exp.description}
-                                </Typography>
-                              )}
+                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                        {(profile?.experience || []).map((exp: any, i: number, arr: any[]) => (
+                          <Box
+                            key={getExpId(exp, i)}
+                            sx={{
+                              display: 'flex', gap: 1.5, position: 'relative',
+                              pl: 2,
+                              pb: i < arr.length - 1 ? 2.5 : 0,
+                              // Timeline left border
+                              '&::before': {
+                                content: '""',
+                                position: 'absolute',
+                                left: 0,
+                                top: 8,
+                                bottom: i < arr.length - 1 ? 0 : '100%',
+                                width: 2,
+                                background: i < arr.length - 1 ? 'linear-gradient(180deg,#10b981,rgba(16,185,129,0.15))' : 'transparent',
+                                borderRadius: '2px',
+                              },
+                              // Timeline dot
+                              '&::after': {
+                                content: '""',
+                                position: 'absolute',
+                                left: -4,
+                                top: 10,
+                                width: 10,
+                                height: 10,
+                                borderRadius: '50%',
+                                background: 'linear-gradient(135deg,#10b981,#059669)',
+                                border: '2px solid',
+                                borderColor: 'background.paper',
+                                boxShadow: '0 0 0 1.5px rgba(16,185,129,0.4)',
+                              },
+                            }}
+                          >
+                            <Box sx={{ flex: 1, pl: 1.5 }}>
+                              <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.25, mb: 0.25 }}>
+                                <Box sx={{
+                                  width: 36, height: 36, borderRadius: '10px',
+                                  background: 'linear-gradient(135deg,#166534,#15803d)',
+                                  display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                                  boxShadow: '0 3px 8px rgba(22,101,52,0.3)',
+                                }}>
+                                  <Work sx={{ color: 'white', fontSize: 16 }} />
+                                </Box>
+                                <Box sx={{ flex: 1 }}>
+                                  <Typography variant="body2" fontWeight={700}>{exp.title}</Typography>
+                                  <Typography variant="body2" color="text.secondary">{exp.company}{exp.location ? ` · ${exp.location}` : ''}</Typography>
+                                  <Typography variant="caption" color="text.disabled">
+                                    {exp.startDate ? new Date(exp.startDate).toLocaleDateString(undefined, { month: 'short', year: 'numeric' }) : ''}{' '}
+                                    — {exp.current ? 'Present' : exp.endDate ? new Date(exp.endDate).toLocaleDateString(undefined, { month: 'short', year: 'numeric' }) : ''}
+                                  </Typography>
+                                  {exp.description && (
+                                    <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 0.5, lineHeight: 1.6 }}>
+                                      {exp.description}
+                                    </Typography>
+                                  )}
+                                </Box>
+                              </Box>
                             </Box>
                             {isOwnProfile && (
-                              <IconButton size="small" onClick={() => handleDeleteExperience(getExpId(exp, i))} sx={{ color: 'error.main', alignSelf: 'flex-start', flexShrink: 0 }}>
+                              <IconButton size="small" onClick={() => handleDeleteExperience(getExpId(exp, i))} sx={{ color: 'error.main', alignSelf: 'flex-start', flexShrink: 0, mt: 0.25 }}>
                                 <Close fontSize="small" />
                               </IconButton>
                             )}
@@ -559,16 +760,42 @@ export const ProfilePage: React.FC = () => {
                 </Card>
 
                 {/* Education */}
-                <Card variant="outlined" sx={{ borderRadius: '14px' }}>
-                  <CardContent>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    borderRadius: '14px',
+                    overflow: 'hidden',
+                    borderColor: 'divider',
+                    '&::before': {
+                      content: '""',
+                      display: 'block',
+                      height: 3,
+                      background: 'linear-gradient(90deg, #1d4ed8, #3b82f6)',
+                    },
+                  }}
+                >
+                  <CardContent sx={{ pt: 2 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
-                      <Typography variant="subtitle2" fontWeight={700} sx={{ color: 'primary.main', display: 'flex', alignItems: 'center', gap: 0.75 }}>
-                        <School sx={{ fontSize: 18 }} /> Education
+                      <Typography variant="subtitle2" fontWeight={700} sx={{ color: '#2563eb', display: 'flex', alignItems: 'center', gap: 0.75 }}>
+                        <Box sx={{ width: 3, height: 14, borderRadius: '2px', background: 'linear-gradient(180deg,#1d4ed8,#3b82f6)', flexShrink: 0 }} />
+                        <School sx={{ fontSize: 16 }} /> Education
                       </Typography>
                       {isOwnProfile && (
-                        <IconButton size="small" onClick={() => setAddEduOpen(true)} sx={{ color: 'primary.main' }}>
-                          <Add fontSize="small" />
-                        </IconButton>
+                        <Button
+                          size="small"
+                          startIcon={<Add sx={{ fontSize: '16px !important' }} />}
+                          onClick={() => setAddEduOpen(true)}
+                          sx={{
+                            borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700,
+                            px: 1.5, py: 0.4, textTransform: 'none',
+                            background: 'rgba(37,99,235,0.1)',
+                            color: '#2563eb',
+                            border: '1px solid rgba(37,99,235,0.25)',
+                            '&:hover': { background: 'rgba(37,99,235,0.18)' },
+                          }}
+                        >
+                          Add
+                        </Button>
                       )}
                     </Box>
                     {(profile?.education || []).length === 0 ? (
@@ -576,19 +803,58 @@ export const ProfilePage: React.FC = () => {
                         {isOwnProfile ? 'Add your educational background.' : 'No education added yet.'}
                       </Typography>
                     ) : (
-                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                        {(profile?.education || []).map((edu: any, i: number) => (
-                          <Box key={getEduId(edu, i)} sx={{ display: 'flex', gap: 1.5 }}>
-                            <Box sx={{ width: 40, height: 40, borderRadius: '10px', background: 'linear-gradient(135deg,#1d4ed8,#3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                              <School sx={{ color: 'white', fontSize: 18 }} />
-                            </Box>
-                            <Box sx={{ flex: 1 }}>
-                              <Typography variant="body2" fontWeight={700}>{edu.school}</Typography>
-                              <Typography variant="body2" color="text.secondary">{edu.degree}{edu.field ? ` · ${edu.field}` : ''}</Typography>
-                              <Typography variant="caption" color="text.disabled">
-                                {edu.startYear} — {edu.endYear || 'Present'}
-                                {edu.grade ? ` · Grade: ${edu.grade}` : ''}
-                              </Typography>
+                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                        {(profile?.education || []).map((edu: any, i: number, arr: any[]) => (
+                          <Box
+                            key={getEduId(edu, i)}
+                            sx={{
+                              display: 'flex', gap: 1.5, position: 'relative',
+                              pl: 2,
+                              pb: i < arr.length - 1 ? 2.5 : 0,
+                              '&::before': {
+                                content: '""',
+                                position: 'absolute',
+                                left: 0,
+                                top: 8,
+                                bottom: i < arr.length - 1 ? 0 : '100%',
+                                width: 2,
+                                background: i < arr.length - 1 ? 'linear-gradient(180deg,#3b82f6,rgba(59,130,246,0.15))' : 'transparent',
+                                borderRadius: '2px',
+                              },
+                              '&::after': {
+                                content: '""',
+                                position: 'absolute',
+                                left: -4,
+                                top: 10,
+                                width: 10,
+                                height: 10,
+                                borderRadius: '50%',
+                                background: 'linear-gradient(135deg,#3b82f6,#1d4ed8)',
+                                border: '2px solid',
+                                borderColor: 'background.paper',
+                                boxShadow: '0 0 0 1.5px rgba(59,130,246,0.4)',
+                              },
+                            }}
+                          >
+                            <Box sx={{ flex: 1, pl: 1.5 }}>
+                              <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.25 }}>
+                                <Box sx={{
+                                  width: 36, height: 36, borderRadius: '10px',
+                                  background: 'linear-gradient(135deg,#1d4ed8,#3b82f6)',
+                                  display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                                  boxShadow: '0 3px 8px rgba(29,78,216,0.3)',
+                                }}>
+                                  <School sx={{ color: 'white', fontSize: 16 }} />
+                                </Box>
+                                <Box sx={{ flex: 1 }}>
+                                  <Typography variant="body2" fontWeight={700}>{edu.school}</Typography>
+                                  <Typography variant="body2" color="text.secondary">{edu.degree}{edu.field ? ` · ${edu.field}` : ''}</Typography>
+                                  <Typography variant="caption" color="text.disabled">
+                                    {edu.startYear} — {edu.endYear || 'Present'}
+                                    {edu.grade ? ` · Grade: ${edu.grade}` : ''}
+                                  </Typography>
+                                </Box>
+                              </Box>
                             </Box>
                             {isOwnProfile && (
                               <IconButton size="small" onClick={() => handleDeleteEducation(getEduId(edu, i))} sx={{ color: 'error.main', alignSelf: 'flex-start', flexShrink: 0 }}>
@@ -603,16 +869,42 @@ export const ProfilePage: React.FC = () => {
                 </Card>
 
                 {/* Certifications */}
-                <Card variant="outlined" sx={{ borderRadius: '14px' }}>
-                  <CardContent>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    borderRadius: '14px',
+                    overflow: 'hidden',
+                    borderColor: 'divider',
+                    '&::before': {
+                      content: '""',
+                      display: 'block',
+                      height: 3,
+                      background: 'linear-gradient(90deg, #b45309, #f59e0b)',
+                    },
+                  }}
+                >
+                  <CardContent sx={{ pt: 2 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
-                      <Typography variant="subtitle2" fontWeight={700} sx={{ color: 'primary.main', display: 'flex', alignItems: 'center', gap: 0.75 }}>
-                        <EmojiEvents sx={{ fontSize: 18 }} /> Certifications
+                      <Typography variant="subtitle2" fontWeight={700} sx={{ color: '#d97706', display: 'flex', alignItems: 'center', gap: 0.75 }}>
+                        <Box sx={{ width: 3, height: 14, borderRadius: '2px', background: 'linear-gradient(180deg,#b45309,#f59e0b)', flexShrink: 0 }} />
+                        <EmojiEvents sx={{ fontSize: 16 }} /> Certifications
                       </Typography>
                       {isOwnProfile && (
-                        <IconButton size="small" onClick={() => setAddCertOpen(true)} sx={{ color: 'primary.main' }}>
-                          <Add fontSize="small" />
-                        </IconButton>
+                        <Button
+                          size="small"
+                          startIcon={<Add sx={{ fontSize: '16px !important' }} />}
+                          onClick={() => setAddCertOpen(true)}
+                          sx={{
+                            borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700,
+                            px: 1.5, py: 0.4, textTransform: 'none',
+                            background: 'rgba(245,158,11,0.1)',
+                            color: '#d97706',
+                            border: '1px solid rgba(245,158,11,0.25)',
+                            '&:hover': { background: 'rgba(245,158,11,0.18)' },
+                          }}
+                        >
+                          Add
+                        </Button>
                       )}
                     </Box>
                     {(profile?.certifications || []).length === 0 ? (
@@ -622,9 +914,24 @@ export const ProfilePage: React.FC = () => {
                     ) : (
                       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                         {(profile?.certifications || []).map((cert: any, i: number) => (
-                          <Box key={cert.id || i} sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start' }}>
-                            <Box sx={{ width: 36, height: 36, borderRadius: '8px', background: 'linear-gradient(135deg,#f59e0b,#d97706)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                              <EmojiEvents sx={{ color: 'white', fontSize: 16 }} />
+                          <Box
+                            key={cert.id || i}
+                            sx={{
+                              display: 'flex', gap: 1.5, alignItems: 'flex-start',
+                              p: 1.25, borderRadius: '12px',
+                              background: 'rgba(245,158,11,0.05)',
+                              border: '1px solid rgba(245,158,11,0.15)',
+                              transition: 'all 0.2s ease',
+                              '&:hover': { background: 'rgba(245,158,11,0.1)', borderColor: 'rgba(245,158,11,0.3)' },
+                            }}
+                          >
+                            <Box sx={{
+                              width: 36, height: 36, borderRadius: '10px',
+                              background: 'linear-gradient(135deg,#f59e0b,#d97706)',
+                              display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                              boxShadow: '0 3px 8px rgba(245,158,11,0.35)',
+                            }}>
+                              <EmojiEvents sx={{ color: 'white', fontSize: 18 }} />
                             </Box>
                             <Box sx={{ flex: 1 }}>
                               <Typography variant="body2" fontWeight={700}>{cert.name}</Typography>
@@ -635,7 +942,7 @@ export const ProfilePage: React.FC = () => {
                                 </Typography>
                               )}
                               {cert.url && (
-                                <Typography variant="caption" component="a" href={cert.url} target="_blank" sx={{ display: 'block', color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+                                <Typography variant="caption" component="a" href={cert.url} target="_blank" sx={{ display: 'block', color: '#d97706', textDecoration: 'none', fontWeight: 600, '&:hover': { textDecoration: 'underline' } }}>
                                   View credential →
                                 </Typography>
                               )}
@@ -654,11 +961,31 @@ export const ProfilePage: React.FC = () => {
 
                 {/* Open to Work toggle (own profile only) */}
                 {isOwnProfile && (
-                  <Card variant="outlined" sx={{ borderRadius: '14px', borderColor: profile?.openToWork ? 'success.main' : 'divider' }}>
-                    <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <Card
+                    variant="outlined"
+                    sx={{
+                      borderRadius: '14px',
+                      overflow: 'hidden',
+                      borderColor: profile?.openToWork ? 'success.main' : 'divider',
+                      transition: 'border-color 0.3s ease',
+                      background: profile?.openToWork
+                        ? 'linear-gradient(135deg, rgba(16,185,129,0.06), rgba(5,150,105,0.04))'
+                        : 'background.paper',
+                      '&::before': {
+                        content: '""',
+                        display: 'block',
+                        height: 3,
+                        background: profile?.openToWork
+                          ? 'linear-gradient(90deg, #10b981, #059669)'
+                          : 'linear-gradient(90deg, #9ca3af, #d1d5db)',
+                        transition: 'background 0.3s ease',
+                      },
+                    }}
+                  >
+                    <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pt: 2 }}>
                       <Box>
                         <Typography variant="subtitle2" fontWeight={700} sx={{ color: profile?.openToWork ? 'success.main' : 'text.primary' }}>
-                          🟢 Open to Opportunities
+                          Open to Opportunities
                         </Typography>
                         <Typography variant="caption" color="text.secondary">
                           Let recruiters and faculty know you're open to new roles
@@ -680,9 +1007,33 @@ export const ProfilePage: React.FC = () => {
               {/* Pending incoming requests — only shown on own profile */}
               {isOwnProfile && (connectionRequestsData?.data || []).length > 0 && (
                 <Box sx={{ mb: 3 }}>
-                  <Typography variant="subtitle1" fontWeight={700} sx={{ mb: 1.5, color: 'warning.main' }}>
-                    Pending Requests ({connectionRequestsData!.data.length})
-                  </Typography>
+                  {/* Pending requests heading */}
+                  <Box sx={{
+                    display: 'flex', alignItems: 'center', gap: 1.5, mb: 2,
+                    p: 1.5, borderRadius: '12px',
+                    background: 'linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.06))',
+                    border: '1px solid rgba(245,158,11,0.25)',
+                  }}>
+                    <Box sx={{
+                      width: 32, height: 32, borderRadius: '8px',
+                      background: 'linear-gradient(135deg, #d97706, #f59e0b)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      boxShadow: '0 3px 8px rgba(245,158,11,0.3)',
+                      flexShrink: 0,
+                    }}>
+                      <Typography sx={{ color: '#fff', fontSize: '0.85rem', fontWeight: 700 }}>
+                        {connectionRequestsData!.data.length}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography variant="subtitle2" fontWeight={700} sx={{ color: '#d97706' }}>
+                        Pending Requests
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        People who want to connect with you
+                      </Typography>
+                    </Box>
+                  </Box>
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                     {connectionRequestsData!.data.map((req: any) => {
                       const profile = req.profile || req;
@@ -695,11 +1046,29 @@ export const ProfilePage: React.FC = () => {
                         <Card
                           key={req.connectionId || reqUserId}
                           variant="outlined"
-                          sx={{ borderRadius: '12px', p: 1.5, display: 'flex', alignItems: 'center', gap: 1.5, borderColor: 'warning.light' }}
+                          sx={{
+                            borderRadius: '14px',
+                            p: 1.75,
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1.5,
+                            borderColor: 'rgba(245,158,11,0.3)',
+                            background: 'rgba(245,158,11,0.04)',
+                            transition: 'all 0.2s ease',
+                            '&:hover': {
+                              borderColor: 'rgba(245,158,11,0.5)',
+                              boxShadow: '0 4px 14px rgba(245,158,11,0.12)',
+                            },
+                          }}
                         >
                           <Avatar
                             src={displayAvatar}
-                            sx={{ width: 44, height: 44, background: 'linear-gradient(135deg,#f59e0b,#d97706)', fontWeight: 700, flexShrink: 0 }}
+                            sx={{
+                              width: 46, height: 46,
+                              background: 'linear-gradient(135deg,#f59e0b,#d97706)',
+                              fontWeight: 700, flexShrink: 0,
+                              boxShadow: '0 3px 10px rgba(245,158,11,0.35)',
+                            }}
                           >
                             {displayFirst?.[0]}
                           </Avatar>
@@ -713,8 +1082,13 @@ export const ProfilePage: React.FC = () => {
                             <Button
                               size="small"
                               variant="contained"
-                              color="success"
-                              sx={{ borderRadius: '8px', fontSize: '0.75rem' }}
+                              sx={{
+                                borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700,
+                                background: 'linear-gradient(135deg,#10b981,#059669)',
+                                boxShadow: '0 2px 8px rgba(16,185,129,0.3)',
+                                border: 'none',
+                                '&:hover': { background: 'linear-gradient(135deg,#059669,#047857)', boxShadow: '0 4px 12px rgba(16,185,129,0.4)' },
+                              }}
                               onClick={async () => {
                                 try {
                                   await acceptConnectionMutation(reqUserId).unwrap();
@@ -729,7 +1103,7 @@ export const ProfilePage: React.FC = () => {
                               size="small"
                               variant="outlined"
                               color="error"
-                              sx={{ borderRadius: '8px', fontSize: '0.75rem' }}
+                              sx={{ borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700 }}
                               onClick={async () => {
                                 try {
                                   await declineConnectionMutation(reqUserId).unwrap();
@@ -764,8 +1138,32 @@ export const ProfilePage: React.FC = () => {
                     const connUser = typeof conn === 'string' ? { _id: conn, firstName: 'User', lastName: conn.slice(0, 6), role: 'student' } : conn;
                     const connId = connUser._id || connUser.id || i;
                     return (
-                      <Card key={connId} variant="outlined" sx={{ borderRadius: '12px', p: 1.5, display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                        <Avatar src={connUser.avatar} sx={{ width: 44, height: 44, background: 'linear-gradient(135deg,#6366f1,#818cf8)', fontWeight: 700 }}>
+                      <Card
+                        key={connId}
+                        variant="outlined"
+                        sx={{
+                          borderRadius: '12px',
+                          p: 1.5,
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 1.5,
+                          transition: 'all 0.2s ease',
+                          '&:hover': {
+                            borderColor: 'primary.light',
+                            boxShadow: '0 4px 14px rgba(16,185,129,0.1)',
+                            transform: 'translateY(-1px)',
+                          },
+                        }}
+                      >
+                        <Avatar
+                          src={connUser.avatar}
+                          sx={{
+                            width: 44, height: 44,
+                            background: 'linear-gradient(135deg,#6366f1,#818cf8)',
+                            fontWeight: 700,
+                            boxShadow: '0 3px 8px rgba(99,102,241,0.3)',
+                          }}
+                        >
                           {(connUser.firstName || 'U')[0]}{(connUser.lastName || '')[0]}
                         </Avatar>
                         <Box>
@@ -816,7 +1214,16 @@ export const ProfilePage: React.FC = () => {
                 return (
                   <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2 }}>
                     {profileEvents.map((event: any) => (
-                      <Card key={event._id || event.id} variant="outlined" sx={{ borderRadius: '12px', overflow: 'hidden', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 8px 24px rgba(0,0,0,0.10)' } }}>
+                      <Card
+                        key={event._id || event.id}
+                        variant="outlined"
+                        sx={{
+                          borderRadius: '14px',
+                          overflow: 'hidden',
+                          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                          '&:hover': { transform: 'translateY(-3px)', boxShadow: '0 10px 28px rgba(99,102,241,0.14)' },
+                        }}
+                      >
                         {(event.banner || event.imageUrl || event.coverImage) && (
                           <Box
                             component="img"
@@ -826,9 +1233,18 @@ export const ProfilePage: React.FC = () => {
                             onError={(e: any) => { e.target.style.display = 'none'; }}
                           />
                         )}
+                        {/* Top colour strip if no image */}
+                        {!(event.banner || event.imageUrl || event.coverImage) && (
+                          <Box sx={{ height: 4, background: 'linear-gradient(90deg, #312e81, #6366f1)' }} />
+                        )}
                         <CardContent sx={{ pb: '12px !important' }}>
                           <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
-                            <Box sx={{ width: 32, height: 32, borderRadius: '8px', background: 'linear-gradient(135deg, #312e81, #6366f1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <Box sx={{
+                              width: 34, height: 34, borderRadius: '10px',
+                              background: 'linear-gradient(135deg, #312e81, #6366f1)',
+                              display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                              boxShadow: '0 3px 8px rgba(99,102,241,0.3)',
+                            }}>
                               <EventIcon sx={{ color: '#fff', fontSize: 16 }} />
                             </Box>
                             <Box>
@@ -848,8 +1264,13 @@ export const ProfilePage: React.FC = () => {
                           <Chip
                             label={event.type?.replace('_', ' ') || 'Event'}
                             size="small"
-                            sx={{ mt: 1, height: 18, fontSize: '0.65rem', fontWeight: 600, textTransform: 'capitalize' }}
-                            color="secondary"
+                            sx={{
+                              mt: 1, height: 19, fontSize: '0.65rem', fontWeight: 700,
+                              textTransform: 'capitalize',
+                              background: 'rgba(99,102,241,0.12)',
+                              color: '#6366f1',
+                              border: '1px solid rgba(99,102,241,0.3)',
+                            }}
                           />
                         </CardContent>
                       </Card>
@@ -950,11 +1371,18 @@ export const ProfilePage: React.FC = () => {
             InputProps={{ startAdornment: <GitHub sx={{ color: 'text.secondary', mr: 1, fontSize: 18 }} /> }}
           />
         </DialogContent>
-        <DialogActions sx={{ px: 3, py: 2 }}>
-          <Button onClick={() => setEditOpen(false)} disabled={editSubmitting}>Cancel</Button>
-          <Button variant="contained" onClick={handleEditSave} disabled={editSubmitting}>
-            {editSubmitting ? 'Saving…' : 'Save Changes'}
-          </Button>
+        <DialogActions sx={{ px: 3, py: 2, flexDirection: 'column', alignItems: 'stretch', gap: 1 }}>
+          {editError && (
+            <Typography variant="caption" color="error" sx={{ px: 1, textAlign: 'center' }}>
+              {editError}
+            </Typography>
+          )}
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+            <Button onClick={() => { setEditOpen(false); setEditError(''); }} disabled={editSubmitting}>Cancel</Button>
+            <Button variant="contained" onClick={handleEditSave} disabled={editSubmitting}>
+              {editSubmitting ? 'Saving…' : 'Save Changes'}
+            </Button>
+          </Box>
         </DialogActions>
       </Dialog>
 
@@ -977,7 +1405,14 @@ export const ProfilePage: React.FC = () => {
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 3 }}>
           <Button onClick={() => setAddExpOpen(false)} variant="outlined" sx={{ borderRadius: '10px' }}>Cancel</Button>
-          <Button variant="contained" onClick={handleSaveExperience} disabled={!expForm.title || !expForm.company} sx={{ borderRadius: '10px', background: 'linear-gradient(135deg,#15803d,#166534)' }}>Save</Button>
+          <Button
+            variant="contained"
+            onClick={handleSaveExperience}
+            disabled={!expForm.title || !expForm.company}
+            sx={{ borderRadius: '10px', background: 'linear-gradient(135deg,#15803d,#166534)', boxShadow: '0 3px 10px rgba(22,101,52,0.35)', '&:hover': { background: 'linear-gradient(135deg,#166534,#14532d)' } }}
+          >
+            Save
+          </Button>
         </DialogActions>
       </Dialog>
 
@@ -996,7 +1431,14 @@ export const ProfilePage: React.FC = () => {
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 3 }}>
           <Button onClick={() => setAddEduOpen(false)} variant="outlined" sx={{ borderRadius: '10px' }}>Cancel</Button>
-          <Button variant="contained" onClick={handleSaveEducation} disabled={!eduForm.school} sx={{ borderRadius: '10px', background: 'linear-gradient(135deg,#15803d,#166534)' }}>Save</Button>
+          <Button
+            variant="contained"
+            onClick={handleSaveEducation}
+            disabled={!eduForm.school}
+            sx={{ borderRadius: '10px', background: 'linear-gradient(135deg,#1d4ed8,#2563eb)', boxShadow: '0 3px 10px rgba(29,78,216,0.35)', '&:hover': { background: 'linear-gradient(135deg,#1e40af,#1d4ed8)' } }}
+          >
+            Save
+          </Button>
         </DialogActions>
       </Dialog>
 
@@ -1011,7 +1453,14 @@ export const ProfilePage: React.FC = () => {
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 3 }}>
           <Button onClick={() => setAddCertOpen(false)} variant="outlined" sx={{ borderRadius: '10px' }}>Cancel</Button>
-          <Button variant="contained" onClick={handleSaveCert} disabled={!certForm.name || !certForm.issuer} sx={{ borderRadius: '10px', background: 'linear-gradient(135deg,#15803d,#166534)' }}>Save</Button>
+          <Button
+            variant="contained"
+            onClick={handleSaveCert}
+            disabled={!certForm.name || !certForm.issuer}
+            sx={{ borderRadius: '10px', background: 'linear-gradient(135deg,#d97706,#f59e0b)', boxShadow: '0 3px 10px rgba(245,158,11,0.35)', '&:hover': { background: 'linear-gradient(135deg,#b45309,#d97706)' } }}
+          >
+            Save
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>

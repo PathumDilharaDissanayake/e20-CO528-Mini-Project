@@ -75,7 +75,7 @@ export interface Post {
   userId?: string;
   author?: User;
   content?: string;
-  type?: 'text' | 'image' | 'video' | 'document' | 'poll';
+  type?: 'text' | 'image' | 'video' | 'document' | 'poll' | 'event' | 'announcement';
   media?: { url: string; type: 'image' | 'video' }[];
   mediaUrls?: string[];
   likes?: string[] | number;

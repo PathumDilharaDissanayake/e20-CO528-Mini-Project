@@ -1,5 +1,6 @@
 import { apiSlice } from './api';
 import { User, PaginatedResponse, ApiResponse } from '@types';
+import { RootState } from '@store';
 
 interface ConnectionRequest {
   connectionId: string;
@@ -164,29 +165,32 @@ export const userApi = apiSlice.injectEndpoints({
       invalidatesTags: ['User'],
     }),
     uploadProfilePicture: builder.mutation<ApiResponse<{ url: string }>, FormData>({
-      queryFn: async (formData, { dispatch }) => {
+      queryFn: async (formData, { getState }) => {
         try {
-          // Upload to feed-service
-          const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'}/feed/upload`, {
+          const token = (getState() as RootState).auth.token;
+          const authHeader: Record<string, string> = token ? { Authorization: `Bearer ${token}` } : {};
+          const BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1';
+
+          // Upload image to feed-service via posts/upload gateway route
+          const uploadRes = await fetch(`${BASE}/posts/upload`, {
             method: 'POST',
+            headers: authHeader,
             body: formData,
           });
-          const result = await response.json();
+          const uploadJson = await uploadRes.json();
 
-          if (result.success && result.data?.url) {
-            // Update profile with the new avatar URL
-            const userId = JSON.parse(atob(localStorage.getItem('token')?.split('.')[1] || '{}'))?.userId;
-            if (userId) {
-              await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'}/users/me`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ avatar: result.data.url }),
-              });
-            }
-            return { data: { success: true, data: { url: result.data.url } } };
+          if (uploadJson.success && uploadJson.data?.url) {
+            const avatarUrl = uploadJson.data.url;
+            // Persist the new avatar URL on the user profile
+            await fetch(`${BASE}/users/me`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json', ...authHeader },
+              body: JSON.stringify({ avatar: avatarUrl }),
+            });
+            return { data: { success: true, data: { url: avatarUrl } } };
           }
-          return { error: { status: 500, data: { message: 'Upload failed' } } };
-        } catch (error) {
+          return { error: { status: 500, data: { message: uploadJson.message || 'Upload failed' } } };
+        } catch {
           return { error: { status: 500, data: { message: 'Upload failed' } } };
         }
       },
@@ -197,10 +201,11 @@ export const userApi = apiSlice.injectEndpoints({
       transformResponse: (response: any) => {
         const items = Array.isArray(response?.data) ? response.data : [];
         return {
-          data: items.map(normalizeUser),
+          // Handle both flat objects and nested { profile: {...} } / { user: {...} } shapes
+          data: items.map((item: any) => normalizeUser(item?.profile || item?.user || item)),
           page: 1,
           limit: items.length,
-          total: items.length,
+          total: response?.meta?.total || items.length,
           hasMore: false,
         };
       },

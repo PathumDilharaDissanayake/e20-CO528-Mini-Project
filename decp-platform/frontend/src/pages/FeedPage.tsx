@@ -39,7 +39,7 @@ import { CreatePost } from '@components/feed/CreatePost';
 import PostCard from '@components/feed/PostCard';
 import { FeedSkeleton, EmptyState, ErrorState } from '@components/common';
 import { useGetPostsQuery } from '@services/postApi';
-import { useGetUsersQuery, useSendConnectionRequestMutation, useGetConnectionsQuery } from '@services/userApi';
+import { useGetSuggestedUsersQuery, useGetUsersQuery, useSendConnectionRequestMutation, useGetConnectionsQuery } from '@services/userApi';
 import { useGetUserPostsQuery } from '@services/postApi';
 import { useInfiniteScroll } from '@hooks';
 import { Post } from '@types';
@@ -66,24 +66,51 @@ const StatsWidget: React.FC = () => {
         borderRadius: '16px',
         overflow: 'hidden',
         mb: 2,
-        boxShadow: '0 2px 8px rgba(22,101,52,0.12)',
+        boxShadow: '0 4px 20px rgba(16,185,129,0.18)',
+        border: '1px solid rgba(16,185,129,0.15)',
       }}
     >
       {/* Banner */}
       <Box
         sx={{
-          height: 64,
-          background: 'linear-gradient(135deg, #15803d 0%, #166534 50%, #14b8a6 100%)',
+          height: 72,
+          background: 'linear-gradient(135deg, #059669 0%, #10b981 40%, #14b8a6 70%, #0891b2 100%)',
           position: 'relative',
           cursor: 'pointer',
+          overflow: 'hidden',
         }}
         onClick={() => navigate('/profile')}
       >
+        {/* Animated shimmer overlay */}
         <Box
-          className="absolute inset-0 opacity-20"
           sx={{
-            backgroundImage: `radial-gradient(circle at 15px 15px, rgba(255,255,255,0.4) 1px, transparent 0)`,
-            backgroundSize: '20px 20px',
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: `radial-gradient(circle at 20px 20px, rgba(255,255,255,0.25) 1px, transparent 0)`,
+            backgroundSize: '22px 22px',
+            opacity: 0.6,
+          }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            right: -20,
+            top: -20,
+            width: 100,
+            height: 100,
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.08)',
+          }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            right: 30,
+            bottom: -30,
+            width: 80,
+            height: 80,
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.06)',
           }}
         />
       </Box>
@@ -117,21 +144,38 @@ const StatsWidget: React.FC = () => {
         <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block', textAlign: 'center', mb: 1.5 }}>
           {user?.department || user?.role || 'Department Member'}
         </Typography>
-        <Divider sx={{ mb: 1.5 }} />
+        <Divider sx={{ mb: 1.5, borderColor: 'rgba(16,185,129,0.15)' }} />
         <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
           {[
-            { label: 'Posts', value: postCount },
-            { label: 'Connections', value: connectionCount },
+            { label: 'Posts', value: postCount, color: '#10b981' },
+            { label: 'Connections', value: connectionCount, color: '#6366f1' },
           ].map((s) => (
             <Box
               key={s.label}
-              sx={{ textAlign: 'center', cursor: 'pointer', '&:hover': { opacity: 0.8 } }}
+              sx={{
+                textAlign: 'center',
+                cursor: 'pointer',
+                p: 1,
+                borderRadius: '10px',
+                transition: 'all 0.2s',
+                '&:hover': { background: `${s.color}10`, transform: 'translateY(-1px)' },
+              }}
               onClick={() => navigate('/profile')}
             >
-              <Typography variant="subtitle2" sx={{ fontWeight: 700, color: 'primary.main' }}>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  fontWeight: 800,
+                  background: `linear-gradient(135deg, ${s.color}, ${s.color}bb)`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  lineHeight: 1.2,
+                }}
+              >
                 {s.value}
               </Typography>
-              <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+              <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500 }}>
                 {s.label}
               </Typography>
             </Box>
@@ -145,20 +189,20 @@ const StatsWidget: React.FC = () => {
 const QuickActionsWidget: React.FC = () => {
   const navigate = useNavigate();
   const items = [
-    { label: 'Browse Jobs', icon: Work, path: '/jobs', color: '#6366f1' },
-    { label: 'View Events', icon: Event, path: '/events', color: '#f59e0b' },
-    { label: 'Research Hub', icon: Science, path: '/research', color: '#3b82f6' },
-    { label: 'Community', icon: People, path: '/search', color: '#166534' },
+    { label: 'Browse Jobs', icon: Work, path: '/jobs', color: '#10b981', gradient: 'linear-gradient(135deg, #059669, #10b981)' },
+    { label: 'View Events', icon: Event, path: '/events', color: '#f59e0b', gradient: 'linear-gradient(135deg, #d97706, #f59e0b)' },
+    { label: 'Research Hub', icon: Science, path: '/research', color: '#14b8a6', gradient: 'linear-gradient(135deg, #0891b2, #14b8a6)' },
+    { label: 'Community', icon: People, path: '/search', color: '#6366f1', gradient: 'linear-gradient(135deg, #4f46e5, #6366f1)' },
   ];
   return (
-    <Card sx={{ borderRadius: '16px', mb: 2, overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+    <Card sx={{ borderRadius: '16px', mb: 2, overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.08)', border: '1px solid', borderColor: 'divider' }}>
       <CardContent sx={{ pb: '16px !important' }}>
         <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1.5, display: 'flex', alignItems: 'center', gap: 0.5 }}>
-          <EmojiEvents fontSize="small" sx={{ color: 'primary.main' }} />
+          <EmojiEvents fontSize="small" sx={{ color: '#f59e0b', filter: 'drop-shadow(0 0 4px rgba(245,158,11,0.5))' }} />
           Quick Access
         </Typography>
         <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1 }}>
-          {items.map(({ label, icon: Icon, path, color }) => (
+          {items.map(({ label, icon: Icon, path, color, gradient }) => (
             <Box
               key={path}
               onClick={() => navigate(path)}
@@ -166,20 +210,36 @@ const QuickActionsWidget: React.FC = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                gap: 0.5,
+                gap: 0.75,
                 p: 1.5,
                 borderRadius: '12px',
                 cursor: 'pointer',
                 border: '1px solid',
                 borderColor: 'divider',
-                transition: 'all 0.2s',
-                '&:hover': { borderColor: color, background: `${color}10`, transform: 'translateY(-2px)' },
+                transition: 'all 0.22s cubic-bezier(0.4, 0, 0.2, 1)',
+                '&:hover': {
+                  borderColor: color,
+                  background: `${color}12`,
+                  transform: 'translateY(-3px)',
+                  boxShadow: `0 6px 16px ${color}25`,
+                },
               }}
             >
-              <Box sx={{ width: 36, height: 36, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: `${color}18` }}>
-                <Icon sx={{ fontSize: 20, color }} />
+              <Box
+                sx={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: '11px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  background: gradient,
+                  boxShadow: `0 4px 10px ${color}35`,
+                }}
+              >
+                <Icon sx={{ fontSize: 20, color: '#fff' }} />
               </Box>
-              <Typography variant="caption" sx={{ fontWeight: 600, textAlign: 'center', lineHeight: 1.2 }}>
+              <Typography variant="caption" sx={{ fontWeight: 700, textAlign: 'center', lineHeight: 1.2, color: 'text.primary' }}>
                 {label}
               </Typography>
             </Box>
@@ -196,19 +256,30 @@ const SuggestedUsersWidget: React.FC = () => {
   const [sendConnectionRequest] = useSendConnectionRequestMutation();
   const [pendingIds, setPendingIds] = useState<Set<string>>(new Set());
 
-  const { data, isLoading, isError, refetch } = useGetUsersQuery(
+  const { data: suggestedData, isLoading: isSuggestedLoading, isError: isSuggestedError, refetch } = useGetSuggestedUsersQuery(
     { limit: 6 },
     { refetchOnMountOrArgChange: 60 }
   );
+
+  // Fallback: when /suggested returns an error or empty, use the general user list
+  // and filter out self. This ensures the widget always shows real people.
+  const suggestedFailed = isSuggestedError || (!isSuggestedLoading && (suggestedData?.data || []).length === 0);
+  const { data: fallbackData, isLoading: isFallbackLoading } = useGetUsersQuery(
+    { limit: 10 },
+    { skip: !suggestedFailed }
+  );
   const { refetch: refetchConnections } = useGetConnectionsQuery(undefined);
 
-  const users = (data?.data || [])
-    .filter((u: any) => (u._id || u.id) !== (currentUser?._id || currentUser?.id))
-    .slice(0, 4);
+  const isLoading = isSuggestedLoading || (suggestedFailed && isFallbackLoading);
+
+  const currentId = currentUser?._id || currentUser?.id || '';
+  const users = suggestedFailed
+    ? (fallbackData?.data || []).filter((u: any) => (u._id || u.id) !== currentId).slice(0, 4)
+    : (suggestedData?.data || []).slice(0, 4);
 
   const getRoleColor = (role?: string) => {
     switch (role) {
-      case 'faculty': return '#166534';
+      case 'faculty': return '#10b981';
       case 'alumni': return '#f59e0b';
       case 'admin': return '#ef4444';
       default: return '#6366f1';
@@ -249,7 +320,7 @@ const SuggestedUsersWidget: React.FC = () => {
     );
   }
 
-  if (isError || users.length === 0) return null;
+  if (!isLoading && users.length === 0) return null;
 
   return (
     <Card sx={{ borderRadius: '16px', mb: 2, overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
@@ -297,7 +368,7 @@ const SuggestedUsersWidget: React.FC = () => {
                 <ListItemAvatar sx={{ minWidth: 42 }}>
                   <Avatar
                     src={u.avatar || u.profilePicture}
-                    sx={{ width: 34, height: 34, fontSize: '0.8rem', fontWeight: 700, background: 'linear-gradient(135deg,#15803d,#166534)' }}
+                    sx={{ width: 34, height: 34, fontSize: '0.8rem', fontWeight: 700, background: `linear-gradient(135deg,${getRoleColor(u.role)},${getRoleColor(u.role)}bb)` }}
                   >
                     {u.firstName?.[0]?.toUpperCase() || 'U'}
                   </Avatar>
@@ -349,14 +420,23 @@ export const FeedPage: React.FC = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const seenIds = useRef<Set<string>>(new Set());
+  // Lock prevents the observer from triggering multiple page increments
+  // before RTK Query's isFetching flag has time to propagate
+  const fetchLockRef = useRef(false);
 
   const { data, isLoading, isFetching, isError, error, refetch } = useGetPostsQuery(
     { page, limit: 10 },
     {
-      pollingInterval: page === 1 ? 30000 : 0,
-      refetchOnMountOrArgChange: 30, // Refresh if data is > 30s old on mount
+      // No polling — avoid re-triggering the observer loop every 30 s
+      pollingInterval: 0,
+      refetchOnMountOrArgChange: false,
     }
   );
+
+  // Release lock as soon as RTK Query confirms the fetch finished
+  useEffect(() => {
+    if (!isFetching) fetchLockRef.current = false;
+  }, [isFetching]);
 
   useEffect(() => {
     if (!data?.data) return;
@@ -364,7 +444,6 @@ export const FeedPage: React.FC = () => {
     setAllPosts((prev) => {
       if (data.data.length === 0 && prev.length === 0) return prev;
 
-      // Build an index of existing posts by ID for O(1) lookup
       const prevIndexMap = new Map<string, number>();
       prev.forEach((p, i) => {
         const id = p._id || p.id || '';
@@ -380,15 +459,12 @@ export const FeedPage: React.FC = () => {
         if (!id) return;
 
         if (prevIndexMap.has(id)) {
-          // UPDATE the existing post with fresh server data (fixes stale likes/comments/polls)
           result[prevIndexMap.get(id)!] = post;
         } else if (!seenIds.current.has(id)) {
           seenIds.current.add(id);
           if (page === 1) {
-            // New posts from page-1 refetches go to the TOP (e.g. just-created post)
             toPrepend.push(post);
           } else {
-            // Paginated posts append to the bottom
             toAppend.push(post);
           }
         }
@@ -400,16 +476,21 @@ export const FeedPage: React.FC = () => {
   }, [data, page]);
 
   const handleLoadMore = useCallback(() => {
-    if (data?.hasMore && !isFetching) setPage((prev) => prev + 1);
+    // Guard: skip if already loading, locked, or no more pages
+    if (fetchLockRef.current || isFetching || !data?.hasMore) return;
+    fetchLockRef.current = true;
+    setPage((prev) => prev + 1);
   }, [data?.hasMore, isFetching]);
 
   const { loadMoreRef } = useInfiniteScroll({
     onLoadMore: handleLoadMore,
     hasMore: data?.hasMore || false,
     isLoading: isFetching,
+    threshold: 200,
   });
 
   const handleRefresh = () => {
+    fetchLockRef.current = false;
     setAllPosts([]);
     seenIds.current.clear();
     setPage(1);
@@ -464,10 +545,106 @@ export const FeedPage: React.FC = () => {
 
   const userInitials = user?.firstName?.[0]?.toUpperCase() || 'U';
 
+  const FEED_ROLE_COLORS: Record<string, { color: string; label: string; gradient: string }> = {
+    admin:   { color: '#ef4444', label: 'Admin',   gradient: 'linear-gradient(135deg, #ef4444, #dc2626)' },
+    faculty: { color: '#10b981', label: 'Faculty', gradient: 'linear-gradient(135deg, #10b981, #059669)' },
+    alumni:  { color: '#f59e0b', label: 'Alumni',  gradient: 'linear-gradient(135deg, #f59e0b, #d97706)' },
+    student: { color: '#6366f1', label: 'Student', gradient: 'linear-gradient(135deg, #6366f1, #4f46e5)' },
+  };
+  const userRoleInfo = FEED_ROLE_COLORS[user?.role || 'student'] || FEED_ROLE_COLORS.student;
+
+  const MOTIVATIONAL: Record<string, string> = {
+    admin:   'Shaping the future of your department.',
+    faculty: 'Inspiring minds and driving excellence.',
+    alumni:  'Your journey continues — share your story.',
+    student: 'Every connection is a step forward.',
+  };
+  const motivationalMsg = MOTIVATIONAL[user?.role || 'student'] || MOTIVATIONAL.student;
+
   return (
     <Box className="page-enter" sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', xl: '1fr 300px' }, gap: 3, alignItems: 'start' }}>
       {/* ── Centre: Feed ── */}
       <Box>
+        {/* Welcome hero banner — shown only when feed is empty (no posts yet) */}
+        {displayPosts.length === 0 && !isLoading && !isFetching && (
+          <Fade in>
+            <Box
+              sx={{
+                mb: 2.5,
+                borderRadius: '18px',
+                overflow: 'hidden',
+                position: 'relative',
+                background: 'linear-gradient(135deg, #059669 0%, #10b981 35%, #14b8a6 65%, #0891b2 100%)',
+                boxShadow: '0 8px 32px rgba(16,185,129,0.35)',
+                p: 3,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 2.5,
+              }}
+            >
+              {/* Decorative circles */}
+              <Box sx={{ position: 'absolute', top: -30, right: -30, width: 140, height: 140, borderRadius: '50%', background: 'rgba(255,255,255,0.08)', pointerEvents: 'none' }} />
+              <Box sx={{ position: 'absolute', bottom: -20, right: 60, width: 90, height: 90, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', pointerEvents: 'none' }} />
+              <Box sx={{ position: 'absolute', top: 10, right: 120, width: 40, height: 40, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', pointerEvents: 'none' }} />
+              <Box
+                sx={{
+                  position: 'absolute',
+                  inset: 0,
+                  backgroundImage: 'radial-gradient(circle at 12px 12px, rgba(255,255,255,0.12) 1px, transparent 0)',
+                  backgroundSize: '24px 24px',
+                  pointerEvents: 'none',
+                }}
+              />
+              <Avatar
+                src={user?.avatar || user?.profilePicture}
+                sx={{
+                  width: 60,
+                  height: 60,
+                  border: '3px solid rgba(255,255,255,0.5)',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
+                  background: userRoleInfo.gradient,
+                  fontSize: '1.4rem',
+                  fontWeight: 700,
+                  flexShrink: 0,
+                  zIndex: 1,
+                }}
+              >
+                {userInitials}
+              </Avatar>
+              <Box sx={{ zIndex: 1, minWidth: 0 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5, flexWrap: 'wrap' }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ color: '#fff', fontWeight: 800, lineHeight: 1.2, fontSize: '1.1rem' }}
+                  >
+                    Welcome back, {user?.firstName || 'there'}!
+                  </Typography>
+                  <Box
+                    sx={{
+                      px: 1.25,
+                      py: 0.25,
+                      borderRadius: '20px',
+                      background: 'rgba(255,255,255,0.2)',
+                      border: '1px solid rgba(255,255,255,0.3)',
+                      backdropFilter: 'blur(4px)',
+                    }}
+                  >
+                    <Typography sx={{ color: '#fff', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.04em' }}>
+                      {userRoleInfo.label.toUpperCase()}
+                    </Typography>
+                  </Box>
+                </Box>
+                <Typography
+                  variant="body2"
+                  sx={{ color: 'rgba(255,255,255,0.88)', fontWeight: 500, fontSize: '0.875rem' }}
+                >
+                  {motivationalMsg}
+                </Typography>
+              </Box>
+            </Box>
+          </Fade>
+        )}
+
         {/* Create Post Card */}
         <Fade in>
           <Paper
@@ -475,10 +652,26 @@ export const FeedPage: React.FC = () => {
             sx={{
               p: 2,
               mb: 2.5,
-              borderRadius: '16px',
+              borderRadius: '18px',
               border: '1px solid',
-              borderColor: 'divider',
-              boxShadow: '0 2px 8px rgba(16,185,129,0.08)',
+              borderColor: 'rgba(16,185,129,0.25)',
+              boxShadow: (t) => t.palette.mode === 'dark'
+                ? '0 4px 20px rgba(0,0,0,0.3)'
+                : '0 4px 20px rgba(16,185,129,0.1)',
+              background: (t) => t.palette.mode === 'dark'
+                ? 'linear-gradient(145deg, rgba(30,41,59,0.95), rgba(15,23,42,0.9))'
+                : 'rgba(255,255,255,0.98)',
+              position: 'relative',
+              overflow: 'hidden',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '3px',
+                background: 'linear-gradient(90deg, #059669, #10b981, #14b8a6, #0891b2)',
+              },
             }}
           >
             {/* Top row */}
@@ -486,36 +679,47 @@ export const FeedPage: React.FC = () => {
               <Avatar
                 src={user?.avatar || user?.profilePicture}
                 sx={{
-                  width: 42,
-                  height: 42,
+                  width: 46,
+                  height: 46,
                   fontWeight: 700,
-                  background: 'linear-gradient(135deg, #15803d, #166534)',
+                  background: 'linear-gradient(135deg, #059669, #10b981)',
+                  boxShadow: '0 0 0 3px rgba(16,185,129,0.2)',
+                  border: '2px solid rgba(16,185,129,0.4)',
+                  fontSize: '1.1rem',
+                  transition: 'all 0.2s',
+                  '&:hover': { transform: 'scale(1.05)', boxShadow: '0 0 0 4px rgba(16,185,129,0.3)' },
                 }}
               >
                 {userInitials}
               </Avatar>
               <Box
-                className="flex-1 rounded-full px-4 flex items-center cursor-pointer transition-colors"
+                className="flex-1 rounded-full px-4 flex items-center cursor-pointer"
                 onClick={() => setIsCreateModalOpen(true)}
                 sx={{
-                  height: 44,
+                  height: 46,
                   border: '1.5px solid',
                   borderColor: 'divider',
+                  borderRadius: '23px',
+                  transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+                  background: (t) => t.palette.mode === 'dark'
+                    ? 'rgba(255,255,255,0.03)'
+                    : 'rgba(16,185,129,0.02)',
                   '&:hover': {
-                    borderColor: 'primary.main',
-                    background: (t) =>
-                      t.palette.mode === 'dark' ? 'rgba(16,185,129,0.06)' : 'rgba(16,185,129,0.04)',
+                    borderColor: '#10b981',
+                    background: (t) => t.palette.mode === 'dark'
+                      ? 'rgba(16,185,129,0.08)'
+                      : 'rgba(16,185,129,0.05)',
+                    boxShadow: '0 0 0 3px rgba(16,185,129,0.12)',
                   },
-                  transition: 'all 0.2s',
                 }}
               >
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500 }}>
                   What's on your mind, {user?.firstName || 'there'}?
                 </Typography>
               </Box>
             </Box>
 
-            <Divider sx={{ mb: 1.5 }} />
+            <Divider sx={{ mb: 1.5, borderColor: 'rgba(16,185,129,0.12)' }} />
 
             {/* Action buttons */}
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
@@ -523,7 +727,7 @@ export const FeedPage: React.FC = () => {
                 startIcon={<PhotoCamera sx={{ fontSize: 18, color: '#45bd62' }} />}
                 onClick={() => setIsCreateModalOpen(true)}
                 size="small"
-                sx={{ flex: 1, py: 0.75, borderRadius: '10px', color: 'text.secondary', fontWeight: 600, fontSize: '0.8rem', '&:hover': { background: '#45bd6212', color: '#45bd62' }, transition: 'all 0.2s' }}
+                sx={{ flex: 1, py: 0.75, borderRadius: '10px', color: 'text.secondary', fontWeight: 600, fontSize: '0.8rem', '&:hover': { background: 'rgba(69,189,98,0.1)', color: '#45bd62' }, transition: 'all 0.2s' }}
               >
                 Photo/Video
               </Button>
@@ -531,7 +735,7 @@ export const FeedPage: React.FC = () => {
                 startIcon={<Event sx={{ fontSize: 18, color: '#e86771' }} />}
                 onClick={() => navigate('/events')}
                 size="small"
-                sx={{ flex: 1, py: 0.75, borderRadius: '10px', color: 'text.secondary', fontWeight: 600, fontSize: '0.8rem', '&:hover': { background: '#e8677112', color: '#e86771' }, transition: 'all 0.2s' }}
+                sx={{ flex: 1, py: 0.75, borderRadius: '10px', color: 'text.secondary', fontWeight: 600, fontSize: '0.8rem', '&:hover': { background: 'rgba(232,103,113,0.1)', color: '#e86771' }, transition: 'all 0.2s' }}
               >
                 Events
               </Button>
@@ -539,7 +743,7 @@ export const FeedPage: React.FC = () => {
                 startIcon={<Work sx={{ fontSize: 18, color: '#1876f2' }} />}
                 onClick={() => navigate('/jobs')}
                 size="small"
-                sx={{ flex: 1, py: 0.75, borderRadius: '10px', color: 'text.secondary', fontWeight: 600, fontSize: '0.8rem', '&:hover': { background: '#1876f212', color: '#1876f2' }, transition: 'all 0.2s' }}
+                sx={{ flex: 1, py: 0.75, borderRadius: '10px', color: 'text.secondary', fontWeight: 600, fontSize: '0.8rem', '&:hover': { background: 'rgba(24,118,242,0.1)', color: '#1876f2' }, transition: 'all 0.2s' }}
               >
                 Jobs
               </Button>
@@ -553,9 +757,17 @@ export const FeedPage: React.FC = () => {
                   py: 0.75,
                   px: 2,
                   fontSize: '0.8rem',
-                  background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
+                  fontWeight: 700,
+                  background: 'linear-gradient(135deg, #059669 0%, #10b981 50%, #14b8a6 100%)',
+                  boxShadow: '0 3px 10px rgba(16,185,129,0.4)',
                   whiteSpace: 'nowrap',
                   display: { xs: 'none', sm: 'inline-flex' },
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #047857 0%, #059669 50%, #0891b2 100%)',
+                    boxShadow: '0 5px 14px rgba(16,185,129,0.5)',
+                    transform: 'translateY(-1px)',
+                  },
+                  transition: 'all 0.2s',
                 }}
               >
                 Post
@@ -587,7 +799,7 @@ export const FeedPage: React.FC = () => {
                 style={{ transitionDelay: `${Math.min(index * 30, 200)}ms` }}
               >
                 <Box>
-                  <PostCard post={post} onPostUpdated={handleRefresh} />
+                  <PostCard post={post} onPostUpdate={handleRefresh} />
                 </Box>
               </Fade>
             ))}

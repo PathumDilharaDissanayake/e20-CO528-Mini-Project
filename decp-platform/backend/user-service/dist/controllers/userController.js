@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getSuggestedUsers = exports.getConnectionStatus = exports.endorseSkill = exports.unfollowUser = exports.getConnectionRequests = exports.declineConnection = exports.acceptConnection = exports.followUser = exports.getConnections = exports.searchUsers = exports.deleteUser = exports.updateProfile = exports.getMyProfile = exports.getUserById = exports.getUsers = void 0;
+exports.getBatchProfiles = exports.getSuggestedUsers = exports.getConnectionStatus = exports.endorseSkill = exports.unfollowUser = exports.getConnectionRequests = exports.declineConnection = exports.acceptConnection = exports.followUser = exports.getConnections = exports.searchUsers = exports.deleteUser = exports.updateProfile = exports.getMyProfile = exports.getUserById = exports.getUsers = void 0;
 const sequelize_1 = require("sequelize");
 const models_1 = require("../models");
 const validation_1 = require("../utils/validation");
@@ -20,7 +20,9 @@ const getUsers = async (req, res) => {
         const { page, limit } = value;
         const offset = (page - 1) * limit;
         const q = req.query.q;
-        const where = {};
+        const where = {
+            firstName: { [sequelize_1.Op.and]: [{ [sequelize_1.Op.ne]: null }, { [sequelize_1.Op.ne]: '' }] }
+        };
         if (q) {
             where[sequelize_1.Op.or] = [
                 { firstName: { [sequelize_1.Op.iLike]: `%${q}%` } },
@@ -29,9 +31,10 @@ const getUsers = async (req, res) => {
                 { headline: { [sequelize_1.Op.iLike]: `%${q}%` } }
             ];
         }
+        // Use DISTINCT ON userId to avoid duplicate profiles from multiple seed runs
         const { count, rows: profiles } = await models_1.Profile.findAndCountAll({
             where,
-            order: [['createdAt', 'DESC']],
+            order: [['userId', 'ASC'], ['createdAt', 'DESC']],
             limit,
             offset
         });
@@ -527,12 +530,14 @@ const getSuggestedUsers = async (req, res) => {
         });
         connectedUserIds.add(currentUserId); // Exclude self
         // Get users who are not connected (excluding self and existing connections)
+        // Only return profiles with actual data (firstName not null/empty)
         const suggestedProfiles = await models_1.Profile.findAll({
             where: {
-                userId: { [sequelize_1.Op.notIn]: Array.from(connectedUserIds) }
+                userId: { [sequelize_1.Op.notIn]: Array.from(connectedUserIds) },
+                firstName: { [sequelize_1.Op.and]: [{ [sequelize_1.Op.ne]: null }, { [sequelize_1.Op.ne]: '' }] }
             },
             limit,
-            order: [['createdAt', 'DESC']]
+            order: (0, sequelize_1.literal)('RANDOM()')
         });
         res.json({
             success: true,
@@ -547,4 +552,31 @@ const getSuggestedUsers = async (req, res) => {
     }
 };
 exports.getSuggestedUsers = getSuggestedUsers;
+const getBatchProfiles = async (req, res) => {
+    try {
+        const userIds = (req.query.userIds || '').split(',').filter(Boolean);
+        if (userIds.length === 0) {
+            res.json({ success: true, data: [] });
+            return;
+        }
+        const profiles = await models_1.Profile.findAll({
+            where: { userId: { [sequelize_1.Op.in]: userIds } },
+            order: [['createdAt', 'DESC']]
+        });
+        // Return only the most recent profile per userId
+        const seen = new Set();
+        const unique = profiles.filter(p => {
+            if (seen.has(p.userId))
+                return false;
+            seen.add(p.userId);
+            return true;
+        });
+        res.json({ success: true, data: unique });
+    }
+    catch (error) {
+        logger_1.logger.error('Get batch profiles error:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+};
+exports.getBatchProfiles = getBatchProfiles;
 //# sourceMappingURL=userController.js.map

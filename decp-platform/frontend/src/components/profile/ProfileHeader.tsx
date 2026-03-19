@@ -23,7 +23,7 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
 import { useUpdateProfileMutation } from '@services/authApi';
-import { useGetConnectionStatusQuery, useAcceptConnectionMutation, useDeclineConnectionMutation } from '@services/userApi';
+import { useGetConnectionStatusQuery, useAcceptConnectionMutation, useDeclineConnectionMutation, useUpdateMyProfileMutation } from '@services/userApi';
 import { User } from '@types';
 import { updateUser } from '@features/authSlice';
 import { useDispatch } from 'react-redux';
@@ -53,10 +53,11 @@ const coverGradients: Record<string, string> = {
 
 export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, isOwnProfile, profileId, onEditClick, onConnectClick }) => {
   const dispatch = useDispatch<AppDispatch>();
-  const currentUser = useSelector((state: RootState) => state.auth.user);
+  const { user: currentUser, token: authToken } = useSelector((state: RootState) => state.auth);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [avatarUploading, setAvatarUploading] = useState(false);
   const [updateProfile] = useUpdateProfileMutation();
+  const [updateMyProfile] = useUpdateMyProfileMutation();
   const [acceptConnection] = useAcceptConnectionMutation();
   const [declineConnection] = useDeclineConnectionMutation();
 
@@ -90,17 +91,21 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, isOwnProfile
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';
+      const token = authToken || localStorage.getItem('token') || sessionStorage.getItem('token') || '';
       const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1';
       const resp = await fetch(`${apiBase}/posts/upload`, {
         method: 'POST',
-        headers: { Authorization: `Bearer ${token}` },
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: formData,
       });
       const data = await resp.json();
       if (data.success && data.data?.url) {
-        await updateProfile({ avatar: data.data.url }).unwrap();
-        if (currentUser) dispatch(updateUser({ avatar: data.data.url }));
+        const avatarUrl = data.data.url;
+        // Update user-service profile (invalidates User cache → useGetMyProfileQuery refetches → useAuth merges avatar)
+        await updateMyProfile({ avatar: avatarUrl }).unwrap();
+        // Also update auth-service profile for consistency
+        await updateProfile({ avatar: avatarUrl }).unwrap().catch(() => {});
+        dispatch(updateUser({ avatar: avatarUrl }));
       }
     } catch {
       // Keep local preview on failure

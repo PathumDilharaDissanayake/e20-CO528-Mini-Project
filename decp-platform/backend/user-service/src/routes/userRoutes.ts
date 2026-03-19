@@ -14,13 +14,15 @@ import {
   getConnectionRequests,
   getConnections,
   endorseSkill,
-  getSuggestedUsers
+  getSuggestedUsers,
+  getBatchProfiles
 } from '../controllers/userController';
 
 const router = Router();
 
 router.get('/search', searchUsers);
 router.get('/suggested', getSuggestedUsers);
+router.get('/internal/batch', getBatchProfiles);
 router.get('/', getUsers);
 router.get('/me', getMyProfile);
 router.put('/me', updateProfile);

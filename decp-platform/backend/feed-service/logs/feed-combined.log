@@ -3762,3 +3762,63 @@ Error
 2026-03-19 11:41:47 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
 2026-03-19 11:41:48 [FEED-SERVICE] [info]: ✅ Database synchronized.
 2026-03-19 11:41:48 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-19 12:27:13 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-19 12:27:14 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-19 12:27:14 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-19 13:33:51 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-19 13:33:51 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-19 13:33:51 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-19 13:46:54 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-19 13:46:54 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-19 13:46:54 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-19 14:06:03 [FEED-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-19 14:06:04 [FEED-SERVICE] [info]: ✅ Database synchronized.
+2026-03-19 14:06:04 [FEED-SERVICE] [info]: 📰 Feed Service running on port 3003
+2026-03-19 15:00:37 [FEED-SERVICE] [error]: [getBookmarkedPosts] invalid input syntax for type uuid: "none"
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async getBookmarkedPosts (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\dist\controllers\postController.js:395:23)
+2026-03-19 15:02:56 [FEED-SERVICE] [error]: [getBookmarkedPosts] invalid input syntax for type uuid: "none"
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async getBookmarkedPosts (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\dist\controllers\postController.js:395:23)
+2026-03-19 15:05:33 [FEED-SERVICE] [error]: [getBookmarkedPosts] invalid input syntax for type uuid: "none"
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async getBookmarkedPosts (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\dist\controllers\postController.js:395:23)
+2026-03-19 15:12:36 [FEED-SERVICE] [error]: [getBookmarkedPosts] invalid input syntax for type uuid: "none"
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async getBookmarkedPosts (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\dist\controllers\postController.js:395:23)
+2026-03-19 15:23:47 [FEED-SERVICE] [error]: [getBookmarkedPosts] invalid input syntax for type uuid: "none"
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async getBookmarkedPosts (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\dist\controllers\postController.js:395:23)
+2026-03-19 15:53:41 [FEED-SERVICE] [error]: [getBookmarkedPosts] invalid input syntax for type uuid: "none"
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Post.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async getBookmarkedPosts (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\feed-service\dist\controllers\postController.js:395:23)

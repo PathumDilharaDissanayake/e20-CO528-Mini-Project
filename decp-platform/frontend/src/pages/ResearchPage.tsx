@@ -18,7 +18,7 @@ import {
   InputAdornment,
   IconButton,
 } from '@mui/material';
-import { Add, Science, Biotech, Hub, Groups, PhotoCamera } from '@mui/icons-material';
+import { Add, Science, Biotech, Hub, Groups, PhotoCamera, Delete } from '@mui/icons-material';
 
 const getMediaUrl = (url: string): string => {
   if (!url) return '';
@@ -34,6 +34,7 @@ import {
   useGetCollaboratingResearchQuery,
   useCreateResearchMutation,
   useUpdateResearchMutation,
+  useDeleteResearchMutation,
   useCollaborateResearchMutation,
   useLeaveResearchMutation,
 } from '@services/researchApi';
@@ -50,19 +51,19 @@ const HeroBanner: React.FC<{ count: number; canCreate: boolean; onCreate: () => 
       overflow: 'hidden',
       mb: 3,
       position: 'relative',
-      background: 'linear-gradient(135deg, #0c2340 0%, #1e3a5f 40%, #0f2d2d 100%)',
+      background: 'linear-gradient(135deg, #022c22 0%, #064e3b 40%, #0f172a 100%)',
     }}
   >
     <Box className="absolute inset-0 opacity-15" sx={{ backgroundImage: `radial-gradient(circle at 18px 18px, rgba(255,255,255,0.4) 1.5px, transparent 0)`, backgroundSize: '30px 30px' }} />
-    <Box className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10" sx={{ background: 'radial-gradient(circle, #3b82f6 0%, transparent 70%)', transform: 'translate(30%, -30%)' }} />
-    <Box className="absolute bottom-0 left-1/4 w-48 h-48 rounded-full opacity-10" sx={{ background: 'radial-gradient(circle, #166534 0%, transparent 70%)', transform: 'translateY(40%)' }} />
+    <Box className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-20" sx={{ background: 'radial-gradient(circle, rgba(16,185,129,0.6) 0%, transparent 70%)', transform: 'translate(30%, -30%)', filter: 'blur(40px)' }} />
+    <Box className="absolute bottom-0 left-1/4 w-48 h-48 rounded-full opacity-15" sx={{ background: 'radial-gradient(circle, rgba(99,102,241,0.4) 0%, transparent 70%)', transform: 'translateY(40%)', filter: 'blur(30px)' }} />
 
     <Box className="relative p-6 sm:p-8">
       <Box className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <Box>
           <Box className="flex items-center gap-2 mb-2">
-            <Box sx={{ width: 40, height: 40, borderRadius: '12px', background: 'rgba(59,130,246,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Science sx={{ color: '#93c5fd', fontSize: 22 }} />
+            <Box sx={{ width: 40, height: 40, borderRadius: '12px', background: 'rgba(16,185,129,0.25)', border: '1px solid rgba(16,185,129,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Science sx={{ color: '#6ee7b7', fontSize: 22 }} />
             </Box>
             <Typography variant="h5" sx={{ fontWeight: 800, color: '#fff' }}>
               Research Hub
@@ -73,7 +74,7 @@ const HeroBanner: React.FC<{ count: number; canCreate: boolean; onCreate: () => 
           </Typography>
           <Box className="flex flex-wrap gap-2">
             <Chip icon={<Biotech sx={{ fontSize: '14px !important' }} />} label={`${count} Active Projects`} size="small"
-              sx={{ background: 'rgba(59,130,246,0.2)', color: '#93c5fd', borderColor: 'rgba(59,130,246,0.35)', fontWeight: 600 }} variant="outlined" />
+              sx={{ background: 'rgba(16,185,129,0.2)', color: '#6ee7b7', borderColor: 'rgba(16,185,129,0.35)', fontWeight: 600 }} variant="outlined" />
             <Chip icon={<Hub sx={{ fontSize: '14px !important' }} />} label="Multi-disciplinary" size="small"
               sx={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.8)', borderColor: 'rgba(255,255,255,0.2)', fontWeight: 600 }} variant="outlined" />
             <Chip icon={<Groups sx={{ fontSize: '14px !important' }} />} label="Open Collaboration" size="small"
@@ -82,7 +83,7 @@ const HeroBanner: React.FC<{ count: number; canCreate: boolean; onCreate: () => 
         </Box>
         {canCreate && (
           <Button variant="contained" startIcon={<Add />} onClick={onCreate}
-            sx={{ background: 'linear-gradient(135deg, #1d4ed8, #3b82f6)', borderRadius: '12px', px: 3, py: 1.5, fontWeight: 700, whiteSpace: 'nowrap', boxShadow: '0 4px 15px rgba(59,130,246,0.35)' }}>
+            sx={{ background: 'linear-gradient(135deg, #059669, #10b981)', borderRadius: '12px', px: 3, py: 1.5, fontWeight: 700, whiteSpace: 'nowrap', boxShadow: '0 4px 15px rgba(16,185,129,0.35)', '&:hover': { background: 'linear-gradient(135deg, #047857, #059669)' } }}>
             New Project
           </Button>
         )}
@@ -124,10 +125,14 @@ export const ResearchPage: React.FC = () => {
   const { data: collabProjectsData, isLoading: isLoadingCollab } = useGetCollaboratingResearchQuery({}, { skip: activeTab !== 2 });
   const [createResearch, { isLoading: isCreating }] = useCreateResearchMutation();
   const [updateResearch, { isLoading: isUpdating }] = useUpdateResearchMutation();
+  const [deleteResearch, { isLoading: isDeleting }] = useDeleteResearchMutation();
   const [collaborate, { isLoading: isCollaborating }] = useCollaborateResearchMutation();
   const [leave, { isLoading: isLeaving }] = useLeaveResearchMutation();
 
-  const canCreateResearch = user?.role === 'faculty' || user?.role === 'admin';
+  const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
+  const [deleteConfirmTitle, setDeleteConfirmTitle] = useState('');
+
+  const canCreateResearch = !!user;
   const isLoading = activeTab === 0 ? isLoadingAll : activeTab === 1 ? isLoadingMine : isLoadingCollab;
   const projects = activeTab === 0 ? (allProjectsData?.data || []) : activeTab === 1 ? (myProjectsData?.data || []) : (collabProjectsData?.data || []);
   const totalProjects = allProjectsData?.total || allProjectsData?.data?.length || 0;
@@ -255,7 +260,7 @@ export const ResearchPage: React.FC = () => {
           description="Explore ongoing research or start a new project to advance academic knowledge!"
           action={canCreateResearch && activeTab !== 2 ? (
             <Button variant="contained" startIcon={<Add />} onClick={() => setCreateDialogOpen(true)}
-              sx={{ background: 'linear-gradient(135deg,#1d4ed8,#3b82f6)' }}>
+              sx={{ background: 'linear-gradient(135deg,#059669,#10b981)' }}>
               Start New Project
             </Button>
           ) : undefined}
@@ -274,6 +279,7 @@ export const ResearchPage: React.FC = () => {
             )}
             isLeadResearcher={project.leadResearcherId === (user?._id || user?.id)}
             onEdit={() => handleEditProject(project)}
+            onDelete={(id) => { setDeleteConfirmId(id); setDeleteConfirmTitle(project.title || ''); }}
           />
         ))
       )}
@@ -344,12 +350,40 @@ export const ResearchPage: React.FC = () => {
           </DialogContent>
           <DialogActions sx={{ px: 3, pb: 3, gap: 1 }}>
             <Button onClick={() => setCreateDialogOpen(false)} variant="outlined" sx={{ borderRadius: '10px' }}>Cancel</Button>
-            <Button type="submit" variant="contained" disabled={isCreating} sx={{ background: 'linear-gradient(135deg,#1d4ed8,#3b82f6)' }}>
+            <Button type="submit" variant="contained" disabled={isCreating} sx={{ background: 'linear-gradient(135deg,#059669,#10b981)' }}>
               {isCreating ? 'Creating…' : 'Create Project'}
             </Button>
           </DialogActions>
         </form>
       </Dialog>
+      {/* Delete Research Confirmation Dialog */}
+      <Dialog open={!!deleteConfirmId} onClose={() => setDeleteConfirmId(null)} maxWidth="xs" fullWidth PaperProps={{ sx: { borderRadius: '16px' } }}>
+        <DialogTitle sx={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Delete sx={{ color: 'error.main', fontSize: 22 }} /> Delete Project
+        </DialogTitle>
+        <DialogContent>
+          <Typography>
+            Are you sure you want to delete <strong>"{deleteConfirmTitle}"</strong>? This action cannot be undone.
+          </Typography>
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 3, gap: 1 }}>
+          <Button onClick={() => setDeleteConfirmId(null)} variant="outlined" sx={{ borderRadius: '10px' }}>Cancel</Button>
+          <Button
+            color="error"
+            variant="contained"
+            disabled={isDeleting}
+            sx={{ borderRadius: '10px' }}
+            onClick={async () => {
+              if (!deleteConfirmId) return;
+              try { await deleteResearch(deleteConfirmId).unwrap(); setDeleteConfirmId(null); }
+              catch (e) { console.error('Delete failed', e); }
+            }}
+          >
+            {isDeleting ? 'Deleting…' : 'Delete'}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       {/* Edit Research Dialog */}
       <Dialog open={editProjectOpen} onClose={() => setEditProjectOpen(false)} maxWidth="sm" fullWidth PaperProps={{ sx: { borderRadius: '20px' } }}>
         <form onSubmit={handleEditSubmit}>
@@ -434,7 +468,7 @@ export const ResearchPage: React.FC = () => {
           </DialogContent>
           <DialogActions sx={{ px: 3, pb: 3, gap: 1 }}>
             <Button onClick={() => setEditProjectOpen(false)} variant="outlined" sx={{ borderRadius: '10px' }}>Cancel</Button>
-            <Button type="submit" variant="contained" disabled={isUpdating} sx={{ background: 'linear-gradient(135deg,#1d4ed8,#3b82f6)' }}>
+            <Button type="submit" variant="contained" disabled={isUpdating} sx={{ background: 'linear-gradient(135deg,#059669,#10b981)' }}>
               {isUpdating ? 'Saving…' : 'Save Changes'}
             </Button>
           </DialogActions>

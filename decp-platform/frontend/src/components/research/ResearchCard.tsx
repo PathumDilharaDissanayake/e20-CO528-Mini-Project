@@ -11,24 +11,26 @@ import {
   Avatar,
   AvatarGroup,
   Tooltip,
+  IconButton,
 } from '@mui/material';
-
-const getMediaUrl = (url: string): string => {
-  if (!url) return '';
-  if (url.startsWith('http') || url.startsWith('blob:')) return url;
-  // Use relative path - Vite will proxy /uploads to API Gateway
-  return `${url.startsWith('/') ? '' : '/'}${url}`;
-};
 import {
   Science,
   CalendarToday,
   Group,
   Description,
   Person,
+  Delete,
 } from '@mui/icons-material';
+
 import { ResearchProject, User } from '@types';
 import { formatDate } from '@utils';
 import { RESEARCH_STATUS } from '@utils';
+
+const getMediaUrl = (url: string): string => {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('blob:')) return url;
+  return `${url.startsWith('/') ? '' : '/'}${url}`;
+};
 
 interface ResearchCardProps {
   project: ResearchProject;
@@ -39,6 +41,7 @@ interface ResearchCardProps {
   isLeaving?: boolean;
   isLeadResearcher?: boolean;
   onEdit?: (projectId: string) => void;
+  onDelete?: (projectId: string) => void;
 }
 
 const toUser = (value: User | string): User => {
@@ -64,6 +67,7 @@ export const ResearchCard: React.FC<ResearchCardProps> = ({
   isLeaving = false,
   isLeadResearcher = false,
   onEdit,
+  onDelete,
 }) => {
   const projectId = project._id || project.id || '';
   const collaborators = Array.isArray(project.collaborators) ? project.collaborators.map(toUser) : [];
@@ -90,8 +94,32 @@ export const ResearchCard: React.FC<ResearchCardProps> = ({
     return 50;
   };
 
+  const progress = getProgress();
+
   return (
-    <Card className="mb-4 shadow-card hover:shadow-card-hover transition-all duration-300">
+    <Card
+      elevation={0}
+      sx={{
+        mb: 2.5,
+        borderRadius: '20px',
+        border: '1px solid',
+        borderColor: (t) => t.palette.mode === 'dark' ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)',
+        background: (t) =>
+          t.palette.mode === 'dark'
+            ? 'rgba(255,255,255,0.03)'
+            : 'rgba(255,255,255,0.85)',
+        backdropFilter: 'blur(12px)',
+        overflow: 'hidden',
+        transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+        '&:hover': {
+          transform: 'translateY(-3px)',
+          boxShadow: (t) =>
+            t.palette.mode === 'dark'
+              ? '0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(16,185,129,0.15)'
+              : '0 12px 40px rgba(0,0,0,0.12)',
+        },
+      }}
+    >
       {project.coverImage && (
         <CardMedia
           component="img"
@@ -102,73 +130,104 @@ export const ResearchCard: React.FC<ResearchCardProps> = ({
           onError={(e: any) => { e.target.style.display = 'none'; }}
         />
       )}
-      <CardContent>
-        <Box className="flex justify-between items-start mb-3">
+      <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 } }}>
+        {/* Header row: field chip + status */}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
           <Chip
-            icon={<Science fontSize="small" />}
+            icon={<Science sx={{ fontSize: '14px !important', color: '#10b981 !important' }} />}
             label={project.field || 'General'}
             size="small"
-            color="primary"
             variant="outlined"
+            sx={{ borderColor: 'rgba(16,185,129,0.4)', color: '#10b981', fontWeight: 600, bgcolor: 'rgba(16,185,129,0.08)' }}
           />
           <Chip
             label={statusConfig?.label || project.status || 'Ongoing'}
             size="small"
             sx={{
-              backgroundColor: statusConfig?.color || '#2196f3',
-              color: '#fff',
+              backgroundColor: statusConfig?.color ? `${statusConfig.color}22` : 'rgba(16,185,129,0.15)',
+              color: statusConfig?.color || '#10b981',
+              border: `1px solid ${statusConfig?.color ? `${statusConfig.color}44` : 'rgba(16,185,129,0.3)'}`,
+              fontWeight: 700,
+              fontSize: '0.68rem',
             }}
           />
         </Box>
 
-        <Typography variant="h6" className="font-semibold mb-2">
+        {/* Title */}
+        <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, lineHeight: 1.3, fontSize: '1rem' }}>
           {project.title || 'Untitled Research Project'}
         </Typography>
 
-        <Typography variant="body2" className="text-gray-600 dark:text-gray-400 mb-2 line-clamp-2">
+        {/* Description */}
+        <Typography
+          variant="body2"
+          sx={{ color: 'text.secondary', mb: 2, lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+        >
           {project.description || 'No description provided.'}
         </Typography>
 
-        <Box className="flex items-center gap-1 mb-4">
-          <Person fontSize="small" sx={{ color: 'text.secondary', fontSize: 16 }} />
-          <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500 }}>
-            Lead Researcher:
-          </Typography>
-          <Typography variant="caption" sx={{ color: 'text.primary', fontWeight: 600 }}>
+        {/* Lead researcher */}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, mb: 2, p: 1.25, borderRadius: '10px', bgcolor: (t) => t.palette.mode === 'dark' ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.03)' }}>
+          <Person sx={{ fontSize: 15, color: 'text.disabled' }} />
+          <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500 }}>Lead:</Typography>
+          <Typography variant="caption" sx={{ color: 'text.primary', fontWeight: 700 }}>
             {typeof leadResearcher === 'string'
               ? leadResearcher
               : `${leadResearcher.firstName || 'Lead'} ${leadResearcher.lastName || 'Researcher'}`}
           </Typography>
         </Box>
 
-        <Box className="mb-4">
-          <Box className="flex justify-between mb-1">
-            <Typography variant="caption" className="text-gray-500">
-              Progress
-            </Typography>
-            <Typography variant="caption" className="text-gray-500">
-              {getProgress()}%
-            </Typography>
+        {/* Progress bar */}
+        <Box sx={{ mb: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.75 }}>
+            <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500 }}>Progress</Typography>
+            <Typography variant="caption" sx={{ color: '#10b981', fontWeight: 700 }}>{progress}%</Typography>
           </Box>
-          <LinearProgress variant="determinate" value={getProgress()} className="h-2 rounded-full" />
+          <LinearProgress
+            variant="determinate"
+            value={progress}
+            sx={{
+              height: 6,
+              borderRadius: 3,
+              bgcolor: (t) => t.palette.mode === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)',
+              '& .MuiLinearProgress-bar': {
+                borderRadius: 3,
+                background: 'linear-gradient(90deg, #059669, #10b981)',
+              },
+            }}
+          />
         </Box>
 
+        {/* Tags */}
         {tags.length > 0 && (
-          <Box className="flex flex-wrap gap-2 mb-4">
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75, mb: 2 }}>
             {tags.map((tag, index) => (
-              <Chip key={index} label={tag} size="small" className="bg-gray-100 dark:bg-gray-800" />
+              <Chip
+                key={index}
+                label={tag}
+                size="small"
+                sx={{
+                  height: 22,
+                  fontSize: '0.68rem',
+                  bgcolor: (t) => t.palette.mode === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)',
+                  color: 'text.secondary',
+                  border: '1px solid',
+                  borderColor: (t) => t.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+                }}
+              />
             ))}
           </Box>
         )}
 
-        <Box className="flex items-center justify-between">
-          <Box className="flex items-center gap-2">
-            <Group fontSize="small" className="text-gray-400" />
-            <AvatarGroup max={4}>
+        {/* Footer: collaborators + actions */}
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pt: 2, borderTop: '1px solid', borderColor: (t) => t.palette.mode === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Group sx={{ fontSize: 16, color: 'text.disabled' }} />
+            <AvatarGroup max={4} sx={{ '& .MuiAvatar-root': { width: 28, height: 28, fontSize: '0.7rem', border: '2px solid', borderColor: 'background.paper' } }}>
               <Tooltip title={`Lead: ${leadResearcher.firstName || 'Lead'} ${leadResearcher.lastName || 'Researcher'}`}>
                 <Avatar
                   src={leadResearcher.avatar || leadResearcher.profilePicture}
-                  className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600"
+                  sx={{ background: 'linear-gradient(135deg, #059669, #14b8a6)' }}
                 >
                   {(leadResearcher.firstName || 'L')[0]}
                 </Avatar>
@@ -183,7 +242,7 @@ export const ResearchCard: React.FC<ResearchCardProps> = ({
                   >
                     <Avatar
                       src={collaborator.avatar || collaborator.profilePicture}
-                      className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600"
+                      sx={{ background: 'linear-gradient(135deg, #059669, #14b8a6)' }}
                     >
                       {(collaborator.firstName || 'C')[0]}
                     </Avatar>
@@ -191,31 +250,51 @@ export const ResearchCard: React.FC<ResearchCardProps> = ({
                 );
               })}
             </AvatarGroup>
-            <Typography variant="caption" className="text-gray-500 ml-2">
+            <Typography variant="caption" sx={{ color: 'text.secondary', fontSize: '0.7rem' }}>
               {collaborators.length + 1} members
             </Typography>
           </Box>
 
-          <Box className="flex items-center gap-2">
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             {documents.length > 0 && (
               <Chip
-                icon={<Description fontSize="small" />}
+                icon={<Description sx={{ fontSize: '13px !important' }} />}
                 label={`${documents.length} docs`}
                 size="small"
                 variant="outlined"
+                sx={{ height: 24, fontSize: '0.68rem' }}
               />
             )}
 
             {isLeadResearcher ? (
+              <Box sx={{ display: 'flex', gap: 0.75 }}>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={() => onEdit?.(projectId)}
+                  sx={{ borderRadius: '8px', fontSize: '0.75rem', borderColor: 'rgba(16,185,129,0.5)', color: '#10b981', '&:hover': { borderColor: '#10b981', bgcolor: 'rgba(16,185,129,0.08)' } }}
+                >
+                  Edit
+                </Button>
+                <Tooltip title="Delete project">
+                  <IconButton
+                    size="small"
+                    onClick={() => onDelete?.(projectId)}
+                    sx={{ color: 'error.main', border: '1px solid', borderColor: 'error.light', borderRadius: '8px', '&:hover': { bgcolor: 'error.main', color: '#fff' } }}
+                  >
+                    <Delete sx={{ fontSize: 16 }} />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            ) : isCollaborator ? (
               <Button
                 variant="outlined"
                 size="small"
-                onClick={() => onEdit?.(projectId)}
+                onClick={() => onLeave?.(projectId)}
+                color="error"
+                disabled={isLeaving}
+                sx={{ borderRadius: '8px', fontSize: '0.75rem' }}
               >
-                Edit Project
-              </Button>
-            ) : isCollaborator ? (
-              <Button variant="outlined" size="small" onClick={() => onLeave?.(projectId)} color="error" disabled={isLeaving}>
                 {isLeaving ? 'Leaving…' : 'Leave'}
               </Button>
             ) : (
@@ -223,8 +302,8 @@ export const ResearchCard: React.FC<ResearchCardProps> = ({
                 variant="contained"
                 size="small"
                 onClick={() => onCollaborate?.(projectId)}
-                className="bg-gradient-to-r from-blue-500 to-purple-600"
                 disabled={isCollaborating}
+                sx={{ borderRadius: '8px', fontSize: '0.75rem', background: 'linear-gradient(135deg, #059669, #10b981)', '&:hover': { background: 'linear-gradient(135deg, #047857, #059669)' } }}
               >
                 {isCollaborating ? 'Joining…' : 'Collaborate'}
               </Button>
@@ -232,9 +311,10 @@ export const ResearchCard: React.FC<ResearchCardProps> = ({
           </Box>
         </Box>
 
-        <Box className="flex items-center gap-2 mt-3 text-gray-500">
-          <CalendarToday fontSize="small" />
-          <Typography variant="caption">
+        {/* Date footer */}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, mt: 1.5 }}>
+          <CalendarToday sx={{ fontSize: 12, color: 'text.disabled' }} />
+          <Typography variant="caption" sx={{ color: 'text.disabled', fontSize: '0.7rem' }}>
             Started {formatDate(project.startDate || new Date().toISOString())}
           </Typography>
         </Box>

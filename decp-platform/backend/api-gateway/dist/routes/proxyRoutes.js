@@ -275,12 +275,14 @@ router.post('/api/v1/auth/reset-password', rateLimiter_1.strictRateLimiter, crea
 // CORS preflight handlers for user service
 router.options('/api/v1/users/me', (_req, res) => res.status(204).end());
 router.options('/api/v1/users/search', (_req, res) => res.status(204).end());
+router.options('/api/v1/users/suggested', (_req, res) => res.status(204).end());
 router.options('/api/v1/users/connections', (_req, res) => res.status(204).end());
 router.options('/api/v1/users/connections/requests', (_req, res) => res.status(204).end());
 router.options('/api/v1/users', (_req, res) => res.status(204).end());
 router.get('/api/v1/users/me', auth_1.authMiddleware, createProxyHandler(config_1.config.services.user, 'users'));
 router.put('/api/v1/users/me', auth_1.authMiddleware, createProxyHandler(config_1.config.services.user, 'users'));
 router.get('/api/v1/users/search', auth_1.authMiddleware, createProxyHandler(config_1.config.services.user, 'users'));
+router.get('/api/v1/users/suggested', auth_1.authMiddleware, createProxyHandler(config_1.config.services.user, 'users'));
 router.get('/api/v1/users/connections', auth_1.authMiddleware, createProxyHandler(config_1.config.services.user, 'users'));
 router.get('/api/v1/users/connections/requests', auth_1.authMiddleware, createProxyHandler(config_1.config.services.user, 'users'));
 router.get('/api/v1/users/connections/:userId/status', auth_1.authMiddleware, createProxyHandler(config_1.config.services.user, 'users'));

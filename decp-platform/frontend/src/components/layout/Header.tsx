@@ -62,7 +62,7 @@ export const Header: React.FC = () => {
   const { user, refreshToken } = useSelector((state: RootState) => state.auth);
   const { mode } = useSelector((state: RootState) => state.theme);
   const { data: unreadData } = useGetUnreadCountQuery(undefined, { pollingInterval: 15000 });
-  const { data: connectionRequestsData } = useGetConnectionRequestsQuery(undefined, { pollingInterval: 30000 });
+  const { data: connectionRequestsData, refetch: refetchConnectionRequests } = useGetConnectionRequestsQuery(undefined, { pollingInterval: 30000 });
   const [logoutMutation] = useLogoutMutation();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -124,7 +124,7 @@ export const Header: React.FC = () => {
         backgroundColor: (theme) =>
           theme.palette.mode === 'dark'
             ? 'rgba(15,23,42,0.92)'
-            : 'rgba(255,255,255,0.92)',
+            : 'rgba(216,216,220,0.96)',
         backdropFilter: 'blur(20px)',
         color: 'text.primary',
         zIndex: (theme) => theme.zIndex.drawer + 1,
@@ -337,7 +337,7 @@ export const Header: React.FC = () => {
           <Tooltip title={displayName}>
             <IconButton onClick={handleMenuOpen} sx={{ p: 0.5 }}>
               <Avatar
-                src={user?.avatar}
+                src={user?.avatar || user?.profilePicture}
                 sx={{
                   width: 36,
                   height: 36,
@@ -377,7 +377,7 @@ export const Header: React.FC = () => {
           <Box sx={{ px: 2, py: 2, background: 'linear-gradient(135deg, #15803d, #166534)' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
               <Avatar
-                src={user?.avatar}
+                src={user?.avatar || user?.profilePicture}
                 sx={{ width: 44, height: 44, border: '2px solid rgba(255,255,255,0.5)', fontWeight: 700 }}
               >
                 {initials || 'U'}
@@ -523,7 +523,7 @@ export const Header: React.FC = () => {
                       onClick={async () => {
                         try {
                           await acceptConnectionMutation(reqUserId).unwrap();
-                          refetchConnections();
+                          refetchConnectionRequests();
                         } catch { }
                         setRequestsAnchorEl(null);
                       }}
@@ -538,7 +538,7 @@ export const Header: React.FC = () => {
                       onClick={async () => {
                         try {
                           await declineConnectionMutation(reqUserId).unwrap();
-                          refetchConnections();
+                          refetchConnectionRequests();
                         } catch { }
                         setRequestsAnchorEl(null);
                       }}

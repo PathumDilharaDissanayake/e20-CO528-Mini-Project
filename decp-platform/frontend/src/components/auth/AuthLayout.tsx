@@ -5,65 +5,165 @@ import { Outlet } from 'react-router-dom';
 export const AuthLayout: React.FC = () => {
   return (
     <Box className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Animated Background - Green/Black Theme */}
-      <Box className="absolute inset-0 bg-gradient-to-br from-slate-950 via-green-950 to-slate-900">
-        {/* Animated Orbs */}
-        <Box className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-500/20 rounded-full blur-3xl animate-pulse-slow" />
-        <Box className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
-        <Box className="absolute top-1/2 left-1/2 w-64 h-64 bg-teal-500/15 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }} />
+      {/* ── Animated Background ── */}
+      <Box className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #020c06 0%, #051a0d 40%, #060c1a 70%, #020c06 100%)' }}>
+        {/* Moving Orb 1 – large green */}
+        <Box
+          className="absolute rounded-full"
+          style={{
+            width: 700,
+            height: 700,
+            top: '-20%',
+            left: '-15%',
+            background: 'radial-gradient(circle, rgba(34,197,94,0.22) 0%, rgba(22,101,52,0.08) 50%, transparent 75%)',
+            filter: 'blur(60px)',
+            animation: 'floatOrb1 28s ease-in-out infinite',
+            willChange: 'transform',
+          }}
+        />
+        {/* Moving Orb 2 – teal */}
+        <Box
+          className="absolute rounded-full"
+          style={{
+            width: 600,
+            height: 600,
+            bottom: '-15%',
+            right: '-15%',
+            background: 'radial-gradient(circle, rgba(20,184,166,0.20) 0%, rgba(13,148,136,0.06) 50%, transparent 75%)',
+            filter: 'blur(70px)',
+            animation: 'floatOrb2 34s ease-in-out infinite',
+            willChange: 'transform',
+          }}
+        />
+        {/* Moving Orb 3 – emerald center */}
+        <Box
+          className="absolute rounded-full"
+          style={{
+            width: 400,
+            height: 400,
+            top: '40%',
+            left: '35%',
+            transform: 'translate(-50%, -50%)',
+            background: 'radial-gradient(circle, rgba(16,185,129,0.18) 0%, transparent 70%)',
+            filter: 'blur(50px)',
+            animation: 'floatOrb3 22s ease-in-out infinite',
+            willChange: 'transform',
+          }}
+        />
+        {/* Moving Orb 4 – indigo accent top-right */}
+        <Box
+          className="absolute rounded-full"
+          style={{
+            width: 350,
+            height: 350,
+            top: '5%',
+            right: '10%',
+            background: 'radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%)',
+            filter: 'blur(55px)',
+            animation: 'floatOrb4 38s ease-in-out infinite',
+            willChange: 'transform',
+          }}
+        />
+        {/* Moving Orb 5 – small green bottom-left */}
+        <Box
+          className="absolute rounded-full"
+          style={{
+            width: 250,
+            height: 250,
+            bottom: '10%',
+            left: '10%',
+            background: 'radial-gradient(circle, rgba(74,222,128,0.16) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+            animation: 'floatOrb5 18s ease-in-out infinite',
+            willChange: 'transform',
+          }}
+        />
 
-        {/* Grid Pattern */}
-        <Box className="absolute inset-0 opacity-20" style={{
-          backgroundImage: `linear-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(16, 185, 129, 0.1) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }} />
+        {/* Animated Grid Pattern */}
+        <Box
+          className="absolute inset-0 animate-mesh-pulse"
+          style={{
+            backgroundImage: `linear-gradient(rgba(16, 185, 129, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(16, 185, 129, 0.07) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px',
+          }}
+        />
       </Box>
 
-      {/* Content */}
+      {/* ── Content ── */}
       <Box className="w-full max-w-md relative z-10 p-4">
         {/* Logo */}
         <Box className="text-center mb-8">
-          <Box className="w-24 h-24 mx-auto rounded-3xl bg-gradient-to-br from-green-500 via-emerald-500 to-teal-600 flex items-center justify-center shadow-2xl shadow-green-500/40 mb-4 transform hover:scale-105 transition-transform duration-300">
-            <Typography className="text-white font-bold text-5xl drop-shadow-lg">D</Typography>
+          <Box
+            className="w-24 h-24 mx-auto rounded-3xl flex items-center justify-center shadow-2xl mb-4 animate-float"
+            style={{
+              background: 'linear-gradient(135deg, #22c55e 0%, #14b8a6 50%, #22c55e 100%)',
+              backgroundSize: '200% 200%',
+              animation: 'floatOrb5 6s ease-in-out infinite, gradientFlow 4s ease infinite',
+              boxShadow: '0 0 40px rgba(34,197,94,0.5), 0 20px 40px rgba(0,0,0,0.3)',
+            }}
+          >
+            <Typography className="text-white font-bold text-5xl drop-shadow-lg" style={{ fontFamily: 'Inter, sans-serif' }}>D</Typography>
           </Box>
-          <Typography variant="h3" className="font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
+          <Typography
+            variant="h3"
+            className="font-bold"
+            style={{
+              background: 'linear-gradient(135deg, #4ade80, #22c55e, #14b8a6)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
             DECP
           </Typography>
-          <Typography variant="body1" className="text-gray-400 mt-3 font-medium">
+          <Typography variant="body1" className="mt-2 font-medium" style={{ color: 'rgba(148,163,184,0.9)' }}>
             Department Engagement & Career Platform
           </Typography>
 
           {/* Feature Pills */}
           <Box className="flex flex-wrap justify-center gap-2 mt-4">
-            <Box className="px-3 py-1 rounded-full bg-white/10 text-xs text-gray-300 border border-white/20 backdrop-blur-sm">
-              🎓 Connect
-            </Box>
-            <Box className="px-3 py-1 rounded-full bg-white/10 text-xs text-gray-300 border border-white/20 backdrop-blur-sm">
-              💼 Career
-            </Box>
-            <Box className="px-3 py-1 rounded-full bg-white/10 text-xs text-gray-300 border border-white/20 backdrop-blur-sm">
-              🔬 Research
-            </Box>
-            <Box className="px-3 py-1 rounded-full bg-white/10 text-xs text-gray-300 border border-white/20 backdrop-blur-sm">
-              📅 Events
-            </Box>
+            {[
+              { icon: '🎓', label: 'Connect' },
+              { icon: '💼', label: 'Career' },
+              { icon: '🔬', label: 'Research' },
+              { icon: '📅', label: 'Events' },
+            ].map(({ icon, label }) => (
+              <Box
+                key={label}
+                className="px-3 py-1 rounded-full text-xs font-medium"
+                style={{
+                  background: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  backdropFilter: 'blur(8px)',
+                  color: 'rgba(203,213,225,0.9)',
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                {icon} {label}
+              </Box>
+            ))}
           </Box>
         </Box>
 
         {/* Form Container */}
         <Paper
           elevation={0}
-          className="p-8 rounded-3xl bg-white/10 backdrop-blur-xl shadow-2xl border border-white/20"
-          sx={{
+          style={{
+            padding: '2rem',
+            borderRadius: '24px',
             background: 'rgba(255, 255, 255, 0.05)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            boxShadow: '0 25px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)',
           }}
         >
           <Outlet />
         </Paper>
 
         {/* Footer */}
-        <Typography variant="caption" className="block text-center text-gray-500 mt-6">
-          © 2024 DECP Platform. All rights reserved.
+        <Typography variant="caption" className="block text-center mt-6" style={{ color: 'rgba(100,116,139,0.8)' }}>
+          © 2025 DECP Platform · University of Peradeniya
         </Typography>
       </Box>
     </Box>

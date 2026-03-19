@@ -15,22 +15,27 @@ export const useInfiniteScroll = ({
 }: UseInfiniteScrollOptions) => {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  // Cooldown flag — after firing, ignore the observer for 800 ms so a single
+  // scroll event cannot enqueue multiple page fetches
+  const cooldownRef = useRef(false);
 
   const setLoadMoreRef = useCallback(
     (node: HTMLDivElement | null) => {
-      if (isLoading) return;
       if (observerRef.current) observerRef.current.disconnect();
+      if (!node) return;
 
       observerRef.current = new IntersectionObserver(
         (entries) => {
-          if (entries[0].isIntersecting && hasMore && !isLoading) {
+          if (entries[0].isIntersecting && hasMore && !isLoading && !cooldownRef.current) {
+            cooldownRef.current = true;
             onLoadMore();
+            setTimeout(() => { cooldownRef.current = false; }, 800);
           }
         },
         { rootMargin: `${threshold}px` }
       );
 
-      if (node) observerRef.current.observe(node);
+      observerRef.current.observe(node);
       loadMoreRef.current = node;
     },
     [isLoading, hasMore, onLoadMore, threshold]

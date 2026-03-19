@@ -29,6 +29,7 @@ import {
   EmojiEvents,
   PhotoCamera,
   Delete,
+  Edit,
 } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
@@ -37,6 +38,7 @@ import {
   useGetMyEventsQuery,
   useGetAttendingEventsQuery,
   useCreateEventMutation,
+  useUpdateEventMutation,
   useDeleteEventMutation,
   useRsvpEventMutation,
   useCancelRsvpMutation,
@@ -61,21 +63,21 @@ const HeroBanner: React.FC<{ eventCount: number; canCreate: boolean; onCreate: (
       overflow: 'hidden',
       mb: 3,
       position: 'relative',
-      background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #1e1b4b 100%)',
+      background: 'linear-gradient(135deg, #022c22 0%, #064e3b 40%, #0f172a 100%)',
     }}
   >
     <Box className="absolute inset-0 opacity-15" sx={{ backgroundImage: `radial-gradient(circle at 18px 18px, rgba(255,255,255,0.4) 1.5px, transparent 0)`, backgroundSize: '30px 30px' }} />
-    <Box className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10" sx={{ background: 'radial-gradient(circle, #818cf8 0%, transparent 70%)', transform: 'translate(30%, -30%)' }} />
-    <Box className="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-10" sx={{ background: 'radial-gradient(circle, #166534 0%, transparent 70%)', transform: 'translate(-30%, 40%)' }} />
+    <Box className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-20" sx={{ background: 'radial-gradient(circle, rgba(16,185,129,0.6) 0%, transparent 70%)', transform: 'translate(30%, -30%)', filter: 'blur(40px)' }} />
+    <Box className="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-15" sx={{ background: 'radial-gradient(circle, rgba(99,102,241,0.5) 0%, transparent 70%)', transform: 'translate(-30%, 40%)', filter: 'blur(30px)' }} />
 
     <Box className="relative p-6 sm:p-8">
       <Box className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <Box>
           <Box className="flex items-center gap-2 mb-2">
-            <Box sx={{ width: 40, height: 40, borderRadius: '12px', background: 'rgba(129,140,248,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Event sx={{ color: '#a5b4fc', fontSize: 22 }} />
+            <Box sx={{ width: 40, height: 40, borderRadius: '12px', background: 'rgba(16,185,129,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(16,185,129,0.3)' }}>
+              <Event sx={{ color: '#6ee7b7', fontSize: 22 }} />
             </Box>
-            <Typography variant="h5" sx={{ fontWeight: 800, color: '#fff' }}>
+            <Typography variant="h5" sx={{ fontWeight: 800, color: '#fff', letterSpacing: '-0.02em' }}>
               Events & Webinars
             </Typography>
           </Box>
@@ -84,7 +86,7 @@ const HeroBanner: React.FC<{ eventCount: number; canCreate: boolean; onCreate: (
           </Typography>
           <Box className="flex flex-wrap gap-2">
             <Chip icon={<CalendarMonth sx={{ fontSize: '14px !important' }} />} label={`${eventCount} Upcoming`} size="small"
-              sx={{ background: 'rgba(129,140,248,0.2)', color: '#a5b4fc', borderColor: 'rgba(129,140,248,0.35)', fontWeight: 600 }} variant="outlined" />
+              sx={{ background: 'rgba(16,185,129,0.2)', color: '#6ee7b7', borderColor: 'rgba(16,185,129,0.35)', fontWeight: 600 }} variant="outlined" />
             <Chip icon={<Videocam sx={{ fontSize: '14px !important' }} />} label="Online & In-Person" size="small"
               sx={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.8)', borderColor: 'rgba(255,255,255,0.2)', fontWeight: 600 }} variant="outlined" />
             <Chip icon={<Groups sx={{ fontSize: '14px !important' }} />} label="Open to All" size="small"
@@ -93,7 +95,7 @@ const HeroBanner: React.FC<{ eventCount: number; canCreate: boolean; onCreate: (
         </Box>
         {canCreate && (
           <Button variant="contained" startIcon={<Add />} onClick={onCreate}
-            sx={{ background: 'linear-gradient(135deg, #6366f1, #818cf8)', borderRadius: '12px', px: 3, py: 1.5, fontWeight: 700, whiteSpace: 'nowrap', boxShadow: '0 4px 15px rgba(99,102,241,0.35)' }}>
+            sx={{ background: 'linear-gradient(135deg, #059669, #10b981)', borderRadius: '12px', px: 3, py: 1.5, fontWeight: 700, whiteSpace: 'nowrap', boxShadow: '0 4px 15px rgba(16,185,129,0.35)', '&:hover': { background: 'linear-gradient(135deg, #047857, #059669)' } }}>
             Create Event
           </Button>
         )}
@@ -120,11 +122,90 @@ export const EventsPage: React.FC = () => {
   const { data: myEventsData, isLoading: isLoadingMy } = useGetMyEventsQuery({}, { skip: activeTab !== 1 });
   const { data: attendingData, isLoading: isLoadingAttending } = useGetAttendingEventsQuery({}, { skip: activeTab !== 2 });
   const [createEvent, { isLoading: isCreating }] = useCreateEventMutation();
+  const [updateEvent, { isLoading: isUpdating }] = useUpdateEventMutation();
   const [deleteEvent, { isLoading: isDeleting }] = useDeleteEventMutation();
+
+  // Edit event state
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [editEventId, setEditEventId] = useState('');
+  const [editEventData, setEditEventData] = useState({
+    title: '',
+    description: '',
+    type: 'webinar' as string,
+    startDate: '',
+    endDate: '',
+    location: '',
+    isOnline: false,
+    meetingLink: '',
+    maxAttendees: '',
+    coverImage: '',
+  });
+  const [editCoverUploading, setEditCoverUploading] = useState(false);
+  const editCoverInputRef = useRef<HTMLInputElement>(null);
+
+  const handleOpenEdit = (event: EventType) => {
+    setEditEventId(event._id || event.id || '');
+    const toLocalDatetime = (iso: string) => {
+      if (!iso) return '';
+      return new Date(iso).toISOString().slice(0, 16);
+    };
+    setEditEventData({
+      title: event.title || '',
+      description: event.description || '',
+      type: event.type || 'webinar',
+      startDate: toLocalDatetime(event.startDate || ''),
+      endDate: toLocalDatetime(event.endDate || ''),
+      location: event.location || '',
+      isOnline: !!(event as any).isOnline,
+      meetingLink: (event as any).meetingLink || '',
+      maxAttendees: (event as any).maxAttendees ? String((event as any).maxAttendees) : '',
+      coverImage: (event as any).coverImage || '',
+    });
+    setEditDialogOpen(true);
+  };
+
+  const handleEditCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setEditCoverUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';
+      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1';
+      const resp = await fetch(`${apiBase}/posts/upload`, { method: 'POST', headers: { Authorization: `Bearer ${token}` }, body: fd });
+      const data = await resp.json();
+      if (data.success) setEditEventData(d => ({ ...d, coverImage: data.data.url }));
+    } catch (err) { console.error('Cover upload failed', err); }
+    finally { setEditCoverUploading(false); }
+  };
+
+  const handleEditSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!editEventId) return;
+    try {
+      await updateEvent({
+        id: editEventId,
+        data: {
+          title: editEventData.title,
+          description: editEventData.description,
+          type: editEventData.type as any,
+          startDate: editEventData.startDate,
+          endDate: editEventData.endDate,
+          location: editEventData.location,
+          isOnline: editEventData.isOnline,
+          meetingLink: editEventData.meetingLink || undefined,
+          maxAttendees: editEventData.maxAttendees ? Number(editEventData.maxAttendees) : undefined,
+          coverImage: editEventData.coverImage || undefined,
+        },
+      }).unwrap();
+      setEditDialogOpen(false);
+    } catch (err) { console.error('Failed to update event:', err); }
+  };
   const [rsvpEvent] = useRsvpEventMutation();
   const [cancelRsvp] = useCancelRsvpMutation();
 
-  const canCreateEvent = user?.role === 'admin' || user?.role === 'faculty';
+  const canCreateEvent = !!user;
   const isLoading = activeTab === 0 ? isLoadingAll : activeTab === 1 ? isLoadingMy : isLoadingAttending;
   const events = activeTab === 0 ? (allEventsData?.data || []) : activeTab === 1 ? (myEventsData?.data || []) : (attendingData?.data || []);
   const totalEvents = allEventsData?.total || allEventsData?.data?.length || 0;
@@ -224,7 +305,7 @@ export const EventsPage: React.FC = () => {
           title={activeTab === 1 ? "No events created" : activeTab === 2 ? "Not attending any events" : "No upcoming events"}
           description={activeTab === 0 ? "Check back soon for upcoming events!" : activeTab === 1 ? "Create your first event." : "Browse upcoming events and RSVP."}
           action={canCreateEvent && activeTab !== 2 ? (
-            <Button variant="contained" startIcon={<Add />} onClick={() => setCreateDialogOpen(true)} sx={{ background: 'linear-gradient(135deg,#6366f1,#818cf8)' }}>
+            <Button variant="contained" startIcon={<Add />} onClick={() => setCreateDialogOpen(true)} sx={{ background: 'linear-gradient(135deg,#059669,#10b981)' }}>
               Create Event
             </Button>
           ) : undefined}
@@ -253,28 +334,38 @@ export const EventsPage: React.FC = () => {
                   isAttending={attendingIds.has(eventId)}
                 />
                 {isOwner && (
-                  <Tooltip title="Delete event">
-                    <IconButton
-                      size="small"
-                      onClick={() => { setDeleteConfirmId(eventId); setDeleteConfirmTitle(event.title || ''); }}
-                      sx={{
-                        position: 'absolute',
-                        top: 8,
-                        right: 8,
-                        color: 'error.main',
-                        bgcolor: 'background.paper',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                        transition: 'all 0.2s ease',
-                        '&:hover': {
-                          bgcolor: 'error.main',
-                          color: 'white',
-                          transform: 'scale(1.1)',
-                        },
-                      }}
-                    >
-                      <Delete fontSize="small" />
-                    </IconButton>
-                  </Tooltip>
+                  <Box sx={{ position: 'absolute', top: 8, right: 8, display: 'flex', gap: 0.5 }}>
+                    <Tooltip title="Edit event">
+                      <IconButton
+                        size="small"
+                        onClick={() => handleOpenEdit(event)}
+                        sx={{
+                          color: 'primary.main',
+                          bgcolor: 'background.paper',
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                          transition: 'all 0.2s ease',
+                          '&:hover': { bgcolor: 'primary.main', color: 'white', transform: 'scale(1.1)' },
+                        }}
+                      >
+                        <Edit fontSize="small" />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete event">
+                      <IconButton
+                        size="small"
+                        onClick={() => { setDeleteConfirmId(eventId); setDeleteConfirmTitle(event.title || ''); }}
+                        sx={{
+                          color: 'error.main',
+                          bgcolor: 'background.paper',
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                          transition: 'all 0.2s ease',
+                          '&:hover': { bgcolor: 'error.main', color: 'white', transform: 'scale(1.1)' },
+                        }}
+                      >
+                        <Delete fontSize="small" />
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
                 )}
               </Box>
             );
@@ -312,12 +403,73 @@ export const EventsPage: React.FC = () => {
         </DialogActions>
       </Dialog>
 
+      {/* Edit Event Dialog */}
+      <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)} maxWidth="sm" fullWidth PaperProps={{ sx: { borderRadius: '20px' } }}>
+        <form onSubmit={handleEditSubmit}>
+          <DialogTitle sx={{ pb: 1, fontWeight: 700 }}>
+            <Box className="flex items-center gap-2">
+              <Box sx={{ width: 36, height: 36, borderRadius: '10px', background: 'linear-gradient(135deg,#059669,#10b981)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Edit sx={{ color: '#fff', fontSize: 18 }} />
+              </Box>
+              Edit Event
+            </Box>
+          </DialogTitle>
+          <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: '8px !important' }}>
+            <TextField fullWidth label="Event Title" required value={editEventData.title} onChange={(e) => setEditEventData(d => ({ ...d, title: e.target.value }))} />
+            <TextField select fullWidth label="Event Type" required value={editEventData.type} onChange={(e) => setEditEventData(d => ({ ...d, type: e.target.value }))}>
+              {EVENT_TYPES.map((t) => <MenuItem key={t.value} value={t.value}>{t.label}</MenuItem>)}
+            </TextField>
+            <TextField fullWidth label="Description" multiline rows={3} required value={editEventData.description} onChange={(e) => setEditEventData(d => ({ ...d, description: e.target.value }))} />
+            <input type="file" accept="image/*" ref={editCoverInputRef} style={{ display: 'none' }} onChange={handleEditCoverUpload} />
+            <TextField
+              label="Cover Image URL (optional)"
+              fullWidth
+              value={editEventData.coverImage}
+              onChange={(e) => setEditEventData(d => ({ ...d, coverImage: e.target.value }))}
+              size="small"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton size="small" onClick={() => editCoverInputRef.current?.click()} disabled={editCoverUploading}>
+                      {editCoverUploading ? <CircularProgress size={18} /> : <PhotoCamera fontSize="small" />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            {editEventData.coverImage && (
+              <Box component="img" src={editEventData.coverImage} alt="Cover preview"
+                sx={{ width: '100%', height: 120, objectFit: 'cover', borderRadius: '8px' }}
+                onError={(e: any) => { e.target.style.display = 'none'; }}
+              />
+            )}
+            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+              <TextField fullWidth label="Start Date & Time" type="datetime-local" required InputLabelProps={{ shrink: true }} value={editEventData.startDate} onChange={(e) => setEditEventData(d => ({ ...d, startDate: e.target.value }))} />
+              <TextField fullWidth label="End Date & Time" type="datetime-local" required InputLabelProps={{ shrink: true }} value={editEventData.endDate} onChange={(e) => setEditEventData(d => ({ ...d, endDate: e.target.value }))} />
+            </Box>
+            <FormControlLabel control={<Switch checked={editEventData.isOnline} onChange={(e) => setEditEventData(d => ({ ...d, isOnline: e.target.checked }))} color="primary" />} label="Online Event" />
+            {editEventData.isOnline ? (
+              <TextField fullWidth label="Meeting Link" value={editEventData.meetingLink} onChange={(e) => setEditEventData(d => ({ ...d, meetingLink: e.target.value }))} />
+            ) : (
+              <TextField fullWidth label="Venue / Location" value={editEventData.location} onChange={(e) => setEditEventData(d => ({ ...d, location: e.target.value }))} />
+            )}
+            <TextField fullWidth label="Max Attendees (optional)" type="number" value={editEventData.maxAttendees} onChange={(e) => setEditEventData(d => ({ ...d, maxAttendees: e.target.value }))} />
+          </DialogContent>
+          <DialogActions sx={{ px: 3, pb: 3, gap: 1 }}>
+            <Button onClick={() => setEditDialogOpen(false)} variant="outlined" sx={{ borderRadius: '10px' }}>Cancel</Button>
+            <Button type="submit" variant="contained" disabled={isUpdating} sx={{ background: 'linear-gradient(135deg,#059669,#10b981)', '&:hover': { background: 'linear-gradient(135deg,#047857,#059669)' } }}>
+              {isUpdating ? 'Saving…' : 'Save Changes'}
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
+
       {/* Create Event Dialog */}
       <Dialog open={createDialogOpen} onClose={() => setCreateDialogOpen(false)} maxWidth="sm" fullWidth PaperProps={{ sx: { borderRadius: '20px' } }}>
         <form onSubmit={handleCreateEvent}>
           <DialogTitle sx={{ pb: 1, fontWeight: 700 }}>
             <Box className="flex items-center gap-2">
-              <Box sx={{ width: 36, height: 36, borderRadius: '10px', background: 'linear-gradient(135deg,#6366f1,#818cf8)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Box sx={{ width: 36, height: 36, borderRadius: '10px', background: 'linear-gradient(135deg,#059669,#10b981)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Event sx={{ color: '#fff', fontSize: 18 }} />
               </Box>
               Create New Event
@@ -368,7 +520,7 @@ export const EventsPage: React.FC = () => {
           </DialogContent>
           <DialogActions sx={{ px: 3, pb: 3, gap: 1 }}>
             <Button onClick={() => setCreateDialogOpen(false)} variant="outlined" sx={{ borderRadius: '10px' }}>Cancel</Button>
-            <Button type="submit" variant="contained" disabled={isCreating} sx={{ background: 'linear-gradient(135deg,#6366f1,#818cf8)' }}>
+            <Button type="submit" variant="contained" disabled={isCreating} sx={{ background: 'linear-gradient(135deg,#059669,#10b981)', '&:hover': { background: 'linear-gradient(135deg,#047857,#059669)' } }}>
               {isCreating ? 'Creating…' : 'Create Event'}
             </Button>
           </DialogActions>

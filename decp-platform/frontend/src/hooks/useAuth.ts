@@ -2,8 +2,9 @@ import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState, AppDispatch } from '@store';
-import { setCredentials, logout, setLoading, updateToken } from '@features/authSlice';
+import { setCredentials, logout, setLoading, updateToken, updateUser } from '@features/authSlice';
 import { useGetMeQuery, useRefreshTokenMutation, useLogoutMutation } from '@services/authApi';
+import { useGetMyProfileQuery } from '@services/userApi';
 import { addToast } from '@features/uiSlice';
 
 export const useAuth = () => {
@@ -17,6 +18,9 @@ export const useAuth = () => {
     skip: !token,
     refetchOnMountOrArgChange: true,
   });
+
+  // Fetch the user-service profile to get the avatar (auth/me only returns profilePicture)
+  const { data: profileData } = useGetMyProfileQuery(undefined, { skip: !token });
 
   const [refreshTokenMutation] = useRefreshTokenMutation();
   const [logoutMutation] = useLogoutMutation();
@@ -74,9 +78,12 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (data?.data?.user) {
+      const authUser = normalizeUser(data.data.user);
+      const profile = profileData?.data as any;
+      const avatar = profile?.avatar || profile?.profilePicture || authUser.avatar || authUser.profilePicture;
       dispatch(
         setCredentials({
-          user: normalizeUser(data.data.user),
+          user: avatar ? { ...authUser, avatar } : authUser,
           token: token as string,
           refreshToken: refreshToken || undefined,
         })
@@ -91,7 +98,15 @@ export const useAuth = () => {
     } else if (!token) {
       dispatch(setLoading(false));
     }
-  }, [data, error, token, refreshToken, dispatch, normalizeUser, handleRefreshToken]);
+  }, [data, error, token, refreshToken, dispatch, normalizeUser, handleRefreshToken, profileData]);
+
+  // Keep avatar in sync if profile loads after auth
+  useEffect(() => {
+    const profile = profileData?.data as any;
+    if (!profile) return;
+    const avatar = profile.avatar || profile.profilePicture;
+    if (avatar) dispatch(updateUser({ avatar }));
+  }, [profileData, dispatch]);
 
   return {
     user,

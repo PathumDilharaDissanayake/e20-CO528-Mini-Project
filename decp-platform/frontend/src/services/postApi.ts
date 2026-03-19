@@ -72,8 +72,12 @@ const toPaginatedPosts = (response: any): PaginatedResponse<Post> => {
 
 export const postApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getPosts: builder.query<PaginatedResponse<Post>, { page?: number; limit?: number }>({
-      query: ({ page = 1, limit = 10 }) => `/posts/feed?page=${page}&limit=${limit}`,
+    getPosts: builder.query<PaginatedResponse<Post>, { page?: number; limit?: number; search?: string }>({
+      query: ({ page = 1, limit = 10, search }) => {
+        const params = new URLSearchParams({ page: String(page), limit: String(limit) });
+        if (search) params.append('q', search);
+        return `/posts/feed?${params.toString()}`;
+      },
       transformResponse: (response: any) => toPaginatedPosts(response),
       providesTags: (result) =>
         result

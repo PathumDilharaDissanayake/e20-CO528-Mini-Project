@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Op } from 'sequelize';
+import { Op, literal } from 'sequelize';
 import { Profile, Connection } from '../models';
 import { updateProfileSchema, paginationSchema } from '../utils/validation';
 import { logger } from '../utils/logger';
@@ -21,7 +21,9 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
     const offset = (page - 1) * limit;
     const q = req.query.q as string | undefined;
 
-    const where: any = {};
+    const where: any = {
+      firstName: { [Op.and]: [{ [Op.ne]: null }, { [Op.ne]: '' }] } as any
+    };
     if (q) {
       where[Op.or] = [
         { firstName: { [Op.iLike]: `%${q}%` } },
@@ -31,18 +33,25 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
       ];
     }
 
-    const { count, rows: profiles } = await Profile.findAndCountAll({
+    // Fetch all matching, then deduplicate by userId (most recently updated wins)
+    const allProfiles = await Profile.findAll({
       where,
-      order: [['createdAt', 'DESC']],
-      limit,
-      offset
+      order: [['userId', 'ASC'], ['updatedAt', 'DESC']],
     });
+    const seen = new Set<string>();
+    const unique = allProfiles.filter(p => {
+      if (seen.has(p.userId!)) return false;
+      seen.add(p.userId!);
+      return true;
+    });
+    const total = unique.length;
+    const profiles = unique.slice(offset, offset + limit);
 
     res.json({
       success: true,
       message: 'Users retrieved successfully',
       data: profiles,
-      meta: { page, limit, total: count, totalPages: Math.ceil(count / limit) }
+      meta: { page, limit, total, totalPages: Math.ceil(total / limit) }
     });
   } catch (error) {
     logger.error('Get users error:', error);
@@ -96,7 +105,8 @@ export const getMyProfile = async (req: Request, res: Response): Promise<void> =
     }
 
     let profile = await Profile.findOne({
-      where: { userId }
+      where: { userId },
+      order: [['updatedAt', 'DESC']]
     });
 
     const email = req.headers['x-user-email'] as string | undefined;
@@ -164,9 +174,14 @@ export const updateProfile = async (req: Request, res: Response): Promise<void> 
       return;
     }
 
-    const [profile, created] = await Profile.findOrCreate({
+    // Find the most recently-updated profile for this user (avoids stale duplicate picking up wrong row)
+    let profile = await Profile.findOne({
       where: { userId },
-      defaults: {
+      order: [['updatedAt', 'DESC']]
+    });
+
+    if (!profile) {
+      profile = await Profile.create({
         userId,
         ...value,
         skills: value.skills || [],
@@ -174,10 +189,8 @@ export const updateProfile = async (req: Request, res: Response): Promise<void> 
         education: value.education || [],
         experience: value.experience || [],
         socialLinks: value.socialLinks || {}
-      }
-    });
-
-    if (!created) {
+      });
+    } else {
       await profile.update(value);
     }
 
@@ -555,12 +568,14 @@ export const getSuggestedUsers = async (req: Request, res: Response): Promise<vo
     connectedUserIds.add(currentUserId); // Exclude self
 
     // Get users who are not connected (excluding self and existing connections)
+    // Only return profiles with actual data (firstName not null/empty)
     const suggestedProfiles = await Profile.findAll({
       where: {
-        userId: { [Op.notIn]: Array.from(connectedUserIds) }
+        userId: { [Op.notIn]: Array.from(connectedUserIds) },
+        firstName: { [Op.and]: [{ [Op.ne]: null }, { [Op.ne]: '' }] } as any
       },
       limit,
-      order: [['createdAt', 'DESC']]
+      order: literal('RANDOM()')
     });
 
     res.json({
@@ -571,6 +586,31 @@ export const getSuggestedUsers = async (req: Request, res: Response): Promise<vo
     });
   } catch (error) {
     logger.error('Get suggested users error:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+};
+
+export const getBatchProfiles = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const userIds = ((req.query.userIds as string) || '').split(',').filter(Boolean);
+    if (userIds.length === 0) {
+      res.json({ success: true, data: [] });
+      return;
+    }
+    const profiles = await Profile.findAll({
+      where: { userId: { [Op.in]: userIds } },
+      order: [['updatedAt', 'DESC']]
+    });
+    // Return only the most recent profile per userId
+    const seen = new Set<string>();
+    const unique = profiles.filter(p => {
+      if (seen.has(p.userId!)) return false;
+      seen.add(p.userId!);
+      return true;
+    });
+    res.json({ success: true, data: unique });
+  } catch (error) {
+    logger.error('Get batch profiles error:', error);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };

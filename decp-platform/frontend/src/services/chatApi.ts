@@ -4,8 +4,8 @@ import { Chat, Message, PaginatedResponse, ApiResponse } from '@types';
 const placeholderUser = (id: string) => ({
   _id: id,
   id,
-  firstName: 'User',
-  lastName: id.slice(0, 6),
+  firstName: 'Unknown',
+  lastName: 'User',
   role: 'student' as const,
 });
 
@@ -20,8 +20,8 @@ const normalizeChat = (raw: any): Chat => {
       return {
         _id: id,
         id,
-        firstName: participant?.firstName || 'User',
-        lastName: participant?.lastName || id.slice(0, 6),
+        firstName: participant?.firstName || 'Unknown',
+        lastName: participant?.lastName || 'User',
         avatar: participant?.avatar,
         role: participant?.role || 'student',
       };

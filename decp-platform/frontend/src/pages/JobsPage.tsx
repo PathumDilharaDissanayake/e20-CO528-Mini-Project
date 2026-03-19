@@ -60,8 +60,8 @@ const HeroBanner: React.FC<{ jobCount: number; canPost: boolean; onPost: () => v
       <Box className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <Box>
           <Box className="flex items-center gap-2 mb-2">
-            <Box sx={{ width: 40, height: 40, borderRadius: '12px', background: 'rgba(22,101,52,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Work sx={{ color: '#166534', fontSize: 22 }} />
+            <Box sx={{ width: 40, height: 40, borderRadius: '12px', background: 'rgba(16,185,129,0.25)', border: '1px solid rgba(16,185,129,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Work sx={{ color: '#6ee7b7', fontSize: 22 }} />
             </Box>
             <Typography variant="h5" sx={{ fontWeight: 800, color: '#fff' }}>
               Jobs & Internships

@@ -303,7 +303,11 @@ export const Sidebar: React.FC = () => {
           sx: {
             width: 260,
             background: (theme) =>
-              theme.palette.mode === 'dark' ? '#1e293b' : '#ffffff',
+              theme.palette.mode === 'dark'
+                ? 'rgba(2,12,6,0.92)'
+                : '#c8c8cc',
+            backdropFilter: 'blur(20px)',
+            border: 'none',
           },
         }}
       >
@@ -318,7 +322,10 @@ export const Sidebar: React.FC = () => {
           sx: {
             width: 260,
             background: (theme) =>
-              theme.palette.mode === 'dark' ? '#1e293b' : '#ffffff',
+              theme.palette.mode === 'dark'
+                ? 'rgba(2,12,6,0.92)'
+                : '#c8c8cc',
+            backdropFilter: 'blur(20px)',
             borderRight: '1px solid',
             borderColor: 'divider',
           },

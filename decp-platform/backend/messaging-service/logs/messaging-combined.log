@@ -504,3 +504,245 @@ SequelizeConnectionError: database "decp_messaging" does not exist
 2026-03-19 11:41:52 [MESSAGING-SERVICE] [info]: ✅ Database connected.
 2026-03-19 11:41:52 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
 2026-03-19 11:41:52 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-19 12:27:17 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-19 12:27:18 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-19 12:27:18 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-19 12:44:50 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:44:50 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:46:41 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:46:41 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:46:43 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:46:43 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:50:13 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:50:13 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:50:15 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:50:15 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:57:14 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:57:14 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:57:15 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:57:15 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:57:19 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:57:19 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:57:20 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:57:20 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:57:45 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:57:45 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:57:46 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 12:57:46 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:22:08 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:22:08 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:23:35 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:23:35 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:33:55 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-19 13:33:55 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-19 13:33:55 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-19 13:34:10 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:34:10 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:35:00 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:35:00 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:35:01 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:35:01 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:46:58 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-19 13:46:58 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-19 13:46:58 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-19 13:47:13 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:47:13 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:56:29 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:56:29 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:56:30 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:56:30 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:56:38 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:56:38 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:56:39 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 13:56:39 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:00:00 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:00:00 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:00:01 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:00:01 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:02:30 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:02:30 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:02:32 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:02:32 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:02:33 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:02:33 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:02:34 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:02:34 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:06:07 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-19 14:06:07 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-19 14:06:07 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-19 14:06:24 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:06:24 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:06:46 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:06:46 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:06:47 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:06:47 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:11:42 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:11:42 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:11:43 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:11:43 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:17:15 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:17:15 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:17:16 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:17:16 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:21:12 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:21:12 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:21:13 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:21:13 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:36:49 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:36:49 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:36:50 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:36:50 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:37:35 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:37:35 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:37:37 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:37:37 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:43:32 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:43:32 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:43:33 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:43:33 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:45:07 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:45:07 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:45:08 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:45:08 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:45:10 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:45:10 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:45:11 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:45:11 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:48:44 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:48:44 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:48:45 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:48:45 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:52:36 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:52:36 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:52:37 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:52:37 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:52:55 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:52:55 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:52:56 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:52:56 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:56:26 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:56:26 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:56:27 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:56:27 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:58:17 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 14:58:17 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 15:00:04 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:00:04 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:06:04 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:06:04 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:06:05 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:06:05 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:12:04 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:12:04 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:12:06 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:12:06 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:12:15 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:12:15 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:12:17 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:12:17 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:17:25 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:17:25 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:19:20 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:19:20 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:21:43 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:21:43 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:21:45 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:21:45 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:24:09 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:24:09 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:24:11 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:24:11 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:29:02 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:29:02 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:29:04 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:29:04 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:49:04 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:49:04 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:49:06 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:49:06 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:49:19 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:50:04 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:50:04 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:50:53 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 15:52:14 [MESSAGING-SERVICE] [info]: User connected: 7c2fc481-4989-4f96-b04f-6ff8a71139d4
+2026-03-19 15:52:14 [MESSAGING-SERVICE] [info]: User connected: 7c2fc481-4989-4f96-b04f-6ff8a71139d4
+2026-03-19 16:10:52 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 16:10:52 [MESSAGING-SERVICE] [info]: User disconnected: 7c2fc481-4989-4f96-b04f-6ff8a71139d4
+2026-03-19 16:10:52 [MESSAGING-SERVICE] [info]: User disconnected: 7c2fc481-4989-4f96-b04f-6ff8a71139d4
+2026-03-19 16:10:52 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 16:10:54 [MESSAGING-SERVICE] [info]: User connected: 7c2fc481-4989-4f96-b04f-6ff8a71139d4
+2026-03-19 16:10:54 [MESSAGING-SERVICE] [info]: User connected: 7c2fc481-4989-4f96-b04f-6ff8a71139d4
+2026-03-19 16:32:00 [MESSAGING-SERVICE] [error]: Get messages error: invalid input syntax for type uuid: "1" {"name":"SequelizeDatabaseError","parent":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"original":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';","parameters":{}}
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Conversation.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Conversation.findOne (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Conversation.findByPk (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async getMessages (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\dist\controllers\conversationController.js:97:30)
+2026-03-19 16:32:00 [MESSAGING-SERVICE] [error]: Get messages error: invalid input syntax for type uuid: "1" {"name":"SequelizeDatabaseError","parent":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"original":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';","parameters":{}}
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Conversation.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Conversation.findOne (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Conversation.findByPk (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async getMessages (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\dist\controllers\conversationController.js:97:30)
+2026-03-19 16:32:06 [MESSAGING-SERVICE] [error]: Send message error: invalid input syntax for type uuid: "1" {"name":"SequelizeDatabaseError","parent":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"original":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';","parameters":{}}
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Conversation.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Conversation.findOne (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Conversation.findByPk (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async sendMessage (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\dist\controllers\conversationController.js:129:30)
+2026-03-19 16:32:11 [MESSAGING-SERVICE] [error]: Get messages error: invalid input syntax for type uuid: "1" {"name":"SequelizeDatabaseError","parent":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"original":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';","parameters":{}}
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Conversation.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Conversation.findOne (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Conversation.findByPk (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async getMessages (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\dist\controllers\conversationController.js:97:30)
+2026-03-19 16:32:11 [MESSAGING-SERVICE] [error]: Get messages error: invalid input syntax for type uuid: "1" {"name":"SequelizeDatabaseError","parent":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"original":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';","parameters":{}}
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Conversation.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Conversation.findOne (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Conversation.findByPk (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async getMessages (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\dist\controllers\conversationController.js:97:30)
+2026-03-19 16:32:15 [MESSAGING-SERVICE] [error]: Get messages error: invalid input syntax for type uuid: "1" {"name":"SequelizeDatabaseError","parent":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"original":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';","parameters":{}}
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Conversation.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Conversation.findOne (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Conversation.findByPk (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async getMessages (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\dist\controllers\conversationController.js:97:30)
+2026-03-19 16:32:15 [MESSAGING-SERVICE] [error]: Get messages error: invalid input syntax for type uuid: "1" {"name":"SequelizeDatabaseError","parent":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"original":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';","parameters":{}}
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Conversation.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Conversation.findOne (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Conversation.findByPk (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async getMessages (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\dist\controllers\conversationController.js:97:30)
+2026-03-19 16:34:36 [MESSAGING-SERVICE] [info]: User disconnected: 7c2fc481-4989-4f96-b04f-6ff8a71139d4
+2026-03-19 16:34:36 [MESSAGING-SERVICE] [info]: User disconnected: 7c2fc481-4989-4f96-b04f-6ff8a71139d4
+2026-03-19 16:34:38 [MESSAGING-SERVICE] [info]: User connected: 7c2fc481-4989-4f96-b04f-6ff8a71139d4
+2026-03-19 16:34:38 [MESSAGING-SERVICE] [info]: User connected: 7c2fc481-4989-4f96-b04f-6ff8a71139d4

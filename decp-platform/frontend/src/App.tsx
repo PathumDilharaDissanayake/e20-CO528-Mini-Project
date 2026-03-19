@@ -26,7 +26,7 @@ import { SettingsPage } from '@pages/SettingsPage';
 
 // Loading Component — branded DECP spinner
 const PageLoader: React.FC = () => (
-  <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-slate-800">
+  <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-900 dark:to-slate-800">
     <div className="relative w-20 h-20">
       {/* Outer ring */}
       <div className="absolute inset-0 rounded-full border-4 border-green-100 dark:border-green-900/40"></div>

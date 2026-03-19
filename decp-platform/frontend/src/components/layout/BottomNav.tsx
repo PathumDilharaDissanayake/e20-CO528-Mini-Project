@@ -35,12 +35,17 @@ export const BottomNav: React.FC = () => {
       sx={{
         borderTopLeftRadius: 16,
         borderTopRightRadius: 16,
+        background: (t) => t.palette.mode === 'dark' ? 'rgba(15,23,42,0.97)' : '#d0d0d4',
+        borderTop: '1px solid',
+        borderColor: 'divider',
       }}
     >
       <BottomNavigation
         value={value}
         onChange={handleChange}
-        className="bg-white dark:bg-gray-900"
+        sx={{
+          background: (t) => t.palette.mode === 'dark' ? 'rgba(15,23,42,0.97)' : '#d8d8dc',
+        }}
       >
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -49,11 +54,10 @@ export const BottomNav: React.FC = () => {
               key={item.path}
               label={item.label}
               icon={<Icon />}
-              className="text-gray-500 dark:text-gray-400"
               sx={{
-                '&.Mui-selected': {
-                  color: '#2196f3',
-                },
+                color: 'text.secondary',
+                '&.Mui-selected': { color: '#10b981' },
+                '& .MuiBottomNavigationAction-label': { fontSize: '0.7rem', fontWeight: 600 },
               }}
             />
           );

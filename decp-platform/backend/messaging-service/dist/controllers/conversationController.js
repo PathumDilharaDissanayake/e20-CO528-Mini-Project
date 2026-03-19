@@ -5,9 +5,57 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendMessage = exports.getMessages = exports.createConversation = exports.getConversationById = exports.getConversations = void 0;
 const sequelize_1 = require("sequelize");
+const http_1 = __importDefault(require("http"));
 const models_1 = require("../models");
 const logger_1 = require("../utils/logger");
 const joi_1 = __importDefault(require("joi"));
+/** Fetch participant profile data from user-service via internal endpoint */
+async function enrichParticipants(userIds) {
+    return new Promise((resolve) => {
+        if (userIds.length === 0) {
+            resolve(new Map());
+            return;
+        }
+        const qs = `userIds=${userIds.join(',')}`;
+        const options = {
+            hostname: 'localhost',
+            port: 3002,
+            path: `/internal/batch?${qs}`,
+            method: 'GET',
+            headers: {
+                'x-internal-token': process.env.INTERNAL_SERVICE_TOKEN || 'decp-internal-svc-token-change-in-production-2026'
+            }
+        };
+        const req = http_1.default.request(options, (res) => {
+            let data = '';
+            res.on('data', chunk => { data += chunk; });
+            res.on('end', () => {
+                try {
+                    const json = JSON.parse(data);
+                    const map = new Map();
+                    (json?.data || []).forEach((p) => {
+                        map.set(p.userId || p.id, {
+                            _id: p.userId || p.id,
+                            id: p.userId || p.id,
+                            firstName: p.firstName || '',
+                            lastName: p.lastName || '',
+                            avatar: p.avatar || null,
+                            role: p.role || 'student',
+                            headline: p.headline || null
+                        });
+                    });
+                    resolve(map);
+                }
+                catch {
+                    resolve(new Map());
+                }
+            });
+        });
+        req.on('error', () => resolve(new Map()));
+        req.setTimeout(3000, () => { req.destroy(); resolve(new Map()); });
+        req.end();
+    });
+}
 const createConversationSchema = joi_1.default.object({
     type: joi_1.default.string().valid('direct', 'group').required(),
     title: joi_1.default.string().max(200).when('type', { is: 'group', then: joi_1.default.required(), otherwise: joi_1.default.optional() }),
@@ -24,7 +72,16 @@ const getConversations = async (req, res) => {
             where: { participants: { [sequelize_1.Op.contains]: [userId] } },
             order: [['updatedAt', 'DESC']]
         });
-        res.json({ success: true, data: { conversations } });
+        // Collect all unique participant IDs across all conversations
+        const allParticipantIds = new Set();
+        conversations.forEach(c => (c.participants || []).forEach(id => allParticipantIds.add(id)));
+        // Enrich participant IDs with profile data from user-service
+        const profileMap = await enrichParticipants(Array.from(allParticipantIds));
+        const enriched = conversations.map(c => ({
+            ...c.toJSON(),
+            participants: (c.participants || []).map(id => profileMap.get(id) || { _id: id, id, firstName: 'User', lastName: '', role: 'student', avatar: null })
+        }));
+        res.json({ success: true, data: { conversations: enriched } });
     }
     catch (error) {
         logger_1.logger.error('Get conversations error:', error);
@@ -80,7 +137,12 @@ const createConversation = async (req, res) => {
             participants,
             createdBy: userId
         });
-        res.status(201).json({ success: true, message: 'Conversation created', data: { conversation } });
+        const profileMap = await enrichParticipants(participants);
+        const enriched = {
+            ...conversation.toJSON(),
+            participants: participants.map(id => profileMap.get(id) || { _id: id, id, firstName: 'User', lastName: '', role: 'student', avatar: null })
+        };
+        res.status(201).json({ success: true, message: 'Conversation created', data: { conversation: enriched } });
     }
     catch (error) {
         logger_1.logger.error('Create conversation error:', error);
