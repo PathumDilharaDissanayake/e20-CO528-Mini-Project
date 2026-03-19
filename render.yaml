@@ -1,29 +1,34 @@
 # Render.com Free Deployment Configuration
 # Deploy the DECP Platform for free using Render.com
 # See: https://render.com/docs/blueprint-spec
+#
+# NOTE: All paths are relative to the REPOSITORY ROOT (where this file lives).
+# Services are under: code/Mini Project/decp-platform/backend/<service>/
 
 services:
   # ─── Frontend (Static Site - Free) ───────────────────────────────────────
   - type: web
     name: decp-frontend
     runtime: static
-    buildCommand: cd frontend && npm ci && npm run build
-    staticPublishPath: frontend/dist
+    buildCommand: cd "code/Mini Project/decp-platform/frontend" && npm ci && npm run build
+    staticPublishPath: code/Mini Project/decp-platform/frontend/dist
     pullRequestPreviewsEnabled: false
     routes:
       - type: rewrite
         source: /*
         destination: /index.html
     envVars:
-      - key: VITE_API_BASE_URL
+      - key: VITE_API_URL
+        sync: false
+      - key: VITE_SOCKET_URL
         sync: false
 
-  # ─── API Gateway (Web Service - Free Tier) ───────────────────────────────
+  # ─── API Gateway ──────────────────────────────────────────────────────────
   - type: web
     name: decp-api-gateway
     runtime: docker
-    dockerfilePath: ./backend/api-gateway/Dockerfile
-    dockerContext: ./backend/api-gateway
+    dockerfilePath: ./code/Mini Project/decp-platform/backend/api-gateway/Dockerfile
+    dockerContext: ./code/Mini Project/decp-platform/backend/api-gateway
     plan: free
     envVars:
       - key: NODE_ENV
@@ -84,8 +89,8 @@ services:
   - type: web
     name: decp-auth-service
     runtime: docker
-    dockerfilePath: ./backend/auth-service/Dockerfile
-    dockerContext: ./backend/auth-service
+    dockerfilePath: ./code/Mini Project/decp-platform/backend/auth-service/Dockerfile
+    dockerContext: ./code/Mini Project/decp-platform/backend/auth-service
     plan: free
     envVars:
       - key: NODE_ENV
@@ -119,8 +124,8 @@ services:
   - type: web
     name: decp-user-service
     runtime: docker
-    dockerfilePath: ./backend/user-service/Dockerfile
-    dockerContext: ./backend/user-service
+    dockerfilePath: ./code/Mini Project/decp-platform/backend/user-service/Dockerfile
+    dockerContext: ./code/Mini Project/decp-platform/backend/user-service
     plan: free
     envVars:
       - key: NODE_ENV
@@ -150,8 +155,8 @@ services:
   - type: web
     name: decp-feed-service
     runtime: docker
-    dockerfilePath: ./backend/feed-service/Dockerfile
-    dockerContext: ./backend/feed-service
+    dockerfilePath: ./code/Mini Project/decp-platform/backend/feed-service/Dockerfile
+    dockerContext: ./code/Mini Project/decp-platform/backend/feed-service
     plan: free
     envVars:
       - key: NODE_ENV
@@ -181,8 +186,8 @@ services:
   - type: web
     name: decp-jobs-service
     runtime: docker
-    dockerfilePath: ./backend/jobs-service/Dockerfile
-    dockerContext: ./backend/jobs-service
+    dockerfilePath: ./code/Mini Project/decp-platform/backend/jobs-service/Dockerfile
+    dockerContext: ./code/Mini Project/decp-platform/backend/jobs-service
     plan: free
     envVars:
       - key: NODE_ENV
@@ -212,8 +217,8 @@ services:
   - type: web
     name: decp-events-service
     runtime: docker
-    dockerfilePath: ./backend/events-service/Dockerfile
-    dockerContext: ./backend/events-service
+    dockerfilePath: ./code/Mini Project/decp-platform/backend/events-service/Dockerfile
+    dockerContext: ./code/Mini Project/decp-platform/backend/events-service
     plan: free
     envVars:
       - key: NODE_ENV
@@ -243,8 +248,8 @@ services:
   - type: web
     name: decp-research-service
     runtime: docker
-    dockerfilePath: ./backend/research-service/Dockerfile
-    dockerContext: ./backend/research-service
+    dockerfilePath: ./code/Mini Project/decp-platform/backend/research-service/Dockerfile
+    dockerContext: ./code/Mini Project/decp-platform/backend/research-service
     plan: free
     envVars:
       - key: NODE_ENV
@@ -274,8 +279,8 @@ services:
   - type: web
     name: decp-messaging-service
     runtime: docker
-    dockerfilePath: ./backend/messaging-service/Dockerfile
-    dockerContext: ./backend/messaging-service
+    dockerfilePath: ./code/Mini Project/decp-platform/backend/messaging-service/Dockerfile
+    dockerContext: ./code/Mini Project/decp-platform/backend/messaging-service
     plan: free
     envVars:
       - key: NODE_ENV
@@ -309,8 +314,8 @@ services:
   - type: web
     name: decp-notification-service
     runtime: docker
-    dockerfilePath: ./backend/notification-service/Dockerfile
-    dockerContext: ./backend/notification-service
+    dockerfilePath: ./code/Mini Project/decp-platform/backend/notification-service/Dockerfile
+    dockerContext: ./code/Mini Project/decp-platform/backend/notification-service
     plan: free
     envVars:
       - key: NODE_ENV
@@ -340,8 +345,8 @@ services:
   - type: web
     name: decp-analytics-service
     runtime: docker
-    dockerfilePath: ./backend/analytics-service/Dockerfile
-    dockerContext: ./backend/analytics-service
+    dockerfilePath: ./code/Mini Project/decp-platform/backend/analytics-service/Dockerfile
+    dockerContext: ./code/Mini Project/decp-platform/backend/analytics-service
     plan: free
     envVars:
       - key: NODE_ENV
