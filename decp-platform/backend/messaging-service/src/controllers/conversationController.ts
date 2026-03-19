@@ -3,6 +3,7 @@ import { Op } from 'sequelize';
 import http from 'http';
 import { Conversation, Message } from '../models';
 import { logger } from '../utils/logger';
+import { getSocketIO } from '../socket/socketInstance';
 import Joi from 'joi';
 
 /** Fetch participant profile data from user-service via internal endpoint */
@@ -175,9 +176,26 @@ export const getMessages = async (req: Request, res: Response): Promise<void> =>
       offset
     });
 
+    // Enrich each message with the sender's profile so the frontend can
+    // display real names instead of "Unknown User".
+    const uniqueSenderIds = [...new Set(messages.map(m => m.senderId).filter(Boolean))];
+    const profileMap = await enrichParticipants(uniqueSenderIds);
+
+    const enrichedMessages = messages.reverse().map(m => ({
+      ...m.toJSON(),
+      sender: profileMap.get(m.senderId) || {
+        _id: m.senderId,
+        id: m.senderId,
+        firstName: 'Unknown',
+        lastName: 'User',
+        role: 'student',
+        avatar: null,
+      },
+    }));
+
     res.json({
       success: true,
-      data: messages.reverse(),
+      data: enrichedMessages,
       meta: { page: parseInt(page as string), limit: parseInt(limit as string), total: count }
     });
   } catch (error) {
@@ -208,6 +226,25 @@ export const sendMessage = async (req: Request, res: Response): Promise<void> =>
       conversationId,
       senderId: userId
     });
+
+    // Broadcast in real-time to everyone in this conversation room.
+    // This covers recipients who have the conversation open right now.
+    const io = getSocketIO();
+    if (io) {
+      const msgJson = message.toJSON();
+      const payload = { ...msgJson, conversationId, chat: conversationId };
+
+      // Emit to conversation room (users actively viewing this chat)
+      io.to(`conversation:${conversationId}`).emit('new-message', payload);
+      io.to(`conversation:${conversationId}`).emit('new_message', { message: payload, conversationId });
+
+      // Also emit to each participant's personal room so they receive it
+      // even if they haven't joined the conversation room yet.
+      conversation.participants.forEach((participantId: string) => {
+        io.to(`user:${participantId}`).emit('new-message', payload);
+        io.to(`user:${participantId}`).emit('new_message', { message: payload, conversationId });
+      });
+    }
 
     res.status(201).json({ success: true, message: 'Message sent', data: { message } });
   } catch (error) {

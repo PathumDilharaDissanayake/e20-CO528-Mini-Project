@@ -119,7 +119,7 @@ export const chatApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: any) => ({
         ...response,
-        data: normalizeChat(response?.data || response?.data?.conversation),
+        data: normalizeChat(response?.data?.conversation || response?.data),
       }),
       invalidatesTags: ['Chat'],
     }),

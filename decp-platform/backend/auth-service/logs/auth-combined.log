@@ -2844,3 +2844,15 @@ Error
 2026-03-19 15:52:14 [AUTH-SERVICE] [warn]: SMTP not configured — skipping email to mystudentgmail@gmail.com
 2026-03-19 15:52:14 [AUTH-SERVICE] [info]: User registered: mystudentgmail@gmail.com
 2026-03-19 16:19:28 [AUTH-SERVICE] [info]: User logged in: pathumdilharadissanayake@gmail.com
+2026-03-19 18:40:26 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-19 18:40:27 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-19 18:40:27 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-19 18:40:27 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001
+2026-03-19 18:41:10 [AUTH-SERVICE] [info]: User logged in: pathumdilharadissanayake@gmail.com
+2026-03-19 18:42:23 [AUTH-SERVICE] [info]: User logged in: pathumdilharadissanayake@gmail.com
+2026-03-19 19:01:20 [AUTH-SERVICE] [info]: User logged in: chiara.lopez135@decp.edu
+2026-03-20 01:02:09 [AUTH-SERVICE] [info]: User logged in: pathumdilharadissanayake@gmail.com
+2026-03-20 01:23:25 [AUTH-SERVICE] [warn]: Google OAuth not configured - set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+2026-03-20 01:23:26 [AUTH-SERVICE] [info]: ✅ Database connection established successfully.
+2026-03-20 01:23:26 [AUTH-SERVICE] [info]: ✅ Database synchronized.
+2026-03-20 01:23:26 [AUTH-SERVICE] [info]: 🔐 Auth Service running on port 3001

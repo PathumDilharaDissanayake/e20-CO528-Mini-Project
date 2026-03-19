@@ -9,6 +9,7 @@ import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 import { internalAuthMiddleware } from './middleware/internalAuth';
 import conversationRoutes from './routes/conversationRoutes';
 import { setupSocketIO } from './socket';
+import { setSocketIO } from './socket/socketInstance';
 import sequelize from './config/database';
 
 const app: Application = express();
@@ -61,6 +62,8 @@ app.use('/', conversationRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
+// Register socket instance so controllers can emit events
+setSocketIO(io);
 // Setup Socket.IO
 setupSocketIO(io);
 

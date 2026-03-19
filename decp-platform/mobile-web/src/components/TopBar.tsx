@@ -6,22 +6,21 @@ interface TopBarProps {
   showBack?: boolean
   onBack?: () => void
   rightAction?: ReactNode
+  transparent?: boolean
 }
 
-export default function TopBar({ title, showBack, onBack, rightAction }: TopBarProps) {
+export default function TopBar({ title, showBack, onBack, rightAction, transparent }: TopBarProps) {
   const navigate = useNavigate()
-
-  const handleBack = () => {
-    if (onBack) onBack()
-    else navigate(-1)
-  }
 
   return (
     <div
       style={{
         height: 56,
-        background: '#fff',
-        borderBottom: '1px solid #f3f4f6',
+        background: transparent ? 'transparent' : 'rgba(6,12,9,0.85)',
+        backdropFilter: transparent ? 'none' : 'blur(24px) saturate(140%)',
+        WebkitBackdropFilter: transparent ? 'none' : 'blur(24px) saturate(140%)',
+        borderBottom: transparent ? 'none' : '1px solid rgba(0,217,138,0.08)',
+        boxShadow: transparent ? 'none' : '0 1px 0 rgba(0,217,138,0.05)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -29,53 +28,51 @@ export default function TopBar({ title, showBack, onBack, rightAction }: TopBarP
         flexShrink: 0,
         position: 'sticky',
         top: 0,
-        zIndex: 10,
+        zIndex: 20,
       }}
     >
-      {/* Left: back button or spacer */}
-      <div style={{ width: 40, display: 'flex', alignItems: 'center' }}>
+      {/* Left */}
+      <div style={{ width: 44, display: 'flex', alignItems: 'center' }}>
         {showBack && (
           <button
-            onClick={handleBack}
+            onClick={() => { if (onBack) onBack(); else navigate(-1) }}
+            aria-label="Go back"
             style={{
               border: 'none',
-              background: 'none',
+              background: 'rgba(0,217,138,0.08)',
               cursor: 'pointer',
-              padding: 4,
-              borderRadius: 8,
+              padding: 8,
+              borderRadius: 12,
               display: 'flex',
               alignItems: 'center',
-              color: '#10b981',
+              justifyContent: 'center',
+              minWidth: 44,
+              minHeight: 44,
+              transition: 'background 0.2s',
             }}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M15 18l-6-6 6-6"
-                stroke="#10b981"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18l-6-6 6-6" stroke="#7A9E8E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
         )}
       </div>
 
-      {/* Center: title */}
+      {/* Title */}
       <span
         style={{
-          fontFamily: 'Inter, sans-serif',
-          fontWeight: 700,
+          fontFamily: 'Archivo, sans-serif',
+          fontWeight: 800,
           fontSize: 17,
-          color: '#111827',
+          color: '#E8FFF4',
           letterSpacing: '-0.3px',
         }}
       >
         {title}
       </span>
 
-      {/* Right: action */}
-      <div style={{ width: 40, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+      {/* Right */}
+      <div style={{ width: 44, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
         {rightAction}
       </div>
     </div>

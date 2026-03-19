@@ -129,12 +129,14 @@ export const getMyProfile = async (req: Request, res: Response): Promise<void> =
         socialLinks: {}
       });
     } else {
-      // Keep basic info in sync with auth service data from headers
+      // Sync email and role from auth service (these are auth-managed)
+      // Only populate firstName/lastName from headers when profile fields are empty —
+      // never overwrite values the user has explicitly set via PUT /users/me
       const updates: any = {};
       if (email && profile.email !== email) updates.email = email;
       if (role && profile.role !== role) updates.role = role;
-      if (firstName && profile.firstName !== firstName) updates.firstName = firstName;
-      if (lastName && profile.lastName !== lastName) updates.lastName = lastName;
+      if (firstName && !profile.firstName) updates.firstName = firstName;
+      if (lastName && !profile.lastName) updates.lastName = lastName;
       if (Object.keys(updates).length > 0) await profile.update(updates);
     }
 

@@ -3,31 +3,24 @@ export default function LoadingSpinner({ size = 32 }: { size?: number }) {
     <div
       style={{
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100%',
-        minHeight: 120,
-        flexDirection: 'column',
+        padding: 40,
         gap: 12,
       }}
     >
       <div
-        className="spinner"
         style={{
           width: size,
           height: size,
           borderRadius: '50%',
-          border: `3px solid rgba(16,185,129,0.15)`,
-          borderTopColor: '#10b981',
+          border: '2.5px solid rgba(255,255,255,0.08)',
+          borderTopColor: '#3B82F6',
+          animation: 'spin 0.7s linear infinite',
         }}
       />
-      <span
-        style={{
-          fontSize: 13,
-          color: '#9ca3af',
-          fontFamily: 'Inter, sans-serif',
-        }}
-      >
+      <span style={{ fontSize: 12, color: '#4B5A6A', fontFamily: 'Space Grotesk, sans-serif' }}>
         Loading…
       </span>
     </div>

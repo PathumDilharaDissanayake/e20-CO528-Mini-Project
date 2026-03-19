@@ -17,7 +17,8 @@ const app: Application = express();
 // Security middleware
 app.use(helmet({
   contentSecurityPolicy: false,
-  crossOriginEmbedderPolicy: false
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: false,
 }));
 
 // CORS configuration - Allow all origins for development

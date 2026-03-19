@@ -746,3 +746,151 @@ Error
 2026-03-19 16:34:36 [MESSAGING-SERVICE] [info]: User disconnected: 7c2fc481-4989-4f96-b04f-6ff8a71139d4
 2026-03-19 16:34:38 [MESSAGING-SERVICE] [info]: User connected: 7c2fc481-4989-4f96-b04f-6ff8a71139d4
 2026-03-19 16:34:38 [MESSAGING-SERVICE] [info]: User connected: 7c2fc481-4989-4f96-b04f-6ff8a71139d4
+2026-03-19 18:40:32 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-19 18:40:32 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-19 18:40:32 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-19 18:41:11 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 18:41:11 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 18:41:20 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 18:41:20 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 18:41:22 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 18:41:22 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 18:41:25 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 18:41:25 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 18:41:26 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 18:41:26 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 19:01:21 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 19:01:21 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 19:02:00 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 19:02:00 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 19:02:03 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 19:02:03 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 19:03:12 [MESSAGING-SERVICE] [error]: Get messages error: invalid input syntax for type uuid: "1" {"name":"SequelizeDatabaseError","parent":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"original":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';","parameters":{}}
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Conversation.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Conversation.findOne (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Conversation.findByPk (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async getMessages (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\dist\controllers\conversationController.js:159:30)
+2026-03-19 19:03:12 [MESSAGING-SERVICE] [error]: Get messages error: invalid input syntax for type uuid: "1" {"name":"SequelizeDatabaseError","parent":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"original":{"length":101,"name":"error","severity":"ERROR","code":"22P02","position":"152","file":"uuid.c","line":"177","routine":"string_to_uuid","sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';"},"sql":"SELECT \"id\", \"type\", \"title\", \"participants\", \"createdBy\", \"createdAt\", \"updatedAt\" FROM \"conversations\" AS \"Conversation\" WHERE \"Conversation\".\"id\" = '1';","parameters":{}}
+Error
+    at Query.run (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async PostgresQueryInterface.select (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Conversation.findAll (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1140:21)
+    at async Conversation.findOne (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1240:12)
+    at async Conversation.findByPk (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\node_modules\sequelize\lib\model.js:1221:12)
+    at async getMessages (E:\Git Hub\e20-CO528-Mini-Project\decp-platform\backend\messaging-service\dist\controllers\conversationController.js:159:30)
+2026-03-19 19:39:26 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 19:39:43 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 19:40:50 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 19:42:07 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 20:02:05 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 20:16:23 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 20:16:23 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 20:18:08 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 20:18:08 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 20:18:08 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 20:50:44 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 20:50:44 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 20:50:44 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 20:50:44 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-19 20:50:44 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 20:50:44 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 21:51:01 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 21:51:01 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:13:52 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:13:52 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:13:55 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:13:55 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:14:09 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:14:09 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:14:10 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:14:12 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:15:22 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:15:22 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:50:48 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:50:49 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:57:10 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:57:10 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:57:14 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:57:14 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:57:14 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-19 22:57:14 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:11:25 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:11:25 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:12:09 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:12:31 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:27:53 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:27:53 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:27:54 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:27:54 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:30:28 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:31:55 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:31:55 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:31:57 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:31:57 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:32:31 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:35:02 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:42:09 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:45:14 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:45:14 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:45:15 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:45:15 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:45:51 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:45:51 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:45:51 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:45:51 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:45:53 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:45:53 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:45:53 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:45:53 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:50:40 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:50:40 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:50:40 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:50:40 [MESSAGING-SERVICE] [info]: User disconnected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:50:42 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:50:42 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 00:52:04 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:52:04 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:52:05 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 00:52:05 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:06:29 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:06:29 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:06:31 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:06:31 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:15:13 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:15:13 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:15:14 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:15:14 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:23:33 [MESSAGING-SERVICE] [info]: ✅ Database connected.
+2026-03-20 01:23:33 [MESSAGING-SERVICE] [info]: ✅ Database synchronized.
+2026-03-20 01:23:33 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007
+2026-03-20 01:23:46 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:23:46 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:24:04 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:24:04 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:26:32 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:26:32 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:26:33 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:26:33 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:26:38 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:26:38 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:27:32 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:27:32 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:27:33 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:27:33 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:27:36 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:27:36 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:27:37 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:27:37 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:27:47 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 01:27:47 [MESSAGING-SERVICE] [info]: User connected: ea327809-eb65-4380-8f2c-c8675ec6b1a6
+2026-03-20 01:28:18 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:28:18 [MESSAGING-SERVICE] [info]: User disconnected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:28:19 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059
+2026-03-20 01:28:19 [MESSAGING-SERVICE] [info]: User connected: 15d21610-62f6-4c32-b0e6-1920f1cf4059

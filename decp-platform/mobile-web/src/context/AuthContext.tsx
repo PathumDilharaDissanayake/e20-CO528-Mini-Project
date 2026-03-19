@@ -18,6 +18,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>
   register: (data: RegisterData) => Promise<void>
   logout: () => void
+  updateUser: (partial: Partial<User>) => void
 }
 
 interface RegisterData {
@@ -49,7 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           .then((res) => {
             const u = res.data?.data?.user || res.data?.data || res.data?.user || res.data
             if (u?.id || u?._id) {
-              const normalized = { ...u, id: u._id || u.id }
+              const normalized = { ...u, id: u._id || u.id, avatar: u.avatar || u.profilePicture }
               setUser(normalized)
               localStorage.setItem('decp_user', JSON.stringify(normalized))
             }
@@ -70,12 +71,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  const normalizeUser = (raw: any): User => {
+    if (!raw) return raw
+    return { ...raw, id: raw._id || raw.id, avatar: raw.avatar || raw.profilePicture }
+  }
+
   const login = async (email: string, password: string) => {
     const res = await api.post('/auth/login', { email, password })
     // API returns { success, data: { user, accessToken, refreshToken } }
     const payload = res.data?.data || res.data
     const resolvedToken = payload?.accessToken || payload?.access_token || payload?.token
-    const resolvedUser = payload?.user || payload
+    const resolvedUser = normalizeUser(payload?.user || payload)
 
     if (!resolvedToken) throw new Error('No token returned from server')
 
@@ -89,7 +95,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const res = await api.post('/auth/register', data)
     const payload = res.data?.data || res.data
     const resolvedToken = payload?.accessToken || payload?.access_token || payload?.token
-    const resolvedUser = payload?.user || payload
+    const resolvedUser = normalizeUser(payload?.user || payload)
 
     if (resolvedToken) {
       localStorage.setItem('decp_token', resolvedToken)
@@ -97,6 +103,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setToken(resolvedToken)
       setUser(resolvedUser)
     }
+  }
+
+  const updateUser = (partial: Partial<User>) => {
+    setUser((prev) => {
+      if (!prev) return prev
+      const updated = { ...prev, ...partial }
+      localStorage.setItem('decp_user', JSON.stringify(updated))
+      return updated
+    })
   }
 
   const logout = () => {
@@ -116,6 +131,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         login,
         register,
         logout,
+        updateUser,
       }}
     >
       {children}

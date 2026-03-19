@@ -31,18 +31,25 @@ const getUsers = async (req, res) => {
                 { headline: { [sequelize_1.Op.iLike]: `%${q}%` } }
             ];
         }
-        // Use DISTINCT ON userId to avoid duplicate profiles from multiple seed runs
-        const { count, rows: profiles } = await models_1.Profile.findAndCountAll({
+        // Fetch all matching, then deduplicate by userId (most recently updated wins)
+        const allProfiles = await models_1.Profile.findAll({
             where,
-            order: [['userId', 'ASC'], ['createdAt', 'DESC']],
-            limit,
-            offset
+            order: [['userId', 'ASC'], ['updatedAt', 'DESC']],
         });
+        const seen = new Set();
+        const unique = allProfiles.filter(p => {
+            if (seen.has(p.userId))
+                return false;
+            seen.add(p.userId);
+            return true;
+        });
+        const total = unique.length;
+        const profiles = unique.slice(offset, offset + limit);
         res.json({
             success: true,
             message: 'Users retrieved successfully',
             data: profiles,
-            meta: { page, limit, total: count, totalPages: Math.ceil(count / limit) }
+            meta: { page, limit, total, totalPages: Math.ceil(total / limit) }
         });
     }
     catch (error) {
@@ -93,7 +100,8 @@ const getMyProfile = async (req, res) => {
             return;
         }
         let profile = await models_1.Profile.findOne({
-            where: { userId }
+            where: { userId },
+            order: [['updatedAt', 'DESC']]
         });
         const email = req.headers['x-user-email'];
         const role = req.headers['x-user-role'];
@@ -115,15 +123,17 @@ const getMyProfile = async (req, res) => {
             });
         }
         else {
-            // Keep basic info in sync with auth service data from headers
+            // Sync email and role from auth service (these are auth-managed)
+            // Only populate firstName/lastName from headers when profile fields are empty —
+            // never overwrite values the user has explicitly set via PUT /users/me
             const updates = {};
             if (email && profile.email !== email)
                 updates.email = email;
             if (role && profile.role !== role)
                 updates.role = role;
-            if (firstName && profile.firstName !== firstName)
+            if (firstName && !profile.firstName)
                 updates.firstName = firstName;
-            if (lastName && profile.lastName !== lastName)
+            if (lastName && !profile.lastName)
                 updates.lastName = lastName;
             if (Object.keys(updates).length > 0)
                 await profile.update(updates);
@@ -162,9 +172,13 @@ const updateProfile = async (req, res) => {
             });
             return;
         }
-        const [profile, created] = await models_1.Profile.findOrCreate({
+        // Find the most recently-updated profile for this user (avoids stale duplicate picking up wrong row)
+        let profile = await models_1.Profile.findOne({
             where: { userId },
-            defaults: {
+            order: [['updatedAt', 'DESC']]
+        });
+        if (!profile) {
+            profile = await models_1.Profile.create({
                 userId,
                 ...value,
                 skills: value.skills || [],
@@ -172,9 +186,9 @@ const updateProfile = async (req, res) => {
                 education: value.education || [],
                 experience: value.experience || [],
                 socialLinks: value.socialLinks || {}
-            }
-        });
-        if (!created) {
+            });
+        }
+        else {
             await profile.update(value);
         }
         res.json({
@@ -561,7 +575,7 @@ const getBatchProfiles = async (req, res) => {
         }
         const profiles = await models_1.Profile.findAll({
             where: { userId: { [sequelize_1.Op.in]: userIds } },
-            order: [['createdAt', 'DESC']]
+            order: [['updatedAt', 'DESC']]
         });
         // Return only the most recent profile per userId
         const seen = new Set();

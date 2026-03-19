@@ -28,11 +28,12 @@ import { Search, Edit, GroupAdd, Message as MessageIcon } from '@mui/icons-mater
 import { useSelector } from 'react-redux';
 import { RootState } from '@store';
 import { useGetChatsQuery } from '@services/chatApi';
-import { useGetUsersQuery } from '@services/userApi';
+import { useSearchUsersQuery } from '@services/userApi';
 import { useCreateChatMutation } from '@services/chatApi';
 import { ChatRoom } from '@components/messaging/ChatRoom';
 import { Chat, User } from '@types';
 import { formatRelativeTime } from '@utils';
+import { useSocket } from '@hooks';
 
 // ─── Avatar gradient helpers ───────────────────────────────────────────────────
 
@@ -189,9 +190,18 @@ export const MessagesPage: React.FC = () => {
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const { user } = useSelector((state: RootState) => state.auth);
-  const { data: chatsData, isLoading } = useGetChatsQuery(undefined, {
+  const { data: chatsData, isLoading, refetch: refetchChats } = useGetChatsQuery(undefined, {
     pollingInterval: 10000,
   });
+
+  // Refetch chat list in real-time when any new message arrives on this user's room
+  const { onNewMessage } = useSocket();
+  React.useEffect(() => {
+    const unsubscribe = onNewMessage(() => {
+      refetchChats();
+    });
+    return unsubscribe;
+  }, [onNewMessage, refetchChats]);
 
   const [newChatOpen, setNewChatOpen] = useState(false);
   const [newGroupOpen, setNewGroupOpen] = useState(false);
@@ -199,8 +209,10 @@ export const MessagesPage: React.FC = () => {
   const [groupName, setGroupName] = useState('');
   const [selectedGroupUsers, setSelectedGroupUsers] = useState<string[]>([]);
   const [createChat, { isLoading: isCreatingChat }] = useCreateChatMutation();
-  const { data: usersData, isFetching: isSearching } = useGetUsersQuery(
-    { search: userQuery.trim() || undefined, limit: 20 },
+  // useSearchUsersQuery: when q is empty it returns ALL profiles (no firstName filter),
+  // which is better than getUsers which skips users with empty firstName.
+  const { data: usersData, isFetching: isSearching } = useSearchUsersQuery(
+    { q: userQuery.trim() },
     { skip: !newChatOpen && !newGroupOpen }
   );
 
@@ -399,10 +411,10 @@ export const MessagesPage: React.FC = () => {
 
   const selectedChatId = selectedChat?._id || selectedChat?.id || '';
 
-  // Mobile view
+  // Mobile view — use 100svh (small viewport height) to stay within browser chrome
   if (isMobile) {
     return (
-      <Box sx={{ height: 'calc(100vh - 120px)' }}>
+      <Box sx={{ height: 'calc(100svh - 156px)' }}>
         {selectedChat ? (
           <Paper sx={{ height: '100%', overflow: 'hidden', borderRadius: '16px' }}>
             <ChatRoom key={selectedChatId} chat={selectedChat} onBack={handleBack} isMobile />
@@ -418,7 +430,7 @@ export const MessagesPage: React.FC = () => {
 
   // Desktop view
   return (
-    <Box sx={{ height: 'calc(100vh - 120px)' }}>
+    <Box sx={{ height: 'calc(100vh - 108px)' }}>
       <Paper
         sx={{
           height: '100%',
@@ -539,9 +551,10 @@ export const MessagesPage: React.FC = () => {
         onClose={() => { setNewChatOpen(false); setUserQuery(''); }}
         maxWidth="xs"
         fullWidth
+        fullScreen={isMobile}
         PaperProps={{
           sx: {
-            borderRadius: '20px',
+            borderRadius: isMobile ? 0 : '20px',
             overflow: 'hidden',
           },
         }}
@@ -585,14 +598,17 @@ export const MessagesPage: React.FC = () => {
               <CircularProgress size={24} sx={{ color: '#10b981' }} />
             </Box>
           )}
-          {!isSearching && userQuery.trim() && usersData?.data?.length === 0 && (
+          {!isSearching && (usersData?.data || []).filter((u: User) => (u._id || u.id) !== currentUserId).length === 0 && (
             <Typography variant="body2" color="text.disabled" sx={{ textAlign: 'center', py: 2 }}>
-              No users found
+              {isSearching ? '' : userQuery.trim() ? 'No users found' : 'No users available'}
             </Typography>
           )}
           <List dense disablePadding>
             {(usersData?.data || []).filter((u: User) => (u._id || u.id) !== currentUserId).map((u: User) => {
-              const uName = `${u.firstName || ''} ${u.lastName || ''}`.trim();
+              const uName =
+                `${u.firstName || ''} ${u.lastName || ''}`.trim() ||
+                u.email?.split('@')[0]?.replace(/[._]/g, ' ') ||
+                'User';
               return (
                 <ListItemButton
                   key={u._id || u.id}
@@ -617,7 +633,8 @@ export const MessagesPage: React.FC = () => {
                           fontWeight: 700,
                         }}
                       >
-                        {u.firstName?.[0]}{u.lastName?.[0]}
+                        {(u.firstName?.[0] || u.email?.[0] || 'U').toUpperCase()}
+                        {u.lastName?.[0]?.toUpperCase()}
                       </Avatar>
                       {/* Online indicator dot */}
                       <Box
@@ -641,7 +658,7 @@ export const MessagesPage: React.FC = () => {
                     }
                     secondary={
                       <Typography variant="caption" color="text.secondary" sx={{ textTransform: 'capitalize' }}>
-                        {u.role}
+                        {u.role}{u.email ? ` · ${u.email}` : ''}
                       </Typography>
                     }
                   />
@@ -667,9 +684,10 @@ export const MessagesPage: React.FC = () => {
         onClose={() => { setNewGroupOpen(false); setUserQuery(''); setGroupName(''); setSelectedGroupUsers([]); }}
         maxWidth="xs"
         fullWidth
+        fullScreen={isMobile}
         PaperProps={{
           sx: {
-            borderRadius: '20px',
+            borderRadius: isMobile ? 0 : '20px',
             overflow: 'hidden',
           },
         }}
@@ -748,7 +766,10 @@ export const MessagesPage: React.FC = () => {
             {(usersData?.data || []).filter((u: User) => (u._id || u.id) !== currentUserId).map((u: User) => {
               const uid = u._id || u.id || '';
               const checked = selectedGroupUsers.includes(uid);
-              const uName = `${u.firstName || ''} ${u.lastName || ''}`.trim();
+              const uName =
+                `${u.firstName || ''} ${u.lastName || ''}`.trim() ||
+                u.email?.split('@')[0]?.replace(/[._]/g, ' ') ||
+                'User';
               return (
                 <ListItemButton
                   key={uid}

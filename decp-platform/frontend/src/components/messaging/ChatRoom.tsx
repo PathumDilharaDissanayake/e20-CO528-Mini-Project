@@ -43,9 +43,9 @@ export const ChatRoom: React.FC<ChatRoomProps> = ({ chat, onBack, isMobile }) =>
   const chatId = chat._id || chat.id || '';
   const currentUserId = user?._id || user?.id || '';
 
-  const { data: messagesData, isLoading: isLoadingMessages } = useGetMessagesQuery(
+  const { data: messagesData, isLoading: isLoadingMessages, refetch: refetchMessages } = useGetMessagesQuery(
     { chatId, page: 1, limit: 50 },
-    { skip: !chatId, pollingInterval: 8000 }
+    { skip: !chatId, pollingInterval: 3000 }
   );
   const [sendMessage] = useSendMessageMutation();
   const { joinChat, leaveChat, onNewMessage, isConnected } = useSocket();
@@ -113,6 +113,10 @@ export const ChatRoom: React.FC<ChatRoomProps> = ({ chat, onBack, isMobile }) =>
         if (id && prev.some((m) => (m._id || m.id) === id)) return prev;
         return [...prev, enrichedMessage];
       });
+
+      // Immediately pull confirmed server copy so we get the real message ID,
+      // timestamp, and enriched sender — this makes receipt near-instant.
+      refetchMessages();
     });
 
     return () => {
@@ -150,8 +154,9 @@ export const ChatRoom: React.FC<ChatRoomProps> = ({ chat, onBack, isMobile }) =>
 
     try {
       await sendMessage({ chatId, content: text }).unwrap();
-      // Remove temp — the refetch will include the real message
+      // Remove temp and immediately fetch the confirmed server message
       setLocalMessages((prev) => prev.filter((m) => (m._id || m.id) !== tempId));
+      refetchMessages();
     } catch (error) {
       console.error('[ChatRoom] Failed to send message:', error);
       // Keep temp message visible so user knows it was attempted
@@ -329,7 +334,13 @@ export const ChatRoom: React.FC<ChatRoomProps> = ({ chat, onBack, isMobile }) =>
         {allMessages.map((message) => {
           const isMine = isMyMessage(message);
           const isTemp = (message._id || message.id || '').startsWith('temp-');
-          const sender = (message.sender || { firstName: 'User', lastName: '', role: 'student' }) as any;
+          // Resolve sender: prefer backend-enriched data, fall back to participant lookup
+          const rawSender = message.sender as any;
+          const sender = (
+            rawSender?.firstName && rawSender.firstName !== 'Unknown'
+              ? rawSender
+              : resolveSender(message.senderId || rawSender?._id || rawSender?.id || '')
+          ) as any;
           const senderName = `${sender.firstName || 'User'} ${sender.lastName || ''}`.trim();
 
           return (

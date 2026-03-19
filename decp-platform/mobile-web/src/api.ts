@@ -37,3 +37,13 @@ export default api
 export function getApiUrl(path: string): string {
   return `http://localhost:3000/api/v1${path}`
 }
+
+const MEDIA_BASE = 'http://localhost:3000'
+
+/** Resolves any image path from the API to a full usable URL */
+export function resolveImageUrl(path: string | null | undefined): string | undefined {
+  if (!path || typeof path !== 'string') return undefined
+  if (path.startsWith('http://') || path.startsWith('https://')) return path
+  if (path.startsWith('/')) return `${MEDIA_BASE}${path}`
+  return `${MEDIA_BASE}/uploads/${path}`
+}

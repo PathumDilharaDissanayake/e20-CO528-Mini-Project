@@ -3,85 +3,31 @@ import { useNavigate, useLocation } from 'react-router-dom'
 const tabs = [
   {
     key: 'feed',
-    label: 'Feed',
+    label: 'Home',
     path: '/feed',
+    color: '#00D98A',
     icon: (active: boolean) => (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
         <path
           d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
-          stroke={active ? '#10b981' : '#9ca3af'}
+          stroke={active ? '#00D98A' : '#2D4A3E'}
           strokeWidth="2"
           strokeLinecap="round"
-          strokeLinejoin="round"
-          fill={active ? 'rgba(16,185,129,0.1)' : 'none'}
+          fill={active ? 'rgba(0,217,138,0.15)' : 'none'}
         />
-        <polyline
-          points="9 22 9 12 15 12 15 22"
-          stroke={active ? '#10b981' : '#9ca3af'}
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <polyline points="9 22 9 12 15 12 15 22" stroke={active ? '#00D98A' : '#2D4A3E'} strokeWidth="2" strokeLinecap="round"/>
       </svg>
     ),
   },
   {
-    key: 'jobs',
-    label: 'Jobs',
-    path: '/jobs',
+    key: 'search',
+    label: 'Search',
+    path: '/search',
+    color: '#00E5CC',
     icon: (active: boolean) => (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <rect
-          x="2" y="7" width="20" height="14" rx="2"
-          stroke={active ? '#10b981' : '#9ca3af'}
-          strokeWidth="2"
-          fill={active ? 'rgba(16,185,129,0.1)' : 'none'}
-        />
-        <path
-          d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"
-          stroke={active ? '#10b981' : '#9ca3af'}
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        <line x1="12" y1="12" x2="12" y2="16" stroke={active ? '#10b981' : '#9ca3af'} strokeWidth="2" strokeLinecap="round"/>
-        <line x1="2" y1="12" x2="22" y2="12" stroke={active ? '#10b981' : '#9ca3af'} strokeWidth="2"/>
-      </svg>
-    ),
-  },
-  {
-    key: 'events',
-    label: 'Events',
-    path: '/events',
-    icon: (active: boolean) => (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <rect
-          x="3" y="4" width="18" height="18" rx="2"
-          stroke={active ? '#10b981' : '#9ca3af'}
-          strokeWidth="2"
-          fill={active ? 'rgba(16,185,129,0.1)' : 'none'}
-        />
-        <line x1="16" y1="2" x2="16" y2="6" stroke={active ? '#10b981' : '#9ca3af'} strokeWidth="2" strokeLinecap="round"/>
-        <line x1="8" y1="2" x2="8" y2="6" stroke={active ? '#10b981' : '#9ca3af'} strokeWidth="2" strokeLinecap="round"/>
-        <line x1="3" y1="10" x2="21" y2="10" stroke={active ? '#10b981' : '#9ca3af'} strokeWidth="2"/>
-        <rect x="8" y="14" width="3" height="3" rx="0.5" fill={active ? '#10b981' : '#9ca3af'}/>
-      </svg>
-    ),
-  },
-  {
-    key: 'research',
-    label: 'Research',
-    path: '/research',
-    icon: (active: boolean) => (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle
-          cx="11" cy="11" r="8"
-          stroke={active ? '#10b981' : '#9ca3af'}
-          strokeWidth="2"
-          fill={active ? 'rgba(16,185,129,0.1)' : 'none'}
-        />
-        <line x1="21" y1="21" x2="16.65" y2="16.65" stroke={active ? '#10b981' : '#9ca3af'} strokeWidth="2" strokeLinecap="round"/>
-        <line x1="8" y1="11" x2="14" y2="11" stroke={active ? '#10b981' : '#9ca3af'} strokeWidth="1.5" strokeLinecap="round"/>
-        <line x1="11" y1="8" x2="11" y2="14" stroke={active ? '#10b981' : '#9ca3af'} strokeWidth="1.5" strokeLinecap="round"/>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <circle cx="11" cy="11" r="8" stroke={active ? '#00E5CC' : '#2D4A3E'} strokeWidth="2" fill={active ? 'rgba(0,229,204,0.12)' : 'none'}/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65" stroke={active ? '#00E5CC' : '#2D4A3E'} strokeWidth="2.5" strokeLinecap="round"/>
       </svg>
     ),
   },
@@ -89,16 +35,46 @@ const tabs = [
     key: 'messages',
     label: 'Messages',
     path: '/messages',
+    color: '#4F8EF7',
     icon: (active: boolean) => (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
         <path
           d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-          stroke={active ? '#10b981' : '#9ca3af'}
+          stroke={active ? '#4F8EF7' : '#2D4A3E'}
           strokeWidth="2"
           strokeLinecap="round"
-          strokeLinejoin="round"
-          fill={active ? 'rgba(16,185,129,0.1)' : 'none'}
+          fill={active ? 'rgba(79,142,247,0.15)' : 'none'}
         />
+      </svg>
+    ),
+  },
+  {
+    key: 'notifications',
+    label: 'Alerts',
+    path: '/notifications',
+    color: '#B5E853',
+    icon: (active: boolean) => (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
+          stroke={active ? '#B5E853' : '#2D4A3E'}
+          strokeWidth="2"
+          strokeLinecap="round"
+          fill={active ? 'rgba(181,232,83,0.12)' : 'none'}
+        />
+        <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke={active ? '#B5E853' : '#2D4A3E'} strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    key: 'profile',
+    label: 'Profile',
+    path: '/profile',
+    color: '#00D98A',
+    icon: (active: boolean) => (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke={active ? '#00D98A' : '#2D4A3E'} strokeWidth="2" strokeLinecap="round"/>
+        <circle cx="12" cy="7" r="4" stroke={active ? '#00D98A' : '#2D4A3E'} strokeWidth="2" fill={active ? 'rgba(0,217,138,0.12)' : 'none'}/>
       </svg>
     ),
   },
@@ -112,43 +88,73 @@ export default function BottomTabBar() {
     <div
       style={{
         height: 64,
-        background: '#fff',
-        borderTop: '1px solid #f3f4f6',
+        background: 'rgba(6,12,9,0.96)',
+        backdropFilter: 'blur(24px) saturate(160%)',
+        WebkitBackdropFilter: 'blur(24px) saturate(160%)',
+        borderTop: '1px solid rgba(0,217,138,0.1)',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-around',
         flexShrink: 0,
-        paddingBottom: 4,
+        paddingBottom: 'env(safe-area-inset-bottom, 4px)',
+        position: 'relative',
+        zIndex: 30,
       }}
     >
       {tabs.map((tab) => {
-        const active = location.pathname.startsWith(tab.path)
+        const active = location.pathname === tab.path ||
+          (tab.path !== '/feed' && location.pathname.startsWith(tab.path))
+
         return (
           <button
             key={tab.key}
             onClick={() => navigate(tab.path)}
+            aria-label={tab.label}
             style={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               gap: 3,
-              padding: '4px 12px',
+              padding: '6px 10px',
               border: 'none',
-              background: 'none',
+              background: active ? `${tab.color}10` : 'none',
               cursor: 'pointer',
-              borderRadius: 12,
-              transition: 'background 0.15s',
-              minWidth: 56,
+              borderRadius: 14,
+              transition: 'all 0.2s',
+              minWidth: 52,
+              minHeight: 48,
+              position: 'relative',
             }}
           >
+            {/* Active indicator */}
+            {active && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: 20,
+                  height: 2,
+                  borderRadius: 1,
+                  background: tab.color,
+                  boxShadow: `0 0 8px ${tab.color}`,
+                }}
+              />
+            )}
+
             {tab.icon(active)}
+
             <span
               style={{
                 fontSize: 10,
-                fontWeight: active ? 600 : 400,
-                color: active ? '#10b981' : '#9ca3af',
-                fontFamily: 'Inter, sans-serif',
+                fontWeight: active ? 700 : 500,
+                color: active ? tab.color : '#2D4A3E',
+                fontFamily: 'Space Grotesk, sans-serif',
                 lineHeight: 1,
+                transition: 'color 0.2s',
               }}
             >
               {tab.label}

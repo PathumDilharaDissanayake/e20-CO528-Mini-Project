@@ -75,6 +75,8 @@ export const ProfilePage: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [editOpen, setEditOpen] = useState(false);
   const [editData, setEditData] = useState({
+    firstName: '',
+    lastName: '',
     bio: '',
     headline: '',
     department: '',
@@ -191,6 +193,8 @@ export const ProfilePage: React.FC = () => {
 
   const handleOpenEdit = () => {
     setEditData({
+      firstName: profileUser?.firstName || '',
+      lastName: profileUser?.lastName || '',
       bio: profileUser?.bio || '',
       headline: profileUser?.headline || '',
       department: profileUser?.department || '',
@@ -214,6 +218,8 @@ export const ProfilePage: React.FC = () => {
         return `https://${url}`;
       };
       const payload: any = {
+        firstName: editData.firstName,
+        lastName: editData.lastName,
         bio: editData.bio,
         headline: editData.headline,
         department: editData.department,
@@ -1303,6 +1309,22 @@ export const ProfilePage: React.FC = () => {
           </IconButton>
         </DialogTitle>
         <DialogContent dividers sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 2 }}>
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <TextField
+              label="First Name"
+              fullWidth
+              size="small"
+              value={editData.firstName}
+              onChange={(e) => setEditData((d) => ({ ...d, firstName: e.target.value }))}
+            />
+            <TextField
+              label="Last Name"
+              fullWidth
+              size="small"
+              value={editData.lastName}
+              onChange={(e) => setEditData((d) => ({ ...d, lastName: e.target.value }))}
+            />
+          </Box>
           <TextField
             label="Headline"
             placeholder="e.g. Final Year CS Student | ML Enthusiast"

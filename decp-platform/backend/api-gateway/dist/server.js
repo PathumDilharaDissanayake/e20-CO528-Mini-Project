@@ -20,7 +20,8 @@ const app = (0, express_1.default)();
 // Security middleware
 app.use((0, helmet_1.default)({
     contentSecurityPolicy: false,
-    crossOriginEmbedderPolicy: false
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: false,
 }));
 // CORS configuration - Allow all origins for development
 app.use((0, cors_1.default)({

@@ -15,6 +15,7 @@ const errorHandler_1 = require("./middleware/errorHandler");
 const internalAuth_1 = require("./middleware/internalAuth");
 const conversationRoutes_1 = __importDefault(require("./routes/conversationRoutes"));
 const socket_1 = require("./socket");
+const socketInstance_1 = require("./socket/socketInstance");
 const database_1 = __importDefault(require("./config/database"));
 const app = (0, express_1.default)();
 exports.app = app;
@@ -62,6 +63,8 @@ app.get('/health', (req, res) => {
 app.use('/', conversationRoutes_1.default);
 app.use(errorHandler_1.notFoundHandler);
 app.use(errorHandler_1.errorHandler);
+// Register socket instance so controllers can emit events
+(0, socketInstance_1.setSocketIO)(io);
 // Setup Socket.IO
 (0, socket_1.setupSocketIO)(io);
 const PORT = config_1.config.port;
