@@ -27,6 +27,11 @@ jobs:
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
+      - name: Verify token and list services
+        run: |
+          RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN }} railway whoami
+          RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN }} railway list || true
+
       - name: Deploy API Gateway
         working-directory: 'code/Mini Project/decp-platform/backend/api-gateway'
         run: RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN }} railway up --service decp-api-gateway --detach
