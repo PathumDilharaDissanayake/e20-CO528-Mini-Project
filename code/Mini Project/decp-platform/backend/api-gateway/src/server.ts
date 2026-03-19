@@ -20,26 +20,26 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false
 }));
 
-// CORS configuration
-const allowedOrigins = [
-  'http://decp-platform-frontend-dev.s3-website-us-east-1.amazonaws.com',
-  'http://localhost:5173',
-  'http://localhost:3000',
-];
+// CORS configuration — origins driven by env var CORS_ORIGIN (comma-separated)
+const allowedOrigins: string[] = config.cors.origin as string[];
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (mobile apps, curl, etc.)
-    if (!origin || allowedOrigins.includes(origin)) {
+    // Allow requests with no origin (mobile apps, Postman, curl, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
+      callback(null, true);
+    } else if (config.nodeEnv !== 'production') {
+      // In development, permit all origins but log them
+      logger.warn(`CORS: permitting unknown origin in dev mode: ${origin}`);
       callback(null, true);
     } else {
-      // Still allow for development - log unknown origins
-      callback(null, true);
+      callback(new Error(`CORS: origin ${origin} is not allowed`));
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Correlation-ID']
 }));
 
 // Explicitly handle preflight requests

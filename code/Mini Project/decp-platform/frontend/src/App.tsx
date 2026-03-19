@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@hooks';
 
 // Layouts
@@ -23,6 +23,104 @@ import {
 } from '@pages';
 import { SavedPostsPage } from '@pages/SavedPostsPage';
 import { SettingsPage } from '@pages/SettingsPage';
+
+// 404 Not Found Page
+const NotFoundPage: React.FC = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-950 via-green-950 to-slate-900">
+      {/* Background orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" style={{ animationDelay: '1.5s' }} />
+
+      <div className="relative z-10 text-center px-6 animate-slide-up">
+        {/* Giant 404 */}
+        <div className="relative mb-6 select-none">
+          <p
+            className="text-[10rem] sm:text-[14rem] font-black leading-none"
+            style={{
+              background: 'linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(20,184,166,0.15) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              letterSpacing: '-0.05em',
+            }}
+          >
+            404
+          </p>
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ background: 'linear-gradient(135deg, #22c55e, #14b8a6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
+          >
+            <p className="text-[10rem] sm:text-[14rem] font-black leading-none" style={{ letterSpacing: '-0.05em', opacity: 0.15 }}>
+              404
+            </p>
+          </div>
+          {/* DECP badge in center */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div
+              className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-2xl"
+              style={{ background: 'linear-gradient(135deg, #22c55e 0%, #14b8a6 100%)', boxShadow: '0 16px 40px rgba(34,197,94,0.4)' }}
+            >
+              <span className="text-emerald-950 font-black text-3xl">D</span>
+            </div>
+          </div>
+        </div>
+
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3" style={{ letterSpacing: '-0.5px' }}>
+          Page Not Found
+        </h2>
+        <p className="text-gray-400 text-lg mb-8 max-w-md mx-auto leading-relaxed">
+          Looks like this page wandered off campus. Let's get you back to the platform.
+        </p>
+
+        {/* Action buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button
+            onClick={() => navigate('/')}
+            className="btn-press px-8 py-3.5 rounded-2xl text-white font-semibold text-base transition-all duration-200 hover:-translate-y-0.5"
+            style={{
+              background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
+              boxShadow: '0 8px 24px rgba(22,101,52,0.45)',
+            }}
+          >
+            Go to Feed
+          </button>
+          <button
+            onClick={() => navigate(-1)}
+            className="btn-press px-8 py-3.5 rounded-2xl font-semibold text-base transition-all duration-200 hover:-translate-y-0.5"
+            style={{
+              background: 'rgba(255,255,255,0.07)',
+              border: '1px solid rgba(255,255,255,0.15)',
+              color: 'rgba(255,255,255,0.75)',
+              backdropFilter: 'blur(8px)',
+            }}
+          >
+            Go Back
+          </button>
+        </div>
+
+        {/* Quick links */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+          {[
+            { label: 'Jobs', path: '/jobs' },
+            { label: 'Events', path: '/events' },
+            { label: 'Research', path: '/research' },
+            { label: 'Messages', path: '/messages' },
+          ].map(({ label, path }) => (
+            <button
+              key={path}
+              onClick={() => navigate(path)}
+              className="text-sm text-green-400 hover:text-green-300 font-medium transition-colors hover:underline"
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 // Loading Component — branded DECP spinner
 const PageLoader: React.FC = () => (
@@ -164,21 +262,7 @@ const App: React.FC = () => {
         {/* Catch all - 404 */}
         <Route
           path="*"
-          element={
-            <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-              <div className="text-center">
-                <h1 className="text-6xl font-bold text-gray-300 dark:text-gray-700 mb-4">404</h1>
-                <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Page Not Found</h2>
-                <p className="text-gray-500 dark:text-gray-400 mb-6">The page you're looking for doesn't exist.</p>
-                <a
-                  href="/"
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
-                >
-                  Go Home
-                </a>
-              </div>
-            </div>
-          }
+          element={<NotFoundPage />}
         />
       </Routes>
     </Suspense>
