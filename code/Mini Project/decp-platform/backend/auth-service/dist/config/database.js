@@ -42,48 +42,18 @@ const sequelize = new sequelize_1.Sequelize({
         : {})
 });
 exports.sequelize = sequelize;
-const ensureDatabaseExists = async () => {
-    const adminSequelize = new sequelize_1.Sequelize({
-        database: 'postgres',
-        username: index_1.config.db.user,
-        password: index_1.config.db.password,
-        host: index_1.config.db.host,
-        port: index_1.config.db.port,
-        dialect: 'postgres',
-        logging: false,
-        ...(useSsl
-            ? { dialectOptions: { ssl: { require: true, rejectUnauthorized } } }
-            : {}),
-    });
-    try {
-        const result = await adminSequelize.query('SELECT 1 FROM pg_database WHERE datname = $1', { bind: [index_1.config.db.name], type: sequelize_1.QueryTypes.SELECT });
-        if (result.length === 0) {
-            // Identifier is validated against the config value, not user input
-            await adminSequelize.query(`CREATE DATABASE "${index_1.config.db.name}"`);
-            logger_1.logger.info(`Database "${index_1.config.db.name}" created successfully`);
-        }
-    }
-    finally {
-        await adminSequelize.close();
-    }
-};
 const connectDatabase = async () => {
     try {
         await sequelize.authenticate();
+        logger_1.logger.info('Database connection established successfully');
+        // Sync models (development only)
+        await sequelize.sync({ alter: true });
+        logger_1.logger.info('Database models synchronized');
     }
     catch (error) {
-        if (error?.original?.code === '3D000') {
-            logger_1.logger.info(`Database "${index_1.config.db.name}" does not exist, creating...`);
-            await ensureDatabaseExists();
-            await sequelize.authenticate();
-        }
-        else {
-            throw error;
-        }
+        logger_1.logger.error('Unable to connect to database:', error);
+        throw error;
     }
-    logger_1.logger.info('Database connection established successfully');
-    await sequelize.sync({ alter: true });
-    logger_1.logger.info('Database models synchronized');
 };
 exports.connectDatabase = connectDatabase;
 exports.default = sequelize;

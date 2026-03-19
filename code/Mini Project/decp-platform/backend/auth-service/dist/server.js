@@ -1,37 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -45,32 +12,16 @@ const logger_1 = require("./utils/logger");
 const errorHandler_1 = require("./middleware/errorHandler");
 const internalAuth_1 = require("./middleware/internalAuth");
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
-const database_1 = __importStar(require("./config/database"));
+const database_1 = __importDefault(require("./config/database"));
 require("./controllers/oauthController"); // Initialize passport
 const app = (0, express_1.default)();
 // Security middleware
 app.use((0, helmet_1.default)());
-// CORS configuration
-const allowedOrigins = [
-    'http://decp-platform-frontend-dev.s3-website-us-east-1.amazonaws.com',
-    'http://localhost:5173',
-    'http://localhost:3000',
-];
+// CORS - Allow all origins for development
 app.use((0, cors_1.default)({
-    origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        }
-        else {
-            callback(null, true);
-        }
-    },
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+    origin: true,
+    credentials: true
 }));
-// Explicitly handle preflight requests
-app.options('*', (0, cors_1.default)());
 // Body parsing
 app.use(express_1.default.json({ limit: '10mb' }));
 app.use(express_1.default.urlencoded({ extended: true, limit: '10mb' }));
@@ -125,7 +76,10 @@ app.use(errorHandler_1.errorHandler);
 const PORT = config_1.config.port;
 const startServer = async () => {
     try {
-        await (0, database_1.connectDatabase)();
+        await database_1.default.authenticate();
+        logger_1.logger.info('✅ Database connection established successfully.');
+        await database_1.default.sync({ force: false }); // MIGRATE-001: create-if-not-exists only — safe for production
+        logger_1.logger.info('✅ Database synchronized.');
         app.listen(PORT, () => {
             logger_1.logger.info(`🔐 Auth Service running on port ${PORT}`);
         });

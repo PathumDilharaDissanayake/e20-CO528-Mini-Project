@@ -21,23 +21,6 @@ import { useLoginMutation } from '@services/authApi';
 import { setCredentials } from '@features/authSlice';
 import { loginSchema, LoginFormData } from '@utils';
 
-const fieldSx = {
-  '& .MuiOutlinedInput-root': {
-    borderRadius: '12px',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    color: 'white',
-    transition: 'all 0.2s ease',
-    '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.15)', transition: 'border-color 0.2s' },
-    '&:hover fieldset': { borderColor: 'rgba(74, 222, 128, 0.45)' },
-    '&.Mui-focused fieldset': { borderColor: '#22c55e', borderWidth: '1.5px' },
-    '&.Mui-focused': { boxShadow: '0 0 0 3px rgba(34, 197, 94, 0.12)' },
-  },
-  '& .MuiInputLabel-root': { color: 'rgba(255,255,255,0.45)' },
-  '& .MuiInputLabel-root.Mui-focused': { color: '#4ade80' },
-  '& .MuiFormHelperText-root': { color: '#f87171' },
-  '& .MuiInputBase-input': { color: 'white' },
-};
-
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,6 +29,7 @@ export const LoginPage: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [login, { isLoading }] = useLoginMutation();
 
+  // Get redirect path from URL query params
   const searchParams = new URLSearchParams(location.search);
   const redirectPath = searchParams.get('redirect') || '/';
 
@@ -56,11 +40,18 @@ export const LoginPage: React.FC = () => {
     setFocus,
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: '', password: '' },
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
 
-  useEffect(() => { setFocus('email'); }, [setFocus]);
+  // Auto-focus email field on mount
+  useEffect(() => {
+    setFocus('email');
+  }, [setFocus]);
 
+  // Clear error message after 5 seconds
   useEffect(() => {
     if (errorMessage) {
       const timer = setTimeout(() => setErrorMessage(null), 5000);
@@ -71,19 +62,31 @@ export const LoginPage: React.FC = () => {
   const onSubmit = async (data: LoginFormData) => {
     setErrorMessage(null);
     try {
-      const response = await login({ email: data.email || '', password: data.password || '' }).unwrap();
+      const response = await login({
+        email: data.email || '',
+        password: data.password || '',
+      }).unwrap();
+
       if (response.success && response.data) {
         const { user, accessToken, refreshToken } = response.data;
-        dispatch(setCredentials({
-          user: { ...user, _id: user._id || user.id, id: user.id || user._id, role: user.role || 'student' },
-          token: accessToken,
-          refreshToken,
-        }));
+        dispatch(
+          setCredentials({
+            user: {
+              ...user,
+              _id: user._id || user.id,
+              id: user.id || user._id,
+              role: user.role || 'student',
+            },
+            token: accessToken,
+            refreshToken,
+          })
+        );
         navigate(redirectPath, { replace: true });
       } else {
         setErrorMessage(response.message || 'Login failed. Please try again.');
       }
     } catch (error: any) {
+      console.error('Login error:', error);
       const message = error.data?.message || error.message || 'Invalid email or password';
       setErrorMessage(message);
     }
@@ -91,10 +94,16 @@ export const LoginPage: React.FC = () => {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ fontWeight: 800, textAlign: 'center', mb: 0.75, color: 'white', letterSpacing: '-0.5px' }}>
+      <Typography
+        variant="h4"
+        className="font-bold text-center mb-2 text-white"
+      >
         Welcome Back
       </Typography>
-      <Typography variant="body2" sx={{ textAlign: 'center', mb: 3.5, color: 'rgba(255,255,255,0.45)' }}>
+      <Typography
+        variant="body2"
+        className="text-center mb-6 text-gray-400"
+      >
         Sign in to continue your journey
       </Typography>
 
@@ -104,13 +113,12 @@ export const LoginPage: React.FC = () => {
           <Alert
             severity="error"
             onClose={() => setErrorMessage(null)}
+            className="rounded-xl"
             sx={{
-              borderRadius: '12px',
-              backgroundColor: 'rgba(239, 68, 68, 0.12)',
-              border: '1px solid rgba(239, 68, 68, 0.3)',
+              backgroundColor: 'rgba(239, 68, 68, 0.1)',
+              borderColor: 'rgba(239, 68, 68, 0.3)',
               color: '#fca5a5',
-              '& .MuiAlert-icon': { color: '#f87171' },
-              '& .MuiAlert-action button': { color: '#fca5a5' },
+              '& .MuiAlert-icon': { color: '#f87171' }
             }}
           >
             {errorMessage}
@@ -118,7 +126,7 @@ export const LoginPage: React.FC = () => {
         </Box>
       </Fade>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <TextField
           fullWidth
           label="Email Address"
@@ -130,11 +138,23 @@ export const LoginPage: React.FC = () => {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <Email sx={{ color: 'rgba(74,222,128,0.7)', fontSize: 20 }} />
+                <Email className="text-green-400" />
               </InputAdornment>
             ),
           }}
-          sx={fieldSx}
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              borderRadius: '12px',
+              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+              color: 'white',
+              '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.2)' },
+              '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
+              '&.Mui-focused fieldset': { borderColor: '#166534' },
+            },
+            '& .MuiInputLabel-root': { color: 'gray' },
+            '& .MuiInputLabel-root.Mui-focused': { color: '#166534' },
+            '& .MuiFormHelperText-root': { color: '#f87171' },
+          }}
         />
 
         <TextField
@@ -148,7 +168,7 @@ export const LoginPage: React.FC = () => {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <Lock sx={{ color: 'rgba(74,222,128,0.7)', fontSize: 20 }} />
+                <Lock className="text-green-400" />
               </InputAdornment>
             ),
             endAdornment: (
@@ -157,22 +177,32 @@ export const LoginPage: React.FC = () => {
                   onClick={() => setShowPassword(!showPassword)}
                   edge="end"
                   disabled={isLoading}
-                  sx={{ color: 'rgba(255,255,255,0.4)', '&:hover': { color: 'rgba(255,255,255,0.8)' } }}
+                  className="text-gray-400 hover:text-white"
                 >
-                  {showPassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
             ),
           }}
-          sx={fieldSx}
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              borderRadius: '12px',
+              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+              color: 'white',
+              '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.2)' },
+              '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
+              '&.Mui-focused fieldset': { borderColor: '#166534' },
+            },
+            '& .MuiInputLabel-root': { color: 'gray' },
+            '& .MuiInputLabel-root.Mui-focused': { color: '#166534' },
+            '& .MuiFormHelperText-root': { color: '#f87171' },
+          }}
         />
 
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: -1 }}>
+        <Box className="flex justify-end">
           <Link
             to="/forgot-password"
-            style={{ fontSize: '0.82rem', color: '#4ade80', textDecoration: 'none', fontWeight: 500, transition: 'color 0.2s' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#86efac')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#4ade80')}
+            className="text-sm text-green-400 hover:text-green-300 transition-colors"
           >
             Forgot Password?
           </Link>
@@ -183,29 +213,22 @@ export const LoginPage: React.FC = () => {
           fullWidth
           variant="contained"
           disabled={isLoading}
-          className="btn-press"
+          className="py-3 rounded-xl text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed"
           sx={{
-            py: 1.6,
-            borderRadius: '12px',
             textTransform: 'none',
             fontSize: '1rem',
-            fontWeight: 700,
             background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
-            boxShadow: '0 6px 20px rgba(22, 101, 52, 0.5)',
+            boxShadow: '0 4px 15px rgba(16, 185, 129, 0.4)',
             '&:hover': {
               background: 'linear-gradient(135deg, #14532d 0%, #15803d 100%)',
-              boxShadow: '0 8px 28px rgba(22, 101, 52, 0.6)',
-              transform: 'translateY(-1px)',
+              boxShadow: '0 6px 20px rgba(16, 185, 129, 0.5)',
             },
-            '&:active': { transform: 'scale(0.98)' },
-            '&.Mui-disabled': { background: 'rgba(22,101,52,0.4)', color: 'rgba(255,255,255,0.5)' },
-            transition: 'all 0.2s ease',
           }}
         >
           {isLoading ? (
-            <CircularProgress size={22} sx={{ color: 'rgba(255,255,255,0.8)' }} />
+            <CircularProgress size={24} className="text-white" />
           ) : (
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Box className="flex items-center gap-2">
               <RocketLaunch fontSize="small" />
               Sign In
             </Box>
@@ -213,18 +236,18 @@ export const LoginPage: React.FC = () => {
         </Button>
       </form>
 
-      <Divider sx={{ my: 3, borderColor: 'rgba(255,255,255,0.1)' }}>
-        <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.35)', px: 1 }}>or</Typography>
+      <Divider className="my-6" sx={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+        <Typography variant="body2" className="text-gray-500 px-2">
+          or
+        </Typography>
       </Divider>
 
-      <Box sx={{ textAlign: 'center', mb: 3 }}>
-        <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.45)' }}>
+      <Box className="text-center">
+        <Typography variant="body2" className="text-gray-400">
           Don't have an account?{' '}
           <Link
             to="/register"
-            style={{ color: '#4ade80', fontWeight: 700, textDecoration: 'none' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#86efac')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#4ade80')}
+            className="text-green-400 hover:text-green-300 font-semibold transition-colors"
           >
             Sign Up
           </Link>
@@ -232,37 +255,20 @@ export const LoginPage: React.FC = () => {
       </Box>
 
       {/* Demo Credentials */}
-      <Box
-        sx={{
-          p: 2.5,
-          borderRadius: '14px',
-          background: 'rgba(34, 197, 94, 0.06)',
-          border: '1px solid rgba(34, 197, 94, 0.2)',
-        }}
-      >
-        <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', gap: 0.75, color: '#4ade80', fontWeight: 700, mb: 1, fontSize: '0.75rem' }}>
+      <Box className="mt-6 p-4 rounded-xl" style={{
+        background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.2) 100%)',
+        border: '1px solid rgba(16, 185, 129, 0.3)'
+      }}>
+        <Typography variant="caption" className="flex items-center gap-1 text-green-300 font-medium">
           <School fontSize="small" />
           Demo Accounts
         </Typography>
-        <Box sx={{ display: 'grid', gap: 0.5 }}>
-          {[
-            { role: 'Student', email: 'alice.student@decp.edu', pass: 'Pass1234x' },
-            { role: 'Faculty', email: 'prof.james@decp.edu', pass: 'Pass1234x' },
-            { role: 'Alumni', email: 'david.alumni@decp.edu', pass: 'Pass1234x' },
-            { role: 'Admin', email: 'admin@decp.edu', pass: 'Admin1234x' },
-          ].map(({ role, email, pass }) => (
-            <Box key={role} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Box sx={{ width: 46, flexShrink: 0 }}>
-                <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                  {role}
-                </Typography>
-              </Box>
-              <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.55)', fontFamily: 'monospace', fontSize: '0.72rem' }}>
-                {email} / {pass}
-              </Typography>
-            </Box>
-          ))}
-        </Box>
+        <Typography variant="caption" className="block text-gray-400 mt-1">
+          Student: alice.student@decp.edu / Pass1234x<br />
+          Faculty: prof.james@decp.edu / Pass1234x<br />
+          Alumni: &nbsp;&nbsp;david.alumni@decp.edu / Pass1234x<br />
+          Admin: &nbsp;&nbsp;&nbsp;admin@decp.edu / Admin1234x
+        </Typography>
       </Box>
     </Box>
   );

@@ -2,12 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-// Base path: '/' for local dev, '/e20-CO528-Mini-Project/' when deployed to GitHub Pages
-const base = process.env.VITE_BASE_URL ?? '/';
-
 export default defineConfig({
   plugins: [react()],
-  base,
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -40,23 +36,5 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
-    chunkSizeWarningLimit: 600,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          // Core React
-          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          // MUI split into smaller pieces
-          'vendor-mui-core': ['@mui/material', '@mui/system'],
-          'vendor-mui-icons': ['@mui/icons-material'],
-          // Redux
-          'vendor-redux': ['@reduxjs/toolkit', 'react-redux'],
-          // Charts
-          'vendor-charts': ['recharts'],
-          // Misc utilities
-          'vendor-utils': ['axios', 'date-fns', 'react-hook-form', 'zod'],
-        },
-      },
-    },
   },
 })
