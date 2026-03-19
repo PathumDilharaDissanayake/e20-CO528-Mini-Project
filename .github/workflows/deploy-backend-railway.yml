@@ -1,0 +1,78 @@
+# DECP Platform — Deploy Backend to Railway
+name: Deploy Backend → Railway
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'code/Mini Project/decp-platform/backend/**'
+      - '.github/workflows/deploy-backend-railway.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: railway-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy all services to Railway
+    runs-on: ubuntu-latest
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy API Gateway
+        working-directory: 'code/Mini Project/decp-platform/backend/api-gateway'
+        run: railway up --service decp-api-gateway --detach
+        continue-on-error: true
+
+      - name: Deploy Auth Service
+        working-directory: 'code/Mini Project/decp-platform/backend/auth-service'
+        run: railway up --service decp-auth-service --detach
+        continue-on-error: true
+
+      - name: Deploy User Service
+        working-directory: 'code/Mini Project/decp-platform/backend/user-service'
+        run: railway up --service decp-user-service --detach
+        continue-on-error: true
+
+      - name: Deploy Feed Service
+        working-directory: 'code/Mini Project/decp-platform/backend/feed-service'
+        run: railway up --service decp-feed-service --detach
+        continue-on-error: true
+
+      - name: Deploy Jobs Service
+        working-directory: 'code/Mini Project/decp-platform/backend/jobs-service'
+        run: railway up --service decp-jobs-service --detach
+        continue-on-error: true
+
+      - name: Deploy Events Service
+        working-directory: 'code/Mini Project/decp-platform/backend/events-service'
+        run: railway up --service decp-events-service --detach
+        continue-on-error: true
+
+      - name: Deploy Research Service
+        working-directory: 'code/Mini Project/decp-platform/backend/research-service'
+        run: railway up --service decp-research-service --detach
+        continue-on-error: true
+
+      - name: Deploy Messaging Service
+        working-directory: 'code/Mini Project/decp-platform/backend/messaging-service'
+        run: railway up --service decp-messaging-service --detach
+        continue-on-error: true
+
+      - name: Deploy Notification Service
+        working-directory: 'code/Mini Project/decp-platform/backend/notification-service'
+        run: railway up --service decp-notification-service --detach
+        continue-on-error: true
+
+      - name: Deploy Analytics Service
+        working-directory: 'code/Mini Project/decp-platform/backend/analytics-service'
+        run: railway up --service decp-analytics-service --detach
+        continue-on-error: true
