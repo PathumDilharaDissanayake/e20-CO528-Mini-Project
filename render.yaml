@@ -1,0 +1,374 @@
+# Render.com Free Deployment Configuration
+# Deploy the DECP Platform for free using Render.com
+# See: https://render.com/docs/blueprint-spec
+
+services:
+  # ─── Frontend (Static Site - Free) ───────────────────────────────────────
+  - type: web
+    name: decp-frontend
+    runtime: static
+    buildCommand: cd frontend && npm ci && npm run build
+    staticPublishPath: frontend/dist
+    pullRequestPreviewsEnabled: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_BASE_URL
+        sync: false
+
+  # ─── API Gateway (Web Service - Free Tier) ───────────────────────────────
+  - type: web
+    name: decp-api-gateway
+    runtime: docker
+    dockerfilePath: ./backend/api-gateway/Dockerfile
+    dockerContext: ./backend/api-gateway
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_REFRESH_SECRET
+        sync: false
+      - key: AUTH_SERVICE_URL
+        fromService:
+          name: decp-auth-service
+          type: web
+          property: hostport
+      - key: USER_SERVICE_URL
+        fromService:
+          name: decp-user-service
+          type: web
+          property: hostport
+      - key: FEED_SERVICE_URL
+        fromService:
+          name: decp-feed-service
+          type: web
+          property: hostport
+      - key: JOBS_SERVICE_URL
+        fromService:
+          name: decp-jobs-service
+          type: web
+          property: hostport
+      - key: EVENTS_SERVICE_URL
+        fromService:
+          name: decp-events-service
+          type: web
+          property: hostport
+      - key: RESEARCH_SERVICE_URL
+        fromService:
+          name: decp-research-service
+          type: web
+          property: hostport
+      - key: MESSAGING_SERVICE_URL
+        fromService:
+          name: decp-messaging-service
+          type: web
+          property: hostport
+      - key: NOTIFICATION_SERVICE_URL
+        fromService:
+          name: decp-notification-service
+          type: web
+          property: hostport
+      - key: ANALYTICS_SERVICE_URL
+        fromService:
+          name: decp-analytics-service
+          type: web
+          property: hostport
+
+  # ─── Auth Service ─────────────────────────────────────────────────────────
+  - type: web
+    name: decp-auth-service
+    runtime: docker
+    dockerfilePath: ./backend/auth-service/Dockerfile
+    dockerContext: ./backend/auth-service
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: DB_HOST
+        fromDatabase:
+          name: decp-postgres
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: decp-postgres
+          property: port
+      - key: DB_NAME
+        value: decp_auth
+      - key: DB_USER
+        fromDatabase:
+          name: decp-postgres
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: decp-postgres
+          property: password
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_REFRESH_SECRET
+        sync: false
+
+  # ─── User Service ─────────────────────────────────────────────────────────
+  - type: web
+    name: decp-user-service
+    runtime: docker
+    dockerfilePath: ./backend/user-service/Dockerfile
+    dockerContext: ./backend/user-service
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3002
+      - key: DB_HOST
+        fromDatabase:
+          name: decp-postgres
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: decp-postgres
+          property: port
+      - key: DB_NAME
+        value: decp_users
+      - key: DB_USER
+        fromDatabase:
+          name: decp-postgres
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: decp-postgres
+          property: password
+
+  # ─── Feed Service ─────────────────────────────────────────────────────────
+  - type: web
+    name: decp-feed-service
+    runtime: docker
+    dockerfilePath: ./backend/feed-service/Dockerfile
+    dockerContext: ./backend/feed-service
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3003
+      - key: DB_HOST
+        fromDatabase:
+          name: decp-postgres
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: decp-postgres
+          property: port
+      - key: DB_NAME
+        value: decp_feed
+      - key: DB_USER
+        fromDatabase:
+          name: decp-postgres
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: decp-postgres
+          property: password
+
+  # ─── Jobs Service ─────────────────────────────────────────────────────────
+  - type: web
+    name: decp-jobs-service
+    runtime: docker
+    dockerfilePath: ./backend/jobs-service/Dockerfile
+    dockerContext: ./backend/jobs-service
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3004
+      - key: DB_HOST
+        fromDatabase:
+          name: decp-postgres
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: decp-postgres
+          property: port
+      - key: DB_NAME
+        value: decp_jobs
+      - key: DB_USER
+        fromDatabase:
+          name: decp-postgres
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: decp-postgres
+          property: password
+
+  # ─── Events Service ───────────────────────────────────────────────────────
+  - type: web
+    name: decp-events-service
+    runtime: docker
+    dockerfilePath: ./backend/events-service/Dockerfile
+    dockerContext: ./backend/events-service
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3005
+      - key: DB_HOST
+        fromDatabase:
+          name: decp-postgres
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: decp-postgres
+          property: port
+      - key: DB_NAME
+        value: decp_events
+      - key: DB_USER
+        fromDatabase:
+          name: decp-postgres
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: decp-postgres
+          property: password
+
+  # ─── Research Service ─────────────────────────────────────────────────────
+  - type: web
+    name: decp-research-service
+    runtime: docker
+    dockerfilePath: ./backend/research-service/Dockerfile
+    dockerContext: ./backend/research-service
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3006
+      - key: DB_HOST
+        fromDatabase:
+          name: decp-postgres
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: decp-postgres
+          property: port
+      - key: DB_NAME
+        value: decp_research
+      - key: DB_USER
+        fromDatabase:
+          name: decp-postgres
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: decp-postgres
+          property: password
+
+  # ─── Messaging Service ────────────────────────────────────────────────────
+  - type: web
+    name: decp-messaging-service
+    runtime: docker
+    dockerfilePath: ./backend/messaging-service/Dockerfile
+    dockerContext: ./backend/messaging-service
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3007
+      - key: DB_HOST
+        fromDatabase:
+          name: decp-postgres
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: decp-postgres
+          property: port
+      - key: DB_NAME
+        value: decp_messaging
+      - key: DB_USER
+        fromDatabase:
+          name: decp-postgres
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: decp-postgres
+          property: password
+      - key: JWT_SECRET
+        sync: false
+      - key: REDIS_URL
+        sync: false
+
+  # ─── Notification Service ─────────────────────────────────────────────────
+  - type: web
+    name: decp-notification-service
+    runtime: docker
+    dockerfilePath: ./backend/notification-service/Dockerfile
+    dockerContext: ./backend/notification-service
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3008
+      - key: DB_HOST
+        fromDatabase:
+          name: decp-postgres
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: decp-postgres
+          property: port
+      - key: DB_NAME
+        value: decp_notifications
+      - key: DB_USER
+        fromDatabase:
+          name: decp-postgres
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: decp-postgres
+          property: password
+
+  # ─── Analytics Service ────────────────────────────────────────────────────
+  - type: web
+    name: decp-analytics-service
+    runtime: docker
+    dockerfilePath: ./backend/analytics-service/Dockerfile
+    dockerContext: ./backend/analytics-service
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3009
+      - key: DB_HOST
+        fromDatabase:
+          name: decp-postgres
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: decp-postgres
+          property: port
+      - key: DB_NAME
+        value: decp_analytics
+      - key: DB_USER
+        fromDatabase:
+          name: decp-postgres
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: decp-postgres
+          property: password
+
+databases:
+  - name: decp-postgres
+    plan: free
+    databaseName: decp
+    user: decp_admin
