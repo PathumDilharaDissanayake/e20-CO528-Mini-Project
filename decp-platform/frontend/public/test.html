@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DECP Frontend Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background: #2196f3;
+            color: white;
+        }
+        button:hover {
+            background: #1976d2;
+        }
+        pre {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 DECP Frontend Diagnostic</h1>
+    
+    <div class="box">
+        <h2>Connection Status</h2>
+        <div id="status">Checking...</div>
+    </div>
+
+    <div class="box">
+        <h2>API Test</h2>
+        <button onclick="testAPI()">Test API Gateway</button>
+        <div id="api-result"></div>
+    </div>
+
+    <div class="box">
+        <h2>Actions</h2>
+        <button onclick="clearStorage()">Clear LocalStorage</button>
+        <button onclick="location.reload()">Reload Page</button>
+        <button onclick="goToApp()">Go to Main App</button>
+    </div>
+
+    <div class="box">
+        <h2>Browser Info</h2>
+        <pre id="browser-info"></pre>
+    </div>
+
+    <script>
+        // Display browser info
+        document.getElementById('browser-info').textContent = 
+            'User Agent: ' + navigator.userAgent + '\n' +
+            'Platform: ' + navigator.platform + '\n' +
+            'Language: ' + navigator.language + '\n' +
+            'Online: ' + navigator.onLine;
+
+        // Check if main app is accessible
+        fetch('/')
+            .then(r => {
+                document.getElementById('status').innerHTML = 
+                    '<span class="success">✅ Server is running (Status: ' + r.status + ')</span>';
+            })
+            .catch(e => {
+                document.getElementById('status').innerHTML = 
+                    '<span class="error">❌ Server not accessible: ' + e.message + '</span>';
+            });
+
+        // Test API
+        async function testAPI() {
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch('http://localhost:3000/health');
+                const data = await response.json();
+                resultDiv.innerHTML = '<span class="success">✅ API Gateway is working!<br><pre>' + 
+                    JSON.stringify(data, null, 2) + '</pre></span>';
+            } catch (e) {
+                resultDiv.innerHTML = '<span class="error">❌ API Gateway error: ' + e.message + '</span>';
+            }
+        }
+
+        // Clear localStorage
+        function clearStorage() {
+            localStorage.clear();
+            alert('LocalStorage cleared!');
+        }
+
+        // Go to main app
+        function goToApp() {
+            window.location.href = '/';
+        }
+
+        // Check for JS errors
+        window.onerror = function(msg, url, line) {
+            alert('JavaScript Error:\n' + msg + '\n\nFile: ' + url + '\nLine: ' + line);
+        };
+    </script>
+</body>
+</html>

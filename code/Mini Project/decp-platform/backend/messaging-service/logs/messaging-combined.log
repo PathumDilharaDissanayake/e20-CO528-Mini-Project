@@ -498,3 +498,7 @@ SequelizeConnectionError: database "decp_messaging" does not exist
 2026-03-05 18:35:42 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
 2026-03-05 18:35:42 [MESSAGING-SERVICE] [info]: User connected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
 2026-03-05 18:35:45 [MESSAGING-SERVICE] [info]: User disconnected: 03ba75c1-ba6b-4526-abde-7145ed0c7ce7
+2026-03-19 11:44:43 [MESSAGING-SERVICE] [info]: DB connection config: host=localhost, port=5432, ssl=false, sslRejectUnauthorized=false
+2026-03-19 11:44:44 [MESSAGING-SERVICE] [info]: Database connection established successfully
+2026-03-19 11:44:45 [MESSAGING-SERVICE] [info]: Database models synchronized
+2026-03-19 11:44:45 [MESSAGING-SERVICE] [info]: 💬 Messaging Service running on port 3007

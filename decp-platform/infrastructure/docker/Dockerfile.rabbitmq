@@ -1,0 +1,32 @@
+# DECP Platform - RabbitMQ Dockerfile
+FROM rabbitmq:3.13-management-alpine
+
+# Install additional plugins
+RUN rabbitmq-plugins enable --offline \
+    rabbitmq_shovel \
+    rabbitmq_shovel_management \
+    rabbitmq_federation \
+    rabbitmq_federation_management \
+    rabbitmq_prometheus
+
+# Copy custom configuration
+COPY rabbitmq.conf /etc/rabbitmq/rabbitmq.conf
+COPY definitions.json /etc/rabbitmq/definitions.json
+
+# Set environment variables
+ENV RABBITMQ_DEFAULT_USER=${RABBITMQ_USER:-decp_admin}
+ENV RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD:-changeme_in_production}
+ENV RABBITMQ_DEFAULT_VHOST=/decp
+ENV RABBITMQ_LOAD_DEFINITIONS=/etc/rabbitmq/definitions.json
+
+# Expose ports
+# 5672: AMQP
+# 15672: Management UI
+# 15692: Prometheus metrics
+EXPOSE 5672 15672 15692
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+    CMD rabbitmq-diagnostics -q ping || exit 1
+
+CMD ["rabbitmq-server"]

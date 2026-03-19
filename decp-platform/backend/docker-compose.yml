@@ -1,0 +1,316 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: decp-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_MULTIPLE_DATABASES: decp_auth,decp_users,decp_feed,decp_jobs,decp_events,decp_research,decp_messaging,decp_notifications,decp_analytics
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-multiple-databases.sh:/docker-entrypoint-initdb.d/init-multiple-databases.sh
+    ports:
+      - "5433:5432"
+    networks:
+      - decp-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for Caching and Sessions
+  redis:
+    image: redis:7-alpine
+    container_name: decp-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - decp-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile.dev
+    container_name: decp-api-gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+      - AUTH_SERVICE_URL=http://auth-service:3001
+      - USER_SERVICE_URL=http://user-service:3002
+      - FEED_SERVICE_URL=http://feed-service:3003
+      - JOBS_SERVICE_URL=http://jobs-service:3004
+      - EVENTS_SERVICE_URL=http://events-service:3005
+      - RESEARCH_SERVICE_URL=http://research-service:3006
+      - MESSAGING_SERVICE_URL=http://messaging-service:3007
+      - NOTIFICATION_SERVICE_URL=http://notification-service:3008
+      - ANALYTICS_SERVICE_URL=http://analytics-service:3009
+      - RATE_LIMIT_WINDOW_MS=900000
+      - RATE_LIMIT_MAX_REQUESTS=100
+    depends_on:
+      - auth-service
+      - user-service
+      - feed-service
+      - jobs-service
+      - events-service
+      - research-service
+      - messaging-service
+      - notification-service
+      - analytics-service
+    networks:
+      - decp-network
+    restart: unless-stopped
+
+  # Auth Service
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile.dev
+    container_name: decp-auth-service
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=decp_auth
+      - DB_USER=postgres
+      - DB_PASSWORD=12345
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - decp-network
+    restart: unless-stopped
+
+  # User Service
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile.dev
+    container_name: decp-user-service
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=production
+      - PORT=3002
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=decp_users
+      - DB_USER=postgres
+      - DB_PASSWORD=12345
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - decp-network
+    restart: unless-stopped
+
+  # Feed Service
+  feed-service:
+    build:
+      context: ./feed-service
+      dockerfile: Dockerfile.dev
+    container_name: decp-feed-service
+    ports:
+      - "3003:3003"
+    volumes:
+      - feed_uploads:/app/uploads
+    environment:
+      - NODE_ENV=production
+      - PORT=3003
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=decp_feed
+      - DB_USER=postgres
+      - DB_PASSWORD=12345
+      - UPLOAD_DIR=uploads
+      - MAX_FILE_SIZE=10485760
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - decp-network
+    restart: unless-stopped
+
+  # Jobs Service
+  jobs-service:
+    build:
+      context: ./jobs-service
+      dockerfile: Dockerfile.dev
+    container_name: decp-jobs-service
+    ports:
+      - "3004:3004"
+    environment:
+      - NODE_ENV=production
+      - PORT=3004
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=decp_jobs
+      - DB_USER=postgres
+      - DB_PASSWORD=12345
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - decp-network
+    restart: unless-stopped
+
+  # Events Service
+  events-service:
+    build:
+      context: ./events-service
+      dockerfile: Dockerfile.dev
+    container_name: decp-events-service
+    ports:
+      - "3005:3005"
+    environment:
+      - NODE_ENV=production
+      - PORT=3005
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=decp_events
+      - DB_USER=postgres
+      - DB_PASSWORD=12345
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - decp-network
+    restart: unless-stopped
+
+  # Research Service
+  research-service:
+    build:
+      context: ./research-service
+      dockerfile: Dockerfile.dev
+    container_name: decp-research-service
+    ports:
+      - "3006:3006"
+    volumes:
+      - research_uploads:/app/uploads
+    environment:
+      - NODE_ENV=production
+      - PORT=3006
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=decp_research
+      - DB_USER=postgres
+      - DB_PASSWORD=12345
+      - UPLOAD_DIR=uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - decp-network
+    restart: unless-stopped
+
+  # Messaging Service
+  messaging-service:
+    build:
+      context: ./messaging-service
+      dockerfile: Dockerfile.dev
+    container_name: decp-messaging-service
+    ports:
+      - "3007:3007"
+    environment:
+      - NODE_ENV=production
+      - PORT=3007
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=decp_messaging
+      - DB_USER=postgres
+      - DB_PASSWORD=12345
+      - JWT_SECRET=${JWT_SECRET}
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - decp-network
+    restart: unless-stopped
+
+  # Notification Service
+  notification-service:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile.dev
+    container_name: decp-notification-service
+    ports:
+      - "3008:3008"
+    environment:
+      - NODE_ENV=production
+      - PORT=3008
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=decp_notifications
+      - DB_USER=postgres
+      - DB_PASSWORD=12345
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - VAPID_PUBLIC_KEY=${VAPID_PUBLIC_KEY}
+      - VAPID_PRIVATE_KEY=${VAPID_PRIVATE_KEY}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - decp-network
+    restart: unless-stopped
+
+  # Analytics Service
+  analytics-service:
+    build:
+      context: ./analytics-service
+      dockerfile: Dockerfile.dev
+    container_name: decp-analytics-service
+    ports:
+      - "3009:3009"
+    environment:
+      - NODE_ENV=production
+      - PORT=3009
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=decp_analytics
+      - DB_USER=postgres
+      - DB_PASSWORD=12345
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - decp-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  feed_uploads:
+  research_uploads:
+
+networks:
+  decp-network:
+    driver: bridge

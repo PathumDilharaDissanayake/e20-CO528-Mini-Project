@@ -1,0 +1,160 @@
+%% DECP Platform - Network Architecture
+%% Shows VPC structure, subnets, security groups, gateways
+
+flowchart TB
+    subgraph Internet["🌐 Internet"]
+        Users["End Users"]
+        ExternalServices["External Services<br/>OAuth, Email, Push"]
+    end
+
+    subgraph AWSCloud["☁️ AWS Cloud Region"]
+        subgraph VPC["📦 VPC: decp-production-vpc<br/>CIDR: 10.0.0.0/16"]
+            
+            subgraph PublicSubnet1["🌐 Public Subnet - AZ A<br/>CIDR: 10.0.1.0/24"]
+                IGW["Internet Gateway<br/>IGW-decp"]
+                NAT1["NAT Gateway 1<br/>EIP: 54.x.x.x"]
+                ALB1["ALB Node 1<br/>Public-facing"]
+                Bastion1["Bastion Host 1<br/>Jump server"]
+            end
+
+            subgraph PublicSubnet2["🌐 Public Subnet - AZ B<br/>CIDR: 10.0.2.0/24"]
+                NAT2["NAT Gateway 2<br/>EIP: 54.x.x.y"]
+                ALB2["ALB Node 2<br/>Public-facing"]
+                Bastion2["Bastion Host 2<br/>Jump server"]
+            end
+
+            subgraph PrivateAppSubnet1["🔒 Private App Subnet - AZ A<br/>CIDR: 10.0.10.0/24"]
+                subgraph EKSNode1["EKS Worker Node 1"]
+                    Pod1["User Service<br/>10.0.10.10"]
+                    Pod2["Feed Service<br/>10.0.10.11"]
+                    Pod3["Job Service<br/>10.0.10.12"]
+                    Pod4["Media Service<br/>10.0.10.13"]
+                end
+            end
+
+            subgraph PrivateAppSubnet2["🔒 Private App Subnet - AZ B<br/>CIDR: 10.0.11.0/24"]
+                subgraph EKSNode2["EKS Worker Node 2"]
+                    Pod5["Event Service<br/>10.0.11.10"]
+                    Pod6["Message Service<br/>10.0.11.11"]
+                    Pod7["Search Service<br/>10.0.11.12"]
+                    Pod8["Analytics Service<br/>10.0.11.13"]
+                end
+            end
+
+            subgraph PrivateDataSubnet1["💾 Private Data Subnet - AZ A<br/>CIDR: 10.0.20.0/24"]
+                RDSPrimary["RDS Primary<br/>PostgreSQL<br/>10.0.20.10"]
+                RedisPrimary["ElastiCache Primary<br/>Redis<br/>10.0.20.20"]
+                DocPrimary["DocumentDB Primary<br/>MongoDB<br/>10.0.20.30"]
+                MQPrimary["MQ Primary<br/>RabbitMQ<br/>10.0.20.40"]
+            end
+
+            subgraph PrivateDataSubnet2["💾 Private Data Subnet - AZ B<br/>CIDR: 10.0.21.0/24"]
+                RDSReplica["RDS Replica<br/>PostgreSQL<br/>10.0.21.10"]
+                RedisReplica["ElastiCache Replica<br/>Redis<br/>10.0.21.20"]
+                DocReplica["DocumentDB Replica<br/>MongoDB<br/>10.0.21.30"]
+                MQReplica["MQ Replica<br/>RabbitMQ<br/>10.0.21.40"]
+            end
+        end
+    end
+
+    subgraph Security["🔒 Security Groups"]
+        SG_ALB["ALB Security Group<br/>Inbound: 80, 443<br/>Source: 0.0.0.0/0"]
+        SG_App["App Security Group<br/>Inbound: 8080<br/>Source: ALB SG"]
+        SG_DB["Database Security Group<br/>Inbound: 5432, 27017, 6379<br/>Source: App SG"]
+        SG_Bastion["Bastion Security Group<br/>Inbound: 22<br/>Source: Office IP"]
+    end
+
+    subgraph ExternalAWS["🔗 External AWS Services"]
+        S3["S3 Buckets<br/>Media, Logs, Backups"]
+        CloudWatch["CloudWatch<br/>Monitoring & Logs"]
+        SES["SES<br/>Email Service"]
+        Cognito["Cognito<br/>Authentication"]
+    end
+
+    %% Traffic Flow - Internet to App
+    Users -->|"HTTPS: 443"| IGW
+    IGW -->|"Route"| ALB1
+    IGW -->|"Route"| ALB2
+    ALB1 -->|"Forward: 8080"| Pod1
+    ALB1 -->|"Forward: 8080"| Pod2
+    ALB2 -->|"Forward: 8080"| Pod5
+    ALB2 -->|"Forward: 8080"| Pod6
+
+    %% App to Database (via NAT for external)
+    Pod1 -->|"PostgreSQL: 5432"| RDSPrimary
+    Pod2 -->|"MongoDB: 27017"| DocPrimary
+    Pod5 -->|"PostgreSQL: 5432"| RDSReplica
+    Pod6 -->|"Redis: 6379"| RedisPrimary
+    Pod3 -->|"AMQP: 5672"| MQPrimary
+    Pod7 -->|"Elasticsearch"| RedisPrimary
+
+    %% NAT Gateway for outbound
+    Pod1 -.->|"Outbound HTTPS"| NAT1
+    Pod2 -.->|"Outbound HTTPS"| NAT1
+    Pod5 -.->|"Outbound HTTPS"| NAT2
+    Pod6 -.->|"Outbound HTTPS"| NAT2
+    NAT1 -->|"Route"| IGW
+    NAT2 -->|"Route"| IGW
+
+    %% Bastion Access
+    Users -.->|"SSH: 22 (restricted)"| Bastion1
+    Users -.->|"SSH: 22 (restricted)"| Bastion2
+    Bastion1 -.->|"Admin access"| RDSPrimary
+    Bastion2 -.->|"Admin access"| RDSReplica
+
+    %% External Services
+    NAT1 -->|"API Calls"| ExternalServices
+    Pod1 -->|"Auth API"| Cognito
+    Pod2 -->|"Store media"| S3
+    Pod3 -->|"Send email"| SES
+    Pod4 -->|"Logs & Metrics"| CloudWatch
+
+    %% Replication
+    RDSPrimary -.->|"Replication"| RDSReplica
+    RedisPrimary -.->|"Replication"| RedisReplica
+    DocPrimary -.->|"Replication"| DocReplica
+    MQPrimary -.->|"Replication"| MQReplica
+
+    %% Security Group Associations
+    SG_ALB -.->|"Protects"| ALB1
+    SG_ALB -.->|"Protects"| ALB2
+    SG_App -.->|"Protects"| EKSNode1
+    SG_App -.->|"Protects"| EKSNode2
+    SG_DB -.->|"Protects"| RDSPrimary
+    SG_DB -.->|"Protects"| RDSReplica
+    SG_DB -.->|"Protects"| DocPrimary
+    SG_DB -.->|"Protects"| DocReplica
+    SG_Bastion -.->|"Protects"| Bastion1
+    SG_Bastion -.->|"Protects"| Bastion2
+
+    %% Styling
+    classDef internet fill:#f5f5f5,stroke:#616161,stroke-width:2px
+    classDef vpc fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
+    classDef public fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef privateapp fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef privatedata fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef security fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef external fill:#efebe9,stroke:#4e342e,stroke-width:2px
+    classDef gateway fill:#fff8e1,stroke:#f9a825,stroke-width:2px
+
+    class Users,ExternalServices internet
+    class VPC vpc
+    class PublicSubnet1,PublicSubnet2,ALB1,ALB2,Bastion1,Bastion2 public
+    class IGW,NAT1,NAT2 gateway
+    class PrivateAppSubnet1,PrivateAppSubnet2,EKSNode1,EKSNode2,Pod1,Pod2,Pod3,Pod4,Pod5,Pod6,Pod7,Pod8 privateapp
+    class PrivateDataSubnet1,PrivateDataSubnet2,RDSPrimary,RDSReplica,RedisPrimary,RedisReplica,DocPrimary,DocReplica,MQPrimary,MQReplica privatedata
+    class SG_ALB,SG_App,SG_DB,SG_Bastion security
+    class S3,CloudWatch,SES,Cognito external
+
+    %% Title
+    Title["🌐 DECP Platform - Network Architecture (AWS VPC)"]
+    style Title fill:#1565c0,stroke:#0d47a1,color:#fff,stroke-width:3px
+
+    %% Legend
+    subgraph Legend["Legend"]
+        direction LR
+        L1["Public Subnet"]:::public
+        L2["App Subnet"]:::privateapp
+        L3["Data Subnet"]:::privatedata
+        L4["Internet Gateway"]:::gateway
+    end

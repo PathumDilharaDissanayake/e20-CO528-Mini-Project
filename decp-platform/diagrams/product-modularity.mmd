@@ -1,0 +1,165 @@
+%% DECP Platform - Product Modularity Diagram
+%% Shows core modules (must have), optional modules (nice to have), dependencies, extension points
+
+flowchart TB
+    subgraph CoreModules["🔴 Core Modules (Must Have)"]
+        direction TB
+        
+        subgraph UserModule["👤 User Management Module<br/>Version: 1.0.0"]
+            UM_F1["User Registration"]
+            UM_F2["User Login/Logout"]
+            UM_F3["Profile Management"]
+            UM_F4["Role Assignment<br/>(Student, Alumni, Admin)"]
+            UM_F5["Password Reset"]
+        end
+        
+        subgraph FeedModule["📰 Feed & Posts Module<br/>Version: 1.0.0"]
+            FM_F1["Create Text Posts"]
+            FM_F2["View Feed"]
+            FM_F3["Like/Comment"]
+            FM_F4["Basic Media Upload"]
+        end
+        
+        subgraph JobModule["💼 Jobs Module<br/>Version: 1.0.0"]
+            JM_F1["Post Job/Internship"]
+            JM_F2["Apply for Job"]
+            JM_F3["View Job Listings"]
+            JM_F4["Application Tracking"]
+        end
+        
+        subgraph NotificationModule["🔔 Notification Module<br/>Version: 1.0.0"]
+            NM_F1["In-app Notifications"]
+            NM_F2["Email Notifications"]
+            NM_F3["Notification Preferences"]
+        end
+    end
+
+    subgraph OptionalModules["🟡 Optional Modules (Nice to Have)"]
+        direction TB
+        
+        subgraph EventModule["📅 Events Module<br/>Version: 1.0.0"]
+            EM_F1["Create Events"]
+            EM_F2["RSVP System"]
+            EM_F3["Event Reminders"]
+            EM_F4["Calendar Integration"]
+        end
+        
+        subgraph ResearchModule["🔬 Research Collaboration Module<br/>Version: 1.0.0"]
+            RM_F1["Create Research Projects"]
+            RM_F2["Document Sharing"]
+            RM_F3["Project Invitations"]
+            RM_F4["GitHub Integration"]
+        end
+        
+        subgraph MessageModule["💬 Messaging Module<br/>Version: 1.0.0"]
+            MM_F1["Direct Messaging"]
+            MM_F2["Group Chat"]
+            MM_F3["File Attachments"]
+            MM_F4["Read Receipts"]
+        end
+        
+        subgraph AnalyticsModule["📊 Analytics Dashboard Module<br/>Version: 1.0.0"]
+            AM_F1["User Activity Metrics"]
+            AM_F2["Popular Posts"]
+            AM_F3["Job Application Stats"]
+            AM_F4["Export Reports"]
+        end
+        
+        subgraph AdvancedMediaModule["🎥 Advanced Media Module<br/>Version: 1.0.0"]
+            AMM_F1["Video Upload"]
+            AMM_F2["Video Streaming"]
+            AMM_F3["Image Optimization"]
+            AMM_F4["CDN Integration"]
+        end
+        
+        subgraph AIModule["🤖 AI Features Module<br/>Version: 0.5.0 (Beta)"]
+            AI_F1["Content Recommendations"]
+            AI_F2["Job Matching"]
+            AI_F3["Spam Detection"]
+            AI_F4["Auto-tagging"]
+        end
+    end
+
+    subgraph ExtensionPoints["🔌 Extension Points"]
+        direction TB
+        EP1["Custom Auth Provider"]
+        EP2["Third-party Integrations"]
+        EP3["Custom Notification Channels"]
+        EP4["Analytics Export Plugins"]
+        EP5["Custom Feed Algorithms"]
+        EP6["External Storage Adapters"]
+    end
+
+    subgraph SharedLibraries["📚 Shared Libraries"]
+        direction TB
+        SL1["Common Utils"]
+        SL2["Database Models"]
+        SL3["API Contracts"]
+        SL4["Authentication SDK"]
+        SL5["Logging & Monitoring"]
+    end
+
+    %% Dependencies - Core Modules
+    FeedModule -.->|"Depends on"| UserModule
+    JobModule -.->|"Depends on"| UserModule
+    JobModule -.->|"Uses"| NotificationModule
+    NotificationModule -.->|"Depends on"| UserModule
+
+    %% Dependencies - Optional to Core
+    EventModule -.->|"Depends on"| UserModule
+    EventModule -.->|"Uses"| NotificationModule
+    ResearchModule -.->|"Depends on"| UserModule
+    ResearchModule -.->|"Uses"| NotificationModule
+    MessageModule -.->|"Depends on"| UserModule
+    MessageModule -.->|"Uses"| NotificationModule
+    AnalyticsModule -.->|"Reads from"| UserModule
+    AnalyticsModule -.->|"Reads from"| FeedModule
+    AnalyticsModule -.->|"Reads from"| JobModule
+    AdvancedMediaModule -.->|"Extends"| FeedModule
+    AIModule -.->|"Analyzes"| FeedModule
+    AIModule -.->|"Analyzes"| JobModule
+
+    %% Extension Points Usage
+    UserModule -.->|"Implements"| EP1
+    NotificationModule -.->|"Implements"| EP3
+    AnalyticsModule -.->|"Implements"| EP4
+    FeedModule -.->|"Implements"| EP5
+    AdvancedMediaModule -.->|"Implements"| EP6
+    ResearchModule -.->|"Uses"| EP2
+
+    %% Shared Libraries Usage
+    UserModule -.->|"Uses"| SL1
+    UserModule -.->|"Uses"| SL2
+    UserModule -.->|"Uses"| SL4
+    FeedModule -.->|"Uses"| SL1
+    FeedModule -.->|"Uses"| SL3
+    JobModule -.->|"Uses"| SL1
+    JobModule -.->|"Uses"| SL2
+    NotificationModule -.->|"Uses"| SL5
+    EventModule -.->|"Uses"| SL1
+    ResearchModule -.->|"Uses"| SL3
+
+    %% Styling
+    classDef core fill:#ffebee,stroke:#c62828,stroke-width:3px
+    classDef optional fill:#fff8e1,stroke:#f9a825,stroke-width:2px
+    classDef extension fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef shared fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef feature fill:#ffffff,stroke:#9e9e9e,stroke-width:1px
+
+    class UserModule,FeedModule,JobModule,NotificationModule,UM_F1,UM_F2,UM_F3,UM_F4,UM_F5,FM_F1,FM_F2,FM_F3,FM_F4,JM_F1,JM_F2,JM_F3,JM_F4,NM_F1,NM_F2,NM_F3 core
+    class EventModule,ResearchModule,MessageModule,AnalyticsModule,AdvancedMediaModule,AIModule,EM_F1,EM_F2,EM_F3,EM_F4,RM_F1,RM_F2,RM_F3,RM_F4,MM_F1,MM_F2,MM_F3,MM_F4,AM_F1,AM_F2,AM_F3,AM_F4,AMM_F1,AMM_F2,AMM_F3,AMM_F4,AI_F1,AI_F2,AI_F3,AI_F4 optional
+    class ExtensionPoints,EP1,EP2,EP3,EP4,EP5,EP6 extension
+    class SharedLibraries,SL1,SL2,SL3,SL4,SL5 shared
+
+    %% Title
+    Title["📦 DECP Platform - Product Modularity Diagram"]
+    style Title fill:#1976d2,stroke:#0d47a1,color:#fff,stroke-width:3px
+
+    %% Legend
+    subgraph Legend["Module Status"]
+        direction LR
+        L1["Core (Required)"]:::core
+        L2["Optional (Plug-in)"]:::optional
+        L3["Extension Point"]:::extension
+        L4["Shared Library"]:::shared
+    end

@@ -448,3 +448,7 @@ SequelizeConnectionError: database "decp_research" does not exist
 2026-03-05 17:59:31 [RESEARCH-SERVICE] [info]: ✅ Database connected.
 2026-03-05 17:59:31 [RESEARCH-SERVICE] [info]: ✅ Database synchronized.
 2026-03-05 17:59:31 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006
+2026-03-19 11:44:42 [RESEARCH-SERVICE] [info]: DB connection config: host=localhost, port=5432, ssl=false, sslRejectUnauthorized=false
+2026-03-19 11:44:43 [RESEARCH-SERVICE] [info]: Database connection established successfully
+2026-03-19 11:44:44 [RESEARCH-SERVICE] [info]: Database models synchronized
+2026-03-19 11:44:44 [RESEARCH-SERVICE] [info]: 🔬 Research Service running on port 3006

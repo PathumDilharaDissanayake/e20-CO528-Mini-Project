@@ -1,0 +1,450 @@
+# DECP Platform - Production Docker Compose
+version: '3.8'
+
+services:
+  # ===================
+  # Load Balancer / Reverse Proxy
+  # ===================
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    container_name: decp-nginx-prod
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./ssl:/etc/nginx/ssl:ro
+      - nginx_logs:/var/log/nginx
+    networks:
+      - decp-network-prod
+    depends_on:
+      - api-gateway
+      - frontend
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ===================
+  # Backend Services
+  # ===================
+  api-gateway:
+    build:
+      context: ../../services/api-gateway
+      dockerfile: ../../infrastructure/docker/Dockerfile.api-gateway
+      target: production
+    image: decp-platform/api-gateway:${VERSION:-latest}
+    container_name: decp-api-gateway-prod
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/decp_platform
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/decp
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-1d}
+      RATE_LIMIT_WINDOW_MS: ${RATE_LIMIT_WINDOW_MS:-900000}
+      RATE_LIMIT_MAX_REQUESTS: ${RATE_LIMIT_MAX_REQUESTS:-100}
+    networks:
+      - decp-network-prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+
+  auth-service:
+    build:
+      context: ../../services/auth-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.auth-service
+      target: production
+    image: decp-platform/auth-service:${VERSION:-latest}
+    container_name: decp-auth-service-prod
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/auth_db
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/decp
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      PASSWORD_SALT_ROUNDS: ${PASSWORD_SALT_ROUNDS:-12}
+    networks:
+      - decp-network-prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  user-service:
+    build:
+      context: ../../services/user-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.user-service
+      target: production
+    image: decp-platform/user-service:${VERSION:-latest}
+    container_name: decp-user-service-prod
+    environment:
+      NODE_ENV: production
+      PORT: 3002
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/user_db
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/decp
+    networks:
+      - decp-network-prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  product-service:
+    build:
+      context: ../../services/product-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.product-service
+      target: production
+    image: decp-platform/product-service:${VERSION:-latest}
+    container_name: decp-product-service-prod
+    environment:
+      NODE_ENV: production
+      PORT: 3003
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/product_db
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/decp
+      S3_BUCKET_NAME: ${S3_BUCKET_NAME}
+      S3_REGION: ${S3_REGION}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    networks:
+      - decp-network-prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  order-service:
+    build:
+      context: ../../services/order-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.order-service
+      target: production
+    image: decp-platform/order-service:${VERSION:-latest}
+    container_name: decp-order-service-prod
+    environment:
+      NODE_ENV: production
+      PORT: 3004
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/order_db
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/decp
+      PAYMENT_SERVICE_URL: http://payment-service:3005
+      INVENTORY_SERVICE_URL: http://product-service:3003
+    networks:
+      - decp-network-prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  payment-service:
+    build:
+      context: ../../services/payment-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.payment-service
+      target: production
+    image: decp-platform/payment-service:${VERSION:-latest}
+    container_name: decp-payment-service-prod
+    environment:
+      NODE_ENV: production
+      PORT: 3005
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/payment_db
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/decp
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      STRIPE_PUBLIC_KEY: ${STRIPE_PUBLIC_KEY}
+    networks:
+      - decp-network-prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  notification-service:
+    build:
+      context: ../../services/notification-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.notification-service
+      target: production
+    image: decp-platform/notification-service:${VERSION:-latest}
+    container_name: decp-notification-service-prod
+    environment:
+      NODE_ENV: production
+      PORT: 3006
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/notification_db
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/decp
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
+      FIREBASE_PRIVATE_KEY: ${FIREBASE_PRIVATE_KEY}
+      FIREBASE_CLIENT_EMAIL: ${FIREBASE_CLIENT_EMAIL}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+      TWILIO_PHONE_NUMBER: ${TWILIO_PHONE_NUMBER}
+    networks:
+      - decp-network-prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # ===================
+  # Frontend
+  # ===================
+  frontend:
+    build:
+      context: ../../frontend
+      dockerfile: ../infrastructure/docker/Dockerfile.frontend
+      target: production
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+        NEXT_PUBLIC_APP_NAME: ${NEXT_PUBLIC_APP_NAME}
+        NEXT_PUBLIC_STRIPE_PUBLIC_KEY: ${STRIPE_PUBLIC_KEY}
+    image: decp-platform/frontend:${VERSION:-latest}
+    container_name: decp-frontend-prod
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+    networks:
+      - decp-network-prod
+    depends_on:
+      - api-gateway
+    restart: unless-stopped
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # ===================
+  # Infrastructure Services (External in real production, included for reference)
+  # ===================
+  postgres:
+    image: postgres:16-alpine
+    container_name: decp-postgres-prod
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+      - ./backups:/backups
+    networks:
+      - decp-network-prod
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: decp-redis-prod
+    command: redis-server --appendonly yes --maxmemory 2gb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data_prod:/data
+    networks:
+      - decp-network-prod
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 1G
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: decp-rabbitmq-prod
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_DEFAULT_VHOST: /decp
+    volumes:
+      - rabbitmq_data_prod:/var/lib/rabbitmq
+    networks:
+      - decp-network-prod
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+
+  # ===================
+  # Monitoring
+  # ===================
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: decp-prometheus-prod
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=15d'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    volumes:
+      - ../monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    networks:
+      - decp-network-prod
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: decp-grafana-prod
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
+      GF_USERS_ALLOW_SIGN_UP: 'false'
+      GF_SERVER_ROOT_URL: ${GRAFANA_ROOT_URL}
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ../monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ../monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    networks:
+      - decp-network-prod
+    restart: unless-stopped
+
+volumes:
+  postgres_data_prod:
+  redis_data_prod:
+  rabbitmq_data_prod:
+  nginx_logs:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  decp-network-prod:
+    driver: overlay
+    attachable: true
+    ipam:
+      config:
+        - subnet: 10.0.0.0/16
