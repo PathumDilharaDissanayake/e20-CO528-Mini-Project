@@ -9,13 +9,7 @@ import {
   Button,
   IconButton,
 } from '@mui/material';
-
-const getMediaUrl = (url: string): string => {
-  if (!url) return '';
-  if (url.startsWith('http') || url.startsWith('blob:')) return url;
-  // Use relative path - Vite will proxy /uploads to API Gateway
-  return `${url.startsWith('/') ? '' : '/'}${url}`;
-};
+import { getMediaUrl } from '@utils';
 import {
   CalendarToday,
   LocationOn,

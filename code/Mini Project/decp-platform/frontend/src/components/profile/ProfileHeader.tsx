@@ -28,6 +28,7 @@ import { User } from '@types';
 import { updateUser } from '@features/authSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@store';
+import { getPostUploadUrl } from '@utils';
 
 interface ProfileHeaderProps {
   user?: User;
@@ -91,8 +92,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, isOwnProfile
       const formData = new FormData();
       formData.append('file', file);
       const token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';
-      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1';
-      const resp = await fetch(`${apiBase}/posts/upload`, {
+      const resp = await fetch(getPostUploadUrl(), {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
