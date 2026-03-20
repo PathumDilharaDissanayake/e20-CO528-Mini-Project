@@ -1,0 +1,49 @@
+version: '3.8'
+
+# ============================================================
+# DECP Platform - Database-Only Docker Compose
+# Use this when you want PostgreSQL + Redis in Docker
+# but run the Node.js services locally on your machine.
+#
+# Usage:
+#   docker-compose -f docker-compose-db.yml up -d
+#   docker-compose -f docker-compose-db.yml down
+#   docker-compose -f docker-compose-db.yml down -v  (wipes data)
+# ============================================================
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: decp-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "12345"
+      # All 9 databases created automatically on first run
+      POSTGRES_MULTIPLE_DATABASES: decp_auth,decp_users,decp_feed,decp_jobs,decp_events,decp_research,decp_messaging,decp_notifications,decp_analytics
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-multiple-databases.sh:/docker-entrypoint-initdb.d/init-multiple-databases.sh
+    ports:
+      - "5432:5432"    # Standard port — services connect to localhost:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: decp-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
